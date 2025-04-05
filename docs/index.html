@@ -41,23 +41,26 @@
     <p class="page-footer__text">愿AI之翼，助银发记忆翱翔，岁岁留痕，代代相承。</p>
   </footer>
 
+  <!-- Coze Web Chat SDK -->
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
   <script>
-    new CozeWebSDK.WebChatClient({
-      config: {
-        bot_id: '7489440833709129747',
-      },
-      componentProps: {
-        title: 'Coze',
-      },
-      auth: {
-        type: 'token',
-        token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
-        onRefreshToken: function () {
-          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8';
+    window.onload = function() {
+      new CozeWebSDK.WebChatClient({
+        config: {
+          bot_id: '7489440833709129747',  // 请确保这个 bot_id 是正确的
+        },
+        componentProps: {
+          title: 'Coze',
+        },
+        auth: {
+          type: 'token',
+          token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',  // 替换为你新的 token
+          onRefreshToken: function () {
+            return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8';  // 替换为你新的 token
+          }
         }
-      }
-    });
+      });
+    }
   </script>
 </body>
 </html>
