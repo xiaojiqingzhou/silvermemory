@@ -1,9 +1,11 @@
+/* Reset 样式 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 通用字体和背景 */
 body {
   font-family: 'Noto Sans SC', sans-serif;
   background-color: #fef9f3;
@@ -11,6 +13,7 @@ body {
   line-height: 1.8;
 }
 
+/* 页眉样式 */
 .page-header {
   background-color: #e6b874;
   color: white;
@@ -20,14 +23,23 @@ body {
 
 .page-header__title {
   font-size: 2.8rem;
+  font-weight: bold;
 }
 
+.page-header__subtitle {
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+  color: #fff5dd;
+}
+
+/* 主体内容区 */
 .page-main {
   padding: 2rem 1rem;
   max-width: 1000px;
   margin: auto;
 }
 
+/* 各模块样式 */
 .section {
   margin-bottom: 3rem;
   background: #fff8ee;
@@ -60,15 +72,37 @@ body {
 
 .section__description {
   font-size: 1.05rem;
+  margin-bottom: 0.8rem;
 }
 
+/* 页脚样式 */
 .page-footer {
   background-color: #e6b874;
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   color: white;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
 }
 
 .page-footer__text {
-  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* 按钮样式 */
+a.button-link {
+  display: inline-block;
+  background-color: #e6b874;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+a.button-link:hover {
+  background-color: #d59f51;
 }
