@@ -1,11 +1,9 @@
-/* Reset 样式 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 通用字体和背景 */
 body {
   font-family: 'Noto Sans SC', sans-serif;
   background-color: #fef9f3;
@@ -13,7 +11,6 @@ body {
   line-height: 1.8;
 }
 
-/* 页眉样式 */
 .page-header {
   background-color: #e6b874;
   color: white;
@@ -27,19 +24,17 @@ body {
 }
 
 .page-header__subtitle {
-  font-size: 1.4rem;
-  margin-top: 0.8rem;
-  color: #fff5dd;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #7a4c15;
 }
 
-/* 主体内容区 */
 .page-main {
   padding: 2rem 1rem;
   max-width: 1000px;
   margin: auto;
 }
 
-/* 各模块样式 */
 .section {
   margin-bottom: 3rem;
   background: #fff8ee;
@@ -72,37 +67,41 @@ body {
 
 .section__description {
   font-size: 1.05rem;
-  margin-bottom: 0.8rem;
 }
 
-/* 页脚样式 */
+.button-link {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #e6b874;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.button-link:hover {
+  background-color: #c89746;
+}
+
 .page-footer {
   background-color: #e6b874;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   color: white;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  line-height: 1.6;
 }
 
 .page-footer__text {
-  font-weight: 500;
+  font-size: 1rem;
 }
 
-/* 按钮样式 */
-a.button-link {
-  display: inline-block;
-  background-color: #e6b874;
+.page-footer__text a {
   color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
   text-decoration: none;
-  font-size: 1.05rem;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
-a.button-link:hover {
-  background-color: #d59f51;
+.page-footer__text a:hover {
+  text-decoration: underline;
 }
