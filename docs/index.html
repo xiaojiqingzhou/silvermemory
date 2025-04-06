@@ -3,75 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>银发记忆——用AI守护岁月留痕</title>
+  <title>银发记忆工程</title>
   <link rel="stylesheet" href="./css/style.css" />
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
 </head>
 <body>
   <header class="page-header">
-    <h1 class="page-header__title">银发记忆</h1>
-    <p class="page-header__subtitle">—— 用AI守护岁月留痕</p>
+    <h1 class="page-header__title">银发记忆工程</h1>
+    <p class="page-header__subtitle">用 AI 守护岁月留痕</p>
   </header>
 
   <main class="page-main">
     <section class="section">
       <h2 class="section__title">项目缘起</h2>
       <img src="./images/project-start.jpg" alt="项目背景图" class="section__image" />
-      <p class="section__description">
-        岁月悠悠，2.8亿银发长者承载着时代的波澜。传统记录难敌时光，AI轻轻荡入记忆的深海，开启守护回忆的新篇章。
-      </p>
+      <p class="section__description">岁月悠悠，2.8亿银发长者承载着时代的波澜。传统记录难敌时光，AI轻轻荡入记忆的深海，开启守护回忆的新篇章。</p>
     </section>
 
     <section class="section">
       <h2 class="section__title">核心价值</h2>
       <img src="./images/core-value.jpg" alt="核心价值图" class="section__image" />
-      <p class="section__description">
-        点点回忆如星火，小舟串联起文化的长河，搭起代际沟通的桥梁，个体故事中勾勒时代的纹理，人民视角绘就历史长卷。
-      </p>
+      <p class="section__description">点点回忆如星火，小舟串联起文化的长河，搭起代际沟通的桥梁，个体故事中勾勒时代的纹理，人民视角绘就历史长卷。</p>
     </section>
 
     <section class="section">
       <h2 class="section__title">独特优势</h2>
       <img src="./images/advantage.jpg" alt="独特优势图" class="section__image" />
-      <p class="section__description">
-        智能相伴，如孙辈贴心交流；尊重叙事，让回忆自然流淌；规范输出，成家族记忆瑰宝。
-      </p>
+      <p class="section__description">智能相伴，如孙辈贴心交流；尊重叙事，让回忆自然流淌；规范输出，成家族记忆瑰宝。</p>
     </section>
 
     <section class="section">
       <h2 class="section__title">实施路径</h2>
       <img src="./images/path.jpg" alt="实施路径图" class="section__image" />
-      <p class="section__description">
-        精研技术，打磨方言与长文处理；试点打磨，优化体验；携手推广，记忆小舟缓缓驶入千家万户的记忆港湾。
-      </p>
+      <p class="section__description">精研技术，打磨方言与长文处理；试点打磨，优化体验；携手推广，记忆小舟缓缓驶入千家万户的记忆港湾。</p>
     </section>
 
     <section class="section">
       <h2 class="section__title">预期成果</h2>
       <img src="./images/result.jpg" alt="预期成果图" class="section__image" />
-      <p class="section__description">
-        岁月有痕，岁岁有成，五万份记忆档案如光点汇聚成星河；代际传情，年轻一代读懂长辈风华；微光成炬，共绘时代深情长卷。
-      </p>
+      <p class="section__description">岁月有痕，岁岁有成，五万份记忆档案如光点汇聚成星河；代际传情，年轻一代读懂长辈风华；微光成炬，共绘时代深情长卷。</p>
     </section>
 
-    <section class="section" style="background-color: #fff3e6;">
-      <h2 class="section__title">智能互动体验</h2>
+    <section class="section">
+      <h2 class="section__title">智能体验</h2>
       <p class="section__description">点击右侧浮钮开始体验</p>
       <p class="section__description">如有调用失败，请点击下方按钮：</p>
-      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true"
-         style="display: inline-block; background-color: #e6b874; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin-top: 0.5rem;">
-         现在体验
-      </a>
+      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank">现在体验</a>
     </section>
   </main>
 
   <footer class="page-footer">
-    <p class="page-footer__text">
-      小舟载记，字字生光。<br />
-      岁岁留痕，代代相传。
-    </p>
+    <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
 
+  <!-- Coze 智能体 SDK -->
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
   <script>
     new CozeWebSDK.WebChatClient({
       config: {
@@ -84,7 +69,7 @@
         type: 'token',
         token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
         onRefreshToken: function () {
-          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8';
+          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
         }
       }
     });
