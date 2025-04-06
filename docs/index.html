@@ -5,211 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>银发记忆——用AI守护岁月留痕</title>
   <link rel="stylesheet" href="./css/style.css" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Noto Sans SC', sans-serif;
-      background-color: #fef9f3;  /* 恢复原背景色 */
-      color: #4b3d2c;
-      line-height: 1.8;
-    }
-
-    .page-header {
-      background-color: #e6b874;  /* 恢复原背景色 */
-      color: white;
-      text-align: center;
-      padding: 4rem 1rem;
-    }
-
-    .page-header__title {
-      font-size: 3rem;  /* 调整标题字体大小 */
-      font-weight: bold;
-      line-height: 1.2;
-    }
-
-    .page-header__title span {
-      display: block; /* 让破折号部分另起一行 */
-      font-size: 2rem;
-      font-weight: normal;
-    }
-
-    .page-main {
-      padding: 2rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-      background: #fff8ee;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);  /* 更强的阴影 */
-      padding: 2rem;
-      transition: transform 0.3s ease;
-      text-align: center;
-    }
-
-    .section:hover {
-      transform: translateY(-8px);
-    }
-
-    .section__title {
-      font-size: 2rem;
-      color: #7a4c15;
-      border-bottom: 2px solid #e6b874;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .section__image {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 1.2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .section__description {
-      font-size: 1.2rem;
-    }
-
-    .page-footer {
-      background-color: #e6b874;  /* 恢复原背景色 */
-      text-align: center;
-      padding: 3rem 1rem;
-      color: white;
-    }
-
-    .page-footer__text {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    /* 错误提示文本及按钮样式 */
-    .error-message {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 1.2rem;
-      color: #7a4c15;
-    }
-
-    .error-message p {
-      margin-bottom: 10px;
-    }
-
-    .error-message a button {
-      background-color: #e6b874;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1.3rem;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .error-message a button:hover {
-      background-color: #d08a50;
-      transform: scale(1.05);
-    }
-
-    /* 可选：按钮动画 */
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .pulse-button {
-      animation: pulse 1.5s infinite;
-    }
-  </style>
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
 </head>
 <body>
   <header class="page-header">
-    <h1 class="page-header__title">
-      银发记忆——用AI守护岁月留痕
-      <span>——为每一段记忆插上飞翔的翅膀</span>  <!-- 破折号部分另起一行 -->
-    </h1>
+    <h1 class="page-header__title">银发记忆</h1>
+    <p class="page-header__subtitle">—— 用AI守护岁月留痕</p>
   </header>
 
   <main class="page-main">
     <section class="section">
       <h2 class="section__title">项目缘起</h2>
       <img src="./images/project-start.jpg" alt="项目背景图" class="section__image" />
-      <p class="section__description">悠悠岁月，2.8亿银发长者承载着时代印记。传统记录难敌时光，AI开启记忆留存新篇。</p>
+      <p class="section__description">
+        岁月悠悠，2.8亿银发长者承载着时代的波澜。传统记录难敌时光，AI轻轻荡入记忆的深海，开启守护回忆的新篇章。
+      </p>
     </section>
 
     <section class="section">
       <h2 class="section__title">核心价值</h2>
       <img src="./images/core-value.jpg" alt="核心价值图" class="section__image" />
-      <p class="section__description">传承文化薪火，搭建代际沟通桥梁，以人民视角绘就历史长卷。</p>
+      <p class="section__description">
+        点点回忆如星火，小舟串联起文化的长河，搭起代际沟通的桥梁，个体故事中勾勒时代的纹理，人民视角绘就历史长卷。
+      </p>
     </section>
 
     <section class="section">
       <h2 class="section__title">独特优势</h2>
       <img src="./images/advantage.jpg" alt="独特优势图" class="section__image" />
-      <p class="section__description">智能相伴，如孙辈贴心交流；尊重叙事，让回忆自然流淌；规范输出，成家族记忆瑰宝。</p>
+      <p class="section__description">
+        智能相伴，如孙辈贴心交流；尊重叙事，让回忆自然流淌；规范输出，成家族记忆瑰宝。
+      </p>
     </section>
 
     <section class="section">
       <h2 class="section__title">实施路径</h2>
       <img src="./images/path.jpg" alt="实施路径图" class="section__image" />
-      <p class="section__description">精研技术，打磨方言与长文处理；试点打磨，优化体验；携手推广，连接家庭与公共文化。</p>
+      <p class="section__description">
+        精研技术，打磨方言与长文处理；试点打磨，优化体验；携手推广，记忆小舟缓缓驶入千家万户的记忆港湾。
+      </p>
     </section>
 
     <section class="section">
       <h2 class="section__title">预期成果</h2>
       <img src="./images/result.jpg" alt="预期成果图" class="section__image" />
-      <p class="section__description">岁岁有成，五万档案成家庭记忆宝库；代际情暖，年轻一代读懂长辈风华；个体微光，融入集体历史星河。</p>
+      <p class="section__description">
+        岁月有痕，岁岁有成，五万份记忆档案如光点汇聚成星河；代际传情，年轻一代读懂长辈风华；微光成炬，共绘时代深情长卷。
+      </p>
+    </section>
+
+    <section class="section" style="background-color: #fff3e6;">
+      <h2 class="section__title">智能互动体验</h2>
+      <p class="section__description">点击右侧浮钮开始体验</p>
+      <p class="section__description">如有调用失败，请点击下方按钮：</p>
+      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true"
+         style="display: inline-block; background-color: #e6b874; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin-top: 0.5rem;">
+         现在体验
+      </a>
     </section>
   </main>
 
   <footer class="page-footer">
-    <p class="page-footer__text">愿AI之翼，助银发记忆翱翔，岁岁留痕，代代相承。</p>
-
-    <!-- 错误提示文本及按钮 -->
-    <div class="error-message">
-      <p><strong>点击右侧浮钮开始体验</strong></p>
-      <p>如有调用失败，请点击下方按钮体验 AI 助手。</p>
-      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank">
-        <button class="pulse-button">现在体验</button> <!-- 使按钮有一个脉冲动画效果 -->
-      </a>
-    </div>
+    <p class="page-footer__text">
+      小舟载记，字字生光。<br />
+      岁岁留痕，代代相传。
+    </p>
   </footer>
 
-  <!-- Coze Web Chat SDK -->
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
   <script>
-    window.onload = function() {
-      new CozeWebSDK.WebChatClient({
-        config: {
-          bot_id: '7489440833709129747',
-        },
-        componentProps: {
-          title: 'Coze',
-        },
-        auth: {
-          type: 'token',
-          token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
-          onRefreshToken: function () {
-            return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8';
-          }
+    new CozeWebSDK.WebChatClient({
+      config: {
+        bot_id: '7489440833709129747',
+      },
+      componentProps: {
+        title: '记忆小舟',
+      },
+      auth: {
+        type: 'token',
+        token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
+        onRefreshToken: function () {
+          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8';
         }
-      });
-    }
+      }
+    });
   </script>
 </body>
 </html>
