@@ -4,54 +4,149 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>银发记忆工程</title>
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 50px 0;
+      background: #5f6368;
+      color: white;
+    }
+
+    .page-header__title {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .page-header__subtitle {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .section {
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .section__title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .section__description {
+      font-size: 1.125rem;
+      color: #333;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .button-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #007bff;
+      color: white;
+      font-size: 1.125rem;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-link:hover {
+      background-color: #0056b3;
+    }
+
+    .page-footer {
+      text-align: center;
+      padding: 30px 0;
+      background: #333;
+      color: white;
+    }
+
+    .section__image {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .section__title {
+        font-size: 1.5rem;
+      }
+
+      .section__description {
+        font-size: 1rem;
+      }
+
+      .card img {
+        height: 150px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <header class="page-header">
     <h1 class="page-header__title">银发记忆工程</h1>
-    <p class="page-header__subtitle">用 AI 镌刻时光，传承岁月故事</p>
+    <p class="page-header__subtitle">用 AI 守护岁月留痕</p>
   </header>
 
-  <main class="page-main">
+  <main class="container">
     <section class="section">
       <h2 class="section__title">产品介绍</h2>
-      <img src="./images/advantage.jpg" alt="独特优势图" class="section__image" />
-      <p class="section__description">
-        “记忆小舟”是一款面向老年人群体的语言AI产品，通过自然交互引导用户回忆与讲述个人经历，帮助他们留存、整理和传承人生故事。产品融合语音识别、方言理解、情感识别与自然语言生成技术，能够识别讲述内容中的重要人物、事件与时间节点，自动生成结构化的家族记忆档案和口述史文本。系统还会结合历史背景补全信息，构建个人与时代之间的联系。我们希望通过技术，帮助老年人更轻松地表达，也让家人更深入地理解和珍视他们的生命历程。每一段讲述，都是一盏点亮时光的灯；每一个故事，都是家族血脉里流淌的温度。我们用细碎的瞬间延续家族的历史与情感；用技术与爱，将回忆封存成宝贵的民族财富。
-      </p>
-    </section>
-
-    <section class="section">
-      <h2 class="section__title">项目缘起</h2>
-      <img src="./images/project-start.jpg" alt="项目背景图" class="section__image" />
-      <p class="section__description">
-        “记忆小舟”源于我们对老年群体长期的田野调研。在与众多社区老人深入交流的过程中，我们发现，他们拥有丰富的人生经验与珍贵记忆，但由于许多原因，这些口述常常难以被完整记录。为回应这一真实需求，我们依托先进的语音识别与自然语言处理技术，设计这款AI语言模型，希望为老年人的回忆提供一个温柔可靠的载体，也为家庭和社会留下宝贵的人文资产。
-      </p>
-    </section>
-
-    <section class="section">
-      <h2 class="section__title">目标人群</h2>
-      <img src="./images/path.jpg" alt="实施路径图" class="section__image" />
-      <p class="section__description">
-        我们的主要服务对象是60岁及以上、具备一定语言表达能力的老年人群体，尤其包括有意愿讲述个人经历、保存家族记忆的老人，以及希望通过数字方式记录亲人故事的家庭成员。同时，也面向养老机构、社区服务中心及相关文化传承组织，提供定制化记忆采集与整理服务。
-      </p>
-    </section>
-
-    <section class="section">
-      <h2 class="section__title">核心价值</h2>
-      <img src="./images/core-value.jpg" alt="核心价值图" class="section__image" />
-      <p class="section__description">
-        “记忆小舟”致力于以AI技术激活、保存并传承老年人的人生记忆，打造从个体故事到家族叙事，再到国家历史的记忆传导机制。在技术上，它融合语义识别、方言处理、情绪分析与历史知识建模，创新构建结构化家族记忆档案系统；在情感上，它以“数字孙辈”的角色倾听老人讲述，使其在倾诉中获得价值感与情感联结。我们不仅关注记忆保存的形式创新，更坚持“人民史观”的价值导向，让普通人的生命历程被记录、被看见，成为时代叙述的一部分。通过这一项目，我们希望推动“个体记忆—家庭文化—国家叙事”的有机融合，让家国记忆代代相传，在数字时代焕发新的生命力。
-      </p>
+      <div class="card">
+        <img src="./images/advantage.jpg" alt="独特优势图" />
+        <div class="card-body">
+          <p class="section__description">
+            “记忆小舟”是一款面向老年人群体的语言AI产品，通过自然交互引导用户回忆与讲述个人经历，帮助他们留存、整理和传承人生故事。产品融合语音识别、方言理解、情感识别与自然语言生成技术，能够识别讲述内容中的重要人物、事件与时间节点，自动生成结构化的家族记忆档案和口述史文本。系统还会结合历史背景补全信息，构建个人与时代之间的联系。我们希望通过技术，帮助老年人更轻松地表达，也让家人更深入地理解和珍视他们的生命历程。每一段讲述，都是一盏点亮时光的灯；每一个故事，都是家族血脉里流淌的温度。我们用细碎的瞬间延续家族的历史与情感；用技术与爱，将回忆封存成宝贵的民族财富。
+          </p>
+        </div>
+      </div>
     </section>
 
     <section class="section">
       <h2 class="section__title">预期成果</h2>
-      <img src="./images/result.jpg" alt="预期成果图" class="section__image" />
-      <p class="section__description">
-        随着“记忆小舟”的发展，成千上万的回忆档案将汇聚成光点，犹如星河闪耀。每一段记忆的保存，都是对过往岁月的珍贵致敬；每一份情感的传递，都在不断加深代际之间的情感联结。年轻一代将通过这些记录，了解并传承长辈的风华，家族的历史将如同一幅逐渐展开的长卷，见证着岁月的深情与时代的变迁。最终，这项工程不仅为每个家庭留下了宝贵的文化遗产，更为整个社会提供了更深刻的历史认知与情感共鸣。
-      </p>
+      <div class="card">
+        <img src="./images/result.jpg" alt="预期成果图" />
+        <div class="card-body">
+          <p class="section__description">
+            随着“记忆小舟”的发展，成千上万的回忆档案将汇聚成光点，犹如星河闪耀。每一段记忆的保存，都是对过往岁月的珍贵致敬；每一份情感的传递，都在不断加深代际之间的情感联结。年轻一代将通过这些记录，了解并传承长辈的风华，家族的历史将如同一幅逐渐展开的长卷，见证着岁月的深情与时代的变迁。最终，这项工程不仅为每个家庭留下了宝贵的文化遗产，更为整个社会提供了更深刻的历史认知与情感共鸣。
+          </p>
+        </div>
+      </div>
     </section>
 
     <section class="section">
