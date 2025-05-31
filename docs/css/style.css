@@ -380,14 +380,18 @@ body {
   bottom: 30px;
   right: 30px;
   background-color: #ff9f43;
-  border: none;
   border-radius: 50%;
-  width: 65px;
-  height: 65px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
+  width: 56px;
+  height: 56px;
+  border: none;
+  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.4);
   cursor: pointer;
-  z-index: 10000;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  user-select: none;
 }
 
 #floating-ai-button:hover,
@@ -396,79 +400,122 @@ body {
   outline: none;
 }
 
-/* ========== 新增：.split-section 样式 ========== */
-.split-section {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, #ffefdb 0%, #fff3e6 100%);
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
-  align-items: center;
-  justify-content: center;
+/* ========== 更多内容展开收起 ========== */
+.more-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-.split-section > div {
-  flex: 1 1 50%;
-  min-width: 300px;
-  padding: 0 1rem;
+.more-content.open {
+  max-height: 500px; /* 可调整或用JS动态设置 */
+  opacity: 1;
 }
 
-.split-section img,
-.split-section video {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-  display: block;
+/* ========== 响应式布局 ========== */
+@media (max-width: 992px) {
+  .page-main {
+    max-width: 720px;
+    padding: 80px 1rem 2rem;
+  }
+  .content-section {
+    padding: 1.5rem 1.5rem;
+  }
 }
 
-/* 响应式：窄屏时堆叠 */
 @media (max-width: 768px) {
-  .page-header {
-    padding: 0.7rem 1rem;
-  }
-
-  .page-title {
-    font-size: 1.5rem;
-  }
-
-  .page-nav ul {
-    display: none; /* 移动端隐藏菜单，需JS控制显示 */
-  }
-
+  /* 汉堡菜单显示 */
   .nav-toggle {
     display: flex;
   }
 
-  .page-main {
-    padding: 90px 1rem 2rem;
-    max-width: 100%;
+  /* 隐藏主导航，切换为抽屉式 */
+  .page-nav ul {
+    position: fixed;
+    top: 60px; /* header高度 */
+    right: 0;
+    background-color: rgba(255, 159, 67, 0.95);
+    flex-direction: column;
+    width: 220px;
+    padding: 1.5rem;
+    border-radius: 0 0 0 10px;
+    box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 9998;
   }
 
-  .content-section {
-    padding: 1.5rem 1.2rem;
-    margin-bottom: 1.5rem;
+  /* 菜单打开 */
+  .page-nav ul.open {
+    display: flex;
   }
 
+  .page-nav li {
+    margin-bottom: 1rem;
+  }
+
+  .page-nav a {
+    font-size: 1.2rem;
+  }
+
+  /* 适当调整header布局 */
+  .page-header {
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* ========== .split-section 布局 ========== */
+.split-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  /* 背景、圆角和阴影保持风格一致 */
+  background: #fff3e6;
+  padding: 1.8rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
+  user-select: none;
+}
+
+.split-section > .split-left,
+.split-section > .split-right {
+  flex: 1 1 48%;
+  min-width: 280px;
+}
+
+/* 文字内容调整 */
+.split-left p,
+.split-right p {
+  color: #5a4631;
+  line-height: 1.65;
+  font-size: 1rem;
+  padding-left: 0.15rem;
+}
+
+/* 图片/视频自适应 */
+.split-left img,
+.split-right img,
+.split-left video,
+.split-right video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.25);
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* 移动端改为上下堆叠 */
+@media (max-width: 768px) {
   .split-section {
     flex-direction: column;
-    padding: 1.5rem 1rem;
+    gap: 1.5rem;
   }
-
-  .split-section > div {
+  .split-section > .split-left,
+  .split-section > .split-right {
+    flex: 1 1 100%;
     min-width: auto;
-    padding: 0 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .slider-btn {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .team-member img {
-    width: 80px;
-    height: 80px;
   }
 }
