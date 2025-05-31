@@ -274,10 +274,17 @@ body {
   user-select: none;
   cursor: pointer;
   margin-top: 0.8rem;
-  line-height: 1.4; /* 优化按钮行高 */
+  line-height: 1.4; /* 新增：调整按钮行高，避免行距过大或过小 */
 }
 
-/* 按钮 hover/focus 效果 */
+/* 新增：立即体验按钮容器，居中对齐 */
+.experience-section {
+  text-align: center;
+  padding: 2rem 0 3rem; /* 适当上下内边距 */
+}
+
+/* experience-section内的按钮继承通用样式即可，这里确保居中 */
+
 .button-link:hover,
 .button-link:focus {
   background-color: #fff;
@@ -374,24 +381,75 @@ body {
 
 .split-section .text-content {
   flex: 1;
-  position: relative;
+  /* 新增“了解更多”内容的过渡效果 */
 }
 
-/* 新增 “了解更多”内容容器，默认隐藏 */
-.split-section .more-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+.split-section img {
+  flex: 1;
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
 }
 
-/* 展开时的状态 */
-.split-section .more-content.open {
-  max-height: 1000px; /* 需要根据内容调整足够大 */
-}
-
-/* “了解更多”按钮 - 保持统一 */
+/* “了解更多”按钮 - 保持与通用样式一致 */
 .split-section .button-link {
   display: inline-block;
-  background-color: #ff9f43;
-  color: #fff;
-  padding: 0.6rem 1.6rem
+  margin-top: 1rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* 新增：了解更多内容容器，默认隐藏 */
+.more-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 0;
+  user-select: text;
+}
+
+/* 展开时 */
+.more-content.show {
+  max-height: 500px; /* 适当足够展示内容的最大高度 */
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+/* 响应式布局 */
+@media (max-width: 900px) {
+  .split-section {
+    flex-direction: column;
+    padding: 1.8rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .split-section img,
+  .split-section .text-content {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .page-header {
+    padding: 0.7rem 1rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .page-nav ul {
+    gap: 1rem;
+  }
+
+  .button-link {
+    padding: 0.5rem 1.4rem;
+    font-size: 0.95rem;
+  }
+}
