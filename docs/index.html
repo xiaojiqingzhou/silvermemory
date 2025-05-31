@@ -17,7 +17,7 @@
     <div class="header-inner">
       <h1 class="page-title">银发记忆工程</h1>
 
-      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="primary-navigation" id="navToggle">
+      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="navMenu" id="navToggle">
         <span class="hamburger" aria-hidden="true"></span>
       </button>
 
@@ -35,7 +35,6 @@
   </header>
 
   <main id="main" class="page-main" role="main">
-
     <!-- 项目缘起 -->
     <section id="origin" class="split-section" tabindex="-1" aria-labelledby="origin-title">
       <img src="images/project-start.jpg" alt="项目缘起图示" loading="lazy" />
@@ -132,7 +131,72 @@
   <!-- Coze 智能体 SDK -->
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js" defer></script>
 
-  <!-- 下面引入你单独的js文件 -->
-  <script src="js/main.js" defer></script>
+  <!-- 修复交互问题的 JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !expanded);
+        navMenu.classList.toggle('open');
+      });
+
+      const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+      toggleButtons.forEach((btn) => {
+        const targetId = btn.getAttribute('aria-controls');
+        btn.addEventListener('click', () => toggleContent(targetId, btn));
+      });
+
+      const prevBtn = document.querySelector('.slider-btn.prev');
+      const nextBtn = document.querySelector('.slider-btn.next');
+      const slides = document.querySelectorAll('.slider-image');
+      const indicators = document.querySelectorAll('.indicator');
+      let currentIndex = 0;
+
+      function updateSlides(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+          indicators[i].classList.toggle('active', i === index);
+          indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+        currentIndex = index;
+      }
+
+      if (prevBtn && nextBtn && slides.length > 0) {
+        prevBtn.addEventListener('click', () => {
+          let index = currentIndex - 1;
+          if (index < 0) index = slides.length - 1;
+          updateSlides(index);
+        });
+
+        nextBtn.addEventListener('click', () => {
+          let index = currentIndex + 1;
+          if (index >= slides.length) index = 0;
+          updateSlides(index);
+        });
+
+        indicators.forEach((btn, i) => {
+          btn.addEventListener('click', () => updateSlides(i));
+        });
+
+        updateSlides(0);
+      }
+    });
+
+    function toggleContent(id, btn) {
+      const content = document.getElementById(id);
+      const isHidden = content.hasAttribute('hidden');
+      if (isHidden) {
+        content.removeAttribute('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = '收起';
+      } else {
+        content.setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '了解更多';
+      }
+    }
+  </script>
 </body>
 </html>
