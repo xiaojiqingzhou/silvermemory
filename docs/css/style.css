@@ -326,6 +326,41 @@ body {
   user-select: none;
 }
 
+/* ========== 浮动体验按钮 ========== */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background-color: #ff9f43;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: breathe 3s ease-in-out infinite;
+  border: none;
+  z-index: 10000;
+}
+
+.floating-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 159, 67, 0.9);
+  }
+}
+
 /* ========== 响应式 ========== */
 @media (max-width: 768px) {
   .page-header {
@@ -420,22 +455,23 @@ body {
 
 .split-section .text-content h3 {
   font-size: 1.6rem;
-  color: #bf6e0a;
-  margin-bottom: 0.8rem;
   font-weight: 700;
-  user-select: text;
+  color: #bf6e0a;
+  margin-bottom: 1rem;
+  user-select: none;
 }
 
 .split-section .text-content p {
-  margin-bottom: 1.2rem;
-  user-select: text;
+  margin-bottom: 1rem;
+  padding-left: 0.2rem;
 }
 
+/* ========== 了解更多 按钮样式 ========== */
 .split-section .button-link {
   display: inline-block;
-  background-color: #ff9f43;
+  background-color: #ff9f43; /* 主题橙色 */
   color: #fff;
-  padding: 0.5rem 1.3rem;
+  padding: 0.6rem 1.6rem;
   font-weight: 600;
   border-radius: 25px;
   border: 2px solid #ff9f43;
