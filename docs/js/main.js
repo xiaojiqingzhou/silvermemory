@@ -1,19 +1,19 @@
 (() => {
   // ====== 导航汉堡按钮和菜单元素 ======
-  const navToggleBtn = document.querySelector('.nav-toggle');  // 对应CSS中.nav-toggle类名
-  const navMenu = document.querySelector('.page-nav ul');       // 导航菜单列表
+  const navToggleBtn = document.querySelector('.nav-toggle');  // 汉堡按钮
+  const navMenu = document.querySelector('.page-nav ul');       // 菜单列表
 
   if (navToggleBtn && navMenu) {
     navToggleBtn.addEventListener('click', () => {
       const expanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
       navToggleBtn.setAttribute('aria-expanded', String(!expanded));
       navToggleBtn.classList.toggle('active');
-      navMenu.classList.toggle('open');  // CSS中通过.open控制显示
+      navMenu.classList.toggle('open');  // CSS中通过.open控制显示/隐藏
     });
 
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) { // 和CSS媒体查询保持一致
+        if (window.innerWidth <= 768) {
           navToggleBtn.setAttribute('aria-expanded', 'false');
           navToggleBtn.classList.remove('active');
           navMenu.classList.remove('open');
@@ -68,17 +68,21 @@
       }
     }
 
-    prevBtn.addEventListener('click', () => {
-      showSlide(currentIndex - 1);
-      stopAutoPlay();
-      startAutoPlay();
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        showSlide(currentIndex - 1);
+        stopAutoPlay();
+        startAutoPlay();
+      });
+    }
 
-    nextBtn.addEventListener('click', () => {
-      showSlide(currentIndex + 1);
-      stopAutoPlay();
-      startAutoPlay();
-    });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        showSlide(currentIndex + 1);
+        stopAutoPlay();
+        startAutoPlay();
+      });
+    }
 
     indicators.forEach((btn, i) => {
       btn.addEventListener('click', () => {
@@ -108,26 +112,21 @@
   if (floatingBtn && window.CozeWebSDK && CozeWebSDK.WebChatClient) {
     let clickTimeout = null;
     floatingBtn.addEventListener('click', () => {
-      if (clickTimeout) return;
+      if (clickTimeout) return; // 防止短时间内重复点击
       CozeWebSDK.WebChatClient.open();
       clickTimeout = setTimeout(() => clickTimeout = null, 500);
     });
   }
 
   // ====== “了解更多”内容展开折叠逻辑 ======
-  // 需要你的HTML结构中：
-  // 1. “了解更多”按钮：class="toggle-more-btn"
-  // 2. 对应内容容器：class="more-content"（与按钮对应，一般为同级或父子元素）
-
+  // 要求：按钮class="toggle-more-btn"，对应内容容器class="more-content"
   const toggleButtons = document.querySelectorAll('.toggle-more-btn');
 
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // 查找对应的.more-content容器，假设它是按钮的同级或父级的子元素
-      // 这里采用查找同级元素方式，按需调整选择器
+      // 优先找同级或父元素内的.more-content
       let moreContent = btn.parentElement.querySelector('.more-content');
       if (!moreContent) {
-        // 如果找不到，再尝试btn下一个兄弟元素
         moreContent = btn.nextElementSibling && btn.nextElementSibling.classList.contains('more-content')
           ? btn.nextElementSibling
           : null;
@@ -139,5 +138,4 @@
       btn.setAttribute('aria-expanded', isShown);
     });
   });
-
 })();
