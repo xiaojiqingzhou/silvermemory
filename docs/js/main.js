@@ -4,6 +4,9 @@
   const navMenu = document.querySelector('.page-nav ul');       // 菜单列表
 
   if (navToggleBtn && navMenu) {
+    // 初始化 aria-expanded
+    navToggleBtn.setAttribute('aria-expanded', 'false');
+
     navToggleBtn.addEventListener('click', () => {
       const expanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
       navToggleBtn.setAttribute('aria-expanded', String(!expanded));
@@ -30,7 +33,7 @@
       });
     });
 
-    // 窗口大小变更时，重置菜单状态
+    // 窗口大小变更时，重置菜单状态（去除移动端打开状态）
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
         navToggleBtn.setAttribute('aria-expanded', 'false');
@@ -56,12 +59,15 @@
     function showSlide(index) {
       if (index < 0) index = total - 1;
       if (index >= total) index = 0;
+
       images.forEach((img, i) => img.classList.toggle('active', i === index));
       indicators.forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-        btn.setAttribute('aria-selected', i === index ? 'true' : 'false');
-        btn.setAttribute('tabindex', i === index ? '0' : '-1');
+        const isActive = (i === index);
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        btn.setAttribute('tabindex', isActive ? '0' : '-1');
       });
+
       currentIndex = index;
     }
 
@@ -79,6 +85,7 @@
       }
     }
 
+    // 绑定上一张按钮事件
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
         showSlide(currentIndex - 1);
@@ -93,6 +100,7 @@
       });
     }
 
+    // 绑定下一张按钮事件
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         showSlide(currentIndex + 1);
@@ -107,6 +115,7 @@
       });
     }
 
+    // 绑定指示器按钮事件
     indicators.forEach((btn, i) => {
       btn.addEventListener('click', () => {
         showSlide(i);
@@ -121,9 +130,11 @@
       });
     });
 
+    // 鼠标进入停止自动轮播，离开后继续
     slider.addEventListener('mouseenter', stopAutoPlay);
     slider.addEventListener('mouseleave', startAutoPlay);
 
+    // 初始化显示第一张
     showSlide(0);
     startAutoPlay();
   }
