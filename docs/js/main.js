@@ -23,19 +23,7 @@
       });
     });
   }
-  
-function toggleText(button) {
-  const moreText = button.nextElementSibling;
-  const isHidden = moreText.classList.contains("hidden");
 
-  if (isHidden) {
-    moreText.classList.remove("hidden");
-    button.textContent = "收起";
-  } else {
-    moreText.classList.add("hidden");
-    button.textContent = "了解更多";
-  }
-}
   // 轮播图相关元素
   const slider = document.querySelector('.image-slider');
   if (!slider) return;
