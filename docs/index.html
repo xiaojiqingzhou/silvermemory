@@ -34,58 +34,30 @@
     </div>
   </header>
 
-以下是你提供内容的**排版优化版 HTML**，结构和视觉风格参考了你图中展示的网页，包含两个主要部分：“项目缘起”和“项目介绍”，并模仿点击后展开的可交互体验（使用 `<details>` 和 `<summary>` 标签来模拟“点击展开”的效果）。
+  <main id="main" class="page-main" role="main">
+    <section id="origin" class="content-section">
+      <h2>项目缘起</h2>
+      <div class="section-content">
+        <img src="images/project-start.jpg" alt="老人与科技结合的背景图" class="section-image" />
+        <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
 
-你可以复制这段代码嵌入到网页中，也可以将其作为前端设计参考继续美化样式（比如添加 CSS 或动画效果）：
+        <h3>目标人群</h3>
+        <img src="images/path.jpg" alt="项目实施路径图" class="section-image" />
+        <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
+      </div>
+    </section>
 
-```html
-<main id="main" class="page-main" tabindex="-1">
+    <section id="introduction" class="content-section">
+      <h2>项目介绍</h2>
+      <div class="section-content">
+        <img src="images/advantage.jpg" alt="记忆小舟系统优势图解" class="section-image" />
+        <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
 
-  <!-- 项目缘起 -->
-  <section id="origin" class="content-section" tabindex="0" aria-labelledby="origin-title">
-    <h2 id="origin-title">项目缘起</h2>
-    <div class="section-content">
-      <img src="images/project-start.jpg" alt="银发记忆工程项目背景图" class="section-image" />
-      <details>
-        <summary><strong>点击展开查看详细内容</strong></summary>
-        <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。</p>
-        <p>为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的 AI 语言助手，希望为老年人的讲述提供一个倾听与记录的平台，也为家庭与社会积累宝贵的文化资产。</p>
-      </details>
-
-      <h3>目标人群</h3>
-      <img src="images/path.jpg" alt="银发记忆工程实施路径图" class="section-image" />
-      <details>
-        <summary><strong>点击展开查看目标人群说明</strong></summary>
-        <p>我们的主要服务对象为60岁及以上，具有一定语言表达能力的老年人，尤其是有意愿回忆与讲述人生经历的个体，以及希望保存家族记忆的亲属成员。</p>
-        <p>与此同时，我们也面向养老机构、社区服务中心、文化馆及历史传承组织，提供定制化的记忆采集与口述史整理方案。</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- 项目介绍 -->
-  <section id="introduction" class="content-section" tabindex="0" aria-labelledby="introduction-title">
-    <h2 id="introduction-title">项目介绍</h2>
-    <div class="section-content">
-      <img src="images/advantage.jpg" alt="记忆小舟独特优势展示" class="section-image" />
-      <details>
-        <summary><strong>点击展开查看产品介绍</strong></summary>
-        <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，采用自然语音交互方式，引导用户回忆并讲述个人生命经历。</p>
-        <p>系统融合语音识别、方言理解、情感识别与自然语言生成技术，能够识别讲述中的关键人物、事件和时间节点，自动生成结构化的家族记忆档案与口述史文本。</p>
-        <p>同时，平台还可依据历史背景补全叙述内容，重建个体记忆与时代大背景的关联。</p>
-      </details>
-
-      <h3>核心价值</h3>
-      <img src="images/core-value.jpg" alt="记忆小舟核心价值图示" class="section-image" />
-      <details>
-        <summary><strong>点击展开查看核心价值解读</strong></summary>
-        <p>我们希望通过 AI 技术，激活、保存并传承老年人的珍贵回忆，构建从个体故事到家族记忆，再到国家叙事的有机传导机制。</p>
-        <p>“记忆小舟”不仅注重记忆保存形式的技术创新，更坚持“人民史观”的价值导向，让普通人的生命轨迹被记录、被看见。</p>
-        <p>通过这一数字化实践，我们致力于推动“个体记忆—家庭文化—国家历史”的深度融合，使家国记忆在数字时代焕发新的生命力。</p>
-      </details>
-    </div>
-  </section>
-
-</main>
+        <h3>核心价值</h3>
+        <img src="images/core-value.jpg" alt="项目核心价值可视化" class="section-image" />
+        <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
+      </div>
+    </section>
 
     <section id="demo" class="content-section">
       <h2>操作演示</h2>
