@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>银发记忆工程</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="page-header">
     <h1 class="page-title">银发记忆工程</h1>
+    <button class="menu-toggle" aria-label="展开菜单">☰</button>
     <nav class="page-nav">
-      <ul>
+      <ul class="nav-list">
         <li><a href="#origin">项目缘起</a></li>
         <li><a href="#introduction">项目介绍</a></li>
         <li><a href="#demo">操作演示</a></li>
@@ -22,33 +24,32 @@
     </nav>
   </header>
 
-  <main class="page-main">
+  <main id="main" class="page-main">
     <section id="origin" class="content-section">
       <h2>项目缘起</h2>
       <div class="text-content">
-        <p>“记忆小舟”源于我们对老年群体长期的田野调研。在与众多社区老人深入交流的过程中，我们发现，他们拥有丰富的人生经验与珍贵记忆，但由于许多原因，这些口述常常难以被完整记录。为回应这一真实需求，我们依托先进的语音识别与自然语言处理技术，设计这款AI语言模型，希望为老年人的回忆提供一个温柔可靠的载体，也为家庭和社会留下宝贵的人文资产。</p>
+        <p>“记忆小舟”源于我们对老年群体长期的田野调研...。</p>
       </div>
     </section>
 
-    <section id="introduction" class="content-section">
+    <section id="introduction" class="content-section section-alt">
       <h2>项目介绍</h2>
       <div class="text-content">
-        <p>“记忆小舟”是一款面向老年人群体的语言AI产品，通过自然交互引导用户回忆与讲述个人经历，帮助他们留存、整理和传承人生故事。产品融合语音识别、方言理解、情感识别与自然语言生成技术，能够识别讲述内容中的重要人物、事件与时间节点，自动生成结构化的家族记忆档案和口述史文本。系统还会结合历史背景补全信息，构建个人与时代之间的联系。我们希望通过技术，帮助老年人更轻松地表达，也让家人更深入地理解和珍视他们的生命历程。</p>
+        <p>“记忆小舟”是一款面向老年人群体的语言AI产品...。</p>
       </div>
     </section>
 
     <section id="demo" class="content-section">
       <h2>操作演示</h2>
       <div class="video-container">
-        <!-- 请将以下链接替换为您的演示视频链接 -->
-        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/your-video-id" title="操作演示视频" frameborder="0" allowfullscreen></iframe>
       </div>
     </section>
 
-    <section id="team" class="content-section">
+    <section id="team" class="content-section section-alt">
       <h2>团队简介</h2>
       <div class="text-content">
-        <p>这里填写团队成员简介，介绍团队的组成、成员背景及分工。</p>
+        <p>这里填写团队成员简介...</p>
       </div>
     </section>
 
@@ -56,18 +57,20 @@
       <h2>成果展示</h2>
       <div class="image-slider" aria-label="成果图片轮播">
         <button class="slider-btn prev" aria-label="上一张图片">&#8249;</button>
+        <div class="slider-images">
+          <img src="images/image1.jpg" alt="成果展示：AI生成的口述历史档案样例" class="slider-image active" loading="lazy" />
+          <img src="images/image2.jpg" alt="成果展示：系统界面交互图" class="slider-image" loading="lazy" />
+          <img src="images/image3.jpg" alt="成果展示：访谈现场照片" class="slider-image" loading="lazy" />
+        </div>
         <button class="slider-btn next" aria-label="下一张图片">&#8250;</button>
-
-        <img src="images/image1.jpg" alt="成果图片1" class="slider-image active" />
-        <img src="images/image2.jpg" alt="成果图片2" class="slider-image" />
-        <img src="images/image3.jpg" alt="成果图片3" class="slider-image" />
+        <div class="slider-indicators"></div>
       </div>
     </section>
 
-    <section id="instructions" class="content-section">
+    <section id="instructions" class="content-section section-alt">
       <h2>使用说明</h2>
       <div class="text-content">
-        <p>点击右侧浮动按钮开始体验。如遇调用失败，请点击下方按钮：</p>
+        <p>点击右侧浮动按钮开始体验...</p>
         <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank" rel="noopener noreferrer">立即体验</a>
       </div>
     </section>
@@ -77,54 +80,24 @@
     <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
 
-  <!-- Coze 智能体 SDK -->
+  <!-- Floating Bot -->
+  <div class="float-button" aria-label="打开记忆小舟体验">💬</div>
+
+  <!-- Coze SDK -->
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
   <script>
     new CozeWebSDK.WebChatClient({
-      config: {
-        bot_id: '7489440833709129747',
-      },
-      componentProps: {
-        title: '记忆小舟',
-      },
+      config: { bot_id: '7489440833709129747' },
+      componentProps: { title: '记忆小舟' },
       auth: {
         type: 'token',
         token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
-        onRefreshToken: function () {
-          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
-        }
+        onRefreshToken: () => 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
       }
     });
   </script>
 
-  <script>
-    // 轮播图功能
-    const images = document.querySelectorAll('.slider-image');
-    const prevBtn = document.querySelector('.slider-btn.prev');
-    const nextBtn = document.querySelector('.slider-btn.next');
-    let currentIndex = 0;
-
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.classList.toggle('active', i === index);
-      });
-    }
-
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
-    });
-
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    });
-
-    // 自动轮播
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    }, 7000);
-  </script>
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
 </body>
 </html>
