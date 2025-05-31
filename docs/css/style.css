@@ -41,6 +41,8 @@ body {
   user-select: none;
 }
 
+
+
 /* ========== 基础重置 ========== */
 * {
   margin: 0;
@@ -947,3 +949,9 @@ body {
     height: 80px;
   }
 }
+
+/* ========== 补充：了解更多隐藏内容控制 ========== */
+.more-content[hidden] {
+  display: none !important;
+}
+
