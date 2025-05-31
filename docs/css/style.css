@@ -1,4 +1,4 @@
-/* ========== 基础重置 ========== */ 
+/* ========== 基础重置 ========== */
 * {
   margin: 0;
   padding: 0;
@@ -81,21 +81,39 @@ body {
 }
 
 /* 汉堡菜单 */
-.menu-toggle {
+.nav-toggle {
   display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 28px;
   height: 24px;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
-.menu-toggle span {
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: '';
   display: block;
+  width: 28px;
   height: 3px;
-  background: #fff;
+  background-color: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-toggle .hamburger::before {
+  position: absolute;
+  top: -8px;
+}
+
+.nav-toggle .hamburger::after {
+  position: absolute;
+  top: 8px;
 }
 
 /* ========== 主体内容 ========== */
@@ -134,14 +152,25 @@ body {
   padding-left: 0.2rem;
 }
 
+/* 图片样式 */
+.section-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  display: block;
+  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
+}
+
 /* ========== 视频容器 ========== */
 .video-container {
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* 16:9 */
   height: 0;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
+  margin-bottom: 2rem;
 }
 
 .video-container iframe {
@@ -161,6 +190,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
   user-select: none;
+  margin-bottom: 2rem;
 }
 
 .slider-image {
@@ -259,6 +289,7 @@ body {
   background-color: #fff8ed;
   box-shadow: 0 2px 10px rgba(255, 159, 67, 0.2);
   transition: transform 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .team-member:hover {
@@ -296,21 +327,38 @@ body {
 }
 
 /* ========== 浮动体验按钮 ========== */
-#coze-chat-btn {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  border-radius: 50% !important;
-  width: 56px !important;
-  height: 56px !important;
-  box-shadow: 0 0 15px rgba(255, 159, 67, 0.6) !important;
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background-color: #ff9f43;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation: breathe 3s ease-in-out infinite;
-  cursor: pointer !important;
+  border: none;
+  z-index: 10000;
+}
+
+.floating-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  pointer-events: none;
 }
 
 @keyframes breathe {
-  0%, 100% { box-shadow: 0 0 15px rgba(255, 159, 67, 0.6); }
-  50% { box-shadow: 0 0 25px rgba(255, 159, 67, 0.9); }
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 159, 67, 0.9);
+  }
 }
 
 /* ========== 响应式 ========== */
@@ -320,34 +368,22 @@ body {
   }
 
   .page-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .page-nav ul {
-    display: none;
-    flex-direction: column;
-    background-color: rgba(255, 159, 67, 0.95);
-    position: fixed;
-    top: 56px;
-    right: 0;
-    width: 220px;
-    height: calc(100% - 56px);
-    padding-top: 1rem;
-    box-shadow: -3px 0 12px rgba(255, 159, 67, 0.3);
-    border-radius: 0 0 0 15px;
-    z-index: 9998;
+    gap: 1rem;
   }
 
-  .page-nav ul.active {
-    display: flex;
+  .content-section {
+    padding: 1.2rem 1.4rem;
   }
 
-  .page-nav li {
-    margin: 1rem 0;
-    text-align: center;
+  .content-section h2 {
+    font-size: 1.5rem;
   }
 
-  .menu-toggle {
-    display: flex;
+  .team-member {
+    padding: 0.8rem;
   }
 }
