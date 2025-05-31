@@ -1,389 +1,89 @@
-/* ========== 基础重置 ========== */
-* {
+/* 全局样式 */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  font-family: 'Noto Sans SC', sans-serif;
-  background-color: #fff8f0;
-  color: #5a4631;
-}
-
-body {
+  font-family: "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  background-color: #f9fbfd;
+  color: #333;
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========== 页面整体布局 ========== */
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 159, 67, 0.9);
-  box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
-  z-index: 9999;
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+main {
+  padding: 2rem;
 }
 
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  user-select: none;
-}
-
-.page-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.3rem;
-}
-
-.page-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
-}
-
-.page-nav a:hover,
-.page-nav a:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  outline: none;
-}
-
-.page-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.page-nav a:hover::after,
-.page-nav a:focus::after {
-  width: 100%;
-}
-
-/* 汉堡菜单 */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 28px;
-  height: 24px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-.nav-toggle .hamburger,
-.nav-toggle .hamburger::before,
-.nav-toggle .hamburger::after {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 3px;
-  background-color: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-toggle .hamburger::before {
-  position: absolute;
-  top: -8px;
-}
-
-.nav-toggle .hamburger::after {
-  position: absolute;
-  top: 8px;
-}
-
-/* ========== 主体内容 ========== */
-.page-main {
-  padding: 100px 1.5rem 3rem;
-  max-width: 960px;
-  margin: 0 auto;
+h2, h3 {
+  color: #1a3d7c;
+  margin-bottom: 1rem;
 }
 
 /* 内容区块 */
 .content-section {
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  margin-bottom: 2rem;
-  padding: 1.8rem 2rem;
-  transition: box-shadow 0.3s ease;
+  margin-bottom: 3rem;
 }
 
-.content-section:hover {
-  box-shadow: 0 8px 20px rgba(255, 159, 67, 0.3);
-}
-
-.content-section h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #bf6e0a;
-  margin-bottom: 1rem;
-  user-select: none;
-}
-
-.text-content p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #5a4631;
-  padding-left: 0.2rem;
-}
-
-/* 图片样式 */
-.section-image {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  display: block;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
-}
-
-/* ========== 视频容器 ========== */
-.video-container {
+.content-block {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
+  border-radius: 20px;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
   margin-bottom: 2rem;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-/* ========== 轮播图 ========== */
-.image-slider {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  user-select: none;
-  margin-bottom: 2rem;
-}
-
-.slider-image {
-  width: 100%;
-  height: auto;
-  display: none;
-  transition: opacity 0.5s ease;
-  border-radius: 10px;
-}
-
-.slider-image.active {
-  display: block;
-  opacity: 1;
-}
-
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  color: #fff;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  z-index: 10;
-}
-
-.slider-btn:hover,
-.slider-btn:focus {
-  background-color: #ff9f43;
-  outline: none;
-}
-
-.slider-btn.prev {
-  left: 15px;
-}
-
-.slider-btn.next {
-  right: 15px;
-}
-
-.slider-indicators {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-  user-select: none;
-}
-
-.slider-indicators button {
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.slider-indicators button.active {
-  background-color: #ff9f43;
-}
-
-/* ========== 按钮链接样式 ========== */
-.button-link {
-  display: inline-block;
-  background-color: #ff9f43;
-  color: #fff;
-  padding: 0.6rem 1.4rem;
-  font-weight: 600;
-  border-radius: 25px;
-  border: 2px solid #ff9f43;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.25);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  user-select: none;
-}
-
-.button-link:hover,
-.button-link:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  outline: none;
-}
-
-/* ========== 卡片式团队成员 ========== */
-.team-member {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #fff8ed;
-  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.2);
-  transition: transform 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.team-member:hover {
-  transform: translateY(-5px);
-}
-
-.team-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 0.8rem;
-  object-fit: cover;
-  border: 3px solid #ff9f43;
-}
-
-.team-member h4 {
-  font-size: 1.2rem;
-  color: #bf6e0a;
-  margin-bottom: 0.3rem;
-}
-
-.team-member p {
-  font-size: 0.95rem;
-  color: #5a4631;
-}
-
-/* ========== 页脚 ========== */
-.page-footer {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 1rem;
-  color: #a47c22;
-  background-color: #fff3e6;
-  user-select: none;
-}
-
-/* ========== 浮动体验按钮 ========== */
-.floating-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 56px;
-  height: 56px;
-  background-color: #ff9f43;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
-  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
   align-items: center;
-  animation: breathe 3s ease-in-out infinite;
+  min-height: 300px;
+}
+
+.text-panel {
+  background: linear-gradient(to top right, rgba(240, 248, 255, 0.9), rgba(255, 255, 255, 0.95));
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 16px;
+  max-width: 60%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮样式 */
+.more-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(to right, #6ab7ff, #3a92ff);
+  color: white;
   border: none;
-  z-index: 10000;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.floating-button svg {
-  width: 24px;
-  height: 24px;
-  fill: #fff;
-  pointer-events: none;
+.more-btn:hover {
+  background: linear-gradient(to right, #4baaff, #1d84ff);
+  transform: scale(1.05);
 }
 
-@keyframes breathe {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 159, 67, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(255, 159, 67, 0.9);
-  }
+/* 折叠内容 */
+.more-text {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #eef7ff;
+  border-left: 4px solid #4baaff;
+  border-radius: 8px;
 }
 
-/* ========== 响应式 ========== */
-@media (max-width: 768px) {
-  .page-header {
-    padding: 0.6rem 1rem;
-  }
+.more-text.hidden {
+  display: none;
+}
 
-  .page-title {
-    font-size: 1.5rem;
+/* 响应式优化 */
+@media screen and (max-width: 768px) {
+  .content-block {
+    flex-direction: column;
+    min-height: auto;
   }
-
-  .page-nav ul {
-    gap: 1rem;
-  }
-
-  .content-section {
-    padding: 1.2rem 1.4rem;
-  }
-
-  .content-section h2 {
-    font-size: 1.5rem;
-  }
-
-  .team-member {
-    padding: 0.8rem;
+  .text-panel {
+    max-width: 90%;
+    margin: 1rem;
   }
 }
