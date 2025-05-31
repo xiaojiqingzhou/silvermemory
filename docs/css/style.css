@@ -91,12 +91,17 @@ h2 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-footer {
+footer.page-footer {
   background: var(--main-color);
   color: white;
   text-align: center;
   padding: 2rem 1rem;
+  font-size: 1.1rem;
   margin-top: 4rem;
+}
+
+.page-footer__text {
+  margin: 0;
 }
 
 @keyframes fadeInUp {
@@ -120,9 +125,9 @@ footer {
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.3s ease;
+  text-decoration: none;
 }
 
 .btn:hover {
   background: #d95c3c;
 }
-
