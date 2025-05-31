@@ -26,40 +26,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 了解更多按钮展开/收起，平滑过渡版
-  window.toggleContent = function(id, btn) {
+  window.toggleContent = function (id, btn) {
     const content = document.getElementById(id);
     const isHidden = content.classList.contains('hidden');
 
     if (isHidden) {
       content.classList.remove('hidden');
-      // 先设置 max-height 为0，再触发过渡到实际高度
       content.style.maxHeight = '0';
-      // 浏览器渲染后触发过渡
+
+      // 触发重绘，确保过渡生效
       requestAnimationFrame(() => {
         content.style.transition = 'max-height 0.35s ease';
         content.style.maxHeight = content.scrollHeight + 'px';
       });
+
       btn.setAttribute('aria-expanded', 'true');
       btn.textContent = '收起';
     } else {
+      // 设置当前高度，准备收起动画
       content.style.maxHeight = content.scrollHeight + 'px';
-      // 先触发浏览器渲染，保证过渡正常执行
+
       requestAnimationFrame(() => {
         content.style.transition = 'max-height 0.35s ease';
         content.style.maxHeight = '0';
       });
+
       btn.setAttribute('aria-expanded', 'false');
       btn.textContent = '了解更多';
 
       const onTransitionEnd = () => {
         content.classList.add('hidden');
+        content.style.maxHeight = null;
+        content.style.transition = null;
         content.removeEventListener('transitionend', onTransitionEnd);
       };
       content.addEventListener('transitionend', onTransitionEnd);
     }
   };
 
-  // 轮播图相关（保持不变）
+  // 轮播图相关
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   const slides = document.querySelectorAll('.slider-image');
@@ -69,33 +74,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const AUTO_SLIDE_DELAY = 5000;
 
   function updateSlides(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+
     slides.forEach((slide, i) => {
       slide.classList.toggle('active', i === index);
-      indicators[i].classList.toggle('active', i === index);
-      indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-      indicators[i].setAttribute('tabindex', i === index ? '0' : '-1');
+    });
+    indicators.forEach((btn, i) => {
+      const isActive = i === index;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      btn.setAttribute('tabindex', isActive ? '0' : '-1');
     });
     currentIndex = index;
   }
 
   function showPrev() {
-    let index = currentIndex - 1;
-    if (index < 0) index = slides.length - 1;
-    updateSlides(index);
+    updateSlides(currentIndex - 1);
   }
 
   function showNext() {
-    let index = currentIndex + 1;
-    if (index >= slides.length) index = 0;
-    updateSlides(index);
+    updateSlides(currentIndex + 1);
   }
 
-  prevBtn.addEventListener('click', () => {
+  prevBtn?.addEventListener('click', () => {
     showPrev();
     resetAutoSlide();
   });
 
-  nextBtn.addEventListener('click', () => {
+  nextBtn?.addEventListener('click', () => {
     showNext();
     resetAutoSlide();
   });
@@ -105,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSlides(i);
       resetAutoSlide();
     });
-    btn.addEventListener('keydown', e => {
+    btn.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         showPrev();
