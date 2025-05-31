@@ -132,6 +132,17 @@ body {
   top: 0;
 }
 
+/* 主导航菜单折叠动画支持 */
+#primary-navigation {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+#primary-navigation.open {
+  /* max-height 由 JS 动态控制 */
+}
+
 /* ========== 主体内容 ========== */
 .page-main {
   padding: 100px 1.5rem 3rem;
@@ -368,12 +379,15 @@ body {
   background-color: #ff9f43;
   border: none;
   border-radius: 50%;
-  width: 65px;
-  height: 65px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
+  width: 58px;
+  height: 58px;
   cursor: pointer;
-  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(255, 159, 67, 0.5);
   transition: background-color 0.3s ease;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #floating-ai-button:hover,
@@ -382,66 +396,80 @@ body {
   outline: none;
 }
 
-/* ========== 新增：.split-section 样式 ========== */
-.split-section {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, #ffefdb 0%, #fff3e6 100%);
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.split-section > div {
-  flex: 1 1 300px;
-  min-width: 280px;
-  padding: 0 1rem;
-  max-width: 600px;
-}
-
-.split-section img,
-.split-section video {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-  display: block;
+#floating-ai-button svg {
+  fill: #fff;
+  width: 28px;
+  height: 28px;
   user-select: none;
 }
 
-/* 文字容器内的排版优化 */
-.split-section .text-content {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #5a4631;
-  padding-left: 0.2rem;
+/* ========== 新增 .split-section 样式 ========== */
+.split-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  padding: 2rem 0;
+  background: linear-gradient(90deg, #ff9f43 10%, #ffddb8 90%);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(255, 159, 67, 0.25);
+  user-select: none;
 }
 
-/* 按钮在分栏内的居中 */
-.split-section .button-link {
-  margin-top: 1rem;
-  display: inline-block;
+.split-section .split-text {
+  flex: 1;
+  color: #5a4631;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-weight: 500;
+  padding-left: 0.8rem;
+  text-align: justify;
+}
+
+.split-section .split-image {
+  flex: 1;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
+  object-fit: cover;
+  user-select: none;
+  filter: drop-shadow(2px 4px 5px rgba(255, 159, 67, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.split-section .split-image:hover,
+.split-section .split-image:focus {
+  transform: scale(1.03);
+  outline: none;
 }
 
 /* 响应式调整 */
-@media (max-width: 768px) {
+@media screen and (max-width: 860px) {
   .page-header {
-    padding: 0.7rem 1rem;
+    padding: 0.6rem 1rem;
   }
 
   .page-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .page-nav ul {
-    display: none;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .nav-toggle {
     display: flex;
+  }
+
+  #primary-navigation {
+    max-height: 0;
+    background-color: #ff9f43;
+    border-radius: 0 0 8px 8px;
+  }
+
+  #primary-navigation.open {
+    max-height: 300px;
   }
 
   .page-main {
@@ -449,29 +477,44 @@ body {
     max-width: 100%;
   }
 
-  .content-section {
-    padding: 1.5rem 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-
   .split-section {
     flex-direction: column;
     padding: 1.5rem 1rem;
+    gap: 1.2rem;
   }
 
-  .split-section > div {
-    padding: 0;
-    margin-bottom: 1.5rem;
+  .split-section .split-text,
+  .split-section .split-image {
     max-width: 100%;
+    flex: none;
+    padding-left: 0;
   }
 
-  .slider-btn {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.6rem;
+  .image-slider {
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+  .button-link {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
   }
 
   .team-member img {
     width: 80px;
     height: 80px;
+  }
+
+  .image-slider {
+    height: 180px;
   }
 }
