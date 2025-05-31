@@ -37,15 +37,15 @@
   <main id="main" class="page-main" role="main">
 
     <!-- 项目缘起 -->
-    <section id="origin" class="content-section split-section">
-      <div class="section-image" style="background-image: url('images/project-start.jpg');"></div>
-      <div class="section-text">
+    <section id="origin" class="split-section">
+      <img src="images/project-start.jpg" alt="项目缘起图示" loading="lazy" />
+      <div class="text-content">
         <h2>项目缘起</h2>
         <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
         <h3>目标人群</h3>
         <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
 
-        <button class="more-button" onclick="toggleContent('origin-more', this)">了解更多</button>
+        <a href="javascript:void(0);" class="button-link" onclick="toggleContent('origin-more', this)">了解更多</a>
         <div id="origin-more" class="more-content" style="display: none;">
           <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
           <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
@@ -54,15 +54,15 @@
     </section>
 
     <!-- 项目介绍 -->
-    <section id="introduction" class="content-section split-section">
-      <div class="section-image" style="background-image: url('images/advantage.jpg');"></div>
-      <div class="section-text">
+    <section id="introduction" class="split-section">
+      <img src="images/advantage.jpg" alt="项目介绍图示" loading="lazy" />
+      <div class="text-content">
         <h2>项目介绍</h2>
         <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
         <h3>核心价值</h3>
         <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
 
-        <button class="more-button" onclick="toggleContent('introduction-more', this)">了解更多</button>
+        <a href="javascript:void(0);" class="button-link" onclick="toggleContent('introduction-more', this)">了解更多</a>
         <div id="introduction-more" class="more-content" style="display: none;">
           <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
           <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
@@ -118,7 +118,7 @@
   </main>
 
   <!-- 浮动智能聊天按钮 -->
-  <button class="floating-button" aria-label="打开智能聊天窗口">
+  <button id="floating-ai-button" aria-label="打开智能聊天窗口">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24" height="24" aria-hidden="true">
       <path d="M2 3h20v18H2z" fill="none" />
       <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z" />
