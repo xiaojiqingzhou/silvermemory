@@ -17,12 +17,12 @@
     <div class="header-inner">
       <h1 class="page-title">银发记忆工程</h1>
 
-      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="navMenu" id="navToggle">
+      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="navMenu" id="navToggle" type="button">
         <span class="hamburger" aria-hidden="true"></span>
       </button>
 
       <nav id="primary-navigation" class="page-nav" role="navigation" aria-label="主导航">
-        <ul class="nav-list" id="navMenu">
+        <ul class="nav-list" id="navMenu" hidden>
           <li><a href="#origin">项目缘起</a></li>
           <li><a href="#introduction">项目介绍</a></li>
           <li><a href="#demo">操作演示</a></li>
@@ -89,19 +89,19 @@
     <section id="achievements" class="content-section" tabindex="-1" aria-labelledby="achievements-title">
       <h2 id="achievements-title">成果展示</h2>
       <div class="image-slider" aria-label="成果展示轮播图">
-        <button class="slider-btn prev" aria-label="上一张图片">&#8249;</button>
-        <button class="slider-btn next" aria-label="下一张图片">&#8250;</button>
+        <button class="slider-btn prev" aria-label="上一张图片" type="button">&#8249;</button>
+        <button class="slider-btn next" aria-label="下一张图片" type="button">&#8250;</button>
 
         <div class="slider-images" role="region" aria-live="polite">
-          <img src="images/image1.jpg" alt="成果图一：老人与记忆小舟交互" loading="lazy" class="slider-image active" />
-          <img src="images/image2.jpg" alt="成果图二：家族口述档案样例" loading="lazy" class="slider-image" />
-          <img src="images/image3.jpg" alt="成果图三：项目社会反馈海报" loading="lazy" class="slider-image" />
+          <img src="images/image1.jpg" alt="成果图一：老人与记忆小舟交互" loading="lazy" class="slider-image active" id="slide1" />
+          <img src="images/image2.jpg" alt="成果图二：家族口述档案样例" loading="lazy" class="slider-image" id="slide2" />
+          <img src="images/image3.jpg" alt="成果图三：项目社会反馈海报" loading="lazy" class="slider-image" id="slide3" />
         </div>
 
         <div class="slider-indicators" role="tablist" aria-label="图片选择器">
-          <button class="indicator active" aria-selected="true" aria-controls="slide1" id="indicator1" role="tab"></button>
-          <button class="indicator" aria-selected="false" aria-controls="slide2" id="indicator2" role="tab"></button>
-          <button class="indicator" aria-selected="false" aria-controls="slide3" id="indicator3" role="tab"></button>
+          <button class="indicator active" aria-selected="true" aria-controls="slide1" id="indicator1" role="tab" type="button"></button>
+          <button class="indicator" aria-selected="false" aria-controls="slide2" id="indicator2" role="tab" type="button"></button>
+          <button class="indicator" aria-selected="false" aria-controls="slide3" id="indicator3" role="tab" type="button"></button>
         </div>
       </div>
     </section>
@@ -136,10 +136,17 @@
     document.addEventListener('DOMContentLoaded', () => {
       const navToggle = document.getElementById('navToggle');
       const navMenu = document.getElementById('navMenu');
+
       navToggle.addEventListener('click', () => {
         const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', !expanded);
-        navMenu.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if (expanded) {
+          navMenu.hidden = true;
+          navMenu.classList.remove('open');
+        } else {
+          navMenu.hidden = false;
+          navMenu.classList.add('open');
+        }
       });
 
       const toggleButtons = document.querySelectorAll('.btn-toggle-more');
@@ -155,6 +162,9 @@
       let currentIndex = 0;
 
       function updateSlides(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+
         slides.forEach((slide, i) => {
           slide.classList.toggle('active', i === index);
           indicators[i].classList.toggle('active', i === index);
@@ -163,17 +173,13 @@
         currentIndex = index;
       }
 
-      if (prevBtn && nextBtn && slides.length > 0) {
+      if (prevBtn && nextBtn && slides.length > 0 && indicators.length === slides.length) {
         prevBtn.addEventListener('click', () => {
-          let index = currentIndex - 1;
-          if (index < 0) index = slides.length - 1;
-          updateSlides(index);
+          updateSlides(currentIndex - 1);
         });
 
         nextBtn.addEventListener('click', () => {
-          let index = currentIndex + 1;
-          if (index >= slides.length) index = 0;
-          updateSlides(index);
+          updateSlides(currentIndex + 1);
         });
 
         indicators.forEach((btn, i) => {
