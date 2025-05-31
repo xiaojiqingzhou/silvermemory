@@ -10,53 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* 汉堡菜单过渡样式示例 */
-    nav.page-nav {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.35s ease;
-    }
-    nav.page-nav.open {
-      max-height: 500px; /* 具体高度根据菜单内容调整，足够展示全部菜单 */
-    }
-    ul.nav-list {
-      margin: 0; padding: 0; list-style: none;
-    }
-    /* 汉堡按钮active状态样式 */
-    .nav-toggle.active .hamburger {
-      background-color: transparent;
-    }
-    .nav-toggle .hamburger {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background-color: #333;
-      position: relative;
-      transition: background-color 0.3s ease;
-    }
-    .nav-toggle .hamburger::before,
-    .nav-toggle .hamburger::after {
-      content: "";
-      position: absolute;
-      width: 24px;
-      height: 2px;
-      background-color: #333;
-      transition: transform 0.3s ease;
-    }
-    .nav-toggle .hamburger::before {
-      top: -8px;
-    }
-    .nav-toggle .hamburger::after {
-      bottom: -8px;
-    }
-    .nav-toggle.active .hamburger::before {
-      transform: translateY(8px) rotate(45deg);
-    }
-    .nav-toggle.active .hamburger::after {
-      transform: translateY(-8px) rotate(-45deg);
-    }
-  </style>
 </head>
 
 <body>
@@ -64,12 +17,12 @@
     <div class="header-inner">
       <h1 class="page-title">银发记忆工程</h1>
 
-      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="primary-navigation" id="navToggle" type="button">
+      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="navMenu" id="navToggle" type="button">
         <span class="hamburger" aria-hidden="true"></span>
       </button>
 
-      <nav id="primary-navigation" class="page-nav" role="navigation" aria-label="主导航" hidden>
-        <ul class="nav-list" id="navMenu">
+      <nav id="primary-navigation" class="page-nav" role="navigation" aria-label="主导航">
+        <ul class="nav-list" id="navMenu" hidden>
           <li><a href="#origin">项目缘起</a></li>
           <li><a href="#introduction">项目介绍</a></li>
           <li><a href="#demo">操作演示</a></li>
