@@ -82,7 +82,7 @@ body {
 
 /* 汉堡菜单 */
 .nav-toggle {
-  display: none;
+  display: none; /* 默认隐藏，移动端显示 */
   flex-direction: column;
   justify-content: space-around;
   width: 28px;
@@ -91,6 +91,8 @@ body {
   background: transparent;
   border: none;
   padding: 0;
+  position: relative;
+  z-index: 10001;
 }
 
 .nav-toggle .hamburger,
@@ -114,6 +116,21 @@ body {
 .nav-toggle .hamburger::after {
   position: absolute;
   top: 8px;
+}
+
+/* 汉堡切换成X动画 */
+.nav-toggle.active .hamburger {
+  background-color: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.nav-toggle.active .hamburger::after {
+  transform: rotate(-45deg);
+  top: 0;
 }
 
 /* ========== 主体内容 ========== */
@@ -160,6 +177,7 @@ body {
   margin-bottom: 1rem;
   display: block;
   box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
+  object-fit: cover;
 }
 
 /* ========== 视频容器 ========== */
@@ -191,21 +209,30 @@ body {
   box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
   user-select: none;
   margin-bottom: 2rem;
+  height: 300px; /* 固定高度防止跳动 */
 }
 
 .slider-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: none;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.5s ease;
   border-radius: 10px;
+  object-fit: cover;
+  user-select: none;
 }
 
 .slider-image.active {
-  display: block;
   opacity: 1;
+  visibility: visible;
+  position: relative;
 }
 
+/* 轮播按钮 */
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -236,12 +263,14 @@ body {
   right: 15px;
 }
 
+/* 轮播指示器 */
 .slider-indicators {
   position: absolute;
   bottom: 15px;
   width: 100%;
   text-align: center;
   user-select: none;
+  z-index: 10;
 }
 
 .slider-indicators button {
@@ -274,17 +303,16 @@ body {
   user-select: none;
   cursor: pointer;
   margin-top: 0.8rem;
-  line-height: 1.4; /* 新增：调整按钮行高，避免行距过大或过小 */
+  line-height: 1.4;
 }
 
-/* 新增：立即体验按钮容器，居中对齐 */
+/* 立即体验按钮容器，居中对齐 */
 .experience-section {
   text-align: center;
-  padding: 2rem 0 3rem; /* 适当上下内边距 */
+  padding: 2rem 0 3rem;
 }
 
-/* experience-section内的按钮继承通用样式即可，这里确保居中 */
-
+/* 按钮悬浮及聚焦效果 */
 .button-link:hover,
 .button-link:focus {
   background-color: #fff;
@@ -358,6 +386,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 10000;
+  user-select: none;
 }
 
 #floating-ai-button:hover,
@@ -366,68 +395,79 @@ body {
   outline: none;
 }
 
-/* ========== 分割区块布局 ========== */
-.split-section {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  background: linear-gradient(135deg, #ffe7c5 0%, #ffd9a1 100%);
-  padding: 2.2rem 2.5rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
-  margin-bottom: 2.5rem;
-  user-select: none;
-}
-
-.split-section .text-content {
-  flex: 1;
-  /* 新增“了解更多”内容的过渡效果 */
-}
-
-.split-section img {
-  flex: 1;
-  max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-}
-
-/* “了解更多”按钮 - 保持与通用样式一致 */
-.split-section .button-link {
-  display: inline-block;
-  margin-top: 1rem;
-  user-select: none;
-  cursor: pointer;
-}
-
-/* 新增：了解更多内容容器，默认隐藏 */
+/* ========== 更多内容展开收起 ========== */
 .more-content {
   max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.4s ease;
   opacity: 0;
-  margin-top: 0;
-  user-select: text;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-/* 展开时 */
-.more-content.show {
-  max-height: 500px; /* 适当足够展示内容的最大高度 */
+.more-content.open {
+  max-height: 500px; /* 可调整或用JS动态设置 */
   opacity: 1;
-  margin-top: 1rem;
 }
 
-/* 响应式布局 */
-@media (max-width: 900px) {
-  .split-section {
-    flex-direction: column;
-    padding: 1.8rem 1.5rem;
-    gap: 1.5rem;
+/* ========== 响应式布局 ========== */
+@media (max-width: 992px) {
+  .page-main {
+    max-width: 720px;
+    padding: 80px 1rem 2rem;
+  }
+  .content-section {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 汉堡菜单显示 */
+  .nav-toggle {
+    display: flex;
   }
 
-  .split-section img,
-  .split-section .text-content {
-    flex: none;
-    width: 100%;
+  /* 隐藏主导航，切换为抽屉式 */
+  .page-nav ul {
+    position: fixed;
+    top: 60px; /* header高度 */
+    right: 0;
+    background-color: rgba(255, 159, 67, 0.95);
+    flex-direction: column;
+    width: 220px;
+    padding: 1.5rem;
+    border-radius: 0 0 0 10px;
+    box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 9998;
+  }
+
+  /* 菜单打开 */
+  .page-nav ul.open {
+    display: flex;
+  }
+
+  .page-nav li {
+    margin-bottom: 1rem;
+  }
+
+  .page-nav a {
+    padding: 0.6rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+
+  /* 页面主内容padding调整，防止header遮挡 */
+  .page-main {
+    padding: 90px 1rem 2rem;
+  }
+
+  /* 轮播图高度自适应 */
+  .image-slider {
+    height: 200px;
+  }
+
+  /* 视频容器缩小 */
+  .video-container {
+    padding-bottom: 56.25%;
   }
 }
 
@@ -436,20 +476,40 @@ body {
     font-size: 14px;
   }
 
-  .page-header {
-    padding: 0.7rem 1rem;
-  }
-
   .page-title {
     font-size: 1.6rem;
   }
 
-  .page-nav ul {
-    gap: 1rem;
+  .button-link {
+    padding: 0.5rem 1.2rem;
   }
 
-  .button-link {
-    padding: 0.5rem 1.4rem;
-    font-size: 0.95rem;
+  .team-member img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ========== 你之前的 split-section 样式整合示例 ========== */
+.split-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.split-section > div {
+  flex: 1 1 48%;
+  background-color: #fff8e6;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.15);
+  padding: 1.5rem;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .split-section > div {
+    flex: 1 1 100%;
   }
 }
