@@ -131,70 +131,8 @@
 
   <!-- Coze 智能体 SDK -->
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js" defer></script>
-  <script defer>
-    new CozeWebSDK.WebChatClient({
-      config: { bot_id: '7489440833709129747' },
-      componentProps: { title: '记忆小舟' },
-      auth: {
-        type: 'token',
-        token: 'pat_fSb3XiSh8NuB7qQFM0uEBA7rJ59XxzXG',
-      },
-      style: { float: true },
-    });
 
-    // 导航菜单切换
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('primary-navigation');
-    navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
-      navToggle.setAttribute('aria-expanded', !expanded);
-      navMenu.classList.toggle('open');
-    });
-
-    // 内容展开/收起功能
-    function toggleContent(id, btn) {
-      const content = document.getElementById(id);
-      if (!content) return;
-      const isHidden = content.style.display === 'none' || content.style.display === '';
-      content.style.display = isHidden ? 'block' : 'none';
-      btn.setAttribute('aria-expanded', isHidden);
-      btn.textContent = isHidden ? '收起' : '了解更多';
-    }
-
-    // 成果展示轮播逻辑
-    (function () {
-      const slider = document.querySelector('.image-slider');
-      if (!slider) return;
-
-      const images = slider.querySelectorAll('.slider-image');
-      const indicators = slider.querySelectorAll('.indicator');
-      const prevBtn = slider.querySelector('.slider-btn.prev');
-      const nextBtn = slider.querySelector('.slider-btn.next');
-      let current = 0;
-
-      function updateSlider(index) {
-        images.forEach((img, i) => {
-          img.classList.toggle('active', i === index);
-        });
-        indicators.forEach((ind, i) => {
-          ind.classList.toggle('active', i === index);
-          ind.setAttribute('aria-selected', i === index ? 'true' : 'false');
-        });
-        current = index;
-      }
-
-      prevBtn.addEventListener('click', () => {
-        const nextIndex = (current - 1 + images.length) % images.length;
-        updateSlider(nextIndex);
-      });
-      nextBtn.addEventListener('click', () => {
-        const nextIndex = (current + 1) % images.length;
-        updateSlider(nextIndex);
-      });
-      indicators.forEach((ind, i) => {
-        ind.addEventListener('click', () => updateSlider(i));
-      });
-    })();
-  </script>
+  <!-- 下面引入你单独的js文件 -->
+  <script src="js/main.js" defer></script>
 </body>
 </html>
