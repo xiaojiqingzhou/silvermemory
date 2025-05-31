@@ -3,28 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('primary-navigation');
 
-  // 先给 navMenu 设置 max-height 为0，hidden，准备过渡
   navMenu.style.overflow = 'hidden';
   navMenu.style.maxHeight = '0';
   navMenu.style.transition = 'max-height 0.35s ease';
 
   navToggle.addEventListener('click', () => {
-    const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', !expanded);
     navToggle.classList.toggle('active');
 
     if (!expanded) {
-      // 展开
       navMenu.classList.add('open');
       navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
     } else {
-      // 收起
       navMenu.style.maxHeight = '0';
-      // 动画结束后移除 open 类，避免冲突
-      navMenu.addEventListener('transitionend', function handler() {
+      const onTransitionEnd = () => {
         navMenu.classList.remove('open');
-        navMenu.removeEventListener('transitionend', handler);
-      });
+        navMenu.removeEventListener('transitionend', onTransitionEnd);
+      };
+      navMenu.addEventListener('transitionend', onTransitionEnd);
     }
   });
 
@@ -35,25 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isHidden) {
       content.classList.remove('hidden');
-      // 动态计算并设置高度，实现过渡
-      content.style.maxHeight = content.scrollHeight + 'px';
+      // 先设置 max-height 为0，再触发过渡到实际高度
+      content.style.maxHeight = '0';
+      // 浏览器渲染后触发过渡
+      requestAnimationFrame(() => {
+        content.style.transition = 'max-height 0.35s ease';
+        content.style.maxHeight = content.scrollHeight + 'px';
+      });
       btn.setAttribute('aria-expanded', 'true');
       btn.textContent = '收起';
     } else {
-      // 设置 max-height 0，过渡后隐藏
-      content.style.maxHeight = '0';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      // 先触发浏览器渲染，保证过渡正常执行
+      requestAnimationFrame(() => {
+        content.style.transition = 'max-height 0.35s ease';
+        content.style.maxHeight = '0';
+      });
       btn.setAttribute('aria-expanded', 'false');
       btn.textContent = '了解更多';
 
-      // 过渡结束后添加hidden类
-      content.addEventListener('transitionend', function handler() {
+      const onTransitionEnd = () => {
         content.classList.add('hidden');
-        content.removeEventListener('transitionend', handler);
-      });
+        content.removeEventListener('transitionend', onTransitionEnd);
+      };
+      content.addEventListener('transitionend', onTransitionEnd);
     }
   };
 
-  // 轮播图相关（不变）
+  // 轮播图相关（保持不变）
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   const slides = document.querySelectorAll('.slider-image');
@@ -113,9 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-      showNext();
-    }, AUTO_SLIDE_DELAY);
+    autoSlideInterval = setInterval(showNext, AUTO_SLIDE_DELAY);
   }
 
   function resetAutoSlide() {
@@ -125,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoSlide();
   }
 
-  // 初始化轮播
   updateSlides(0);
   startAutoSlide();
 });
