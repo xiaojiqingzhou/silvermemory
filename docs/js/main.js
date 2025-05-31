@@ -2,140 +2,101 @@ document.addEventListener('DOMContentLoaded', () => {
   // 汉堡菜单相关
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('primary-navigation');
+  const navLinks = navMenu.querySelectorAll('a');
 
-  navMenu.style.overflow = 'hidden';
-  navMenu.style.maxHeight = '0';
-  navMenu.style.transition = 'max-height 0.35s ease';
+  // 初始样式与切换函数
+  function closeMenu() {
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.classList.remove('active');
+    navMenu.classList.remove('open');
+    navMenu.style.maxHeight = '0';
+  }
+  function openMenu() {
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.classList.add('active');
+    navMenu.classList.add('open');
+    navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+  }
 
+  // 监听汉堡菜单点击
   navToggle.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', !expanded);
-    navToggle.classList.toggle('active');
-
-    if (!expanded) {
-      navMenu.classList.add('open');
-      navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
-    } else {
+    if (expanded) {
       navMenu.style.maxHeight = '0';
       const onTransitionEnd = () => {
         navMenu.classList.remove('open');
         navMenu.removeEventListener('transitionend', onTransitionEnd);
       };
       navMenu.addEventListener('transitionend', onTransitionEnd);
-    }
-  });
-
-  // 了解更多按钮展开/收起，平滑过渡版
-  window.toggleContent = function (id, btn) {
-    const content = document.getElementById(id);
-    const isHidden = content.classList.contains('hidden');
-
-    if (isHidden) {
-      content.classList.remove('hidden');
-      content.style.maxHeight = '0';
-
-      // 触发重绘，确保过渡生效
-      requestAnimationFrame(() => {
-        content.style.transition = 'max-height 0.35s ease';
-        content.style.maxHeight = content.scrollHeight + 'px';
-      });
-
-      btn.setAttribute('aria-expanded', 'true');
-      btn.textContent = '收起';
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.classList.remove('active');
     } else {
-      // 设置当前高度，准备收起动画
-      content.style.maxHeight = content.scrollHeight + 'px';
-
-      requestAnimationFrame(() => {
-        content.style.transition = 'max-height 0.35s ease';
-        content.style.maxHeight = '0';
-      });
-
-      btn.setAttribute('aria-expanded', 'false');
-      btn.textContent = '了解更多';
-
-      const onTransitionEnd = () => {
-        content.classList.add('hidden');
-        content.style.maxHeight = null;
-        content.style.transition = null;
-        content.removeEventListener('transitionend', onTransitionEnd);
-      };
-      content.addEventListener('transitionend', onTransitionEnd);
+      openMenu();
     }
-  };
-
-  // 轮播图相关
-  const prevBtn = document.querySelector('.slider-btn.prev');
-  const nextBtn = document.querySelector('.slider-btn.next');
-  const slides = document.querySelectorAll('.slider-image');
-  const indicators = document.querySelectorAll('.slider-indicators button');
-  let currentIndex = 0;
-  let autoSlideInterval = null;
-  const AUTO_SLIDE_DELAY = 5000;
-
-  function updateSlides(index) {
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-    indicators.forEach((btn, i) => {
-      const isActive = i === index;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      btn.setAttribute('tabindex', isActive ? '0' : '-1');
-    });
-    currentIndex = index;
-  }
-
-  function showPrev() {
-    updateSlides(currentIndex - 1);
-  }
-
-  function showNext() {
-    updateSlides(currentIndex + 1);
-  }
-
-  prevBtn?.addEventListener('click', () => {
-    showPrev();
-    resetAutoSlide();
   });
 
-  nextBtn?.addEventListener('click', () => {
-    showNext();
-    resetAutoSlide();
-  });
-
-  indicators.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-      updateSlides(i);
-      resetAutoSlide();
-    });
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        showPrev();
-        resetAutoSlide();
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        showNext();
-        resetAutoSlide();
+  // 响应式：窗口变化时控制菜单显示和汉堡按钮
+  function handleResize() {
+    if (window.innerWidth < 768) {
+      navMenu.style.overflow = 'hidden';
+      if (!navMenu.classList.contains('open')) {
+        navMenu.style.maxHeight = '0';
       }
+      navToggle.style.display = 'flex';
+      navMenu.setAttribute('aria-hidden', navToggle.getAttribute('aria-expanded') !== 'true');
+    } else {
+      navMenu.style.maxHeight = null;
+      navMenu.style.overflow = null;
+      navToggle.style.display = 'none';
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.classList.remove('active');
+      navMenu.removeAttribute('aria-hidden');
+    }
+  }
+  handleResize();
+  window.addEventListener('resize', handleResize);
+
+  // 平滑滚动效果
+  navLinks.forEach(link => {
+    if (link.hash) {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.hash);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          // 如果是移动端，点击链接后关闭菜单
+          if (window.innerWidth < 768 && navMenu.classList.contains('open')) {
+            navToggle.click();
+          }
+        }
+      });
+    }
+  });
+
+  // PC端导航悬停高亮（视觉层次强化）
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      navLinks.forEach(l => {
+        if (l !== link) l.style.opacity = '0.6';
+        else l.style.opacity = '1';
+      });
+    });
+    link.addEventListener('mouseleave', () => {
+      navLinks.forEach(l => (l.style.opacity = '1'));
     });
   });
 
-  function startAutoSlide() {
-    autoSlideInterval = setInterval(showNext, AUTO_SLIDE_DELAY);
-  }
-
-  function resetAutoSlide() {
-    if (autoSlideInterval) {
-      clearInterval(autoSlideInterval);
-    }
-    startAutoSlide();
-  }
-
-  updateSlides(0);
-  startAutoSlide();
+  // 标题与正文字体层级优化（动态样式调整）
+  // 这里假设标题用h1,h2,h3，正文用p
+  const allTitles = document.querySelectorAll('h1, h2, h3');
+  allTitles.forEach(title => {
+    title.style.fontWeight = '700';
+    title.style.color = '#cc7000'; // 深暖橙色
+  });
+  const allParagraphs = document.querySelectorAll('p');
+  allParagraphs.forEach(p => {
+    p.style.fontWeight = '400';
+    p.style.color = '#4a4a4a'; // 深灰色，更易读
+  });
 });
