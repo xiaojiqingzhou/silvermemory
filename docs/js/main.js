@@ -1,40 +1,42 @@
-// 立即执行，避免全局污染
 (() => {
-  const navToggleBtn = document.querySelector('.nav-toggle');
-  const navMenu = document.getElementById('primary-navigation');
+  // 导航汉堡按钮和菜单元素
+  const navToggleBtn = document.querySelector('.menu-toggle');  // 注意对应你CSS中的.menu-toggle类名
+  const navMenu = document.querySelector('.page-nav ul');       // 导航菜单列表
 
-  // 切换导航菜单（汉堡）
-  navToggleBtn.addEventListener('click', () => {
-    const expanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
-    navToggleBtn.setAttribute('aria-expanded', String(!expanded));
-    navToggleBtn.classList.toggle('active');
-    navMenu.classList.toggle('open');
-  });
-
-  // 点击导航菜单内的链接后自动关闭（小屏幕）
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 720) {
-        navToggleBtn.setAttribute('aria-expanded', 'false');
-        navToggleBtn.classList.remove('active');
-        navMenu.classList.remove('open');
-      }
+  if (navToggleBtn && navMenu) {
+    // 点击汉堡按钮切换菜单显示
+    navToggleBtn.addEventListener('click', () => {
+      const expanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
+      navToggleBtn.setAttribute('aria-expanded', String(!expanded));
+      navToggleBtn.classList.toggle('active');
+      navMenu.classList.toggle('active');  // CSS中通过.active控制显示
     });
-  });
 
-  // 轮播图逻辑
+    // 点击菜单内链接后关闭菜单（适用于小屏幕）
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) { // 和CSS媒体查询保持一致
+          navToggleBtn.setAttribute('aria-expanded', 'false');
+          navToggleBtn.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+  }
+
+  // 轮播图相关元素
   const slider = document.querySelector('.image-slider');
   if (!slider) return;
 
   const images = slider.querySelectorAll('.slider-image');
   const prevBtn = slider.querySelector('.slider-btn.prev');
   const nextBtn = slider.querySelector('.slider-btn.next');
-  const indicators = slider.querySelectorAll('.indicator');
+  const indicators = slider.querySelectorAll('.slider-indicators button');
 
   let currentIndex = 0;
   const total = images.length;
 
-  // 切换图片函数
+  // 显示指定索引的图片及高亮指示器
   function showSlide(index) {
     if (index < 0) index = total - 1;
     if (index >= total) index = 0;
@@ -58,7 +60,7 @@
     showSlide(currentIndex + 1);
   });
 
-  // 点击指示器跳转
+  // 点击指示器切换图片 & 支持键盘操作
   indicators.forEach((btn, i) => {
     btn.addEventListener('click', () => {
       showSlide(i);
@@ -71,15 +73,13 @@
     });
   });
 
-  // 初始化显示第一张
+  // 初始化显示第一张图片
   showSlide(0);
 
-  // 悬浮按钮打开智能体聊天
-  const floatingBtn = document.querySelector('.floating-button');
-  if (floatingBtn && window.CozeWebSDK) {
+  // 浮动聊天按钮事件绑定（假设存在CozeWebSDK）
+  const floatingBtn = document.querySelector('#coze-chat-btn');
+  if (floatingBtn && window.CozeWebSDK && CozeWebSDK.WebChatClient) {
     floatingBtn.addEventListener('click', () => {
-      // 这里假设CozeWebSDK.WebChatClient实例有open()方法，或者触发聊天窗口
-      // 根据官方文档调整调用方式，这里示例：
       CozeWebSDK.WebChatClient.open();
     });
   }
