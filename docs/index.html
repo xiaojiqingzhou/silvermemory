@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>银发记忆工程</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -32,7 +32,7 @@
       <h2>操作演示</h2>
       <p>以下为操作视频展示（你可以插入视频 iframe 或本地视频）：</p>
       <div style="margin-top:1rem;">
-        [插入操作视频位置，例如 <video src="videos/demo.mp4" controls></video>]
+        [插入操作视频位置，例如 &lt;video src="demo.mp4" controls&gt;&lt;/video&gt;]
       </div>
     </div>
   </section>
@@ -49,9 +49,9 @@
       <h2>成果展示</h2>
       <p>以下为部分成果图片展示（请更换为你的真实图片）：</p>
       <div class="gallery">
-        <img src="images/placeholder1.jpg" alt="成果图1" />
-        <img src="images/placeholder2.jpg" alt="成果图2" />
-        <img src="images/placeholder3.jpg" alt="成果图3" />
+        <img src="/placeholder1.jpg" alt="成果图1" />
+        <img src="/placeholder2.jpg" alt="成果图2" />
+        <img src="/placeholder3.jpg" alt="成果图3" />
       </div>
     </div>
   </section>
@@ -64,9 +64,28 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 银发记忆工程 · 关爱每一份记忆</p>
+  <footer class="page-footer">
+    <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
 
+  <!-- Coze 智能体 SDK -->
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
+  <script>
+    new CozeWebSDK.WebChatClient({
+      config: {
+        bot_id: '7489440833709129747',
+      },
+      componentProps: {
+        title: '记忆小舟',
+      },
+      auth: {
+        type: 'token',
+        token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
+        onRefreshToken: function () {
+          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
+        }
+      }
+    });
+  </script>
 </body>
 </html>
