@@ -357,10 +357,8 @@ body {
 .experience-section {
   text-align: center;
   padding: 2rem 0 3rem;
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
 }
+
 
 /* 按钮悬浮及聚焦效果 */
 .button-link:hover,
