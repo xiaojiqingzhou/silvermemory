@@ -1,5 +1,7 @@
 /* ========== 基础重置 ========== */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,15 +10,17 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Sans SC', sans-serif, Arial, sans-serif;
   background-color: #fff8f0;
   color: #5a4631;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff8f0;
+  min-height: 100vh;
 }
 
 /* ========== 页面整体布局 ========== */
@@ -25,34 +29,36 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 159, 67, 0.9);
+  background: linear-gradient(90deg, rgba(255,159,67,0.95) 0%, rgba(255,159,67,0.85) 100%);
   box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
   z-index: 9999;
   padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 }
 
 .page-title {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
-  user-select: none;
+  letter-spacing: 1.5px;
 }
 
 .page-nav ul {
   list-style: none;
   display: flex;
   gap: 1.3rem;
+  align-items: center;
 }
 
 .page-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
 }
@@ -73,6 +79,7 @@ body {
   left: 0;
   background-color: #fff;
   transition: width 0.3s ease;
+  border-radius: 1px;
 }
 
 .page-nav a:hover::after,
@@ -82,7 +89,7 @@ body {
 
 /* 汉堡菜单 */
 .nav-toggle {
-  display: none; /* 默认隐藏，移动端显示 */
+  display: none; /* 移动端显示 */
   flex-direction: column;
   justify-content: space-around;
   width: 28px;
@@ -138,6 +145,7 @@ body {
   padding: 100px 1.5rem 3rem;
   max-width: 960px;
   margin: 0 auto;
+  user-select: text;
 }
 
 /* 内容区块 */
@@ -178,6 +186,8 @@ body {
   display: block;
   box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
   object-fit: cover;
+  user-select: none;
+  cursor: default;
 }
 
 /* ========== 视频容器 ========== */
@@ -191,7 +201,8 @@ body {
   margin-bottom: 2rem;
 }
 
-.video-container iframe {
+.video-container iframe,
+.video-container video {
   position: absolute;
   top: 0;
   left: 0;
@@ -247,6 +258,9 @@ body {
   transition: background-color 0.3s ease;
   user-select: none;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider-btn:hover,
@@ -306,13 +320,11 @@ body {
   line-height: 1.4;
 }
 
-/* 立即体验按钮容器，居中对齐 */
 .experience-section {
   text-align: center;
   padding: 2rem 0 3rem;
 }
 
-/* 按钮悬浮及聚焦效果 */
 .button-link:hover,
 .button-link:focus {
   background-color: #fff;
@@ -344,6 +356,8 @@ body {
   margin-bottom: 0.8rem;
   object-fit: cover;
   border: 3px solid #ff9f43;
+  user-select: none;
+  cursor: default;
 }
 
 .team-member h4 {
@@ -408,7 +422,30 @@ body {
   opacity: 1;
 }
 
-/* ========== 响应式布局 ========== */
+/* ========== split-section 双色分栏布局 ========== */
+.split-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.split-section > div {
+  flex: 1 1 48%;
+  background-color: #fff8e6;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.15);
+  padding: 1.5rem;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.split-section > div:hover {
+  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.3);
+}
+
 @media (max-width: 992px) {
   .page-main {
     max-width: 720px;
@@ -440,7 +477,6 @@ body {
     z-index: 9998;
   }
 
-  /* 菜单打开 */
   .page-nav ul.open {
     display: flex;
   }
@@ -450,24 +486,15 @@ body {
   }
 
   .page-nav a {
-    padding: 0.6rem 1rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
+    font-size: 1.2rem;
   }
 
-  /* 页面主内容padding调整，防止header遮挡 */
+  .split-section > div {
+    flex: 1 1 100%;
+  }
+
   .page-main {
-    padding: 90px 1rem 2rem;
-  }
-
-  /* 轮播图高度自适应 */
-  .image-slider {
-    height: 200px;
-  }
-
-  /* 视频容器缩小 */
-  .video-container {
-    padding-bottom: 56.25%;
+    padding: 80px 1rem 2rem;
   }
 }
 
@@ -477,7 +504,7 @@ body {
   }
 
   .page-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .button-link {
@@ -488,28 +515,8 @@ body {
     width: 80px;
     height: 80px;
   }
-}
 
-/* ========== 你之前的 split-section 样式整合示例 ========== */
-.split-section {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.split-section > div {
-  flex: 1 1 48%;
-  background-color: #fff8e6;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.15);
-  padding: 1.5rem;
-  user-select: none;
-}
-
-@media (max-width: 768px) {
-  .split-section > div {
-    flex: 1 1 100%;
+  .video-container {
+    border-radius: 8px;
   }
 }
