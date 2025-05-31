@@ -1,48 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. 汉堡菜单切换导航显示隐藏
+  // 汉堡菜单相关
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('primary-navigation');
 
+  // 先给 navMenu 设置 max-height 为0，hidden，准备过渡
+  navMenu.style.overflow = 'hidden';
+  navMenu.style.maxHeight = '0';
+  navMenu.style.transition = 'max-height 0.35s ease';
+
   navToggle.addEventListener('click', () => {
-    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
     navToggle.setAttribute('aria-expanded', !expanded);
-    navMenu.classList.toggle('open');
-    navToggle.classList.toggle('active'); // 切换汉堡动画
+    navToggle.classList.toggle('active');
 
-    // 点击汉堡时关闭所有展开内容（如果你有多个展开块，可以根据需要调整）
-    document.querySelectorAll('.expandable-content').forEach(content => {
-      content.classList.add('hidden');
-    });
-    document.querySelectorAll('.expand-btn').forEach(btn => {
-      btn.setAttribute('aria-expanded', 'false');
-      btn.textContent = '了解更多';
-    });
-  });
-
-  // 2. 了解更多按钮展开/收起，支持多个按钮
-  document.body.addEventListener('click', (e) => {
-    const btn = e.target.closest('.expand-btn');
-    if (!btn) return;
-
-    const targetId = btn.getAttribute('aria-controls');
-    if (!targetId) return;
-
-    const content = document.getElementById(targetId);
-    if (!content) return;
-
-    const isHidden = content.classList.contains('hidden');
-    if (isHidden) {
-      content.classList.remove('hidden');
-      btn.setAttribute('aria-expanded', 'true');
-      btn.textContent = '收起';
+    if (!expanded) {
+      // 展开
+      navMenu.classList.add('open');
+      navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
     } else {
-      content.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.textContent = '了解更多';
+      // 收起
+      navMenu.style.maxHeight = '0';
+      // 动画结束后移除 open 类，避免冲突
+      navMenu.addEventListener('transitionend', function handler() {
+        navMenu.classList.remove('open');
+        navMenu.removeEventListener('transitionend', handler);
+      });
     }
   });
 
-  // 3. 轮播图功能（含键盘无障碍及自动轮播暂停）
+  // 了解更多按钮展开/收起，平滑过渡版
+  window.toggleContent = function(id, btn) {
+    const content = document.getElementById(id);
+    const isHidden = content.classList.contains('hidden');
+
+    if (isHidden) {
+      content.classList.remove('hidden');
+      // 动态计算并设置高度，实现过渡
+      content.style.maxHeight = content.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+      btn.textContent = '收起';
+    } else {
+      // 设置 max-height 0，过渡后隐藏
+      content.style.maxHeight = '0';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = '了解更多';
+
+      // 过渡结束后添加hidden类
+      content.addEventListener('transitionend', function handler() {
+        content.classList.add('hidden');
+        content.removeEventListener('transitionend', handler);
+      });
+    }
+  };
+
+  // 轮播图相关（不变）
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   const slides = document.querySelectorAll('.slider-image');
@@ -53,11 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateSlides(index) {
     slides.forEach((slide, i) => {
-      const isActive = i === index;
-      slide.classList.toggle('active', isActive);
-      indicators[i].classList.toggle('active', isActive);
-      indicators[i].setAttribute('aria-selected', isActive ? 'true' : 'false');
-      indicators[i].setAttribute('tabindex', isActive ? '0' : '-1');
+      slide.classList.toggle('active', i === index);
+      indicators[i].classList.toggle('active', i === index);
+      indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+      indicators[i].setAttribute('tabindex', i === index ? '0' : '-1');
     });
     currentIndex = index;
   }
@@ -74,20 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSlides(index);
   }
 
-  function resetAutoSlide() {
-    if (autoSlideInterval) {
-      clearInterval(autoSlideInterval);
-    }
-    startAutoSlide();
-  }
-
-  function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-      showNext();
-    }, AUTO_SLIDE_DELAY);
-  }
-
-  // 按钮点击事件
   prevBtn.addEventListener('click', () => {
     showPrev();
     resetAutoSlide();
@@ -98,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetAutoSlide();
   });
 
-  // 指示器点击和键盘事件
   indicators.forEach((btn, i) => {
     btn.addEventListener('click', () => {
       updateSlides(i);
@@ -117,24 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 鼠标悬停和焦点管理暂停自动轮播
-  const slider = document.querySelector('.slider');
-  if (slider) {
-    slider.addEventListener('mouseenter', () => {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
-    });
-    slider.addEventListener('mouseleave', () => {
-      resetAutoSlide();
-    });
-    slider.addEventListener('focusin', () => {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
-    });
-    slider.addEventListener('focusout', () => {
-      resetAutoSlide();
-    });
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+      showNext();
+    }, AUTO_SLIDE_DELAY);
   }
 
-  // 初始化
+  function resetAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+    }
+    startAutoSlide();
+  }
+
+  // 初始化轮播
   updateSlides(0);
   startAutoSlide();
 });
