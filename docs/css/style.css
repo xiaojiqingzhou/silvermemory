@@ -82,7 +82,7 @@ body {
 
 /* 汉堡菜单 */
 .nav-toggle {
-  display: none;
+  display: none; /* 默认隐藏，移动端显示 */
   flex-direction: column;
   justify-content: space-around;
   width: 28px;
@@ -118,6 +118,7 @@ body {
   top: 8px;
 }
 
+/* 汉堡切换成X动画 */
 .nav-toggle.active .hamburger {
   background-color: transparent;
 }
@@ -182,7 +183,7 @@ body {
 /* ========== 视频容器 ========== */
 .video-container {
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* 16:9 */
   height: 0;
   overflow: hidden;
   border-radius: 12px;
@@ -208,7 +209,7 @@ body {
   box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
   user-select: none;
   margin-bottom: 2rem;
-  height: 300px;
+  height: 300px; /* 固定高度防止跳动 */
 }
 
 .slider-image {
@@ -231,6 +232,7 @@ body {
   position: relative;
 }
 
+/* 轮播按钮 */
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -261,6 +263,7 @@ body {
   right: 15px;
 }
 
+/* 轮播指示器 */
 .slider-indicators {
   position: absolute;
   bottom: 15px;
@@ -285,6 +288,7 @@ body {
   background-color: #ff9f43;
 }
 
+/* ========== 按钮链接样式（通用） ========== */
 .button-link {
   display: inline-block;
   background-color: #ff9f43;
@@ -303,6 +307,7 @@ body {
   text-align: center;
 }
 
+/* 立即体验按钮容器，居中对齐 */
 .experience-section {
   text-align: center;
   padding: 2rem 0 3rem;
@@ -311,6 +316,7 @@ body {
   align-items: center;
 }
 
+/* 按钮悬浮及聚焦效果 */
 .button-link:hover,
 .button-link:focus {
   background-color: #fff;
@@ -320,6 +326,7 @@ body {
   transform: translateY(-2px);
 }
 
+/* ========== 卡片式团队成员 ========== */
 .team-member {
   text-align: center;
   padding: 1rem;
@@ -354,6 +361,7 @@ body {
   color: #5a4631;
 }
 
+/* ========== 页脚 ========== */
 .page-footer {
   background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
   color: #fff;
@@ -365,6 +373,7 @@ body {
   border-radius: 12px 12px 0 0;
 }
 
+/* ========== 浮动 AI 按钮 ========== */
 #floating-ai-button {
   position: fixed;
   bottom: 30px;
@@ -396,12 +405,11 @@ body {
   box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .split-section > div {
-  flex: 1 1 300px;
-  min-width: 280px;
+  flex: 1 1 50%;
+  min-width: 300px;
   padding: 0 1rem;
 }
 
@@ -414,6 +422,7 @@ body {
   display: block;
 }
 
+/* 响应式：窄屏时堆叠 */
 @media (max-width: 768px) {
   .page-header {
     padding: 0.7rem 1rem;
@@ -424,7 +433,7 @@ body {
   }
 
   .page-nav ul {
-    display: none;
+    display: none; /* 移动端隐藏菜单，需JS控制显示 */
   }
 
   .nav-toggle {
@@ -447,6 +456,7 @@ body {
   }
 
   .split-section > div {
+    min-width: auto;
     padding: 0 0;
     margin-bottom: 1.5rem;
   }
