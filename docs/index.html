@@ -1,116 +1,109 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import './index.css';
 
-const images = [
-  "/placeholder1.jpg",
-  "/placeholder2.jpg",
-  "/placeholder3.jpg",
-];
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
-const SilverMemoryProject = () => {
+export default function Home() {
   return (
-    <div className="bg-orange-50 text-gray-800 font-sans">
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-orange-600">银发记忆工程</h1>
-          <div className="space-x-4 text-sm font-medium">
-            <a href="#intro" className="hover:text-orange-600 transition">项目介绍</a>
-            <a href="#demo" className="hover:text-orange-600 transition">操作演示</a>
-            <a href="#team" className="hover:text-orange-600 transition">团队介绍</a>
-            <a href="#gallery" className="hover:text-orange-600 transition">成果展示</a>
-          </div>
-        </nav>
-      </header>
+    <main className="bg-orange-50 min-h-screen text-gray-800">
+      <section className="text-center py-16 px-4" id="hero">
+        <motion.h1
+          className="text-5xl font-bold mb-4 text-orange-600"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          银发记忆工程
+        </motion.h1>
+        <motion.p
+          className="text-xl text-gray-700 mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          留住长者的记忆，唤醒时代的温情
+        </motion.p>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button className="text-lg px-6 py-3 rounded-2xl shadow-lg bg-orange-500 hover:bg-orange-600 transition-colors">
+            开始体验
+          </Button>
+        </motion.div>
+      </section>
 
-      <main className="pt-24 max-w-6xl mx-auto px-4 space-y-16">
-        <motion.section 
-          id="intro" 
-          className="space-y-6"
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
+      <section className="py-20 px-4 max-w-4xl mx-auto" id="about">
+        <motion.h2
+          className="text-3xl font-semibold text-orange-600 mb-6"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl font-semibold text-orange-600">项目介绍</h2>
-          <p className="text-lg leading-relaxed">
-            “银发记忆工程”致力于为老年人提供一个温馨、便捷的数字化平台，通过技术留存他们的宝贵记忆，促进代际沟通与文化传承。
-          </p>
-        </motion.section>
+          项目介绍
+        </motion.h2>
+        <p className="text-lg leading-8 text-gray-700">
+          [此处填写银发记忆工程的简介文字...] 项目致力于通过人工智能与记忆保存技术，帮助老年人留住珍贵的人生故事与记忆片段。
+        </p>
+      </section>
 
-        <motion.section 
-          id="demo" 
-          className="space-y-6"
-          initial={{ opacity: 0 }} 
-          whileInView={{ opacity: 1 }} 
-          transition={{ duration: 0.8 }}
+      <section className="py-20 px-4 max-w-4xl mx-auto bg-orange-100 rounded-3xl my-12 shadow-inner" id="demo">
+        <motion.h2
+          className="text-3xl font-semibold text-orange-600 mb-6"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl font-semibold text-orange-600">操作演示</h2>
-          <div className="w-full aspect-video bg-gray-200 rounded-2xl shadow-inner flex items-center justify-center text-gray-500 hover:shadow-lg transition">
-            [插入操作视频位置]
-          </div>
-        </motion.section>
+          操作演示
+        </motion.h2>
+        <div className="aspect-video w-full bg-gray-300 rounded-xl shadow-md flex items-center justify-center">
+          [插入操作视频位置]
+        </div>
+      </section>
 
-        <motion.section 
-          id="team" 
-          className="space-y-6"
-          initial={{ opacity: 0 }} 
-          whileInView={{ opacity: 1 }} 
-          transition={{ duration: 0.8 }}
+      <section className="py-20 px-4 max-w-4xl mx-auto" id="team">
+        <motion.h2
+          className="text-3xl font-semibold text-orange-600 mb-6"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl font-semibold text-orange-600">团队介绍</h2>
-          <p className="text-lg leading-relaxed">
-            我们的团队由来自传媒与计算机背景的青年组成，融合设计、人文与技术，致力于将温暖的理念通过科技转化为可用的产品。
-          </p>
-        </motion.section>
+          团队介绍
+        </motion.h2>
+        <p className="text-lg leading-8 text-gray-700">
+          [此处填写团队成员与背景简介...]
+        </p>
+      </section>
 
-        <motion.section 
-          id="gallery" 
-          className="space-y-6"
-          initial={{ opacity: 0 }} 
-          whileInView={{ opacity: 1 }} 
-          transition={{ duration: 0.8 }}
+      <section className="py-20 px-4 max-w-6xl mx-auto" id="showcase">
+        <motion.h2
+          className="text-3xl font-semibold text-orange-600 mb-6 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl font-semibold text-orange-600">成果展示</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {images.map((src, i) => (
-              <motion.div 
-                key={i} 
-                className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition transform hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-              >
-                <img src={src} alt={`展示图${i + 1}`} className="w-full h-60 object-cover" />
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+          成果展示
+        </motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="overflow-hidden rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300"
+              whileHover={{ scale: 1.03 }}
+            >
+              <img
+                src={`/placeholder${i + 1}.jpg`}
+                alt={`成果${i + 1}`}
+                className="w-full h-64 object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-        <motion.section 
-          id="experience" 
-          className="space-y-6"
-          initial={{ opacity: 0 }} 
-          whileInView={{ opacity: 1 }} 
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-2xl font-semibold text-orange-600">智能体验</h2>
-          <Card className="bg-white rounded-2xl shadow hover:shadow-lg transition">
-            <CardContent className="p-6 space-y-4">
-              <p className="text-base text-gray-700">
-                点击下方按钮，体验我们的记忆生成系统。系统将引导您记录重要时刻，生成数字记忆档案。
-              </p>
-              <Button className="bg-orange-500 hover:bg-orange-600 transition text-white font-semibold px-6 py-2 rounded-full">
-                开始体验
-              </Button>
-            </CardContent>
-          </Card>
-        </motion.section>
-      </main>
-
-      <footer className="mt-24 py-6 text-center text-sm text-gray-500">
-        © 2025 银发记忆工程 | 关爱 · 传承 · 连接
+      <footer className="text-center py-12 text-gray-500 text-sm">
+        银发记忆工程 © 2025
       </footer>
-    </div>
+    </main>
   );
-};
-
-export default SilverMemoryProject;
+}
