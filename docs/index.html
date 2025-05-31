@@ -1,109 +1,72 @@
-import './index.css';
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>银发记忆工程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+  <nav>
+    <div><strong>银发记忆工程</strong></div>
+    <div>
+      <a href="#intro">项目介绍</a>
+      <a href="#video">操作演示</a>
+      <a href="#team">团队介绍</a>
+      <a href="#gallery">成果展示</a>
+      <a href="#start">智能体验</a>
+    </div>
+  </nav>
 
-export default function Home() {
-  return (
-    <main className="bg-orange-50 min-h-screen text-gray-800">
-      <section className="text-center py-16 px-4" id="hero">
-        <motion.h1
-          className="text-5xl font-bold mb-4 text-orange-600"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          银发记忆工程
-        </motion.h1>
-        <motion.p
-          className="text-xl text-gray-700 mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-          留住长者的记忆，唤醒时代的温情
-        </motion.p>
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button className="text-lg px-6 py-3 rounded-2xl shadow-lg bg-orange-500 hover:bg-orange-600 transition-colors">
-            开始体验
-          </Button>
-        </motion.div>
-      </section>
+  <section id="intro">
+    <div class="container card">
+      <h2>项目介绍</h2>
+      <p>“银发记忆工程”是一项致力于记录与重构老年人数字记忆的公益计划。我们通过数字技术与人文关怀的结合，打造温暖、智慧、易用的记忆管理系统，助力银发群体更好地保存与分享他们的人生故事与生活片段。</p>
+    </div>
+  </section>
 
-      <section className="py-20 px-4 max-w-4xl mx-auto" id="about">
-        <motion.h2
-          className="text-3xl font-semibold text-orange-600 mb-6"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          项目介绍
-        </motion.h2>
-        <p className="text-lg leading-8 text-gray-700">
-          [此处填写银发记忆工程的简介文字...] 项目致力于通过人工智能与记忆保存技术，帮助老年人留住珍贵的人生故事与记忆片段。
-        </p>
-      </section>
+  <section id="video">
+    <div class="container card">
+      <h2>操作演示</h2>
+      <p>以下为操作视频展示（你可以插入视频 iframe 或本地视频）：</p>
+      <div style="margin-top:1rem;">
+        [插入操作视频位置，例如 <video src="videos/demo.mp4" controls></video>]
+      </div>
+    </div>
+  </section>
 
-      <section className="py-20 px-4 max-w-4xl mx-auto bg-orange-100 rounded-3xl my-12 shadow-inner" id="demo">
-        <motion.h2
-          className="text-3xl font-semibold text-orange-600 mb-6"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          操作演示
-        </motion.h2>
-        <div className="aspect-video w-full bg-gray-300 rounded-xl shadow-md flex items-center justify-center">
-          [插入操作视频位置]
-        </div>
-      </section>
+  <section id="team">
+    <div class="container card">
+      <h2>团队介绍</h2>
+      <p>我们的团队由计算语言学、人工智能、人文社科及传播专业的研究生与青年教师组成，致力于将技术温情化落地，构建新时代下的数字公益模型。</p>
+    </div>
+  </section>
 
-      <section className="py-20 px-4 max-w-4xl mx-auto" id="team">
-        <motion.h2
-          className="text-3xl font-semibold text-orange-600 mb-6"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          团队介绍
-        </motion.h2>
-        <p className="text-lg leading-8 text-gray-700">
-          [此处填写团队成员与背景简介...]
-        </p>
-      </section>
+  <section id="gallery">
+    <div class="container card">
+      <h2>成果展示</h2>
+      <p>以下为部分成果图片展示（请更换为你的真实图片）：</p>
+      <div class="gallery">
+        <img src="images/placeholder1.jpg" alt="成果图1" />
+        <img src="images/placeholder2.jpg" alt="成果图2" />
+        <img src="images/placeholder3.jpg" alt="成果图3" />
+      </div>
+    </div>
+  </section>
 
-      <section className="py-20 px-4 max-w-6xl mx-auto" id="showcase">
-        <motion.h2
-          className="text-3xl font-semibold text-orange-600 mb-6 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          成果展示
-        </motion.h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="overflow-hidden rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300"
-              whileHover={{ scale: 1.03 }}
-            >
-              <img
-                src={`/placeholder${i + 1}.jpg`}
-                alt={`成果${i + 1}`}
-                className="w-full h-64 object-cover transition-transform duration-500 hover:scale-105"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+  <section id="start">
+    <div class="container card" style="text-align:center;">
+      <h2>开始智能体验</h2>
+      <p>欢迎尝试我们的“记忆生成AI”服务，为长辈生成温暖、真实、亲切的数字回忆。</p>
+      <a class="btn" href="/experience.html">开始体验</a>
+    </div>
+  </section>
 
-      <footer className="text-center py-12 text-gray-500 text-sm">
-        银发记忆工程 © 2025
-      </footer>
-    </main>
-  );
-}
+  <footer>
+    <p>© 2025 银发记忆工程 · 关爱每一份记忆</p>
+  </footer>
+
+</body>
+</html>
