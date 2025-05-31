@@ -1,6 +1,6 @@
 (() => {
   // 导航汉堡按钮和菜单元素
-  const navToggleBtn = document.querySelector('.menu-toggle');  // 注意对应你CSS中的.menu-toggle类名
+  const navToggleBtn = document.querySelector('.menu-toggle');  // 对应CSS中.menu-toggle类名
   const navMenu = document.querySelector('.page-nav ul');       // 导航菜单列表
 
   if (navToggleBtn && navMenu) {
@@ -28,6 +28,7 @@
   const slider = document.querySelector('.image-slider');
   if (!slider) return;
 
+  // 轮播图片，图片文件放在 /images/ 目录中，img标签src属性写成 src="images/xxx.jpg"
   const images = slider.querySelectorAll('.slider-image');
   const prevBtn = slider.querySelector('.slider-btn.prev');
   const nextBtn = slider.querySelector('.slider-btn.next');
