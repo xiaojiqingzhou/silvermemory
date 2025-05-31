@@ -476,4 +476,53 @@ body {
   border-radius: 25px;
   border: 2px solid #ff9f43;
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 
+  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.25);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+  margin-top: 0.8rem;
+}
+
+.split-section .button-link:hover,
+.split-section .button-link:focus {
+  background-color: #fff;
+  color: #ff9f43;
+  outline: none;
+}
+
+/* ========== 响应式调整 ========== */
+@media (max-width: 900px) {
+  .split-section {
+    flex-direction: column;
+    padding: 1.5rem 1.5rem;
+  }
+
+  .split-section .section-image,
+  .split-section .text-content {
+    flex: none;
+    max-width: 100%;
+    min-width: auto;
+    border-radius: 10px;
+  }
+
+  .split-section .section-image {
+    margin-bottom: 1.5rem;
+  }
+
+  .split-section .text-content {
+    padding-left: 0;
+  }
+
+  .split-section .text-content h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .split-section .text-content {
+    font-size: 0.95rem;
+  }
+}
