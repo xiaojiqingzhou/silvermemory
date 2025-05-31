@@ -274,8 +274,10 @@ body {
   user-select: none;
   cursor: pointer;
   margin-top: 0.8rem;
+  line-height: 1.4; /* 优化按钮行高 */
 }
 
+/* 按钮 hover/focus 效果 */
 .button-link:hover,
 .button-link:focus {
   background-color: #fff;
@@ -372,88 +374,24 @@ body {
 
 .split-section .text-content {
   flex: 1;
+  position: relative;
 }
 
-.split-section img {
-  flex: 1;
-  max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
+/* 新增 “了解更多”内容容器，默认隐藏 */
+.split-section .more-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
 }
 
-/* “了解更多”按钮 - 确保与通用样式保持一致 */
+/* 展开时的状态 */
+.split-section .more-content.open {
+  max-height: 1000px; /* 需要根据内容调整足够大 */
+}
+
+/* “了解更多”按钮 - 保持统一 */
 .split-section .button-link {
   display: inline-block;
   background-color: #ff9f43;
   color: #fff;
-  padding: 0.6rem 1.6rem;
-  font-weight: 600;
-  border-radius: 25px;
-  border: 2px solid #ff9f43;
-  text-decoration: none;
-  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.35);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  cursor: pointer;
-  margin-top: 0.8rem;
-}
-
-.split-section .button-link:hover,
-.split-section .button-link:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  box-shadow: 0 8px 25px rgba(255, 159, 67, 0.5);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-/* ========== 响应式 ========== */
-@media (max-width: 960px) {
-  .page-main {
-    padding: 100px 1rem 3rem;
-  }
-  
-  .split-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .split-section img,
-  .split-section .text-content {
-    flex: none;
-    width: 100%;
-  }
-}
-
-/* 手机小屏幕下导航改成汉堡菜单 */
-@media (max-width: 640px) {
-  .page-nav ul {
-    display: none;
-    flex-direction: column;
-    background-color: rgba(255, 159, 67, 0.95);
-    position: fixed;
-    top: 60px;
-    right: 0;
-    width: 70vw;
-    max-width: 300px;
-    height: calc(100vh - 60px);
-    padding: 2rem 1rem;
-    box-shadow: -2px 0 12px rgba(255, 159, 67, 0.3);
-    border-radius: 0 0 0 15px;
-    z-index: 9998;
-  }
-
-  .page-nav ul.open {
-    display: flex;
-  }
-
-  .page-nav a {
-    padding: 0.8rem 0;
-    font-size: 1.2rem;
-    border-bottom: 1px solid #fff;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-}
+  padding: 0.6rem 1.6rem
