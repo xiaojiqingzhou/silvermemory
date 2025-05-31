@@ -1,90 +1,116 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>银发记忆工程</title>
-  <link rel="stylesheet" href="./css/style.css" />
-</head>
-<body>
-  <header class="page-header">
-    <h1 class="page-header__title">银发记忆工程</h1>
-    <p class="page-header__subtitle">用 AI 镌刻时光，传承岁月故事</p>
-  </header>
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
-  <main class="page-main">
-    <section class="section">
-      <h2 class="section__title">产品介绍</h2>
-      <div class="section__image-wrapper">
-        <img src="./images/advantage.jpg" alt="独特优势图" class="section__image" />
-      </div>
-      <p class="section__description">“记忆小舟”是一款面向老年人群体的语言AI产品，通过自然交互引导用户回忆与讲述个人经历，帮助他们留存、整理和传承人生故事。产品融合语音识别、方言理解、情感识别与自然语言生成技术，能够识别讲述内容中的重要人物、事件与时间节点，自动生成结构化的家族记忆档案和口述史文本。系统还会结合历史背景补全信息，构建个人与时代之间的联系。我们希望通过技术，帮助老年人更轻松地表达，也让家人更深入地理解和珍视他们的生命历程。</p>
-    </section>
-    
-    <section class="section">
-      <h2 class="section__title">项目缘起</h2>
-      <div class="section__image-wrapper">
-        <img src="./images/project-start.jpg" alt="项目背景图" class="section__image" />
-      </div>
-      <p class="section__description">“记忆小舟”源于我们对老年群体长期的田野调研。在与众多社区老人深入交流的过程中，我们发现，他们拥有丰富的人生经验与珍贵记忆，但由于许多原因，这些口述常常难以被完整记录。为回应这一真实需求，我们依托先进的语音识别与自然语言处理技术，设计这款AI语言模型，希望为老年人的回忆提供一个温柔可靠的载体，也为家庭和社会留下宝贵的人文资产。</p>
-    </section>
-    
-     <section class="section">
-      <h2 class="section__title">目标人群</h2>
-      <div class="section__image-wrapper">
-        <img src="./images/path.jpg" alt="实施路径图" class="section__image" />
-      </div>
-      <p class="section__description">我们的主要服务对象是60岁及以上、具备一定语言表达能力的老年人群体，尤其包括有意愿讲述个人经历、保存家族记忆的老人，以及希望通过数字方式记录亲人故事的家庭成员。同时，也面向养老机构、社区服务中心及相关文化传承组织，提供定制化记忆采集与整理服务。</p>
-    </section>
+const images = [
+  "/placeholder1.jpg",
+  "/placeholder2.jpg",
+  "/placeholder3.jpg",
+];
 
-    <section class="section">
-      <h2 class="section__title">核心价值</h2>
-      <div class="section__image-wrapper">
-        <img src="./images/core-value.jpg" alt="核心价值图" class="section__image" />
-      </div>
-      <p class="section__description">“记忆小舟”致力于以AI技术激活、保存并传承老年人的人生记忆，打造从个体故事到家族叙事，再到国家历史的记忆传导机制。我们不仅关注记忆保存的形式创新，更坚持“人民史观”的价值导向，让普通人的生命历程被记录、被看见，成为时代叙述的一部分。通过这一项目，我们希望推动“个体记忆—家庭文化—国家叙事”的有机融合，让家国记忆代代相传，在数字时代焕发新的生命力。</p>
-    </section>
+const SilverMemoryProject = () => {
+  return (
+    <div className="bg-orange-50 text-gray-800 font-sans">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-orange-600">银发记忆工程</h1>
+          <div className="space-x-4 text-sm font-medium">
+            <a href="#intro" className="hover:text-orange-600 transition">项目介绍</a>
+            <a href="#demo" className="hover:text-orange-600 transition">操作演示</a>
+            <a href="#team" className="hover:text-orange-600 transition">团队介绍</a>
+            <a href="#gallery" className="hover:text-orange-600 transition">成果展示</a>
+          </div>
+        </nav>
+      </header>
 
+      <main className="pt-24 max-w-6xl mx-auto px-4 space-y-16">
+        <motion.section 
+          id="intro" 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-2xl font-semibold text-orange-600">项目介绍</h2>
+          <p className="text-lg leading-relaxed">
+            “银发记忆工程”致力于为老年人提供一个温馨、便捷的数字化平台，通过技术留存他们的宝贵记忆，促进代际沟通与文化传承。
+          </p>
+        </motion.section>
 
-    <section class="section">
-      <h2 class="section__title">预期成果</h2>
-      <div class="section__image-wrapper">
-        <img src="./images/result.jpg" alt="预期成果图" class="section__image" />
-      </div>
-      <p class="section__description">随着“记忆小舟”的发展，成千上万的回忆档案将汇聚成光点，犹如星河闪耀。每一段记忆的保存，都是对过往岁月的珍贵致敬；每一份情感的传递，都在不断加深代际之间的情感联结。年轻一代将通过这些记录，了解并传承长辈的风华，家族的历史将如同一幅逐渐展开的长卷，见证着岁月的深情与时代的变迁。最终，这项工程不仅为每个家庭留下了宝贵的文化遗产，更为整个社会提供了更深刻的历史认知与情感共鸣。</p>
-    </section>
+        <motion.section 
+          id="demo" 
+          className="space-y-6"
+          initial={{ opacity: 0 }} 
+          whileInView={{ opacity: 1 }} 
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-2xl font-semibold text-orange-600">操作演示</h2>
+          <div className="w-full aspect-video bg-gray-200 rounded-2xl shadow-inner flex items-center justify-center text-gray-500 hover:shadow-lg transition">
+            [插入操作视频位置]
+          </div>
+        </motion.section>
 
-    <section class="section">
-      <h2 class="section__title">智能体验</h2>
-      <p class="section__description">点击右侧浮动按钮开始体验</p>
-      <p class="section__description">如遇调用失败，请点击下方按钮：</p>
-      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank">立即体验</a>
-    </section>
-  </main>
+        <motion.section 
+          id="team" 
+          className="space-y-6"
+          initial={{ opacity: 0 }} 
+          whileInView={{ opacity: 1 }} 
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-2xl font-semibold text-orange-600">团队介绍</h2>
+          <p className="text-lg leading-relaxed">
+            我们的团队由来自传媒与计算机背景的青年组成，融合设计、人文与技术，致力于将温暖的理念通过科技转化为可用的产品。
+          </p>
+        </motion.section>
 
-  <footer class="page-footer">
-    <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-  </footer>
+        <motion.section 
+          id="gallery" 
+          className="space-y-6"
+          initial={{ opacity: 0 }} 
+          whileInView={{ opacity: 1 }} 
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-2xl font-semibold text-orange-600">成果展示</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {images.map((src, i) => (
+              <motion.div 
+                key={i} 
+                className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition transform hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img src={src} alt={`展示图${i + 1}`} className="w-full h-60 object-cover" />
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
+        <motion.section 
+          id="experience" 
+          className="space-y-6"
+          initial={{ opacity: 0 }} 
+          whileInView={{ opacity: 1 }} 
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-2xl font-semibold text-orange-600">智能体验</h2>
+          <Card className="bg-white rounded-2xl shadow hover:shadow-lg transition">
+            <CardContent className="p-6 space-y-4">
+              <p className="text-base text-gray-700">
+                点击下方按钮，体验我们的记忆生成系统。系统将引导您记录重要时刻，生成数字记忆档案。
+              </p>
+              <Button className="bg-orange-500 hover:bg-orange-600 transition text-white font-semibold px-6 py-2 rounded-full">
+                开始体验
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.section>
+      </main>
 
-  <!-- Coze 智能体 SDK -->
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
-  <script>
-    new CozeWebSDK.WebChatClient({
-      config: {
-        bot_id: '7489440833709129747',
-      },
-      componentProps: {
-        title: '记忆小舟',
-      },
-      auth: {
-        type: 'token',
-        token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
-        onRefreshToken: function () {
-          return 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
-        }
-      }
-    });
-  </script>
-</body>
-</html>
+      <footer className="mt-24 py-6 text-center text-sm text-gray-500">
+        © 2025 银发记忆工程 | 关爱 · 传承 · 连接
+      </footer>
+    </div>
+  );
+};
+
+export default SilverMemoryProject;
