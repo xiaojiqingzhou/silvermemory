@@ -11,6 +11,15 @@
       navMenu.classList.toggle('open');  // CSS中通过.open控制显示/隐藏
     });
 
+    // 支持键盘Enter/Space键打开菜单
+    navToggleBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        navToggleBtn.click();
+      }
+    });
+
+    // 点击菜单链接时，移动端关闭菜单
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth <= 768) {
@@ -21,6 +30,7 @@
       });
     });
 
+    // 窗口大小变更时，重置菜单状态
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
         navToggleBtn.setAttribute('aria-expanded', 'false');
@@ -50,6 +60,7 @@
       indicators.forEach((btn, i) => {
         btn.classList.toggle('active', i === index);
         btn.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        btn.setAttribute('tabindex', i === index ? '0' : '-1');
       });
       currentIndex = index;
     }
@@ -74,6 +85,12 @@
         stopAutoPlay();
         startAutoPlay();
       });
+      prevBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          prevBtn.click();
+        }
+      });
     }
 
     if (nextBtn) {
@@ -81,6 +98,12 @@
         showSlide(currentIndex + 1);
         stopAutoPlay();
         startAutoPlay();
+      });
+      nextBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          nextBtn.click();
+        }
       });
     }
 
@@ -93,9 +116,7 @@
       btn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          showSlide(i);
-          stopAutoPlay();
-          startAutoPlay();
+          btn.click();
         }
       });
     });
@@ -123,6 +144,7 @@
   const toggleButtons = document.querySelectorAll('.toggle-more-btn');
 
   toggleButtons.forEach(btn => {
+    btn.setAttribute('aria-expanded', 'false');
     btn.addEventListener('click', () => {
       // 优先找同级或父元素内的.more-content
       let moreContent = btn.parentElement.querySelector('.more-content');
@@ -136,6 +158,14 @@
       const isShown = moreContent.classList.toggle('show');
       btn.textContent = isShown ? '收起 ▲' : '了解更多 ▼';
       btn.setAttribute('aria-expanded', isShown);
+    });
+
+    // 支持键盘操作
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
     });
   });
 })();
