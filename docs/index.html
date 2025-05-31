@@ -2,67 +2,64 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>银发记忆工程</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <header class="page-header">
+    <h1 class="page-title">银发记忆工程</h1>
+    <nav class="page-nav">
+      <ul>
+        <li><a href="#project-intro">项目介绍</a></li>
+        <li><a href="#team">团队简介</a></li>
+        <li><a href="#results">成果展示</a></li>
+        <li><a href="#demo">操作演示</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <nav>
-    <div><strong>银发记忆工程</strong></div>
-    <div>
-      <a href="#intro">项目介绍</a>
-      <a href="#video">操作演示</a>
-      <a href="#team">团队介绍</a>
-      <a href="#gallery">成果展示</a>
-      <a href="#start">智能体验</a>
-    </div>
-  </nav>
-
-  <section id="intro">
-    <div class="container card">
+  <main class="page-main">
+    <section id="project-intro" class="content-section">
       <h2>项目介绍</h2>
-      <p>“银发记忆工程”是一项致力于记录与重构老年人数字记忆的公益计划。我们通过数字技术与人文关怀的结合，打造温暖、智慧、易用的记忆管理系统，助力银发群体更好地保存与分享他们的人生故事与生活片段。</p>
-    </div>
-  </section>
-
-  <section id="video">
-    <div class="container card">
-      <h2>操作演示</h2>
-      <p>以下为操作视频展示（你可以插入视频 iframe 或本地视频）：</p>
-      <div style="margin-top:1rem;">
-        [插入操作视频位置，例如 &lt;video src="demo.mp4" controls&gt;&lt;/video&gt;]
+      <div class="text-content">
+        <p>银发记忆工程旨在……（请在此填写项目详细介绍内容）</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="team">
-    <div class="container card">
-      <h2>团队介绍</h2>
-      <p>我们的团队由计算语言学、人工智能、人文社科及传播专业的研究生与青年教师组成，致力于将技术温情化落地，构建新时代下的数字公益模型。</p>
-    </div>
-  </section>
+    <section id="team" class="content-section">
+      <h2>团队简介</h2>
+      <div class="text-content">
+        <p>团队由来自不同领域的专家组成……（请在此填写团队简介）</p>
+      </div>
+    </section>
 
-  <section id="gallery">
-    <div class="container card">
+    <section id="results" class="content-section">
       <h2>成果展示</h2>
-      <p>以下为部分成果图片展示（请更换为你的真实图片）：</p>
-      <div class="gallery">
-        <img src="/placeholder1.jpg" alt="成果图1" />
-        <img src="/placeholder2.jpg" alt="成果图2" />
-        <img src="/placeholder3.jpg" alt="成果图3" />
+      <div class="image-slider">
+        <div class="slider-container">
+          <img src="" alt="成果展示图片1" class="slider-image" />
+          <img src="" alt="成果展示图片2" class="slider-image" />
+          <img src="" alt="成果展示图片3" class="slider-image" />
+        </div>
+        <button class="slider-btn prev">‹</button>
+        <button class="slider-btn next">›</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="start">
-    <div class="container card" style="text-align:center;">
-      <h2>开始智能体验</h2>
-      <p>欢迎尝试我们的“记忆生成AI”服务，为长辈生成温暖、真实、亲切的数字回忆。</p>
-      <a class="btn" href="/experience.html">开始体验</a>
-    </div>
-  </section>
+    <section id="demo" class="content-section">
+      <h2>操作演示</h2>
+      <p>请在此插入操作演示视频链接或嵌入代码。</p>
+      <!-- <video controls src="your-demo-video.mp4" width="100%" preload="metadata"></video> -->
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">智能体验</h2>
+      <p class="section__description">点击右侧浮动按钮开始体验</p>
+      <p class="section__description">如遇调用失败，请点击下方按钮：</p>
+      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank">立即体验</a>
+    </section>
+  </main>
 
   <footer class="page-footer">
     <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
@@ -86,6 +83,35 @@
         }
       }
     });
+  </script>
+
+  <script>
+    // 简单图片滑动脚本
+    const sliderContainer = document.querySelector('.slider-container');
+    const images = document.querySelectorAll('.slider-image');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.style.opacity = i === index ? '1' : '0';
+        img.style.zIndex = i === index ? '10' : '1';
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    showImage(currentIndex);
   </script>
 </body>
 </html>
