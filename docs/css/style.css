@@ -388,7 +388,6 @@ body {
   }
 }
 
-
 /* ========== 分割区块排版 ========== */
 /* ========== split-section 容器 ========== */
 .split-section {
@@ -403,6 +402,10 @@ body {
   margin-bottom: 2.5rem;
   user-select: none;
   transition: box-shadow 0.3s ease;
+  /* 新增过渡内阴影以增加层次 */
+  box-shadow:
+    0 4px 12px rgba(255, 159, 67, 0.15),
+    inset 0 0 30px rgba(255, 159, 67, 0.05);
 }
 
 .split-section:hover {
@@ -421,6 +424,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff8f0;
+  transition: transform 0.3s ease;
+  user-select: none;
 }
 
 .split-section .section-image img {
@@ -430,6 +436,11 @@ body {
   border-radius: 10px 0 0 10px;
   user-select: none;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.split-section:hover .section-image img {
+  transform: scale(1.05);
 }
 
 /* ========== 右侧 文本内容 ========== */
@@ -439,6 +450,7 @@ body {
   font-size: 1rem;
   line-height: 1.7;
   padding-left: 1rem;
+  user-select: none;
 }
 
 .split-section .text-content h3 {
@@ -464,43 +476,4 @@ body {
   border-radius: 25px;
   border: 2px solid #ff9f43;
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.25);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  user-select: none;
-  cursor: pointer;
-}
-
-.split-section .button-link:hover,
-.split-section .button-link:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  outline: none;
-}
-
-/* ========== 响应式 ========== */
-@media (max-width: 900px) {
-  .split-section {
-    flex-direction: column;
-    padding: 1.5rem 1.5rem;
-  }
-
-  .split-section .section-image {
-    border-radius: 10px 10px 0 0;
-    max-width: 100%;
-    min-height: 200px;
-  }
-
-  .split-section .section-image img {
-    border-radius: 10px 10px 0 0;
-  }
-
-  .split-section .text-content {
-    padding-left: 0;
-    flex: 1 1 100%;
-    margin-top: 1rem;
-  }
-
-  .split-section .text-content h3 {
-    font-size: 1.4rem;
-  }
-}
+  box-shadow: 0 4px 10px rgba(255, 159, 67, 
