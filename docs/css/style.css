@@ -304,7 +304,6 @@ body {
   cursor: pointer;
   margin-top: 0.8rem;
   line-height: 1.4;
-  /* 居中对齐，确保按钮在父容器居中 */
   text-align: center;
 }
 
@@ -313,8 +312,8 @@ body {
   text-align: center;
   padding: 2rem 0 3rem;
   display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  justify-content: center;
+  align-items: center;
 }
 
 /* 按钮悬浮及聚焦效果 */
