@@ -1,6 +1,6 @@
 (() => {
   // ====== 导航汉堡按钮和菜单元素 ======
-  const navToggleBtn = document.querySelector('.menu-toggle');  // 对应CSS中.menu-toggle类名
+  const navToggleBtn = document.querySelector('.nav-toggle');  // 对应CSS中.nav-toggle类名
   const navMenu = document.querySelector('.page-nav ul');       // 导航菜单列表
 
   if (navToggleBtn && navMenu) {
@@ -9,7 +9,7 @@
       const expanded = navToggleBtn.getAttribute('aria-expanded') === 'true';
       navToggleBtn.setAttribute('aria-expanded', String(!expanded));
       navToggleBtn.classList.toggle('active');
-      navMenu.classList.toggle('active');  // CSS中通过.active控制显示
+      navMenu.classList.toggle('open');  // CSS中通过.open控制显示
     });
 
     // 点击菜单内链接后关闭菜单（适用于小屏幕）
@@ -18,7 +18,7 @@
         if (window.innerWidth <= 768) { // 和CSS媒体查询保持一致
           navToggleBtn.setAttribute('aria-expanded', 'false');
           navToggleBtn.classList.remove('active');
-          navMenu.classList.remove('active');
+          navMenu.classList.remove('open');
         }
       });
     });
@@ -28,7 +28,7 @@
       if (window.innerWidth > 768) {
         navToggleBtn.setAttribute('aria-expanded', 'false');
         navToggleBtn.classList.remove('active');
-        navMenu.classList.remove('active');
+        navMenu.classList.remove('open');
       }
     });
   }
@@ -125,7 +125,4 @@
     floatingBtn.addEventListener('click', () => {
       if (clickTimeout) return; // 防抖
       CozeWebSDK.WebChatClient.open();
-      clickTimeout = setTimeout(() => clickTimeout = null, 500);
-    });
-  }
-})();
+      clickTimeout = setTimeout(() => clickTimeout = null, 500
