@@ -1,4 +1,4 @@
-/* ========== 基础重置 ========== */
+/* ========== 基础重置 ========== */ 
 * {
   margin: 0;
   padding: 0;
@@ -306,15 +306,10 @@ body {
   line-height: 1.4;
   /* 居中对齐，确保按钮在父容器居中 */
   text-align: center;
-}
-
-/* 立即体验按钮容器，居中对齐 */
-.experience-section {
-  text-align: center;
-  padding: 2rem 0 3rem;
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  position: relative;
+  user-select: none;
+  /* 下方留空间给箭头 */
+  padding-right: 2.2rem;
 }
 
 /* 按钮悬浮及聚焦效果 */
@@ -327,77 +322,23 @@ body {
   transform: translateY(-2px);
 }
 
-/* ========== 卡片式团队成员 ========== */
-.team-member {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #fff8ed;
-  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.2);
-  transition: transform 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.team-member:hover {
-  transform: translateY(-5px);
-}
-
-.team-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 0.8rem;
-  object-fit: cover;
-  border: 3px solid #ff9f43;
-}
-
-.team-member h4 {
-  font-size: 1.2rem;
-  color: #bf6e0a;
-  margin-bottom: 0.3rem;
-}
-
-.team-member p {
-  font-size: 1rem;
-  color: #5a4631;
-}
-
-/* ========== 页脚 ========== */
-.page-footer {
-  background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
+/* “了解更多”按钮右侧箭头 */
+.button-link::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
   color: #fff;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  user-select: none;
-  font-weight: 600;
-  margin-top: 3rem;
-  border-radius: 12px 12px 0 0;
-}
-
-/* ========== 浮动 AI 按钮 ========== */
-#floating-ai-button {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #ff9f43;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  border: none;
-  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.4);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
+  transition: transform 0.3s ease;
   user-select: none;
 }
 
-#floating-ai-button:hover,
-#floating-ai-button:focus {
-  background-color: #ff7e15;
-  outline: none;
+/* “了解更多”打开时箭头旋转180度 */
+.button-link.open::after {
+  transform: translateY(-50%) rotate(180deg);
+  color: #ff9f43;
 }
 
 /* ========== 更多内容展开收起 ========== */
@@ -405,12 +346,23 @@ body {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
+  padding: 0 0;
+  transform-origin: top;
+  transform: scaleY(0.95);
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease, transform 0.5s ease;
+  color: #5a4631;
+  font-size: 1rem;
+  line-height: 1.65;
+  user-select: text;
 }
 
 .more-content.open {
-  max-height: 500px; /* 可调整或用JS动态设置 */
+  max-height: 800px; /* 适当大点，避免截断 */
   opacity: 1;
+  padding: 1rem 0 1rem 0.15rem;
+  transform: scaleY(1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: text;
 }
 
 /* ========== 响应式布局 ========== */
@@ -451,71 +403,45 @@ body {
   }
 
   .page-nav li {
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
   }
 
   .page-nav a {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
-  /* 适当调整header布局 */
-  .page-header {
-    padding: 0.7rem 1rem;
+  .button-link {
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .content-section h2 {
+    font-size: 1.5rem;
   }
 }
 
-/* ========== .split-section 布局 ========== */
+/* ========== .split-section 样式配套建议 ========== */
 .split-section {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  /* 背景、圆角和阴影保持风格一致 */
+  gap: 1.5rem;
   background: #fff3e6;
-  padding: 1.8rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.15);
   user-select: none;
+  transition: box-shadow 0.3s ease;
 }
 
-.split-section > .split-left,
-.split-section > .split-right {
-  flex: 1 1 48%;
-  min-width: 280px;
+.split-section:hover {
+  box-shadow: 0 6px 20px rgba(255, 159, 67, 0.3);
 }
 
-/* 文字内容调整 */
-.split-left p,
-.split-right p {
-  color: #5a4631;
-  line-height: 1.65;
-  font-size: 1rem;
-  padding-left: 0.15rem;
+.split-section > div {
+  flex: 1;
 }
 
-/* 图片/视频自适应 */
-.split-left img,
-.split-right img,
-.split-left video,
-.split-right video {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.25);
-  object-fit: cover;
-  display: block;
-  margin-bottom: 1rem;
-}
-
-/* 移动端改为上下堆叠 */
 @media (max-width: 768px) {
   .split-section {
     flex-direction: column;
-    gap: 1.5rem;
-  }
-  .split-section > .split-left,
-  .split-section > .split-right {
-    flex: 1 1 100%;
-    min-width: auto;
   }
 }
