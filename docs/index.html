@@ -101,6 +101,19 @@
     <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
 
+  <!-- Coze 智能体 SDK -->
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
+  <script>
+    new CozeWebSDK.WebChatClient({
+      config: { bot_id: '7489440833709129747' },
+      componentProps: { title: '记忆小舟' },
+      auth: {
+        type: 'token',
+        token: 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8',
+        onRefreshToken: () => 'pat_fSb3Xi09zNxUGn89xzOvCmHUJTPhmtBYMxNaSeTs2WSfAXcWqSC4RozejBxjv5F8'
+      }
+    });
+  </script>
 
   <script src="js/main.js"></script>
 
