@@ -3,25 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" />
-  <meta name="keywords" content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" />
   <title>银发记忆工程</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-  <header class="page-header" id="header" role="banner">
+
+  <header class="page-header" id="header">
     <div class="header-inner">
       <h1 class="page-title">银发记忆工程</h1>
-
-      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false" aria-controls="navMenu" id="navToggle">
-        <span class="hamburger" aria-hidden="true"></span>
+      <button class="menu-toggle" id="navToggle" aria-label="切换导航菜单" aria-expanded="false">
+        <span class="hamburger"></span>
       </button>
-
-      <nav id="primary-navigation" class="page-nav" role="navigation" aria-label="主导航">
+      <nav class="page-nav" role="navigation">
         <ul class="nav-list" id="navMenu">
           <li><a href="#origin">项目缘起</a></li>
           <li><a href="#introduction">项目介绍</a></li>
@@ -34,169 +28,91 @@
     </div>
   </header>
 
-  <main id="main" class="page-main" role="main">
-    <!-- 项目缘起 -->
-    <section id="origin" class="split-section" tabindex="-1" aria-labelledby="origin-title">
-      <img src="images/project-start.jpg" alt="项目缘起图示" loading="lazy" />
-      <div class="text-content">
-        <h2 id="origin-title">项目缘起</h2>
-        <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
-        <h3>目标人群</h3>
-        <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
+  <main class="page-main" role="main">
 
-        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="origin-more" type="button">了解更多</button>
-        <div id="origin-more" class="more-content" hidden>
-          <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
-          <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
+    <!-- 项目缘起 -->
+    <section id="origin" class="split-section">
+      <div class="split-image">
+        <img src="images/project-start.jpg" alt="老人与科技结合的背景图">
+      </div>
+      <div class="text-content">
+        <h2>项目缘起</h2>
+        <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
+        <h3>目标人群</h3>
+        <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
+        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="origin-more">了解更多</button>
+        <div id="origin-more" class="more-content hidden">
+          <p>“记忆小舟”致力于通过技术手段打通个体与社会之间的记忆传导渠道。服务内容包括语音访谈、自动成文、回忆引导、家族档案整理等。</p>
         </div>
       </div>
     </section>
 
     <!-- 项目介绍 -->
-    <section id="introduction" class="split-section" tabindex="-1" aria-labelledby="introduction-title">
-      <img src="images/advantage.jpg" alt="项目介绍图示" loading="lazy" />
+    <section id="introduction" class="split-section">
+      <div class="split-image">
+        <img src="images/advantage.jpg" alt="记忆小舟系统优势图解">
+      </div>
       <div class="text-content">
-        <h2 id="introduction-title">项目介绍</h2>
-        <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
+        <h2>项目介绍</h2>
+        <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
         <h3>核心价值</h3>
-        <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-
-        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="introduction-more" type="button">了解更多</button>
-        <div id="introduction-more" class="more-content" hidden>
-          <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
-          <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
+        <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
+        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="intro-more">了解更多</button>
+        <div id="intro-more" class="more-content hidden">
+          <p>系统具备回忆引导、语义理解、情感伴随等功能，支持多轮交互、自动摘要与视频生成等后期服务。</p>
         </div>
       </div>
     </section>
 
     <!-- 操作演示 -->
-    <section id="demo" class="content-section" tabindex="-1" aria-labelledby="demo-title">
-      <h2 id="demo-title">操作演示</h2>
+    <section id="demo" class="content-section">
+      <h2>操作演示</h2>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen loading="lazy" title="记忆小舟操作演示视频"></iframe>
+        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen loading="lazy" title="操作演示视频"></iframe>
       </div>
     </section>
 
     <!-- 团队简介 -->
-    <section id="team" class="content-section" tabindex="-1" aria-labelledby="team-title">
-      <h2 id="team-title">团队简介</h2>
+    <section id="team" class="content-section">
+      <h2>团队简介</h2>
       <div class="text-content">
-        <p>项目团队由计算语言学、中国文学、口述历史研究专家领衔；多学科研究生团队组成，具备跨学科的合作背景与扎实的落地能力。</p>
+        <p>我们的团队由来自语言学、人工智能、社会学和文化研究等领域的专家组成，涵盖项目管理、技术研发、用户体验设计和社区服务。</p>
       </div>
     </section>
 
     <!-- 成果展示 -->
-    <section id="achievements" class="content-section" tabindex="-1" aria-labelledby="achievements-title">
-      <h2 id="achievements-title">成果展示</h2>
-      <div class="image-slider" aria-label="成果展示轮播图">
-        <button class="slider-btn prev" aria-label="上一张图片">&#8249;</button>
-        <button class="slider-btn next" aria-label="下一张图片">&#8250;</button>
-
-        <div class="slider-images" role="region" aria-live="polite">
-          <img src="images/image1.jpg" alt="成果图一" loading="lazy" class="slider-image active" />
-          <img src="images/image2.jpg" alt="成果图二" loading="lazy" class="slider-image" />
-          <img src="images/image3.jpg" alt="成果图三" loading="lazy" class="slider-image" />
+    <section id="achievements" class="content-section">
+      <h2>成果展示</h2>
+      <div class="image-slider">
+        <button class="slider-btn prev">&#8249;</button>
+        <button class="slider-btn next">&#8250;</button>
+        <div class="slider-images">
+          <img src="images/image1.jpg" alt="成果图一" class="slider-image active">
+          <img src="images/image2.jpg" alt="成果图二" class="slider-image">
+          <img src="images/image3.jpg" alt="成果图三" class="slider-image">
         </div>
-
-        <div class="slider-indicators" role="tablist" aria-label="图片选择器">
-          <button class="indicator active" aria-selected="true" aria-controls="slide1" id="indicator1" role="tab"></button>
-          <button class="indicator" aria-selected="false" aria-controls="slide2" id="indicator2" role="tab"></button>
-          <button class="indicator" aria-selected="false" aria-controls="slide3" id="indicator3" role="tab"></button>
+        <div class="slider-indicators">
+          <button class="indicator active"></button>
+          <button class="indicator"></button>
+          <button class="indicator"></button>
         </div>
       </div>
     </section>
 
     <!-- 使用说明 -->
-    <section id="instructions" class="content-section" tabindex="-1" aria-labelledby="instructions-title">
-      <h2 id="instructions-title">使用说明</h2>
-      <div class="text-content">
-        <p>点击右下角悬浮按钮体验智能对话。如遇异常，可直接访问备用入口：</p>
-        <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank" rel="noopener noreferrer">立即体验</a>
+    <section id="instructions" class="content-section">
+      <h2>使用说明</h2>
+      <div class="experience-section">
+        <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank">立即体验</a>
       </div>
     </section>
+
   </main>
 
-  <!-- 浮动智能聊天按钮 -->
-  <button id="floating-ai-button" aria-label="打开智能聊天窗口" type="button">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24" height="24" aria-hidden="true">
-      <path d="M2 3h20v18H2z" fill="none" />
-      <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z" />
-    </svg>
-  </button>
-
-  <footer class="page-footer" role="contentinfo">
+  <footer class="page-footer">
     <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
 
-  <!-- Coze 智能体 SDK -->
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js" defer></script>
-
-  <!-- 修复交互问题的 JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const navToggle = document.getElementById('navToggle');
-      const navMenu = document.getElementById('navMenu');
-      navToggle.addEventListener('click', () => {
-        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', !expanded);
-        navMenu.classList.toggle('open');
-      });
-
-      const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-      toggleButtons.forEach((btn) => {
-        const targetId = btn.getAttribute('aria-controls');
-        btn.addEventListener('click', () => toggleContent(targetId, btn));
-      });
-
-      const prevBtn = document.querySelector('.slider-btn.prev');
-      const nextBtn = document.querySelector('.slider-btn.next');
-      const slides = document.querySelectorAll('.slider-image');
-      const indicators = document.querySelectorAll('.indicator');
-      let currentIndex = 0;
-
-      function updateSlides(index) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === index);
-          indicators[i].classList.toggle('active', i === index);
-          indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-        });
-        currentIndex = index;
-      }
-
-      if (prevBtn && nextBtn && slides.length > 0) {
-        prevBtn.addEventListener('click', () => {
-          let index = currentIndex - 1;
-          if (index < 0) index = slides.length - 1;
-          updateSlides(index);
-        });
-
-        nextBtn.addEventListener('click', () => {
-          let index = currentIndex + 1;
-          if (index >= slides.length) index = 0;
-          updateSlides(index);
-        });
-
-        indicators.forEach((btn, i) => {
-          btn.addEventListener('click', () => updateSlides(i));
-        });
-
-        updateSlides(0);
-      }
-    });
-
-    function toggleContent(id, btn) {
-      const content = document.getElementById(id);
-      const isHidden = content.hasAttribute('hidden');
-      if (isHidden) {
-        content.removeAttribute('hidden');
-        btn.setAttribute('aria-expanded', 'true');
-        btn.textContent = '收起';
-      } else {
-        content.setAttribute('hidden', '');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.textContent = '了解更多';
-      }
-    }
-  </script>
+  <script src="js/app.js"></script>
 </body>
 </html>
