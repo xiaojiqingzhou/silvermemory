@@ -4,7 +4,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -12,13 +11,11 @@ html {
   background-color: #fff8f0;
   color: #5a4631;
 }
-
 body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 /* ========== 页面整体布局 ========== */
 .page-header {
   position: fixed;
@@ -33,65 +30,17 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
 .page-title {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
   user-select: none;
 }
-
-
-
-/* ========== 基础重置 ========== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  font-family: 'Noto Sans SC', sans-serif;
-  background-color: #fff8f0;
-  color: #5a4631;
-}
-
-body {
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ========== 页面整体布局 ========== */
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 159, 67, 0.9);
-  box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
-  z-index: 9999;
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  user-select: none;
-}
-
 .page-nav ul {
   list-style: none;
   display: flex;
   gap: 1.3rem;
 }
-
 .page-nav a {
   color: #fff;
   text-decoration: none;
@@ -101,14 +50,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
 }
-
 .page-nav a:hover,
 .page-nav a:focus {
   background-color: #fff;
   color: #ff9f43;
   outline: none;
 }
-
 .page-nav a::after {
   content: '';
   position: absolute;
@@ -119,12 +66,10 @@ body {
   background-color: #fff;
   transition: width 0.3s ease;
 }
-
 .page-nav a:hover::after,
 .page-nav a:focus::after {
   width: 100%;
 }
-
 /* 汉堡菜单 */
 .nav-toggle {
   display: none; /* 默认隐藏，移动端显示 */
@@ -139,7 +84,6 @@ body {
   position: relative;
   z-index: 10001;
 }
-
 .nav-toggle .hamburger,
 .nav-toggle .hamburger::before,
 .nav-toggle .hamburger::after {
@@ -152,39 +96,32 @@ body {
   transition: all 0.3s ease;
   position: relative;
 }
-
 .nav-toggle .hamburger::before {
   position: absolute;
   top: -8px;
 }
-
 .nav-toggle .hamburger::after {
   position: absolute;
   top: 8px;
 }
-
 /* 汉堡切换成X动画 */
 .nav-toggle.active .hamburger {
   background-color: transparent;
 }
-
 .nav-toggle.active .hamburger::before {
   transform: rotate(45deg);
   top: 0;
 }
-
 .nav-toggle.active .hamburger::after {
   transform: rotate(-45deg);
   top: 0;
 }
-
 /* ========== 主体内容 ========== */
 .page-main {
   padding: 100px 1.5rem 3rem;
   max-width: 960px;
   margin: 0 auto;
 }
-
 /* 内容区块 */
 .content-section {
   background: #fff3e6;
@@ -194,11 +131,9 @@ body {
   padding: 1.8rem 2rem;
   transition: box-shadow 0.3s ease;
 }
-
 .content-section:hover {
   box-shadow: 0 8px 20px rgba(255, 159, 67, 0.3);
 }
-
 .content-section h2 {
   font-size: 1.8rem;
   font-weight: 700;
@@ -206,14 +141,12 @@ body {
   margin-bottom: 1rem;
   user-select: none;
 }
-
 .text-content p {
   font-size: 1rem;
   line-height: 1.7;
   color: #5a4631;
   padding-left: 0.2rem;
 }
-
 /* 图片样式 */
 .section-image {
   width: 100%;
@@ -224,7 +157,6 @@ body {
   box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
   object-fit: cover;
 }
-
 /* ========== 视频容器 ========== */
 .video-container {
   position: relative;
@@ -235,7 +167,6 @@ body {
   box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
   margin-bottom: 2rem;
 }
-
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -245,7 +176,6 @@ body {
   border: none;
   border-radius: 12px;
 }
-
 /* ========== 轮播图 ========== */
 .image-slider {
   position: relative;
@@ -256,7 +186,6 @@ body {
   margin-bottom: 2rem;
   height: 300px; /* 固定高度防止跳动 */
 }
-
 .slider-image {
   position: absolute;
   top: 0;
@@ -270,13 +199,11 @@ body {
   object-fit: cover;
   user-select: none;
 }
-
 .slider-image.active {
   opacity: 1;
   visibility: visible;
   position: relative;
 }
-
 /* 轮播按钮 */
 .slider-btn {
   position: absolute;
@@ -293,21 +220,17 @@ body {
   user-select: none;
   z-index: 10;
 }
-
 .slider-btn:hover,
 .slider-btn:focus {
   background-color: #ff9f43;
   outline: none;
 }
-
 .slider-btn.prev {
   left: 15px;
 }
-
 .slider-btn.next {
   right: 15px;
 }
-
 /* 轮播指示器 */
 .slider-indicators {
   position: absolute;
@@ -317,7 +240,6 @@ body {
   user-select: none;
   z-index: 10;
 }
-
 .slider-indicators button {
   background: rgba(255, 159, 67, 0.6);
   border: 2px solid #ff9f43;
@@ -328,11 +250,9 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .slider-indicators button.active {
   background-color: #ff9f43;
 }
-
 /* ========== 按钮链接样式（通用） ========== */
 .button-link {
   display: inline-block;
@@ -352,7 +272,6 @@ body {
   /* 居中对齐，确保按钮在父容器居中 */
   text-align: center;
 }
-
 /* 立即体验按钮容器，居中对齐 */
 .experience-section {
   text-align: center;
@@ -361,7 +280,6 @@ body {
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
 }
-
 /* 按钮悬浮及聚焦效果 */
 .button-link:hover,
 .button-link:focus {
@@ -371,7 +289,6 @@ body {
   outline: none;
   transform: translateY(-2px);
 }
-
 /* ========== 卡片式团队成员 ========== */
 .team-member {
   text-align: center;
@@ -382,11 +299,9 @@ body {
   transition: transform 0.3s ease;
   margin-bottom: 1rem;
 }
-
 .team-member:hover {
   transform: translateY(-5px);
 }
-
 .team-member img {
   width: 100px;
   height: 100px;
@@ -395,18 +310,15 @@ body {
   object-fit: cover;
   border: 3px solid #ff9f43;
 }
-
 .team-member h4 {
   font-size: 1.2rem;
   color: #bf6e0a;
   margin-bottom: 0.3rem;
 }
-
 .team-member p {
   font-size: 1rem;
   color: #5a4631;
 }
-
 /* ========== 页脚 ========== */
 .page-footer {
   background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
@@ -418,7 +330,6 @@ body {
   margin-top: 3rem;
   border-radius: 12px 12px 0 0;
 }
-
 /* ========== 浮动 AI 按钮 ========== */
 #floating-ai-button {
   position: fixed;
@@ -434,13 +345,11 @@ body {
   z-index: 10000;
   transition: background-color 0.3s ease;
 }
-
 #floating-ai-button:hover,
 #floating-ai-button:focus {
   background-color: #ff7e15;
   outline: none;
 }
-
 /* ========== 新增：.split-section 样式 ========== */
 .split-section {
   display: flex;
@@ -452,13 +361,11 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .split-section > div {
   flex: 1 1 50%;
   min-width: 300px;
   padding: 0 1rem;
 }
-
 .split-section img,
 .split-section video {
   width: 100%;
@@ -467,491 +374,46 @@ body {
   object-fit: cover;
   display: block;
 }
-
 /* 响应式：窄屏时堆叠 */
 @media (max-width: 768px) {
   .page-header {
     padding: 0.7rem 1rem;
   }
-
   .page-title {
     font-size: 1.5rem;
   }
-
   .page-nav ul {
     display: none; /* 移动端隐藏菜单，需JS控制显示 */
   }
-
   .nav-toggle {
     display: flex;
   }
-
   .page-main {
     padding: 90px 1rem 2rem;
     max-width: 100%;
   }
-
   .content-section {
     padding: 1.5rem 1.2rem;
     margin-bottom: 1.5rem;
   }
-
   .split-section {
     flex-direction: column;
     padding: 1.5rem 1rem;
   }
-
   .split-section > div {
     min-width: auto;
     padding: 0 0;
     margin-bottom: 1.5rem;
   }
-
   .slider-btn {
     font-size: 1.2rem;
     padding: 0.4rem 0.6rem;
   }
-
   .team-member img {
     width: 80px;
     height: 80px;
   }
 }
-
-.page-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.3rem;
-}
-
-.page-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
-}
-
-.page-nav a:hover,
-.page-nav a:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  outline: none;
-}
-
-.page-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.page-nav a:hover::after,
-.page-nav a:focus::after {
-  width: 100%;
-}
-
-/* 汉堡菜单 */
-.nav-toggle {
-  display: none; /* 默认隐藏，移动端显示 */
-  flex-direction: column;
-  justify-content: space-around;
-  width: 28px;
-  height: 24px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0;
-  position: relative;
-  z-index: 10001;
-}
-
-.nav-toggle .hamburger,
-.nav-toggle .hamburger::before,
-.nav-toggle .hamburger::after {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 3px;
-  background-color: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-toggle .hamburger::before {
-  position: absolute;
-  top: -8px;
-}
-
-.nav-toggle .hamburger::after {
-  position: absolute;
-  top: 8px;
-}
-
-/* 汉堡切换成X动画 */
-.nav-toggle.active .hamburger {
-  background-color: transparent;
-}
-
-.nav-toggle.active .hamburger::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.nav-toggle.active .hamburger::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
-
-/* ========== 主体内容 ========== */
-.page-main {
-  padding: 100px 1.5rem 3rem;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-/* 内容区块 */
-.content-section {
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  margin-bottom: 2rem;
-  padding: 1.8rem 2rem;
-  transition: box-shadow 0.3s ease;
-}
-
-.content-section:hover {
-  box-shadow: 0 8px 20px rgba(255, 159, 67, 0.3);
-}
-
-.content-section h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #bf6e0a;
-  margin-bottom: 1rem;
-  user-select: none;
-}
-
-.text-content p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #5a4631;
-  padding-left: 0.2rem;
-}
-
-/* 图片样式 */
-.section-image {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  display: block;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-}
-
-/* ========== 视频容器 ========== */
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
-  margin-bottom: 2rem;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-/* ========== 轮播图 ========== */
-.image-slider {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  user-select: none;
-  margin-bottom: 2rem;
-  height: 300px; /* 固定高度防止跳动 */
-}
-
-.slider-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
-  border-radius: 10px;
-  object-fit: cover;
-  user-select: none;
-}
-
-.slider-image.active {
-  opacity: 1;
-  visibility: visible;
-  position: relative;
-}
-
-/* 轮播按钮 */
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  color: #fff;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  z-index: 10;
-}
-
-.slider-btn:hover,
-.slider-btn:focus {
-  background-color: #ff9f43;
-  outline: none;
-}
-
-.slider-btn.prev {
-  left: 15px;
-}
-
-.slider-btn.next {
-  right: 15px;
-}
-
-/* 轮播指示器 */
-.slider-indicators {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-  user-select: none;
-  z-index: 10;
-}
-
-.slider-indicators button {
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.slider-indicators button.active {
-  background-color: #ff9f43;
-}
-
-/* ========== 按钮链接样式（通用） ========== */
-.button-link {
-  display: inline-block;
-  background-color: #ff9f43;
-  color: #fff;
-  padding: 0.6rem 1.6rem;
-  font-weight: 600;
-  border-radius: 25px;
-  border: 2px solid #ff9f43;
-  text-decoration: none;
-  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.35);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  cursor: pointer;
-  margin-top: 0.8rem;
-  line-height: 1.4;
-  /* 居中对齐，确保按钮在父容器居中 */
-  text-align: center;
-}
-
-/* 立即体验按钮容器，居中对齐 */
-.experience-section {
-  text-align: center;
-  padding: 2rem 0 3rem;
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-}
-
-/* 按钮悬浮及聚焦效果 */
-.button-link:hover,
-.button-link:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  box-shadow: 0 8px 25px rgba(255, 159, 67, 0.5);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-/* ========== 卡片式团队成员 ========== */
-.team-member {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #fff8ed;
-  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.2);
-  transition: transform 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.team-member:hover {
-  transform: translateY(-5px);
-}
-
-.team-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 0.8rem;
-  object-fit: cover;
-  border: 3px solid #ff9f43;
-}
-
-.team-member h4 {
-  font-size: 1.2rem;
-  color: #bf6e0a;
-  margin-bottom: 0.3rem;
-}
-
-.team-member p {
-  font-size: 1rem;
-  color: #5a4631;
-}
-
-/* ========== 页脚 ========== */
-.page-footer {
-  background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
-  color: #fff;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  user-select: none;
-  font-weight: 600;
-  margin-top: 3rem;
-  border-radius: 12px 12px 0 0;
-}
-
-/* ========== 浮动 AI 按钮 ========== */
-#floating-ai-button {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #ff9f43;
-  border: none;
-  border-radius: 50%;
-  width: 65px;
-  height: 65px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
-  cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.3s ease;
-}
-
-#floating-ai-button:hover,
-#floating-ai-button:focus {
-  background-color: #ff7e15;
-  outline: none;
-}
-
-/* ========== 新增：.split-section 样式 ========== */
-.split-section {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, #ffefdb 0%, #fff3e6 100%);
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
-  align-items: center;
-  justify-content: center;
-}
-
-.split-section > div {
-  flex: 1 1 50%;
-  min-width: 300px;
-  padding: 0 1rem;
-}
-
-.split-section img,
-.split-section video {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-  display: block;
-}
-
-/* 响应式：窄屏时堆叠 */
-@media (max-width: 768px)
-
- {
-  .page-header {
-    padding: 0.7rem 1rem;
-  }
-
-  .page-title {
-    font-size: 1.5rem;
-  }
-
-  .page-nav ul {
-    display: none; /* 移动端隐藏菜单，需JS控制显示 */
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  .page-main {
-    padding: 90px 1rem 2rem;
-    max-width: 100%;
-  }
-
-  .content-section {
-    padding: 1.5rem 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .split-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .split-section > div {
-    min-width: auto;
-    padding: 0 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .slider-btn {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .team-member img {
-    width: 80px;
-    height: 80px;
-  }
-}
-
 /* ========== 补充：了解更多隐藏内容控制 ========== */
 .more-content[hidden] {
   display: none !important;
