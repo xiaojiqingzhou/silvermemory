@@ -1,61 +1,48 @@
-/* 字体与排版 */
 body {
   font-family: 'Noto Sans SC', sans-serif;
   line-height: 1.6;
   background-color: #fff8f0;
-  color: #333;
+  color: #5a4631;
   margin: 0;
   padding: 0;
 }
-
-/* 标题 */
-h1 { font-size: 2.5rem; font-weight: 700; }
-h2 { font-size: 2rem; font-weight: 600; }
-h3 { font-size: 1.5rem; font-weight: 600; }
 
 .page-header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: rgba(255, 159, 67, 0.9);
-  z-index: 1000;
+  background-color: rgba(255, 159, 67, 0.9);
+  box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
+  z-index: 9999;
   padding: 0.8rem 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .page-title {
-  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
   margin: 0;
 }
 
-.page-nav {
-  flex-basis: 100%;
-  display: none;
-}
-
 .page-nav ul {
-  display: flex;
-  justify-content: flex-start;
   list-style: none;
+  display: flex;
   gap: 1rem;
   padding: 0;
-  margin: 0.5rem 0;
+  margin: 0;
 }
 
 .page-nav a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
+  padding: 0.3rem 0.6rem;
 }
 
-/* 汉堡菜单按钮 */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -67,22 +54,31 @@ h3 { font-size: 1.5rem; font-weight: 600; }
   cursor: pointer;
 }
 
-.hamburger, .hamburger::before, .hamburger::after {
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
   content: '';
   display: block;
   width: 28px;
   height: 3px;
-  background: white;
+  background-color: #fff;
   border-radius: 2px;
-  transition: all 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
 }
 
-.hamburger::before { position: absolute; top: -8px; }
-.hamburger::after  { position: absolute; top: 8px; }
+.nav-toggle .hamburger::before {
+  position: absolute;
+  top: -8px;
+}
+
+.nav-toggle .hamburger::after {
+  position: absolute;
+  top: 8px;
+}
 
 .nav-toggle.active .hamburger {
-  background: transparent;
+  background-color: transparent;
 }
 
 .nav-toggle.active .hamburger::before {
@@ -95,52 +91,39 @@ h3 { font-size: 1.5rem; font-weight: 600; }
   top: 0;
 }
 
-/* 主体内容 */
 .page-main {
+  padding-top: 90px;
   max-width: 960px;
   margin: 0 auto;
-  padding-top: 100px;
 }
 
 .split-section {
   display: flex;
-  gap: 2rem;
   flex-wrap: wrap;
-  padding: 2rem 1rem;
+  gap: 2rem;
+  margin: 2rem 0;
+  background: #fff3e6;
+  padding: 2rem;
+  border-radius: 10px;
 }
 
 .split-section img {
   width: 100%;
   max-width: 400px;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
-.text-content {
+.split-section .text-content {
   flex: 1;
 }
 
 .content-section {
-  padding: 2rem 1rem;
+  padding: 2rem;
+  background: #fff3e6;
+  margin: 2rem 0;
+  border-radius: 10px;
 }
 
-/* 折叠内容 */
-.more-content {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.5s ease;
-}
-
-.more-content[hidden] {
-  display: block !important;
-  max-height: 0 !important;
-  overflow: hidden;
-}
-
-.more-content.show {
-  max-height: 800px;
-}
-
-/* 视频容器 */
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -149,28 +132,36 @@ h3 { font-size: 1.5rem; font-weight: 600; }
 
 .video-container iframe {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
 
-/* 轮播图 */
+.button-link {
+  background: #ff9f43;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
 .image-slider {
   position: relative;
   overflow: hidden;
-  max-width: 100%;
-  height: 280px;
-  border-radius: 10px;
-}
-
-.slider-images {
-  position: relative;
-  height: 100%;
+  height: 300px;
 }
 
 .slider-image {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -179,29 +170,23 @@ h3 { font-size: 1.5rem; font-weight: 600; }
 .slider-image.active {
   opacity: 1;
   position: relative;
-  z-index: 2;
-}
-
-.slider-controls {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  z-index: 3;
-  padding: 0 1rem;
 }
 
 .slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(255, 159, 67, 0.6);
   border: none;
   color: white;
   font-size: 2rem;
   cursor: pointer;
+  z-index: 10;
 }
 
-/* 指示器 */
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+
 .slider-indicators {
   text-align: center;
   margin-top: 1rem;
@@ -209,30 +194,29 @@ h3 { font-size: 1.5rem; font-weight: 600; }
 
 .slider-indicators .indicator {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: #ccc;
+  width: 12px;
+  height: 12px;
   margin: 0 5px;
+  background: #ccc;
   border-radius: 50%;
   cursor: pointer;
-  border: none;
 }
 
 .slider-indicators .indicator.active {
   background: #ff9f43;
 }
 
-/* 悬浮按钮 */
 #floating-ai-button {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #ff9f43;
-  color: white;
+  bottom: 30px;
+  right: 30px;
+  background-color: #ff9f43;
   border: none;
   border-radius: 50%;
   width: 60px;
   height: 60px;
+  color: white;
+  cursor: pointer;
   animation: pulse 2s infinite ease-in-out;
   box-shadow: 0 0 10px rgba(255, 126, 21, 0.6);
 }
@@ -243,44 +227,17 @@ h3 { font-size: 1.5rem; font-weight: 600; }
   100% { transform: scale(1); }
 }
 
-.button-link {
+.page-footer {
   background: #ff9f43;
   color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 1rem;
-}
-
-/* 居中体验按钮 */
-.experience-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* 页脚 */
-.page-footer {
   text-align: center;
   padding: 1.5rem;
-  background: #ff9f43;
-  color: white;
-  font-weight: 600;
+  font-weight: bold;
 }
 
-/* 响应式 */
 @media (max-width: 768px) {
-  .page-nav {
-    display: block;
-  }
   .page-nav ul {
-    flex-direction: column;
     display: none;
-    background: rgba(255, 159, 67, 0.95);
-    padding: 1rem;
-    border-radius: 8px;
   }
   .nav-list.open {
     display: flex;
