@@ -344,11 +344,22 @@ body {
   cursor: pointer;
   z-index: 10000;
   transition: background-color 0.3s ease;
+  animation: breath 2s infinite;
 }
 #floating-ai-button:hover,
 #floating-ai-button:focus {
   background-color: #ff7e15;
   outline: none;
+}
+@keyframes breath {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 22px rgba(255, 159, 67, 0.7);
+  }
 }
 /* ========== 新增：.split-section 样式 ========== */
 .split-section {
