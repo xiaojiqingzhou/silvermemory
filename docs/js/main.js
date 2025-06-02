@@ -9,28 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
     navMenu.classList.toggle('open');
   });
 
-  // 展开折叠“了解更多”
-  document.querySelectorAll('.btn-toggle-more').forEach(button => {
-    const targetId = button.getAttribute('aria-controls');
-    const target = document.getElementById(targetId);
-    button.addEventListener('click', () => {
-      const isOpen = target.classList.contains('show');
-      button.setAttribute('aria-expanded', !isOpen);
-      button.textContent = isOpen ? '了解更多' : '收起';
-      target.hidden = false;
-      target.classList.toggle('show');
+  document.querySelectorAll('.btn-toggle-more').forEach(btn => {
+    const targetId = btn.getAttribute('aria-controls');
+    const content = document.getElementById(targetId);
+    btn.addEventListener('click', () => {
+      const isOpen = content.classList.contains('show');
+      content.classList.toggle('show', !isOpen);
+      btn.setAttribute('aria-expanded', !isOpen);
+      btn.textContent = isOpen ? '了解更多' : '收起';
     });
   });
 
-  // 轮播图
   const slides = document.querySelectorAll('.slider-image');
   const indicators = document.querySelectorAll('.indicator');
+  const next = document.querySelector('.slider-btn.next');
+  const prev = document.querySelector('.slider-btn.prev');
   let current = 0;
   let interval;
 
   function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
       indicators[i].classList.toggle('active', i === index);
     });
     current = index;
@@ -40,44 +39,39 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide((current + 1) % slides.length);
   }
 
-  function prevSlide() {
+  function prevSlideFn() {
     showSlide((current - 1 + slides.length) % slides.length);
   }
 
-  document.querySelector('.slider-btn.next')?.addEventListener('click', () => {
+  next.addEventListener('click', () => {
     nextSlide();
-    resetAuto();
+    resetInterval();
   });
 
-  document.querySelector('.slider-btn.prev')?.addEventListener('click', () => {
-    prevSlide();
-    resetAuto();
+  prev.addEventListener('click', () => {
+    prevSlideFn();
+    resetInterval();
   });
 
-  indicators.forEach((btn, index) => {
+  indicators.forEach((btn, i) => {
     btn.addEventListener('click', () => {
-      showSlide(index);
-      resetAuto();
+      showSlide(i);
+      resetInterval();
     });
   });
 
-  function startAuto() {
+  function startInterval() {
     interval = setInterval(nextSlide, 5000);
   }
 
-  function stopAuto() {
+  function resetInterval() {
     clearInterval(interval);
+    startInterval();
   }
-
-  function resetAuto() {
-    stopAuto();
-    startAuto();
-  }
-
-  const slider = document.querySelector('.image-slider');
-  slider.addEventListener('mouseenter', stopAuto);
-  slider.addEventListener('mouseleave', startAuto);
 
   showSlide(0);
-  startAuto();
+  startInterval();
+
+  document.querySelector('.image-slider').addEventListener('mouseenter', () => clearInterval(interval));
+  document.querySelector('.image-slider').addEventListener('mouseleave', startInterval);
 });
