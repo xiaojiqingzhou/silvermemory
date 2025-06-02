@@ -92,30 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleContent(id, btn) {
   const content = document.getElementById(id);
   if (!content || !btn) return;
-  const isHidden = content.classList.contains('hidden');
+  const isHidden = content.hasAttribute('hidden');
   if (isHidden) {
-    content.classList.remove('hidden');
-    content.style.maxHeight = '0px';
-    requestAnimationFrame(() => {
-      content.style.transition = 'max-height 0.35s ease';
-      content.style.maxHeight = content.scrollHeight + 'px';
-    });
+    content.removeAttribute('hidden');
     btn.setAttribute('aria-expanded', 'true');
     btn.textContent = '收起';
   } else {
-    content.style.maxHeight = content.scrollHeight + 'px';
-    requestAnimationFrame(() => {
-      content.style.transition = 'max-height 0.35s ease';
-      content.style.maxHeight = '0';
-    });
+    content.setAttribute('hidden', '');
     btn.setAttribute('aria-expanded', 'false');
     btn.textContent = '了解更多';
-    const onTransitionEnd = () => {
-      content.classList.add('hidden');
-      content.style.maxHeight = '';
-      content.style.transition = '';
-      content.removeEventListener('transitionend', onTransitionEnd);
-    };
-    content.addEventListener('transitionend', onTransitionEnd);
   }
 }
