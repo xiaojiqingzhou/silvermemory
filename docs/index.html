@@ -53,51 +53,6 @@ body {
   user-select: none;
 }
 
-
-
-/* ========== 基础重置 ========== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  font-family: 'Noto Sans SC', sans-serif;
-  background-color: #fff8f0;
-  color: #5a4631;
-}
-
-body {
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ========== 页面整体布局 ========== */
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 159, 67, 0.9);
-  box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
-  z-index: 9999;
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  user-select: none;
-}
-
 .page-nav ul {
   list-style: none;
   display: flex;
@@ -211,11 +166,28 @@ body {
   box-shadow: 0 8px 20px rgba(255, 159, 67, 0.3);
 }
 
-.content-section h2 {
+/* 标题层次 */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #bf6e0a;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+h2 {
   font-size: 1.8rem;
   font-weight: 700;
   color: #bf6e0a;
   margin-bottom: 1rem;
+  user-select: none;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ff9f43;
+  margin-bottom: 0.5rem;
   user-select: none;
 }
 
@@ -482,440 +454,6 @@ body {
 
 /* 响应式：窄屏时堆叠 */
 @media (max-width: 768px) {
-  .page-header {
-    padding: 0.7rem 1rem;
-  }
-
-  .page-title {
-    font-size: 1.5rem;
-  }
-
-  .page-nav ul {
-    display: none; /* 移动端隐藏菜单，需JS控制显示 */
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  .page-main {
-    padding: 90px 1rem 2rem;
-    max-width: 100%;
-  }
-
-  .content-section {
-    padding: 1.5rem 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .split-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .split-section > div {
-    min-width: auto;
-    padding: 0 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .slider-btn {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .team-member img {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-.page-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.3rem;
-}
-
-.page-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
-}
-
-.page-nav a:hover,
-.page-nav a:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  outline: none;
-}
-
-.page-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.page-nav a:hover::after,
-.page-nav a:focus::after {
-  width: 100%;
-}
-
-/* 汉堡菜单 */
-.nav-toggle {
-  display: none; /* 默认隐藏，移动端显示 */
-  flex-direction: column;
-  justify-content: space-around;
-  width: 28px;
-  height: 24px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0;
-  position: relative;
-  z-index: 10001;
-}
-
-.nav-toggle .hamburger,
-.nav-toggle .hamburger::before,
-.nav-toggle .hamburger::after {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 3px;
-  background-color: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-toggle .hamburger::before {
-  position: absolute;
-  top: -8px;
-}
-
-.nav-toggle .hamburger::after {
-  position: absolute;
-  top: 8px;
-}
-
-/* 汉堡切换成X动画 */
-.nav-toggle.active .hamburger {
-  background-color: transparent;
-}
-
-.nav-toggle.active .hamburger::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.nav-toggle.active .hamburger::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
-
-/* ========== 主体内容 ========== */
-.page-main {
-  padding: 100px 1.5rem 3rem;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-/* 内容区块 */
-.content-section {
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  margin-bottom: 2rem;
-  padding: 1.8rem 2rem;
-  transition: box-shadow 0.3s ease;
-}
-
-.content-section:hover {
-  box-shadow: 0 8px 20px rgba(255, 159, 67, 0.3);
-}
-
-.content-section h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #bf6e0a;
-  margin-bottom: 1rem;
-  user-select: none;
-}
-
-.text-content p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #5a4631;
-  padding-left: 0.2rem;
-}
-
-/* 图片样式 */
-.section-image {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  display: block;
-  box-shadow: 0 4px 10px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-}
-
-/* ========== 视频容器 ========== */
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.2);
-  margin-bottom: 2rem;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-/* ========== 轮播图 ========== */
-.image-slider {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.15);
-  user-select: none;
-  margin-bottom: 2rem;
-  height: 300px; /* 固定高度防止跳动 */
-}
-
-.slider-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
-  border-radius: 10px;
-  object-fit: cover;
-  user-select: none;
-}
-
-.slider-image.active {
-  opacity: 1;
-  visibility: visible;
-  position: relative;
-}
-
-/* 轮播按钮 */
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  color: #fff;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  z-index: 10;
-}
-
-.slider-btn:hover,
-.slider-btn:focus {
-  background-color: #ff9f43;
-  outline: none;
-}
-
-.slider-btn.prev {
-  left: 15px;
-}
-
-.slider-btn.next {
-  right: 15px;
-}
-
-/* 轮播指示器 */
-.slider-indicators {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-  user-select: none;
-  z-index: 10;
-}
-
-.slider-indicators button {
-  background: rgba(255, 159, 67, 0.6);
-  border: 2px solid #ff9f43;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.slider-indicators button.active {
-  background-color: #ff9f43;
-}
-
-/* ========== 按钮链接样式（通用） ========== */
-.button-link {
-  display: inline-block;
-  background-color: #ff9f43;
-  color: #fff;
-  padding: 0.6rem 1.6rem;
-  font-weight: 600;
-  border-radius: 25px;
-  border: 2px solid #ff9f43;
-  text-decoration: none;
-  box-shadow: 0 6px 15px rgba(255, 159, 67, 0.35);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  cursor: pointer;
-  margin-top: 0.8rem;
-  line-height: 1.4;
-  /* 居中对齐，确保按钮在父容器居中 */
-  text-align: center;
-}
-
-/* 立即体验按钮容器，居中对齐 */
-.experience-section {
-  text-align: center;
-  padding: 2rem 0 3rem;
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-}
-
-/* 按钮悬浮及聚焦效果 */
-.button-link:hover,
-.button-link:focus {
-  background-color: #fff;
-  color: #ff9f43;
-  box-shadow: 0 8px 25px rgba(255, 159, 67, 0.5);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-/* ========== 卡片式团队成员 ========== */
-.team-member {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #fff8ed;
-  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.2);
-  transition: transform 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.team-member:hover {
-  transform: translateY(-5px);
-}
-
-.team-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 0.8rem;
-  object-fit: cover;
-  border: 3px solid #ff9f43;
-}
-
-.team-member h4 {
-  font-size: 1.2rem;
-  color: #bf6e0a;
-  margin-bottom: 0.3rem;
-}
-
-.team-member p {
-  font-size: 1rem;
-  color: #5a4631;
-}
-
-/* ========== 页脚 ========== */
-.page-footer {
-  background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
-  color: #fff;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  user-select: none;
-  font-weight: 600;
-  margin-top: 3rem;
-  border-radius: 12px 12px 0 0;
-}
-
-/* ========== 浮动 AI 按钮 ========== */
-#floating-ai-button {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #ff9f43;
-  border: none;
-  border-radius: 50%;
-  width: 65px;
-  height: 65px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
-  cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.3s ease;
-}
-
-#floating-ai-button:hover,
-#floating-ai-button:focus {
-  background-color: #ff7e15;
-  outline: none;
-}
-
-/* ========== 新增：.split-section 样式 ========== */
-.split-section {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, #ffefdb 0%, #fff3e6 100%);
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(255, 159, 67, 0.25);
-  align-items: center;
-  justify-content: center;
-}
-
-.split-section > div {
-  flex: 1 1 50%;
-  min-width: 300px;
-  padding: 0 1rem;
-}
-
-.split-section img,
-.split-section video {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.2);
-  object-fit: cover;
-  display: block;
-}
-
-/* 响应式：窄屏时堆叠 */
-@media (max-width: 768px)
-
- {
   .page-header {
     padding: 0.7rem 1rem;
   }
@@ -972,6 +510,8 @@ body {
 @media (max-width: 768px) {
   .page-nav ul.open {
     display: flex !important;
+    flex-direction: column; /* 竖屏展示 */
+    gap: 0.5rem; /* 间隔调整 */
   }
   .nav-toggle.active .hamburger {
     background-color: transparent;
@@ -985,7 +525,6 @@ body {
     top: 0;
   }
 }
-
 </style>
 </head>
 
@@ -1000,8 +539,8 @@ body {
 
       <nav id="primary-navigation" class="page-nav" role="navigation" aria-label="主导航">
         <ul class="nav-list" id="navMenu">
-          <li><a href="#origin">项目缘起</a></li>
-          <li><a href="#introduction">项目介绍</a></li>
+          <li><a href="#initial-intent">初心所系</a></li>
+          <li><a href="#memory-heritage">智忆传承</a></li>
           <li><a href="#demo">操作演示</a></li>
           <li><a href="#team">团队简介</a></li>
           <li><a href="#achievements">成果展示</a></li>
@@ -1012,34 +551,36 @@ body {
   </header>
 
   <main id="main" class="page-main" role="main">
-    <!-- 项目缘起 -->
-    <section id="origin" class="split-section" tabindex="-1" aria-labelledby="origin-title">
+    <!-- 初心所系 -->
+    <section id="initial-intent" class="split-section" tabindex="-1" aria-labelledby="initial-intent-title">
       <img src="images/project-start.jpg" alt="项目缘起图示" loading="lazy" />
       <div class="text-content">
-        <h2 id="origin-title">项目缘起</h2>
+        <h1 id="initial-intent-title">初心所系</h1>
+        <h2>项目缘起</h2>
         <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
-        <h3>目标人群</h3>
+        <h2>目标人群</h2>
         <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
 
-        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="origin-more" type="button">了解更多</button>
-        <div id="origin-more" class="more-content" hidden>
+        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="initial-intent-more" type="button">了解更多</button>
+        <div id="initial-intent-more" class="more-content" hidden>
           <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
           <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
         </div>
       </div>
     </section>
 
-    <!-- 项目介绍 -->
-    <section id="introduction" class="split-section" tabindex="-1" aria-labelledby="introduction-title">
+    <!-- 智忆传承 -->
+    <section id="memory-heritage" class="split-section" tabindex="-1" aria-labelledby="memory-heritage-title">
       <img src="images/advantage.jpg" alt="项目介绍图示" loading="lazy" />
       <div class="text-content">
-        <h2 id="introduction-title">项目介绍</h2>
+        <h1 id="memory-heritage-title">智忆传承</h1>
+        <h2>项目介绍</h2>
         <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
-        <h3>核心价值</h3>
+        <h2>核心价值</h2>
         <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
 
-        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="introduction-more" type="button">了解更多</button>
-        <div id="introduction-more" class="more-content" hidden>
+        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="memory-heritage-more" type="button">了解更多</button>
+        <div id="memory-heritage-more" class="more-content" hidden>
           <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
           <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
         </div>
@@ -1048,7 +589,7 @@ body {
 
     <!-- 操作演示 -->
     <section id="demo" class="content-section" tabindex="-1" aria-labelledby="demo-title">
-      <h2 id="demo-title">操作演示</h2>
+      <h1 id="demo-title">操作演示</h1>
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen loading="lazy" title="记忆小舟操作演示视频"></iframe>
       </div>
@@ -1056,15 +597,22 @@ body {
 
     <!-- 团队简介 -->
     <section id="team" class="content-section" tabindex="-1" aria-labelledby="team-title">
-      <h2 id="team-title">团队简介</h2>
-      <div class="text-content">
-        <p>项目团队由计算语言学、中国文学、口述历史研究专家领衔；多学科研究生团队组成，具备跨学科的合作背景与扎实的落地能力。</p>
+      <h1 id="team-title">团队简介</h1>
+      <div class="team-introduction">
+        <div>
+          <h2>指导教师</h2>
+          <p>项目团队由计算语言学、中国文学、口述历史研究专家领衔。</p>
+        </div>
+        <div>
+          <h2>团队成员</h2>
+          <p>多学科研究生团队组成，具备跨学科的合作背景与扎实的落地能力。</p>
+        </div>
       </div>
     </section>
 
     <!-- 成果展示 -->
     <section id="achievements" class="content-section" tabindex="-1" aria-labelledby="achievements-title">
-      <h2 id="achievements-title">成果展示</h2>
+      <h1 id="achievements-title">成果展示</h1>
       <div class="image-slider" aria-label="成果展示轮播图">
         <button class="slider-btn prev" aria-label="上一张图片">&#8249;</button>
         <button class="slider-btn next" aria-label="下一张图片">&#8250;</button>
@@ -1085,7 +633,7 @@ body {
 
     <!-- 使用说明 -->
     <section id="instructions" class="content-section" tabindex="-1" aria-labelledby="instructions-title">
-      <h2 id="instructions-title">使用说明</h2>
+      <h1 id="instructions-title">使用说明</h1>
       <div class="text-content">
         <p>点击右下角悬浮按钮体验智能对话。如遇异常，可直接访问备用入口：</p>
         <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank" rel="noopener noreferrer">立即体验</a>
