@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // 汉堡菜单展开/收起
   const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
+  const navMenu = document.getElementById('primary-navigation');
   if (navToggle && navMenu) {
     navMenu.style.overflow = 'hidden';
     navMenu.style.maxHeight = '0';
@@ -22,15 +23,47 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  // “了解更多”按钮交互逻辑
   const toggleButtons = document.querySelectorAll('.btn-toggle-more');
   toggleButtons.forEach((btn) => {
     const targetId = btn.getAttribute('aria-controls');
     btn.addEventListener('click', () => toggleContent(targetId, btn));
   });
+  function toggleContent(id, btn) {
+    const content = document.getElementById(id);
+    if (!content || !btn) return;
+    const isHidden = content.classList.contains('hidden');
+    if (isHidden) {
+      content.classList.remove('hidden');
+      content.style.maxHeight = '0px';
+      requestAnimationFrame(() => {
+        content.style.transition = 'max-height 0.35s ease';
+        content.style.maxHeight = content.scrollHeight + 'px';
+      });
+      btn.setAttribute('aria-expanded', 'true');
+      btn.textContent = '收起';
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        content.style.transition = 'max-height 0.35s ease';
+        content.style.maxHeight = '0';
+      });
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = '了解更多';
+      const onTransitionEnd = () => {
+        content.classList.add('hidden');
+        content.style.maxHeight = '';
+        content.style.transition = '';
+        content.removeEventListener('transitionend', onTransitionEnd);
+      };
+      content.addEventListener('transitionend', onTransitionEnd);
+    }
+  }
+  // 轮播图相关逻辑
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   const slides = document.querySelectorAll('.slider-image');
-  const indicators = document.querySelectorAll('.indicator');
+  const indicators = document.querySelectorAll('.slider-indicators button');
   let currentIndex = 0;
   let autoSlideInterval = null;
   const AUTO_SLIDE_DELAY = 5000;
@@ -88,34 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   updateSlides(0);
   startAutoSlide();
+  // 鼠标悬停暂停自动播放
+  const slider = document.querySelector('.image-slider');
+  slider.addEventListener('mouseenter', () => {
+    clearInterval(autoSlideInterval);
+  });
+  slider.addEventListener('mouseleave', () => {
+    startAutoSlide();
+  });
 });
-function toggleContent(id, btn) {
-  const content = document.getElementById(id);
-  if (!content || !btn) return;
-  const isHidden = content.classList.contains('hidden');
-  if (isHidden) {
-    content.classList.remove('hidden');
-    content.style.maxHeight = '0px';
-    requestAnimationFrame(() => {
-      content.style.transition = 'max-height 0.35s ease';
-      content.style.maxHeight = content.scrollHeight + 'px';
-    });
-    btn.setAttribute('aria-expanded', 'true');
-    btn.textContent = '收起';
-  } else {
-    content.style.maxHeight = content.scrollHeight + 'px';
-    requestAnimationFrame(() => {
-      content.style.transition = 'max-height 0.35s ease';
-      content.style.maxHeight = '0';
-    });
-    btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = '了解更多';
-    const onTransitionEnd = () => {
-      content.classList.add('hidden');
-      content.style.maxHeight = '';
-      content.style.transition = '';
-      content.removeEventListener('transitionend', onTransitionEnd);
-    };
-    content.addEventListener('transitionend', onTransitionEnd);
-  }
-}
