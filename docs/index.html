@@ -6,8 +6,171 @@
   <meta name="description" content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" />
   <meta name="keywords" content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" />
   <title>银发记忆工程</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      font-family: 'Noto Sans SC', sans-serif;
+      background-color: #fff8f0;
+      color: #5a4631;
+    }
+    body {
+      margin: 0;
+      line-height: 1.6;
+    }
+    .page-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 159, 67, 0.9);
+      box-shadow: 0 2px 6px rgba(255, 159, 67, 0.3);
+      z-index: 9999;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .page-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.3rem;
+      margin: 0;
+      padding: 0;
+    }
+    .page-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 28px;
+      height: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      position: relative;
+    }
+    .hamburger::before {
+      position: absolute;
+      top: -8px;
+    }
+    .hamburger::after {
+      position: absolute;
+      top: 8px;
+    }
+    @media (max-width: 768px) {
+      .page-nav ul {
+        display: none;
+        flex-direction: column;
+        background: rgba(255, 159, 67, 0.95);
+        position: absolute;
+        top: 60px;
+        right: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+      .page-nav ul.open {
+        display: flex;
+      }
+      .nav-toggle {
+        display: flex;
+      }
+    }
+    .page-main {
+      padding: 100px 1.5rem 3rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .split-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, #ffefdb 0%, #fff3e6 100%);
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+    .split-section img {
+      width: 100%;
+      border-radius: 12px;
+      max-width: 100%;
+    }
+    .text-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #bf6e0a;
+    }
+    .text-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5em;
+    }
+    .button-link {
+      display: inline-block;
+      background-color: #ff9f43;
+      color: #fff;
+      padding: 0.6rem 1.6rem;
+      font-weight: 600;
+      border-radius: 25px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 6px 15px rgba(255, 159, 67, 0.35);
+      cursor: pointer;
+    }
+    .page-footer {
+      background: linear-gradient(90deg, #ff9f43 0%, #ff7e15 100%);
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 3rem;
+      border-radius: 12px 12px 0 0;
+    }
+    #floating-ai-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #ff9f43;
+      border: none;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      box-shadow: 0 6px 18px rgba(255, 159, 67, 0.6);
+      cursor: pointer;
+      z-index: 10000;
+    }
+    .more-content {
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
   <header class="page-header" id="header" role="banner">
@@ -28,6 +191,7 @@
       </nav>
     </div>
   </header>
+
   <main id="main" class="page-main" role="main">
     <section id="origin" class="split-section" tabindex="-1" aria-labelledby="origin-title">
       <img src="images/project-start.jpg" alt="项目缘起图示" loading="lazy" />
@@ -37,74 +201,59 @@
         <h3>目标人群</h3>
         <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
         <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="origin-more" type="button">了解更多</button>
-        <div id="origin-more" class="more-content" hidden>
-          <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。</p>
-          <p>我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手，服务对象为60岁及以上的长者，及其家属、社区机构、养老中心等希望进行记忆采集的组织。</p>
+        <div id="origin-more" class="more-content hidden">
+          <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
+          <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
         </div>
-      </div>
-    </section>
-    <section id="introduction" class="split-section" tabindex="-1" aria-labelledby="introduction-title">
-      <img src="images/advantage.jpg" alt="项目介绍图示" loading="lazy" />
-      <div class="text-content">
-        <h2 id="introduction-title">项目介绍</h2>
-        <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
-        <h3>核心价值</h3>
-        <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-        <button class="button-link btn-toggle-more" aria-expanded="false" aria-controls="introduction-more" type="button">了解更多</button>
-        <div id="introduction-more" class="more-content" hidden>
-          <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，支持历史信息补全。</p>
-          <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。</p>
-        </div>
-      </div>
-    </section>
-    <section id="demo" class="content-section" tabindex="-1" aria-labelledby="demo-title">
-      <h2 id="demo-title">操作演示</h2>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen loading="lazy" title="记忆小舟操作演示视频"></iframe>
-      </div>
-    </section>
-    <section id="team" class="content-section" tabindex="-1" aria-labelledby="team-title">
-      <h2 id="team-title">团队简介</h2>
-      <div class="text-content">
-        <p>项目团队由计算语言学、中国文学、口述历史研究专家领衔；多学科研究生团队组成，具备跨学科的合作背景与扎实的落地能力。</p>
-      </div>
-    </section>
-    <section id="achievements" class="content-section" tabindex="-1" aria-labelledby="achievements-title">
-      <h2 id="achievements-title">成果展示</h2>
-      <div class="image-slider" aria-label="成果展示轮播图">
-        <div class="slider-images" role="region" aria-live="polite">
-          <img src="images/image1.jpg" alt="成果图一" loading="lazy" class="slider-image active" />
-          <img src="images/image2.jpg" alt="成果图二" loading="lazy" class="slider-image" />
-          <img src="images/image3.jpg" alt="成果图三" loading="lazy" class="slider-image" />
-        </div>
-        <div class="slider-controls">
-          <button class="slider-btn prev" aria-label="上一张图片">&#8249;</button>
-          <button class="slider-btn next" aria-label="下一张图片">&#8250;</button>
-        </div>
-        <div class="slider-indicators" role="tablist" aria-label="图片选择器">
-          <button class="indicator active" aria-selected="true"></button>
-          <button class="indicator" aria-selected="false"></button>
-          <button class="indicator" aria-selected="false"></button>
-        </div>
-      </div>
-    </section>
-    <section id="instructions" class="content-section" tabindex="-1" aria-labelledby="instructions-title">
-      <h2 id="instructions-title">使用说明</h2>
-      <div class="text-content experience-section">
-        <p>点击右下角悬浮按钮体验智能对话。如遇异常，可直接访问备用入口：</p>
-        <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="button-link" target="_blank">立即体验</a>
       </div>
     </section>
   </main>
+
   <button id="floating-ai-button" aria-label="打开智能聊天窗口" type="button">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24" height="24" aria-hidden="true">
       <path d="M2 3h20v18H2z" fill="none" />
       <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z" />
     </svg>
   </button>
+
   <footer class="page-footer" role="contentinfo">
     <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
   </footer>
-  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      navToggle?.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        navMenu.classList.toggle('open');
+        navToggle.classList.toggle('active');
+      });
+
+      const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+      toggleButtons.forEach((btn) => {
+        const targetId = btn.getAttribute('aria-controls');
+        const content = document.getElementById(targetId);
+
+        btn.addEventListener('click', () => {
+          const isHidden = content.classList.contains('hidden');
+
+          if (isHidden) {
+            content.classList.remove('hidden');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+            btn.textContent = '收起';
+          } else {
+            content.style.maxHeight = '0';
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = '了解更多';
+            setTimeout(() => content.classList.add('hidden'), 350);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
