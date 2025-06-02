@@ -2,82 +2,104 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
 
-  navToggle.addEventListener('click', () => {
-    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', !expanded);
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('open');
-  });
+  // 汉堡菜单切换动画与展开
+  if (navToggle && navMenu) {
+    navMenu.style.overflow = 'hidden';
+    navMenu.style.maxHeight = '0';
+    navMenu.style.transition = 'max-height 0.3s ease';
 
-  // 展开折叠“了解更多”
-  document.querySelectorAll('.btn-toggle-more').forEach(button => {
-    const targetId = button.getAttribute('aria-controls');
-    const target = document.getElementById(targetId);
-    button.addEventListener('click', () => {
-      const isOpen = target.classList.contains('show');
-      button.setAttribute('aria-expanded', !isOpen);
-      button.textContent = isOpen ? '了解更多' : '收起';
-      target.hidden = false;
-      target.classList.toggle('show');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', !expanded);
+      navToggle.classList.toggle('active');
+
+      if (!expanded) {
+        navMenu.classList.add('open');
+        navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+      } else {
+        navMenu.style.maxHeight = '0';
+        navMenu.addEventListener('transitionend', () => {
+          navMenu.classList.remove('open');
+        }, { once: true });
+      }
+    });
+  }
+
+  // 了解更多
+  document.querySelectorAll('.btn-toggle-more').forEach((btn) => {
+    const targetId = btn.getAttribute('aria-controls');
+    const content = document.getElementById(targetId);
+    if (!content) return;
+
+    content.style.maxHeight = '0';
+    content.classList.add('hidden');
+
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      if (!isExpanded) {
+        content.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          content.style.transition = 'max-height 0.4s ease';
+          content.style.maxHeight = content.scrollHeight + 'px';
+        });
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = '收起';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          content.style.maxHeight = '0';
+        });
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '了解更多';
+        content.addEventListener('transitionend', () => {
+          content.classList.add('hidden');
+        }, { once: true });
+      }
     });
   });
 
-  // 轮播图
+  // 轮播图逻辑
   const slides = document.querySelectorAll('.slider-image');
   const indicators = document.querySelectorAll('.indicator');
-  let current = 0;
-  let interval;
+  const prev = document.querySelector('.slider-btn.prev');
+  const next = document.querySelector('.slider-btn.next');
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
+  let current = 0;
+  let autoSlide;
+
+  function updateSlider(index) {
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
       indicators[i].classList.toggle('active', i === index);
+      indicators[i].setAttribute('aria-selected', i === index);
     });
     current = index;
   }
 
   function nextSlide() {
-    showSlide((current + 1) % slides.length);
+    updateSlider((current + 1) % slides.length);
   }
 
   function prevSlide() {
-    showSlide((current - 1 + slides.length) % slides.length);
+    updateSlider((current - 1 + slides.length) % slides.length);
   }
 
-  document.querySelector('.slider-btn.next')?.addEventListener('click', () => {
-    nextSlide();
-    resetAuto();
-  });
-
-  document.querySelector('.slider-btn.prev')?.addEventListener('click', () => {
-    prevSlide();
-    resetAuto();
-  });
-
-  indicators.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      showSlide(index);
-      resetAuto();
-    });
-  });
-
-  function startAuto() {
-    interval = setInterval(nextSlide, 5000);
+  function startSlider() {
+    autoSlide = setInterval(nextSlide, 5000);
   }
 
-  function stopAuto() {
-    clearInterval(interval);
+  function stopSlider() {
+    clearInterval(autoSlide);
   }
 
-  function resetAuto() {
-    stopAuto();
-    startAuto();
-  }
+  next?.addEventListener('click', () => { nextSlide(); stopSlider(); startSlider(); });
+  prev?.addEventListener('click', () => { prevSlide(); stopSlider(); startSlider(); });
+  indicators.forEach((btn, i) => btn.addEventListener('click', () => { updateSlider(i); stopSlider(); startSlider(); }));
 
-  const slider = document.querySelector('.image-slider');
-  slider.addEventListener('mouseenter', stopAuto);
-  slider.addEventListener('mouseleave', startAuto);
+  document.querySelector('.image-slider')?.addEventListener('mouseenter', stopSlider);
+  document.querySelector('.image-slider')?.addEventListener('mouseleave', startSlider);
 
-  showSlide(0);
-  startAuto();
+  updateSlider(0);
+  startSlider();
 });
