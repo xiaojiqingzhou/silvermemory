@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" name="description"/>
-    <meta content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" name="keywords"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" name="description" />
+    <meta content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" name="keywords" />
     <title>银发记忆工程</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         /* ========== 基础重置 ========== */
         * {
@@ -37,13 +38,19 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             z-index: 9999;
             padding: 0.8rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .page-header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         .page-title {
@@ -51,8 +58,10 @@
             font-weight: 700;
             color: #B45647;
             user-select: none;
+            letter-spacing: 0.05rem;
         }
 
+        /* ========== 导航菜单优化 ========== */
         .page-nav ul {
             list-style: none;
             display: flex;
@@ -60,13 +69,14 @@
         }
 
         .page-nav a {
-            color: #333; /* 修改为更鲜明的颜色 */
+            color: #C6653A;
             text-decoration: none;
             font-weight: 600;
             padding: 0.3rem 0.5rem;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
             position: relative;
+            letter-spacing: 0.05rem;
         }
 
         .page-nav a:hover,
@@ -92,42 +102,46 @@
             width: 100%;
         }
 
-        /* 汉堡菜单 */
+        /* 汉堡菜单优化 */
         .nav-toggle {
             display: none;
             flex-direction: column;
             justify-content: space-around;
-            width: 28px;
-            height: 24px;
+            width: 36px;
+            height: 36px;
             background: transparent;
             border: none;
             cursor: pointer;
+            padding: 0;
+            position: relative;
+            z-index: 10001;
         }
 
-        .hamburger, .hamburger::before, .hamburger::after {
+        .nav-toggle .hamburger,
+        .nav-toggle .hamburger::before,
+        .nav-toggle .hamburger::after {
             content: '';
             display: block;
+            width: 100%;
             height: 3px;
-            background-color: #333; /* 修改为更鲜明的颜色 */
-            border-radius: 2px;
+            background-color: #B45647;
+            border-radius: 3px;
             transition: all 0.4s ease;
-        }
-
-        .hamburger {
             position: relative;
-            width: 100%;
         }
 
-        .hamburger::before, .hamburger::after {
+        .nav-toggle .hamburger::before {
             position: absolute;
-            width: 100%;
+            top: -10px;
         }
 
-        .hamburger::before { top: -8px; }
-        .hamburger::after { top: 8px; }
+        .nav-toggle .hamburger::after {
+            position: absolute;
+            top: 10px;
+        }
 
         .nav-toggle.active .hamburger {
-            background: transparent;
+            background-color: transparent;
         }
 
         .nav-toggle.active .hamburger::before {
@@ -140,23 +154,50 @@
             top: 0;
         }
 
+        /* 移动端菜单优化 */
         .page-nav ul.open {
             display: flex !important;
             flex-direction: column;
-            background: rgba(198, 101, 58, 0.95);
-            padding: 1rem;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.5rem;
             position: absolute;
             left: 0;
             top: 60px;
-            width: 200px;
+            width: 240px;
             height: 100vh;
             border-radius: 0 8px 8px 0;
             animation: slideDown 0.4s ease forwards;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-nav ul.open li {
+            margin-bottom: 0.8rem;
+        }
+
+        .page-nav ul.open a {
+            color: #B45647;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .page-nav ul.open a:hover,
+        .page-nav ul.open a:focus {
+            background-color: #EACB9C;
+            transform: translateX(5px);
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @media (max-width: 768px) {
@@ -182,6 +223,11 @@
             border-radius: 15px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
             margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-wrapper:hover {
+            transform: translateY(-5px);
         }
 
         /* 标题层次 */
@@ -191,6 +237,20 @@
             color: #B45647;
             margin-bottom: 1rem;
             user-select: none;
+            text-align: center;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #C6653A;
+            border-radius: 3px;
         }
 
         h2 {
@@ -199,6 +259,18 @@
             color: #C6653A;
             margin-bottom: 1rem;
             user-select: none;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #C6653A;
+            border-radius: 2px;
         }
 
         h3 {
@@ -214,6 +286,7 @@
             line-height: 1.7;
             color: #6D7663;
             padding-left: 0.2rem;
+            margin-bottom: 1rem;
         }
 
         /* 图片样式 */
@@ -225,17 +298,27 @@
             display: block;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* ========== 视频容器 ========== */
+        .section-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* ========== 视频容器优化 ========== */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .video-container:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
         .video-container iframe {
@@ -248,15 +331,20 @@
             border-radius: 12px;
         }
 
-        /* ========== 轮播图 ========== */
+        /* ========== 轮播图优化 ========== */
         .image-slider {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             user-select: none;
             margin-bottom: 2rem;
-            height: 300px; /* 固定高度防止跳动 */
+            height: 380px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .image-slider:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
         .slider-image {
@@ -268,7 +356,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s ease;
-            border-radius: 10px;
+            border-radius: 15px;
             object-fit: cover;
             user-select: none;
         }
@@ -287,13 +375,14 @@
             background: rgba(255, 255, 255, 0.8);
             border: 2px solid #C6653A;
             color: #C6653A;
-            padding: 0.5rem 0.8rem;
+            padding: 0.6rem 1rem;
             cursor: pointer;
             border-radius: 50%;
             font-size: 1.5rem;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             user-select: none;
             z-index: 10;
+            opacity: 0.7;
         }
 
         .slider-btn:hover,
@@ -301,6 +390,8 @@
             background-color: #C6653A;
             color: #FFFFFF;
             outline: none;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .slider-btn.prev {
@@ -314,7 +405,7 @@
         /* 轮播指示器 */
         .slider-indicators {
             position: absolute;
-            bottom: 15px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
             user-select: none;
@@ -324,16 +415,18 @@
         .slider-indicators button {
             background: rgba(255, 255, 255, 0.8);
             border: 2px solid #C6653A;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            margin: 0 5px;
+            margin: 0 6px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .slider-indicators button.active {
             background-color: #C6653A;
+            transform: scale(1.2);
         }
 
         /* ========== 按钮链接样式（通用） ========== */
@@ -341,19 +434,19 @@
             display: inline-block;
             background-color: #C6653A;
             color: #FFFFFF;
-            padding: 0.6rem 1.6rem;
+            padding: 0.8rem 2rem;
             font-weight: 600;
-            border-radius: 25px;
+            font-size: 1.1rem;
+            border-radius: 30px;
             border: 2px solid #C6653A;
             text-decoration: none;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+            transition: all 0.3s ease;
             user-select: none;
             cursor: pointer;
-            margin-top: 0.8rem;
             line-height: 1.4;
-            /* 居中对齐，确保按钮在父容器居中 */
             text-align: center;
+            letter-spacing: 0.05rem;
         }
 
         /* 立即体验按钮容器，居中对齐 */
@@ -361,8 +454,8 @@
             text-align: center;
             padding: 2rem 0 3rem;
             display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
+            justify-content: center;
+            align-items: center;
         }
 
         /* 按钮悬浮及聚焦效果 */
@@ -370,37 +463,50 @@
         .button-link:focus {
             background-color: #FFFFFF;
             color: #C6653A;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
             outline: none;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        /* ========== 卡片式团队成员 ========== */
+        /* ========== 卡片式团队成员优化 ========== */
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
         .team-member {
             text-align: center;
-            padding: 1rem;
-            border-radius: 12px;
+            padding: 1.5rem;
+            border-radius: 15px;
             background-color: #FDFDFD;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
             margin-bottom: 1rem;
+            border: 1px solid #EACB9C;
         }
 
         .team-member:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .team-member img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             object-fit: cover;
-            border: 3px solid #C6653A;
+            border: 4px solid #C6653A;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
         }
 
         .team-member h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #B45647;
             margin-bottom: 0.3rem;
         }
@@ -408,6 +514,7 @@
         .team-member p {
             font-size: 1rem;
             color: #6D7663;
+            line-height: 1.5;
         }
 
         /* ========== 页脚 ========== */
@@ -420,6 +527,7 @@
             font-weight: 600;
             margin-top: 3rem;
             border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* ========== 浮动 AI 按钮 ========== */
@@ -430,18 +538,28 @@
             background-color: #C6653A;
             border: none;
             border-radius: 50%;
-            width: 65px;
-            height: 65px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            width: 70px;
+            height: 70px;
+            box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
             cursor: pointer;
             z-index: 10000;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #floating-ai-button:hover,
         #floating-ai-button:focus {
             background-color: #B45647;
             outline: none;
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+        }
+
+        #floating-ai-button svg {
+            width: 32px;
+            height: 32px;
         }
 
         /* ========== 新增：.split-section 样式 ========== */
@@ -469,6 +587,12 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .split-section img:hover,
+        .split-section video:hover {
+            transform: scale(1.02);
         }
 
         /* 响应式：窄屏时堆叠 */
@@ -482,7 +606,7 @@
             }
 
             .page-nav ul {
-                display: none; /* 移动端隐藏菜单，需JS控制显示 */
+                display: none;
             }
 
             .nav-toggle {
@@ -494,50 +618,57 @@
                 max-width: 100%;
             }
 
-            .content-section {
-                padding: 1.5rem 1.2rem;
-                margin-bottom: 1.5rem;
+            .section-wrapper {
+                padding: 1.5rem;
             }
 
             .split-section {
                 flex-direction: column;
                 padding: 1.5rem 1rem;
+                gap: 1.5rem;
             }
 
             .split-section > div {
                 min-width: auto;
-                padding: 0 0;
-                margin-bottom: 1.5rem;
+                padding: 0;
+                margin-bottom: 1rem;
+            }
+
+            .image-slider {
+                height: 250px;
             }
 
             .slider-btn {
                 font-size: 1.2rem;
-                padding: 0.4rem 0.6rem;
+                padding: 0.4rem 0.7rem;
+            }
+
+            .team-members {
+                grid-template-columns: 1fr;
+            }
+
+            .team-member {
+                padding: 1.2rem;
             }
 
             .team-member img {
-                width: 80px;
-                height: 80px;
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
             }
         }
 
-        /* ========== 补充：了解更多隐藏内容控制 ========== */
-        .more-content[hidden] {
-            display: none !important;
-        }
-
-        @media (max-width: 768px) {
-            .page-nav ul.open {
-                display: flex !important;
-                flex-direction: column; /* 竖屏展示 */
-                gap: 0.5rem; /* 间隔调整 */
-            }
-        }
-
-        /* 平滑展开/收起动画 */
+        /* ========== 了解更多内容动画 ========== */
         .more-content {
-            max-height: 0;
             overflow: hidden;
+            max-height: 0;
             opacity: 0;
             transition: max-height 0.5s ease, opacity 0.5s ease;
         }
@@ -554,17 +685,34 @@
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
             }
             70% {
-                box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+                box-shadow: 0 0 0 15px rgba(198, 101, 58, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .page-nav ul {
+                display: flex !important;
+                flex-direction: row;
+                position: static;
+                background: transparent;
+                height: auto;
+                padding: 0;
+                gap: 1.5rem;
+            }
+
+            .nav-toggle {
+                display: none !important;
             }
         }
     </style>
 </head>
+
 <body>
     <header class="page-header" id="header" role="banner">
         <div class="header-inner">
@@ -587,33 +735,44 @@
     <main class="page-main" id="main" role="main">
         <!-- 初心所系 -->
         <section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
-            <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg"/>
-            <div class="text-content">
-                <h1 id="initial-intent-title">初心所系</h1>
-                <h2>项目缘起</h2>
-                <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
-                <h2>目标人群</h2>
-                <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
-                <button aria-controls="initial-intent-more" aria-expanded="false" class="button-link btn-toggle-more" type="button">了解更多</button>
-                <div class="more-content" hidden="" id="initial-intent-more">
-                    <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
-                    <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集和整理的组织。</p>
+            <div class="split-section">
+                <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg" />
+                <div class="text-content">
+                    <h1 id="initial-intent-title">初心所系</h1>
+                    <h2>项目缘起</h2>
+                    <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
+                    <h2>目标人群</h2>
+                    <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
+                    <button aria-controls="initial-intent-more" aria-expanded="false" class="button-link btn-toggle-more"
+                        type="button">了解更多</button>
+                    <div class="more-content" id="initial-intent-more">
+                        <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，
+                            他们拥有宝贵的生命故事与人生智慧，但由于表达障碍、记录手段缺乏等原因，这些记忆常常无法被妥善保存。
+                            为回应这一真实需求，我们结合语音识别、自然语言处理与情感计算技术，打造出一款温柔可靠的AI语言助手。</p>
+                        <p>我们的服务对象为60岁及以上、具备基本表达能力的长者，及其家属、社区机构、养老中心等希望进行记忆采集
+                            和整理的组织。</p>
+                    </div>
                 </div>
             </div>
         </section>
         <!-- 智忆传承 -->
         <section aria-labelledby="memory-heritage-title" class="section-wrapper" id="memory-heritage" tabindex="-1">
-            <img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg"/>
-            <div class="text-content">
-                <h1 id="memory-heritage-title">智忆传承</h1>
-                <h2>项目介绍</h2>
-                <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
-                <h2>核心价值</h2>
-                <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-                <button aria-controls="memory-heritage-more" aria-expanded="false" class="button-link btn-toggle-more" type="button">了解更多</button>
-                <div class="more-content" hidden="" id="memory-heritage-more">
-                    <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
-                    <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，构建一个人人可述、人人被听见的温情平台。</p>
+            <div class="split-section">
+                <img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg" />
+                <div class="text-content">
+                    <h1 id="memory-heritage-title">智忆传承</h1>
+                    <h2>项目介绍</h2>
+                    <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
+                    <h2>核心价值</h2>
+                    <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
+                    <button aria-controls="memory-heritage-more" aria-expanded="false" class="button-link btn-toggle-more"
+                        type="button">了解更多</button>
+                    <div class="more-content" id="memory-heritage-more">
+                        <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成
+                            技术，可自动生成结构化的口述史档案，并支持历史信息补全，强化时代关联性。</p>
+                        <p>我们致力于通过AI激活、保存与传承记忆，推动“个体—家庭—国家”的历史叙事体系。技术为形，人民为本，
+                            构建一个人人可述、人人被听见的温情平台。</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -621,7 +780,8 @@
         <section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
             <h1 id="demo-title">操作演示</h1>
             <div class="video-container">
-                <iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
+                <iframe allowfullscreen="" frameborder="0" loading="lazy"
+                    src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
             </div>
         </section>
         <!-- 团队简介 -->
@@ -630,11 +790,58 @@
             <div class="team-introduction">
                 <div>
                     <h2>指导教师</h2>
-                    <p>项目团队由计算语言学、中国文学、口述历史研究专家领衔。</p>
+                    <div class="team-members">
+                        <div class="team-member">
+                            <img alt="指导教师1" src="images/teacher1.jpg" />
+                            <h4>某某某</h4>
+                            <p>计算语言学专家</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="指导教师2" src="images/teacher2.jpg" />
+                            <h4>某某某</h4>
+                            <p>中国文学专家</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="指导教师3" src="images/teacher3.jpg" />
+                            <h4>某某某</h4>
+                            <p>口述史研究专家</p>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <h2>团队成员</h2>
-                    <p>多学科研究生团队组成，具备跨学科的合作背景与扎实的落地能力。</p>
+                    <div class="team-members">
+                        <div class="team-member">
+                            <img alt="团队成员1" src="images/member1.jpg" />
+                            <h4>某某某</h4>
+                            <p>算法设计</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="团队成员2" src="images/member2.jpg" />
+                            <h4>某某某</h4>
+                            <p>产品设计</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="团队成员3" src="images/member3.jpg" />
+                            <h4>某某某</h4>
+                            <p>前端开发</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="团队成员4" src="images/member4.jpg" />
+                            <h4>某某某</h4>
+                            <p>后端开发</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="团队成员5" src="images/member5.jpg" />
+                            <h4>某某某</h4>
+                            <p>UI/UX设计</p>
+                        </div>
+                        <div class="team-member">
+                            <img alt="团队成员6" src="images/member6.jpg" />
+                            <h4>某某某</h4>
+                            <p>数据处理</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -645,14 +852,17 @@
                 <button aria-label="上一张图片" class="slider-btn prev">‹</button>
                 <button aria-label="下一张图片" class="slider-btn next">›</button>
                 <div aria-live="polite" class="slider-images" role="region">
-                    <img alt="成果图一" class="slider-image active" loading="lazy" src="images/image1.jpg"/>
-                    <img alt="成果图二" class="slider-image" loading="lazy" src="images/image2.jpg"/>
-                    <img alt="成果图三" class="slider-image" loading="lazy" src="images/image3.jpg"/>
+                    <img alt="成果图一" class="slider-image active" loading="lazy" src="images/image1.jpg" />
+                    <img alt="成果图二" class="slider-image" loading="lazy" src="images/image2.jpg" />
+                    <img alt="成果图三" class="slider-image" loading="lazy" src="images/image3.jpg" />
                 </div>
                 <div aria-label="图片选择器" class="slider-indicators" role="tablist">
-                    <button aria-controls="slide1" aria-selected="true" class="indicator active" id="indicator1" role="tab"></button>
-                    <button aria-controls="slide2" aria-selected="false" class="indicator" id="indicator2" role="tab"></button>
-                    <button aria-controls="slide3" aria-selected="false" class="indicator" id="indicator3" role="tab"></button>
+                    <button aria-controls="slide1" aria-selected="true" class="indicator active" id="indicator1"
+                        role="tab"></button>
+                    <button aria-controls="slide2" aria-selected="false" class="indicator" id="indicator2"
+                        role="tab"></button>
+                    <button aria-controls="slide3" aria-selected="false" class="indicator" id="indicator3"
+                        role="tab"></button>
                 </div>
             </div>
         </section>
@@ -661,112 +871,224 @@
             <h1 id="instructions-title">使用说明</h1>
             <div class="text-content">
                 <p>点击右下角悬浮按钮体验智能对话。如遇异常，可直接访问备用入口：</p>
-                <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
+                <div class="experience-section">
+                    <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true"
+                        rel="noopener noreferrer" target="_blank">立即体验</a>
+                </div>
             </div>
         </section>
     </main>
     <!-- 浮动智能聊天按钮 -->
     <button aria-label="打开智能聊天窗口" id="floating-ai-button" type="button">
-        <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 3h20v18H2z" fill="none"></path>
-            <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
-        </svg>
-    </button>
-    <footer class="page-footer" role="contentinfo">
-        <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-    </footer>
-    <!-- Coze 智能体 SDK -->
-    <script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
-    <!-- 修复交互问题的 JS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navToggle = document.getElementById('navToggle');
-            const navMenu = document.getElementById('navMenu');
-            navToggle.addEventListener('click', () => {
+        <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 3h20v18H2z" fill="none"></        <path d="M2 3h20v18H2z" fill="none"></path>
+        <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+    </svg>
+</button>
+<footer class="page-footer" role="contentinfo">
+    <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
+</footer>
+<!-- Coze 智能体 SDK -->
+<script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
+<script>
+
+
+                // 监听浮动按钮点击事件
+                document.getElementById('floating-ai-button').addEventListener('click', function() {
+                    sdk.openChatWindow();
+                });
+
+                // 可选：监听聊天窗口事件
+                sdk.on('message', function(message) {
+                    console.log('收到消息:', message);
+                });
+
+                sdk.on('open', function() {
+                    console.log('聊天窗口已打开');
+                });
+
+                sdk.on('close', function() {
+                    console.log('聊天窗口已关闭');
+                });
+
+                console.log('Coze AI SDK 初始化成功');
+            } else {
+                console.error('Coze AI SDK 加载失败');
+            }
+        };
+
+        // 检查 SDK 是否已经加载完成
+        if (typeof CozeChatAppSDK !== 'undefined') {
+            initCozeBot();
+        } else {
+            // 如果 SDK 还没加载完成，设置一个计时器等待
+            let maxAttempts = 10;
+            let attempt = 0;
+            const interval = setInterval(() => {
+                attempt++;
+                if (typeof CozeChatAppSDK !== 'undefined') {
+                    clearInterval(interval);
+                    initCozeBot();
+                } else if (attempt >= maxAttempts) {
+                    clearInterval(interval);
+                    console.error('Coze AI SDK 加载超时');
+                }
+            }, 1000);
+        }
+    });
+</script>
+<!-- 修复交互问题的 JS -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 初始化导航菜单
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        // 仅在窄屏时初始化菜单样式
+        if (window.innerWidth <= 768) {
+            navMenu.style.overflow = 'hidden';
+            navMenu.style.maxHeight = '0';
+            navMenu.style.transition = 'max-height 0.3s ease';
+        }
+
+        navToggle.addEventListener('click', () => {
+            // 仅在窄屏时处理菜单显示和隐藏
+            if (window.innerWidth <= 768) {
                 const expanded = navToggle.getAttribute('aria-expanded') === 'true';
                 navToggle.setAttribute('aria-expanded', !expanded);
-                navMenu.classList.toggle('open');
-            });
+                navToggle.classList.toggle('active');
 
-            const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-            toggleButtons.forEach((btn) => {
-                const targetId = btn.getAttribute('aria-controls');
-                btn.addEventListener('click', () => toggleContent(targetId, btn));
-            });
-
-            const prevBtn = document.querySelector('.slider-btn.prev');
-            const nextBtn = document.querySelector('.slider-btn.next');
-            const slides = document.querySelectorAll('.slider-image');
-            const indicators = document.querySelectorAll('.indicator');
-            let currentIndex = 0;
-            let autoPlayInterval;
-
-            function updateSlides(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                    indicators[i].classList.toggle('active', i === index);
-                    indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-                });
-                currentIndex = index;
-            }
-
-            function startAutoPlay() {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = setInterval(() => {
-                    let nextIndex = (currentIndex + 1) % slides.length;
-                    updateSlides(nextIndex);
-                }, 3000); // 每3秒自动切换
-            }
-
-            if (prevBtn && nextBtn && slides.length > 0) {
-                prevBtn.addEventListener('click', () => {
-                    let index = currentIndex - 1;
-                    if (index < 0) index = slides.length - 1;
-                    updateSlides(index);
-                });
-
-                nextBtn.addEventListener('click', () => {
-                    let index = currentIndex + 1;
-                    if (index >= slides.length) index = 0;
-                    updateSlides(index);
-                });
-
-                indicators.forEach((btn, i) => {
-                    btn.addEventListener('click', () => updateSlides(i));
-                });
-
-                slides.forEach(slide => {
-                    slide.addEventListener('mouseenter', () => {
-                        clearInterval(autoPlayInterval);
-                    });
-                    slide.addEventListener('mouseleave', startAutoPlay);
-                });
-
-                startAutoPlay();
+                if (!expanded) {
+                    navMenu.classList.add('open');
+                    navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+                } else {
+                    navMenu.style.maxHeight = '0';
+                    navMenu.addEventListener('transitionend', () => {
+                        if (!expanded) {
+                            navMenu.classList.remove('open');
+                        }
+                    }, { once: true });
+                }
             }
         });
 
-        function toggleContent(id, btn) {
-            const content = document.getElementById(id);
-            const isExpanded = content.classList.contains('expanded');
+        // 点击菜单项时关闭菜单
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navToggle.click();
+                }
+            });
+        });
 
-            if (!isExpanded) {
-                content.classList.add('expanded');
-                content.removeAttribute('hidden');
-                btn.setAttribute('aria-expanded', 'true');
-                btn.textContent = '收起';
-            } else {
-                content.classList.remove('expanded');
-                btn.setAttribute('aria-expanded', 'false');
-                btn.textContent = '了解更多';
-                // 设置延迟隐藏元素，等动画完成
-                setTimeout(() => {
-                    if (!content.classList.contains('expanded')) {
-                        content.setAttribute('hidden', '');
-                    }
-                }, 500);
+        // 初始化"了解更多"按钮
+        const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+        toggleButtons.forEach(btn => {
+            const targetId = btn.getAttribute('aria-controls');
+            const content = document.getElementById(targetId);
+            
+            // 默认隐藏内容
+            if (!content.classList.contains('expanded')) {
+                content.classList.add('hidden');
             }
+            
+            btn.addEventListener('click', () => {
+                content.classList.toggle('expanded');
+                content.classList.toggle('hidden');
+                
+                const isExpanded = content.classList.contains('expanded');
+                btn.setAttribute('aria-expanded', isExpanded);
+                btn.textContent = isExpanded ? '收起' : '了解更多';
+            });
+        });
+
+        // 轮播图功能
+        const prevBtn = document.querySelector('.slider-btn.prev');
+        const nextBtn = document.querySelector('.slider-btn.next');
+        const slides = document.querySelectorAll('.slider-image');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+        let autoPlayInterval;
+
+        function updateSlides(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                indicators[i].classList.toggle('active', i === index);
+                indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+            });
+            currentIndex = index;
         }
-    </script>
+
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                let nextIndex = (currentIndex + 1) % slides.length;
+                updateSlides(nextIndex);
+            }, 5000); // 每5秒自动切换
+        }
+
+        if (prevBtn && nextBtn && slides.length > 0) {
+            prevBtn.addEventListener('click', () => {
+                let index = currentIndex - 1;
+                if (index < 0) index = slides.length - 1;
+                updateSlides(index);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                let index = currentIndex + 1;
+                if (index >= slides.length) index = 0;
+                updateSlides(index);
+            });
+
+            indicators.forEach((btn, i) => {
+                btn.addEventListener('click', () => updateSlides(i));
+            });
+
+            slides.forEach(slide => {
+                slide.addEventListener('mouseenter', () => {
+                    clearInterval(autoPlayInterval);
+                });
+                slide.addEventListener('mouseleave', startAutoPlay);
+            });
+
+            startAutoPlay();
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // 考虑固定头部的高度
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 滚动时改变导航栏样式
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 初始化导航栏样式
+        if (window.scrollY > 50) {
+            document.getElementById('header').classList.add('scrolled');
+        }
+    });
+</script>
 </body>
+
 </html>
