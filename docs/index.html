@@ -155,16 +155,6 @@
         }
 
         /* 移动端菜单优化 */
-        .page-nav ul {
-            display: flex;
-            flex-direction: row;
-            position: static;
-            background: transparent;
-            height: auto;
-            padding: 0;
-            gap: 1.5rem;
-        }
-
         @media (max-width: 768px) {
             .page-nav ul {
                 display: none;
@@ -252,7 +242,7 @@
             position: relative;
         }
 
-        h1::after {
+        .h1::after {
             content: '';
             position: absolute;
             bottom: -8px;
@@ -273,7 +263,7 @@
             position: relative;
         }
 
-        h2::after {
+        .h2::after {
             content: '';
             position: absolute;
             bottom: -4px;
@@ -717,13 +707,13 @@
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 0 rgba(198, 101, 58, 0.4);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
             }
             70% {
-                box-shadow: 0 0 0 0 15px rgba(198, 101, 58, 0);
+                box-shadow: 0 0 0 15px rgba(198, 101, 58, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 0 rgba(198, 101, 58, 0);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
             }
         }
 
@@ -1006,23 +996,24 @@
                 const content = document.getElementById(targetId);
 
                 // 默认隐藏内容
-                if (!content.classList.contains('expanded')) {
-                    content.style.maxHeight = '0';
-                    content.style.opacity = '0';
-                }
+                content.classList.remove('expanded');
+                content.style.maxHeight = '0';
+                content.style.opacity = '0';
 
                 btn.addEventListener('click', () => {
                     const isExpanded = content.classList.contains('expanded');
                     if (isExpanded) {
+                        content.classList.remove('expanded');
                         content.style.maxHeight = '0';
                         content.style.opacity = '0';
+                        btn.textContent = '了解更多';
                     } else {
+                        content.classList.add('expanded');
                         content.style.maxHeight = content.scrollHeight + 'px';
                         content.style.opacity = '1';
+                        btn.textContent = '收起';
                     }
-                    content.classList.toggle('expanded');
                     btn.setAttribute('aria-expanded', !isExpanded);
-                    btn.textContent = isExpanded ? '收起' : '了解更多';
                 });
             });
 
