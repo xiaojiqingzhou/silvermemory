@@ -29,7 +29,7 @@
         body {
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            --moz-osx-font-smoothing: grayscale;
         }
 
         /* ========== 页面整体布局 ========== */
@@ -303,23 +303,6 @@
 
         .section-image:hover {
             transform: scale(1.02);
-        }
-
-        .section-image img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .section-image img.error {
-            display: none;
-        }
-
-        .section-image .placeholder {
-            display: none;
-        }
-
-        .section-image img.error + .placeholder {
-            display: block;
         }
 
         /* ========== 视频容器优化 ========== */
@@ -731,13 +714,13 @@
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
+                box-shadow: 0 0 0 0 0 rgba(198, 101, 58, 0.4);
             }
             70% {
-                box-shadow: 0 0 0 15px rgba(198, 101, 58, 0);
+                box-shadow: 0 0 0 0 15px rgba(198, 101, 58, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
+                box-shadow: 0 0 0 0 0 rgba(198, 101, 58, 0);
             }
         }
 
@@ -839,17 +822,17 @@
                     <div class="team-members">
                         <div class="team-member">
                             <img alt="指导教师1" src="images/teacher1.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>计算语言学专家</p>
                         </div>
                         <div class="team-member">
                             <img alt="指导教师2" src="images/teacher2.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>中国文学专家</p>
                         </div>
                         <div class="team-member">
                             <img alt="指导教师3" src="images/teacher3.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>口述史研究专家</p>
                         </div>
                     </div>
@@ -859,32 +842,32 @@
                     <div class="team-members">
                         <div class="team-member">
                             <img alt="团队成员1" src="images/member1.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>算法设计</p>
                         </div>
                         <div class="team-member">
                             <img alt="团队成员2" src="images/member2.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>产品设计</p>
                         </div>
                         <div class="team-member">
                             <img alt="团队成员3" src="images/member3.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>前端开发</p>
                         </div>
                         <div class="team-member">
                             <img alt="团队成员4" src="images/member4.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>后端开发</p>
                         </div>
                         <div class="team-member">
                             <img alt="团队成员5" src="images/member5.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>UI/UX设计</p>
                         </div>
                         <div class="team-member">
                             <img alt="团队成员6" src="images/member6.jpg" />
-                            <h4>某某某</h4>
+                            <h4>某某某某</h4>
                             <p>数据处理</p>
                         </div>
                     </div>
@@ -933,7 +916,7 @@
         </svg>
     </button>
     <footer class="page-footer" role="contentinfo">
-        <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
+        <p class="page-footer_-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
     </footer>
     <!-- Coze 智能体 SDK -->
     <script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
@@ -1050,7 +1033,7 @@
                     }
                     content.classList.toggle('expanded');
                     btn.setAttribute('aria-expanded', !isExpanded);
-                    btn.textContent = isExpanded ? '了解更多' : '收起';
+                    btn.textContent = isExpanded ? '收起' : '了解更多';
                 });
             });
 
@@ -1063,11 +1046,11 @@
             let autoPlayInterval;
 
             function updateSlides(index) {
-                slides.forEach((slide, i) => {
+                slides.forEach(((slide, i) => {
                     slide.classList.toggle('active', i === index);
                     indicators[i].classList.toggle('active', i === index);
                     indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-                });
+                }));
                 currentIndex = index;
             }
 
