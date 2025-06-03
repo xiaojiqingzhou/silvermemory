@@ -155,57 +155,68 @@
         }
 
         /* 移动端菜单优化 */
-        .page-nav ul.open {
-            display: flex !important;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.98);
-            padding: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: 60px;
-            width: 240px;
-            height: 100vh;
-            border-radius: 0 8px 8px 0;
-            animation: slideDown 0.4s ease forwards;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .page-nav ul.open li {
-            margin-bottom: 0.8rem;
-        }
-
-        .page-nav ul.open a {
-            color: #B45647;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            display: block;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .page-nav ul.open a:hover,
-        .page-nav ul.open a:focus {
-            background-color: #EACB9C;
-            transform: translateX(5px);
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .page-nav ul {
+            display: flex;
+            flex-direction: row;
+            position: static;
+            background: transparent;
+            height: auto;
+            padding: 0;
+            gap: 1.5rem;
         }
 
         @media (max-width: 768px) {
             .page-nav ul {
                 display: none;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1.5rem;
+                position: absolute;
+                left: 0;
+                top: 60px;
+                width: 240px;
+                height: 100vh;
+                border-radius: 0 8px 8px 0;
+                animation: slideDown 0.4s ease forwards;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             }
+
+            .page-nav ul.open {
+                display: flex;
+            }
+
+            .page-nav ul li {
+                margin-bottom: 0.8rem;
+            }
+
+            .page-nav ul a {
+                color: #B45647;
+                font-size: 1.1rem;
+                padding: 0.5rem 1rem;
+                display: block;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .page-nav ul a:hover,
+            .page-nav ul a:focus {
+                background-color: #EACB9C;
+                transform: translateX(5px);
+            }
+
             .nav-toggle {
                 display: flex;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
         }
 
@@ -606,14 +617,6 @@
                 font-size: 1.5rem;
             }
 
-            .page-nav ul {
-                display: none;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
             .page-main {
                 padding: 90px 1rem 2rem;
                 max-width: 100%;
@@ -921,83 +924,69 @@
     <!-- Coze 智能体 SDK -->
     <script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
     <script>
-        // 监听浮动按钮点击事件
-        document.getElementById('floating-ai-button').addEventListener('click', function () {
-            sdk.openChatWindow();
-        });
+        // 初始化 Coze AI SDK
+        function initCozeBot() {
+            try {
+                const sdk = new CozeChatAppSDK({
+                    botId: '7489440833709129747',
+                    showAgentAvatar: true,
+                    showUserAvatar: true,
+                    showWelcomeMessage: true
+                });
 
-        // 可选：监听聊天窗口事件
-        sdk.on('message', function (message) {
-            console.log('收到消息:', message);
-        });
+                // 监听浮动按钮点击事件
+                document.getElementById('floating-ai-button').addEventListener('click', function () {
+                    sdk.openChatWindow();
+                });
 
-        sdk.on('open', function () {
-            console.log('聊天窗口已打开');
-        });
+                // 可选：监听聊天窗口事件
+                sdk.on('message', function (message) {
+                    console.log('收到消息:', message);
+                });
 
-        sdk.on('close', function () {
-            console.log('聊天窗口已关闭');
-        });
+                sdk.on('open', function () {
+                    console.log('聊天窗口已打开');
+                });
 
-        console.log('Coze AI SDK 初始化成功');
-    } else {
-        console.error('Coze AI SDK 加载失败');
-    }
-    });
+                sdk.on('close', function () {
+                    console.log('聊天窗口已关闭');
+                });
 
-    // 检查 SDK 是否已经加载完成
-    if (typeof CozeChatAppSDK !== 'undefined') {
-        initCozeBot();
-    } else {
-        // 如果 SDK 还没加载完成，设置一个计时器等待
-        let maxAttempts = 10;
-        let attempt = 0;
-        const interval = setInterval(() => {
-            attempt++;
-            if (typeof CozeChatAppSDK !== 'undefined') {
-                clearInterval(interval);
-                initCozeBot();
-            } else if (attempt >= maxAttempts) {
-                clearInterval(interval);
-                console.error('Coze AI SDK 加载超时');
+                console.log('Coze AI SDK 初始化成功');
+            } catch (error) {
+                console.error('Coze AI SDK 加载失败', error);
             }
-        }, 1000);
-    }
-    });
-    </script>
-    <!-- 修复交互问题的 JS -->
-    <script>
+        }
+
+        // 检查 SDK 是否已经加载完成
+        if (typeof CozeChatAppSDK !== 'undefined') {
+            initCozeBot();
+        } else {
+            // 如果 SDK 还没加载完成，设置一个计时器等待
+            let maxAttempts = 10;
+            let attempt = 0;
+            const interval = setInterval(() => {
+                attempt++;
+                if (typeof CozeChatAppSDK !== 'undefined') {
+                    clearInterval(interval);
+                    initCozeBot();
+                } else if (attempt >= maxAttempts) {
+                    clearInterval(interval);
+                    console.error('Coze AI SDK 加载超时');
+                }
+            }, 1000);
+        }
+
+        // 初始化导航菜单
         document.addEventListener('DOMContentLoaded', () => {
-            // 初始化导航菜单
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
 
-            // 仅在窄屏时初始化菜单样式
-            if (window.innerWidth <= 768) {
-                navMenu.style.overflow = 'hidden';
-                navMenu.style.maxHeight = '0';
-                navMenu.style.transition = 'max-height 0.3s ease';
-            }
-
             navToggle.addEventListener('click', () => {
-                // 仅在窄屏时处理菜单显示和隐藏
-                if (window.innerWidth <= 768) {
-                    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                    navToggle.setAttribute('aria-expanded', !expanded);
-                    navToggle.classList.toggle('active');
-
-                    if (!expanded) {
-                        navMenu.classList.add('open');
-                        navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
-                    } else {
-                        navMenu.style.maxHeight = '0';
-                        navMenu.addEventListener('transitionend', () => {
-                            if (!expanded) {
-                                navMenu.classList.remove('open');
-                            }
-                        }, { once: true });
-                    }
-                }
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !expanded);
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('open');
             });
 
             // 点击菜单项时关闭菜单
