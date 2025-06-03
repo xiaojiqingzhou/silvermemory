@@ -107,11 +107,11 @@
             display: none;
             flex-direction: column;
             justify-content: space-around;
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 24px;
+            cursor: pointer;
             background: transparent;
             border: none;
-            cursor: pointer;
             padding: 0;
             position: relative;
             z-index: 10001;
@@ -122,22 +122,22 @@
         .nav-toggle .hamburger::after {
             content: '';
             display: block;
-            width: 100%;
+            width: 28px;
             height: 3px;
             background-color: #B45647;
-            border-radius: 3px;
-            transition: all 0.4s ease;
+            border-radius: 2px;
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-toggle .hamburger::before {
             position: absolute;
-            top: -10px;
+            top: -8px;
         }
 
         .nav-toggle .hamburger::after {
             position: absolute;
-            top: 10px;
+            top: 8px;
         }
 
         .nav-toggle.active .hamburger {
@@ -644,16 +644,16 @@
             }
 
             .team-members {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
 
             .team-member {
-                padding: 1.2rem;
+                padding: 1rem;
             }
 
             .team-member img {
-                width: 100px;
-                height: 100px;
+                width: 80px;
+                height: 80px;
             }
 
             h1 {
@@ -676,6 +676,34 @@
         .more-content.expanded {
             max-height: 1000px;
             opacity: 1;
+        }
+
+        .btn-toggle-more {
+            display: inline-block;
+            background-color: #C6653A;
+            color: #FFFFFF;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            border: 2px solid #C6653A;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+            transition: all 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+            line-height: 1.4;
+            text-align: center;
+            letter-spacing: 0.05rem;
+        }
+
+        .btn-toggle-more:hover,
+        .btn-toggle-more:focus {
+            background-color: #FFFFFF;
+            color: #C6653A;
+            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+            outline: none;
+            transform: translateY(-3px);
         }
 
         /* 呼吸动画按钮 */
@@ -743,7 +771,7 @@
                     <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
                     <h2>目标人群</h2>
                     <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
-                    <button aria-controls="initial-intent-more" aria-expanded="false" class="button-link btn-toggle-more"
+                    <button aria-controls="initial-intent-more" aria-expanded="false" class="btn-toggle-more"
                         type="button">了解更多</button>
                     <div class="more-content" id="initial-intent-more">
                         <p>“记忆小舟”源自我们对老年群体的长期田野调研。在与社区老人深度交流的过程中，我们发现，
@@ -765,7 +793,7 @@
                     <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
                     <h2>核心价值</h2>
                     <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-                    <button aria-controls="memory-heritage-more" aria-expanded="false" class="button-link btn-toggle-more"
+                    <button aria-controls="memory-heritage-more" aria-expanded="false" class="btn-toggle-more"
                         type="button">了解更多</button>
                     <div class="more-content" id="memory-heritage-more">
                         <p>“记忆小舟”是一款专为老年人设计的语言 AI 产品，系统融合语音识别、方言理解、情感识别与自然语言生成
@@ -882,213 +910,217 @@
     <button aria-label="打开智能聊天窗口" id="floating-ai-button" type="button">
         <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 3h20v18H2z" fill="none"></        <path d="M2 3h20v18H2z" fill="none"></path>
-        <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
-    </svg>
-</button>
-<footer class="page-footer" role="contentinfo">
-    <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-</footer>
-<!-- Coze 智能体 SDK -->
-<script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
-<script>
+            <path d="M2 3h20v18H2z" fill="none"></path>
+            <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+        </svg>
+    </button>
+    <footer class="page-footer" role="contentinfo">
+        <p class="page-footer__text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
+    </footer>
+    <!-- Coze 智能体 SDK -->
+    <script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
+    <script>
+        // 监听浮动按钮点击事件
+        document.getElementById('floating-ai-button').addEventListener('click', function () {
+            sdk.openChatWindow();
+        });
 
+        // 可选：监听聊天窗口事件
+        sdk.on('message', function (message) {
+            console.log('收到消息:', message);
+        });
 
-                // 监听浮动按钮点击事件
-                document.getElementById('floating-ai-button').addEventListener('click', function() {
-                    sdk.openChatWindow();
-                });
+        sdk.on('open', function () {
+            console.log('聊天窗口已打开');
+        });
 
-                // 可选：监听聊天窗口事件
-                sdk.on('message', function(message) {
-                    console.log('收到消息:', message);
-                });
+        sdk.on('close', function () {
+            console.log('聊天窗口已关闭');
+        });
 
-                sdk.on('open', function() {
-                    console.log('聊天窗口已打开');
-                });
-
-                sdk.on('close', function() {
-                    console.log('聊天窗口已关闭');
-                });
-
-                console.log('Coze AI SDK 初始化成功');
-            } else {
-                console.error('Coze AI SDK 加载失败');
-            }
-        };
-
-        // 检查 SDK 是否已经加载完成
-        if (typeof CozeChatAppSDK !== 'undefined') {
-            initCozeBot();
-        } else {
-            // 如果 SDK 还没加载完成，设置一个计时器等待
-            let maxAttempts = 10;
-            let attempt = 0;
-            const interval = setInterval(() => {
-                attempt++;
-                if (typeof CozeChatAppSDK !== 'undefined') {
-                    clearInterval(interval);
-                    initCozeBot();
-                } else if (attempt >= maxAttempts) {
-                    clearInterval(interval);
-                    console.error('Coze AI SDK 加载超时');
-                }
-            }, 1000);
-        }
+        console.log('Coze AI SDK 初始化成功');
+    } else {
+        console.error('Coze AI SDK 加载失败');
+    }
     });
-</script>
-<!-- 修复交互问题的 JS -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // 初始化导航菜单
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        // 仅在窄屏时初始化菜单样式
-        if (window.innerWidth <= 768) {
-            navMenu.style.overflow = 'hidden';
-            navMenu.style.maxHeight = '0';
-            navMenu.style.transition = 'max-height 0.3s ease';
-        }
 
-        navToggle.addEventListener('click', () => {
-            // 仅在窄屏时处理菜单显示和隐藏
+    // 检查 SDK 是否已经加载完成
+    if (typeof CozeChatAppSDK !== 'undefined') {
+        initCozeBot();
+    } else {
+        // 如果 SDK 还没加载完成，设置一个计时器等待
+        let maxAttempts = 10;
+        let attempt = 0;
+        const interval = setInterval(() => {
+            attempt++;
+            if (typeof CozeChatAppSDK !== 'undefined') {
+                clearInterval(interval);
+                initCozeBot();
+            } else if (attempt >= maxAttempts) {
+                clearInterval(interval);
+                console.error('Coze AI SDK 加载超时');
+            }
+        }, 1000);
+    }
+    });
+    </script>
+    <!-- 修复交互问题的 JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化导航菜单
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            // 仅在窄屏时初始化菜单样式
             if (window.innerWidth <= 768) {
-                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', !expanded);
-                navToggle.classList.toggle('active');
-
-                if (!expanded) {
-                    navMenu.classList.add('open');
-                    navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
-                } else {
-                    navMenu.style.maxHeight = '0';
-                    navMenu.addEventListener('transitionend', () => {
-                        if (!expanded) {
-                            navMenu.classList.remove('open');
-                        }
-                    }, { once: true });
-                }
+                navMenu.style.overflow = 'hidden';
+                navMenu.style.maxHeight = '0';
+                navMenu.style.transition = 'max-height 0.3s ease';
             }
-        });
 
-        // 点击菜单项时关闭菜单
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            navToggle.addEventListener('click', () => {
+                // 仅在窄屏时处理菜单显示和隐藏
                 if (window.innerWidth <= 768) {
-                    navToggle.click();
+                    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !expanded);
+                    navToggle.classList.toggle('active');
+
+                    if (!expanded) {
+                        navMenu.classList.add('open');
+                        navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+                    } else {
+                        navMenu.style.maxHeight = '0';
+                        navMenu.addEventListener('transitionend', () => {
+                            if (!expanded) {
+                                navMenu.classList.remove('open');
+                            }
+                        }, { once: true });
+                    }
                 }
             });
-        });
 
-        // 初始化"了解更多"按钮
-        const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-        toggleButtons.forEach(btn => {
-            const targetId = btn.getAttribute('aria-controls');
-            const content = document.getElementById(targetId);
-            
-            // 默认隐藏内容
-            if (!content.classList.contains('expanded')) {
-                content.classList.add('hidden');
-            }
-            
-            btn.addEventListener('click', () => {
-                content.classList.toggle('expanded');
-                content.classList.toggle('hidden');
-                
-                const isExpanded = content.classList.contains('expanded');
-                btn.setAttribute('aria-expanded', isExpanded);
-                btn.textContent = isExpanded ? '收起' : '了解更多';
-            });
-        });
-
-        // 轮播图功能
-        const prevBtn = document.querySelector('.slider-btn.prev');
-        const nextBtn = document.querySelector('.slider-btn.next');
-        const slides = document.querySelectorAll('.slider-image');
-        const indicators = document.querySelectorAll('.indicator');
-        let currentIndex = 0;
-        let autoPlayInterval;
-
-        function updateSlides(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-                indicators[i].classList.toggle('active', i === index);
-                indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-            });
-            currentIndex = index;
-        }
-
-        function startAutoPlay() {
-            clearInterval(autoPlayInterval);
-            autoPlayInterval = setInterval(() => {
-                let nextIndex = (currentIndex + 1) % slides.length;
-                updateSlides(nextIndex);
-            }, 5000); // 每5秒自动切换
-        }
-
-        if (prevBtn && nextBtn && slides.length > 0) {
-            prevBtn.addEventListener('click', () => {
-                let index = currentIndex - 1;
-                if (index < 0) index = slides.length - 1;
-                updateSlides(index);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                let index = currentIndex + 1;
-                if (index >= slides.length) index = 0;
-                updateSlides(index);
-            });
-
-            indicators.forEach((btn, i) => {
-                btn.addEventListener('click', () => updateSlides(i));
-            });
-
-            slides.forEach(slide => {
-                slide.addEventListener('mouseenter', () => {
-                    clearInterval(autoPlayInterval);
+            // 点击菜单项时关闭菜单
+            const navLinks = navMenu.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navToggle.click();
+                    }
                 });
-                slide.addEventListener('mouseleave', startAutoPlay);
             });
 
-            startAutoPlay();
-        }
+            // 初始化"了解更多"按钮
+            const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+            toggleButtons.forEach(btn => {
+                const targetId = btn.getAttribute('aria-controls');
+                const content = document.getElementById(targetId);
 
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // 考虑固定头部的高度
-                        behavior: 'smooth'
+                // 默认隐藏内容
+                if (!content.classList.contains('expanded')) {
+                    content.style.maxHeight = '0';
+                    content.style.opacity = '0';
+                }
+
+                btn.addEventListener('click', () => {
+                    const isExpanded = content.classList.contains('expanded');
+                    if (isExpanded) {
+                        content.style.maxHeight = '0';
+                        content.style.opacity = '0';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.opacity = '1';
+                    }
+                    content.classList.toggle('expanded');
+                    btn.setAttribute('aria-expanded', !isExpanded);
+                    btn.textContent = isExpanded ? '了解更多' : '收起';
+                });
+            });
+
+            // 轮播图功能
+            const prevBtn = document.querySelector('.slider-btn.prev');
+            const nextBtn = document.querySelector('.slider-btn.next');
+            const slides = document.querySelectorAll('.slider-image');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentIndex = 0;
+            let autoPlayInterval;
+
+            function updateSlides(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                    indicators[i].classList.toggle('active', i === index);
+                    indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+                });
+                currentIndex = index;
+            }
+
+            function startAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(() => {
+                    let nextIndex = (currentIndex + 1) % slides.length;
+                    updateSlides(nextIndex);
+                }, 5000); // 每5秒自动切换
+            }
+
+            if (prevBtn && nextBtn && slides.length > 0) {
+                prevBtn.addEventListener('click', () => {
+                    let index = currentIndex - 1;
+                    if (index < 0) index = slides.length - 1;
+                    updateSlides(index);
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    let index = currentIndex + 1;
+                    if (index >= slides.length) index = 0;
+                    updateSlides(index);
+                });
+
+                indicators.forEach((btn, i) => {
+                    btn.addEventListener('click', () => updateSlides(i));
+                });
+
+                slides.forEach(slide => {
+                    slide.addEventListener('mouseenter', () => {
+                        clearInterval(autoPlayInterval);
                     });
+                    slide.addEventListener('mouseleave', startAutoPlay);
+                });
+
+                startAutoPlay();
+            }
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // 考虑固定头部的高度
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 滚动时改变导航栏样式
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
                 }
             });
-        });
 
-        // 滚动时改变导航栏样式
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
+            // 初始化导航栏样式
             if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+                document.getElementById('header').classList.add('scrolled');
             }
         });
-
-        // 初始化导航栏样式
-        if (window.scrollY > 50) {
-            document.getElementById('header').classList.add('scrolled');
-        }
-    });
-</script>
+    </script>
 </body>
 
 </html>
