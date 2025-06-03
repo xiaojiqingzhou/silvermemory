@@ -305,6 +305,23 @@
             transform: scale(1.02);
         }
 
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .section-image img.error {
+            display: none;
+        }
+
+        .section-image .placeholder {
+            display: none;
+        }
+
+        .section-image img.error + .placeholder {
+            display: block;
+        }
+
         /* ========== 视频容器优化 ========== */
         .video-container {
             position: relative;
@@ -564,7 +581,8 @@
 
         /* ========== 新增：.split-section 样式 ========== */
         .split-section {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
             padding: 2rem 1.5rem;
             background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
@@ -623,7 +641,7 @@
             }
 
             .split-section {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 padding: 1.5rem 1rem;
                 gap: 1.5rem;
             }
@@ -764,7 +782,6 @@
         <!-- 初心所系 -->
         <section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
             <div class="split-section">
-                <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg" />
                 <div class="text-content">
                     <h1 id="initial-intent-title">初心所系</h1>
                     <h2>项目缘起</h2>
@@ -781,6 +798,7 @@
                             和整理的组织。</p>
                     </div>
                 </div>
+                <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg" />
             </div>
         </section>
         <!-- 智忆传承 -->
