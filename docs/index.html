@@ -732,6 +732,41 @@
                 display: none !important;
             }
         }
+
+        /* 增加分条文本美化 */
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #C6653A;
+            font-size: 1.2rem;
+        }
+
+        ul ul {
+            padding-left: 20px;
+        }
+
+        ul ul li {
+            margin-bottom: 0.2rem;
+        }
+
+        ul ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #C6653A;
+            font-size: 1rem;
+        }
     </style>
 </head>
 
@@ -747,9 +782,9 @@
                     <li><a href="#initial-intent">初心所系</a></li>
                     <li><a href="#memory-heritage">智忆传承</a></li>
                     <li><a href="#demo">操作演示</a></li>
-                    <li><a href="#team">团队简介</a></li>
+                    <li><a href="#team">专业护航</a></li>
                     <li><a href="#achievements">成果展示</a></li>
-                    <li><a href="#instructions">使用说明</a></li>
+                    <li><a href="#join-us">立即体验</a></li>
                 </ul>
             </nav>
         </div>
@@ -769,22 +804,23 @@
                     <div class="more-content" id="initial-intent-more">
                         <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
                         <ul>
-                        <li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
-                        <li>同行伙伴：
-                            <ul>
-                                <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
-                                <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
-                                <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
-                            </ul>
-                        </li>
-                        <li>特别场景：
-                            <ul>
-                                <li>多代同堂家庭的「跨代记忆对话」</li>
-                                <li>地方文化机构的「方言口述史工程」</li>
-                                <li>养老社区的「长者生命故事集」</li>
-                            </ul>
-                        </li>
-                    </ul>
+                            <li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
+                            <li>同行伙伴：
+                                <ul>
+                                    <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
+                                    <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
+                                    <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
+                                </ul>
+                            </li>
+                            <li>特别场景：
+                                <ul>
+                                    <li>多代同堂家庭的「跨代记忆对话」</li>
+                                    <li>地方文化机构的「方言口述史工程」</li>
+                                    <li>养老社区的「长者生命故事集」</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg" />
             </div>
@@ -803,31 +839,32 @@
                         type="button">了解更多</button>
                     <div class="more-content" id="memory-heritage-more">
                         <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存：</p>
-                    <ul>
-                        <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
-                        <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
-                        <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
-                    </ul>
                         <ul>
-                        <li>对长者：
-                            <ul>
-                                <li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
-                                <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
-                            </ul>
-                        </li>
-                        <li>对家庭：
-                            <ul>
-                                <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
-                                <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
-                            </ul>
-                        </li>
-                        <li>对社会：
-                            <ul>
-                                <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
-                                <li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
-                            </ul>
-                        </li>
-                    </ul>
+                            <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
+                            <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
+                            <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
+                        </ul>
+                        <ul>
+                            <li>对长者：
+                                <ul>
+                                    <li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
+                                    <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
+                                </ul>
+                            </li>
+                            <li>对家庭：
+                                <ul>
+                                    <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
+                                    <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
+                                </ul>
+                            </li>
+                            <li>对社会：
+                                <ul>
+                                    <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
+                                    <li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -839,9 +876,9 @@
                     src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
             </div>
         </section>
-        <!-- 团队简介 -->
+        <!-- 专业护航 -->
         <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
-            <h1 id="team-title">团队简介</h1>
+            <h1 id="team-title">专业护航</h1>
             <div class="team-introduction">
                 <div>
                     <h2>指导教师</h2>
@@ -921,15 +958,15 @@
                 </div>
             </div>
         </section>
-         <!-- 加入记忆守护计划 -->
+        <!-- 加入记忆守护计划 -->
         <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
             <h1 id="join-us-title">加入记忆守护计划</h1>
             <div class="text-content">
                 <p>即刻行动：</p>
                 <ul>
                     <li>家庭用户：免费试用，为长辈制作专属记忆档案</li>
-                    <li>机构合作：申请「记忆方舟」公益项目，获取技术支持</li>
-                    <li>志愿者招募：欢迎技术、传媒、及相关背景的伙伴加入</li>
+                    <li>机构合作：申请「记忆方舟」公益项目，获取技术支持与补贴</li>
+                    <li>志愿者招募：欢迎技术、传媒、社会学背景的伙伴加入</li>
                 </ul>
                 <div class="experience-section">
                     <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true"
@@ -937,14 +974,14 @@
                 </div>
             </div>
         </section>
-    <!-- 浮动智能聊天按钮 -->
-    <button aria-label="打开智能聊天窗口" id="floating-ai-button" type="button">
-        <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 3h20v18H2z" fill="none"></path>
-            <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
-        </svg>
-    </button>
+        <!-- 浮动智能聊天按钮 -->
+        <button aria-label="打开智能聊天窗口" id="floating-ai-button" type="button">
+            <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 3h20v18H2z" fill="none"></path>
+                <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+            </svg>
+        </button>
     <footer class="page-footer" role="contentinfo">
         <p class="page-footer_-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
     </footer>
