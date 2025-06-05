@@ -518,6 +518,26 @@
             line-height: 1.5;
         }
 
+        /* 窄屏模式下团队成员模块的缩放调整 */
+        @media (max-width: 768px) {
+            .team-member {
+                padding: 1rem;
+            }
+
+            .team-member img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .team-member h4 {
+                font-size: 1.1rem;
+            }
+
+            .team-member p {
+                font-size: 0.9rem;
+            }
+        }
+
         /* ========== 页脚 ========== */
         .page-footer {
             background: linear-gradient(90deg, #C6653A 0%, #B45647 100%);
@@ -554,6 +574,7 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .floating-icon:hover,
@@ -567,6 +588,19 @@
         .floating-icon svg {
             width: 24px;
             height: 24px;
+        }
+
+        .floating-icon span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
         }
 
         /* ========== 弹窗样式 ========== */
@@ -1037,6 +1071,7 @@
                     <path d="M2 3h20v18H2z" fill="none"></path>
                     <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
                 </svg>
+                <span>立即体验</span>
             </button>
             <button aria-label="信箱投稿" class="floating-icon submit-button" type="button">
                 <svg aria-hidden="true" fill="#fff" height="24" viewBox="0 0 24 24" width="24"
@@ -1044,6 +1079,7 @@
                     <path d="M2 3h20v18H2z" fill="none"></path>
                     <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
                 </svg>
+                <span>欢迎投稿</span>
             </button>
         </div>
         <!-- 投稿弹窗 -->
