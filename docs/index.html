@@ -29,7 +29,7 @@
         body {
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            --moz-osx-font-smoothing: grayscale;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ========== 页面整体布局 ========== */
@@ -242,7 +242,7 @@
             position: relative;
         }
 
-        .h1::after {
+        h1::after {
             content: '';
             position: absolute;
             bottom: -8px;
@@ -263,7 +263,7 @@
             position: relative;
         }
 
-        .h2::after {
+        h2::after {
             content: '';
             position: absolute;
             bottom: -4px;
@@ -548,6 +548,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: pulse 2s infinite;
         }
 
         #floating-ai-button:hover,
@@ -701,10 +702,6 @@
         }
 
         /* 呼吸动画按钮 */
-        #floating-ai-button {
-            animation: pulse 2s infinite;
-        }
-
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
@@ -872,6 +869,7 @@
         <section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
             <h1 id="demo-title">操作演示</h1>
             <div class="video-container">
+                <!-- 这里替换为实际的视频ID -->
                 <iframe allowfullscreen="" frameborder="0" loading="lazy"
                     src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
             </div>
@@ -982,6 +980,7 @@
                 <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
             </svg>
         </button>
+    </main>
     <footer class="page-footer" role="contentinfo">
         <p class="page-footer_-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
     </footer>
@@ -1053,114 +1052,7 @@
                 navMenu.classList.toggle('open');
             });
 
-            // 点击菜单项时关闭菜单
-            const navLinks = navMenu.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        navToggle.click();
-                    }
-                });
-            });
-
-            // 初始化"了解更多"按钮
-            const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-            toggleButtons.forEach(btn => {
-                const targetId = btn.getAttribute('aria-controls');
-                const content = document.getElementById(targetId);
-
-                // 默认隐藏内容
-                content.classList.remove('expanded');
-                content.style.maxHeight = '0';
-                content.style.opacity = '0';
-
-                btn.addEventListener('click', () => {
-                    const isExpanded = content.classList.contains('expanded');
-                    if (isExpanded) {
-                        content.classList.remove('expanded');
-                        content.style.maxHeight = '0';
-                        content.style.opacity = '0';
-                        btn.textContent = '了解更多';
-                    } else {
-                        content.classList.add('expanded');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        content.style.opacity = '1';
-                        btn.textContent = '收起';
-                    }
-                    btn.setAttribute('aria-expanded', !isExpanded);
-                });
-            });
-
-            // 轮播图功能
-            const prevBtn = document.querySelector('.slider-btn.prev');
-            const nextBtn = document.querySelector('.slider-btn.next');
-            const slides = document.querySelectorAll('.slider-image');
-            const indicators = document.querySelectorAll('.indicator');
-            let currentIndex = 0;
-            let autoPlayInterval;
-
-            function updateSlides(index) {
-                slides.forEach(((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                    indicators[i].classList.toggle('active', i === index);
-                    indicators[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
-                }));
-                currentIndex = index;
-            }
-
-            function startAutoPlay() {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = setInterval(() => {
-                    let nextIndex = (currentIndex + 1) % slides.length;
-                    updateSlides(nextIndex);
-                }, 5000); // 每5秒自动切换
-            }
-
-            if (prevBtn && nextBtn && slides.length > 0) {
-                prevBtn.addEventListener('click', () => {
-                    let index = currentIndex - 1;
-                    if (index < 0) index = slides.length - 1;
-                    updateSlides(index);
-                });
-
-                nextBtn.addEventListener('click', () => {
-                    let index = currentIndex + 1;
-                    if (index >= slides.length) index = 0;
-                    updateSlides(index);
-                });
-
-                indicators.forEach((btn, i) => {
-                    btn.addEventListener('click', () => updateSlides(i));
-                });
-
-                slides.forEach(slide => {
-                    slide.addEventListener('mouseenter', () => {
-                        clearInterval(autoPlayInterval);
-                    });
-                    slide.addEventListener('mouseleave', startAutoPlay);
-                });
-
-                startAutoPlay();
-            }
-
-            // 平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80, // 考虑固定头部的高度
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // 滚动时改变导航栏样式
+            // 滚动监听，添加 header 滚动样式
             window.addEventListener('scroll', () => {
                 const header = document.getElementById('header');
                 if (window.scrollY > 50) {
@@ -1170,10 +1062,66 @@
                 }
             });
 
-            // 初始化导航栏样式
-            if (window.scrollY > 50) {
-                document.getElementById('header').classList.add('scrolled');
+            // 点击查看更多按钮事件
+            const toggleMoreButtons = document.querySelectorAll('.btn-toggle-more');
+            toggleMoreButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('aria-controls');
+                    const target = document.getElementById(targetId);
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    target.classList.toggle('expanded');
+                });
+            });
+
+            // 轮播图功能
+            const sliderImages = document.querySelectorAll('.slider-image');
+            const sliderIndicators = document.querySelectorAll('.slider-indicators button');
+            const prevButton = document.querySelector('.slider-btn.prev');
+            const nextButton = document.querySelector('.slider-btn.next');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                sliderImages.forEach((image, i) => {
+                    if (i === index) {
+                        image.classList.add('active');
+                    } else {
+                        image.classList.remove('active');
+                    }
+                });
+                sliderIndicators.forEach((indicator, i) => {
+                    if (i === index) {
+                        indicator.classList.add('active');
+                        indicator.setAttribute('aria-selected', 'true');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.setAttribute('aria-selected', 'false');
+                    }
+                });
             }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % sliderImages.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + sliderImages.length) % sliderImages.length;
+                showSlide(currentSlide);
+            }
+
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+
+            sliderIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+
+            // 自动轮播
+            setInterval(nextSlide, 5000);
         });
     </script>
 </body>
