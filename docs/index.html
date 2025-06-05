@@ -175,6 +175,10 @@
                 display: flex;
             }
 
+            .page-nav ul.closing {
+                animation: slideUp 0.4s ease forwards;
+            }
+
             .page-nav ul li {
                 margin-bottom: 0.8rem;
             }
@@ -206,6 +210,17 @@
                 to {
                     opacity: 1;
                     transform: translateX(0);
+                }
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-10px);
                 }
             }
         }
@@ -558,13 +573,13 @@
             right: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 20px; /* 调整按钮间距 */
             z-index: 10000;
         }
 
         .floating-icon {
-            background-color: #C6653A;
-            border: none;
+            background-color: rgba(255, 255, 255, 0.8); /* 设置有一定透明度的偏白色块打底 */
+            border: 2px solid #C6653A;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -575,6 +590,7 @@
             align-items: center;
             transition: all 0.3s ease;
             position: relative;
+            animation: pulse 2s infinite; /* 增加呼吸感动画 */
         }
 
         .floating-icon:hover,
@@ -588,6 +604,7 @@
         .floating-icon svg {
             width: 24px;
             height: 24px;
+            fill: #C6653A; /* 调整图标颜色 */
         }
 
         .floating-icon span {
@@ -596,11 +613,27 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.8rem;
-            color: #FFFFFF;
-            background-color: rgba(0, 0, 0, 0.6);
+            color: #C6653A; /* 调整小字颜色 */
+            background-color: rgba(255, 255, 255, 0.8); /* 调整背景颜色 */
             padding: 2px 6px;
             border-radius: 4px;
             white-space: nowrap;
+        }
+
+        /* 呼吸动画按钮 */
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(198, 101, 58, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
+            }
         }
 
         /* ========== 弹窗样式 ========== */
@@ -617,12 +650,19 @@
             align-items: center;
         }
 
+        .submit-modal.open {
+            display: flex;
+            animation: modalFadeIn 0.3s ease forwards;
+        }
+
         .modal-content {
             background-color: #FFFFFF;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
             text-align: center;
+            transform: scale(0);
+            animation: modalZoomIn 0.3s ease forwards;
         }
 
         .close-button {
@@ -651,6 +691,24 @@
             box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
             outline: none;
             transform: translateY(-3px);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalZoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
         }
 
         /* ========== 新增：.split-section 样式 ========== */
@@ -788,19 +846,6 @@
             box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
             outline: none;
             transform: translateY(-3px);
-        }
-
-        /* 呼吸动画按钮 */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(198, 101, 58, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
-            }
         }
 
         @media (min-width: 769px) {
@@ -1066,201 +1111,105 @@
         <!-- 浮动图标按钮 -->
         <div class="floating-icons">
             <button aria-label="立即体验" class="floating-icon experience-button" type="button">
-                <svg aria-hidden="true" fill="#fff" height="24" viewBox="0 0 24 24" width="24"
+                <svg aria-hidden="true" fill="#C6653A" height="24" viewBox="0 0 24 24" width="24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 3h20v18H2z" fill="none"></path>
                     <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
                 </svg>
                 <span>立即体验</span>
             </button>
-            <button aria-label="信箱投稿" class="floating-icon submit-button" type="button">
-                <svg aria-hidden="true" fill="#fff" height="24" viewBox="0 0 24 24" width="24"
+            <button aria-label="信箱投稿" class="floating-icon submit-button" type="button" onclick="openModal()">
+                <svg aria-hidden="true" fill="none" stroke="#C6653A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="24" viewBox="0 0 24 24" width="24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 3h20v18H2z" fill="none"></path>
-                    <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+                    <path d="M22 2H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 18H2V6l10 7 10-7v14z"></path>
                 </svg>
                 <span>欢迎投稿</span>
             </button>
         </div>
         <!-- 投稿弹窗 -->
-        <div class="submit-modal" id="submit-modal">
+        <div class="submit-modal" id="submitModal">
             <div class="modal-content">
-                <h2>投稿信息</h2>
-                <p>投稿邮箱：<a href="mailto:example@example.com">example@example.com</a></p>
-                <p>小红书账号：<a href="https://www.xiaohongshu.com/user/profile/123456789" target="_blank">@example</a></p>
-                <p>网易云账号：<a href="https://music.163.com/#/user/home?id=123456789" target="_blank">@example</a></p>
-                <button class="close-button" id="close-modal">关闭</button>
+                <h2>欢迎投稿</h2>
+                <p>请在这里填写您的投稿内容。</p>
+                <button class="close-button" onclick="closeModal()">关闭</button>
             </div>
         </div>
-    </main>
-    <footer class="page-footer" role="contentinfo">
-        <p class="page-footer_-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-    </footer>
-    <!-- Coze 智能体 SDK -->
-    <script defer="" src="https://lf-cdn.coze.cn/obj/unpkg/@cozeai/flow-platform@1.2.0-beta.6/dist/chat-app-sdk/chat-app-sdk.umd.min.js"></script>
-    <script>
-        // 初始化 Coze AI SDK
-        function initCozeBot() {
-            try {
-                const sdk = new CozeChatAppSDK({
-                    botId: '7489440833709129747',
-                    showAgentAvatar: true,
-                    showUserAvatar: true,
-                    showWelcomeMessage: true
-                });
-
-                // 监听浮动按钮点击事件
-                document.getElementById('floating-ai-button').addEventListener('click', function () {
-                    sdk.openChatWindow();
-                });
-
-                // 可选：监听聊天窗口事件
-                sdk.on('message', function (message) {
-                    console.log('收到消息:', message);
-                });
-
-                sdk.on('open', function () {
-                    console.log('聊天窗口已打开');
-                });
-
-                sdk.on('close', function () {
-                    console.log('聊天窗口已关闭');
-                });
-
-                console.log('Coze AI SDK 初始化成功');
-            } catch (error) {
-                console.error('Coze AI SDK 加载失败', error);
-            }
-        }
-
-        // 检查 SDK 是否已经加载完成
-        if (typeof CozeChatAppSDK !== 'undefined') {
-            initCozeBot();
-        } else {
-            // 如果 SDK 还没加载完成，设置一个计时器等待
-            let maxAttempts = 10;
-            let attempt = 0;
-            const interval = setInterval(() => {
-                attempt++;
-                if (typeof CozeChatAppSDK !== 'undefined') {
-                    clearInterval(interval);
-                    initCozeBot();
-                } else if (attempt >= maxAttempts) {
-                    clearInterval(interval);
-                    console.error('Coze AI SDK 加载超时');
-                }
-            }, 1000);
-        }
-
-        // 初始化导航菜单
-        document.addEventListener('DOMContentLoaded', () => {
+        <script>
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
 
             navToggle.addEventListener('click', () => {
-                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', !expanded);
-                navToggle.classList.toggle('active');
-                navMenu.classList.toggle('open');
-            });
-
-            // 滚动监听，添加 header 滚动样式
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
+                if (navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                    navMenu.classList.add('closing');
+                    setTimeout(() => {
+                        navMenu.classList.remove('closing');
+                    }, 400);
                 } else {
-                    header.classList.remove('scrolled');
+                    navMenu.classList.add('open');
                 }
+                navToggle.classList.toggle('active');
             });
 
-            // 点击查看更多按钮事件
-            const toggleMoreButtons = document.querySelectorAll('.btn-toggle-more');
-            toggleMoreButtons.forEach(button => {
+            const moreButtons = document.querySelectorAll('.btn-toggle-more');
+            moreButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const targetId = button.getAttribute('aria-controls');
-                    const target = document.getElementById(targetId);
-                    const expanded = button.getAttribute('aria-expanded') === 'true';
-                    button.setAttribute('aria-expanded', !expanded);
-                    target.classList.toggle('expanded');
-                    button.textContent = expanded ? '了解更多' : '收起';
+                    const contentId = button.getAttribute('aria-controls');
+                    const moreContent = document.getElementById(contentId);
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    moreContent.classList.toggle('expanded');
                 });
             });
 
-            // 轮播图功能
             const sliderImages = document.querySelectorAll('.slider-image');
-            const sliderIndicators = document.querySelectorAll('.slider-indicators button');
+            const sliderIndicators = document.querySelectorAll('.indicator');
             const prevButton = document.querySelector('.slider-btn.prev');
             const nextButton = document.querySelector('.slider-btn.next');
             let currentSlide = 0;
 
             function showSlide(index) {
                 sliderImages.forEach((image, i) => {
-                    if (i === index) {
-                        image.classList.add('active');
-                    } else {
-                        image.classList.remove('active');
-                    }
+                    image.classList.remove('active');
+                    sliderIndicators[i].classList.remove('active');
+                    sliderIndicators[i].setAttribute('aria-selected', 'false');
                 });
-                sliderIndicators.forEach((indicator, i) => {
-                    if (i === index) {
-                        indicator.classList.add('active');
-                        indicator.setAttribute('aria-selected', 'true');
-                    } else {
-                        indicator.classList.remove('active');
-                        indicator.setAttribute('aria-selected', 'false');
-                    }
-                });
+                sliderImages[index].classList.add('active');
+                sliderIndicators[index].classList.add('active');
+                sliderIndicators[index].setAttribute('aria-selected', 'true');
+                currentSlide = index;
             }
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % sliderImages.length;
-                showSlide(currentSlide);
-            }
-
-            function prevSlide() {
+            prevButton.addEventListener('click', () => {
                 currentSlide = (currentSlide - 1 + sliderImages.length) % sliderImages.length;
                 showSlide(currentSlide);
-            }
+            });
 
-            prevButton.addEventListener('click', prevSlide);
-            nextButton.addEventListener('click', nextSlide);
+            nextButton.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % sliderImages.length;
+                showSlide(currentSlide);
+            });
 
             sliderIndicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
+                    showSlide(index);
                 });
             });
 
-            // 自动轮播
-            setInterval(nextSlide, 5000);
+            function openModal() {
+                const modal = document.getElementById('submitModal');
+                modal.classList.add('open');
+            }
 
-            // 浮动图标按钮功能
-            const experienceButton = document.querySelector('.experience-button');
-            const submitButton = document.querySelector('.submit-button');
-            const submitModal = document.getElementById('submit-modal');
-            const closeModal = document.getElementById('close-modal');
-
-            experienceButton.addEventListener('click', () => {
-                window.location.href = "https://www.coze.cn/store/agent/7489440833709129747?bot_id=true";
-            });
-
-            submitButton.addEventListener('click', () => {
-                submitModal.style.display = 'flex';
-            });
-
-            closeModal.addEventListener('click', () => {
-                submitModal.style.display = 'none';
-            });
-
-            window.addEventListener('click', (event) => {
-                if (event.target === submitModal) {
-                    submitModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
+            function closeModal() {
+                const modal = document.getElementById('submitModal');
+                modal.classList.remove('open');
+            }
+        </script>
+    </main>
+    <footer class="page-footer">
+        &copy; 银发记忆工程 版权所有
+    </footer>
 </body>
 
 </html>
