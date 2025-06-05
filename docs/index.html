@@ -566,6 +566,13 @@
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* 新增页脚文字样式 */
+        .page-footer-text {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1rem;
+        }
+
         /* ========== 浮动图标按钮 ========== */
         .floating-icons {
             position: fixed;
@@ -581,8 +588,8 @@
             background-color: rgba(255, 255, 255, 0.8); /* 设置有一定透明度的偏白色块打底 */
             border: 2px solid #C6653A;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
             cursor: pointer;
             display: flex;
@@ -601,10 +608,10 @@
             box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
         }
 
-        .floating-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: #C6653A; /* 调整图标颜色 */
+        .floating-icon img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
         }
 
         .floating-icon span {
@@ -865,18 +872,19 @@
         }
 
         /* 增加分条文本美化 */
-        ul {
+        /* 只保留网页主体内容的列表样式，导航栏的列表样式已移除 */
+        .text-content ul {
             padding-left: 20px;
             list-style: none;
         }
 
-        ul li {
+        .text-content ul li {
             margin-bottom: 0.5rem;
             position: relative;
             padding-left: 20px;
         }
 
-        ul li::before {
+        .text-content ul li::before {
             content: '•';
             position: absolute;
             left: 0;
@@ -884,16 +892,16 @@
             font-size: 1.2rem;
         }
 
-        ul ul {
+        .text-content ul ul {
             padding-left: 20px;
             list-style: none;
         }
 
-        ul ul li {
+        .text-content ul ul li {
             margin-bottom: 0.2rem;
         }
 
-        ul ul li::before {
+        .text-content ul ul li::before {
             content: '•';
             position: absolute;
             left: 0;
@@ -1111,18 +1119,11 @@
         <!-- 浮动图标按钮 -->
         <div class="floating-icons">
             <button aria-label="立即体验" class="floating-icon experience-button" type="button">
-                <svg aria-hidden="true" fill="#C6653A" height="24" viewBox="0 0 24 24" width="24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 3h20v18H2z" fill="none"></path>
-                    <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
-                </svg>
+                <img alt="立即体验图标" src="images/experience-icon.jpg" />
                 <span>立即体验</span>
             </button>
             <button aria-label="信箱投稿" class="floating-icon submit-button" type="button" onclick="openModal()">
-                <svg aria-hidden="true" fill="none" stroke="#C6653A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="24" viewBox="0 0 24 24" width="24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 2H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 18H2V6l10 7 10-7v14z"></path>
-                </svg>
+                <img alt="信箱投稿图标" src="images/submit-icon.jpg" />
                 <span>欢迎投稿</span>
             </button>
         </div>
@@ -1151,14 +1152,23 @@
                 navToggle.classList.toggle('active');
             });
 
+            // 了解更多按钮切换文本
             const moreButtons = document.querySelectorAll('.btn-toggle-more');
             moreButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const contentId = button.getAttribute('aria-controls');
                     const moreContent = document.getElementById(contentId);
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    
                     button.setAttribute('aria-expanded', !isExpanded);
                     moreContent.classList.toggle('expanded');
+                    
+                    // 切换按钮文本
+                    if (isExpanded) {
+                        button.textContent = '了解更多';
+                    } else {
+                        button.textContent = '收起';
+                    }
                 });
             });
 
@@ -1205,11 +1215,23 @@
                 const modal = document.getElementById('submitModal');
                 modal.classList.remove('open');
             }
+
+            // 页面滚动时添加header样式
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
         </script>
     </main>
     <footer class="page-footer">
         &copy; 银发记忆工程 版权所有
+        <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
     </footer>
 </body>
 
 </html>
+    
