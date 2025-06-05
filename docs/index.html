@@ -531,37 +531,92 @@
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* ========== 浮动 AI 按钮 ========== */
-        #floating-ai-button {
+        /* ========== 浮动图标按钮 ========== */
+        .floating-icons {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10000;
+        }
+
+        .floating-icon {
             background-color: #C6653A;
             border: none;
             border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
             cursor: pointer;
-            z-index: 10000;
-            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
         }
 
-        #floating-ai-button:hover,
-        #floating-ai-button:focus {
+        .floating-icon:hover,
+        .floating-icon:focus {
             background-color: #B45647;
             outline: none;
             transform: scale(1.08);
             box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
         }
 
-        #floating-ai-button svg {
-            width: 32px;
-            height: 32px;
+        .floating-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* ========== 弹窗样式 ========== */
+        .submit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .close-button {
+            background-color: #C6653A;
+            color: #FFFFFF;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            border: 2px solid #C6653A;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+            transition: all 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+            line-height: 1.4;
+            text-align: center;
+            letter-spacing: 0.05rem;
+            margin-top: 1rem;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            background-color: #FFFFFF;
+            color: #C6653A;
+            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+            outline: none;
+            transform: translateY(-3px);
         }
 
         /* ========== 新增：.split-section 样式 ========== */
@@ -733,9 +788,8 @@
         /* 增加分条文本美化 */
         ul {
             padding-left: 20px;
-        
-    list-style: none;
-}
+            list-style: none;
+        }
 
         ul li {
             margin-bottom: 0.5rem;
@@ -753,9 +807,8 @@
 
         ul ul {
             padding-left: 20px;
-        
-    list-style: none;
-}
+            list-style: none;
+        }
 
         ul ul li {
             margin-bottom: 0.2rem;
@@ -976,14 +1029,33 @@
                 </div>
             </div>
         </section>
-        <!-- 浮动智能聊天按钮 -->
-        <button aria-label="打开智能聊天窗口" id="floating-ai-button" type="button">
-            <svg aria-hidden="true" fill="#fff" height="24" viewbox="0 0 24 24" width="24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 3h20v18H2z" fill="none"></path>
-                <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
-            </svg>
-        </button>
+        <!-- 浮动图标按钮 -->
+        <div class="floating-icons">
+            <button aria-label="立即体验" class="floating-icon experience-button" type="button">
+                <svg aria-hidden="true" fill="#fff" height="24" viewBox="0 0 24 24" width="24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 3h20v18H2z" fill="none"></path>
+                    <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+                </svg>
+            </button>
+            <button aria-label="信箱投稿" class="floating-icon submit-button" type="button">
+                <svg aria-hidden="true" fill="#fff" height="24" viewBox="0 0 24 24" width="24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 3h20v18H2z" fill="none"></path>
+                    <path d="M4 4v14h16V4H4zm1 1h14v11H5V5zm3 4h8v2H8v-2z"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- 投稿弹窗 -->
+        <div class="submit-modal" id="submit-modal">
+            <div class="modal-content">
+                <h2>投稿信息</h2>
+                <p>投稿邮箱：<a href="mailto:example@example.com">example@example.com</a></p>
+                <p>小红书账号：<a href="https://www.xiaohongshu.com/user/profile/123456789" target="_blank">@example</a></p>
+                <p>网易云账号：<a href="https://music.163.com/#/user/home?id=123456789" target="_blank">@example</a></p>
+                <button class="close-button" id="close-modal">关闭</button>
+            </div>
+        </div>
     </main>
     <footer class="page-footer" role="contentinfo">
         <p class="page-footer_-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
@@ -1075,6 +1147,7 @@
                     const expanded = button.getAttribute('aria-expanded') === 'true';
                     button.setAttribute('aria-expanded', !expanded);
                     target.classList.toggle('expanded');
+                    button.textContent = expanded ? '了解更多' : '收起';
                 });
             });
 
@@ -1126,6 +1199,30 @@
 
             // 自动轮播
             setInterval(nextSlide, 5000);
+
+            // 浮动图标按钮功能
+            const experienceButton = document.querySelector('.experience-button');
+            const submitButton = document.querySelector('.submit-button');
+            const submitModal = document.getElementById('submit-modal');
+            const closeModal = document.getElementById('close-modal');
+
+            experienceButton.addEventListener('click', () => {
+                window.location.href = "https://www.coze.cn/store/agent/7489440833709129747?bot_id=true";
+            });
+
+            submitButton.addEventListener('click', () => {
+                submitModal.style.display = 'flex';
+            });
+
+            closeModal.addEventListener('click', () => {
+                submitModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === submitModal) {
+                    submitModal.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
