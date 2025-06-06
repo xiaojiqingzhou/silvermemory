@@ -590,63 +590,16 @@
                     overflow: hidden; /* 防止图片溢出 */
                 }
 
-               /* 上方按钮尺寸 */
-                .floating-icon:first-of-type {
-                    width: 75px;
-                    height: 90px;
+                /* 上方按钮样式 */
+                .floating-icon:first-child {
+                    width: 75px; /* 固定宽度，使两个按钮接触边同宽 */
+                    height: 90px; /* 根据图片比例 633:754 计算得出 */
                 }
 
-                /* 下方按钮尺寸 */
-                .floating-icon:last-of-type {
-                    width: 75px;
-                    height: 22.5px;
-                }
-
-                .floating-icon img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                /* 文字标签样式 */
-                .floating-icon-label {
-                    font-size: 0.8rem;
-                    color: #C6653A;
-                    font-weight: 600;
-                    text-align: center;
-                    background-color: rgba(255, 255, 255, 0.9);
-                    padding: 2px 6px;
-                    border-radius: 6px;
-                    width: fit-content;
-                    max-width: 100px;
-                    margin: 6px 0;
-                    user-select: none;
-                }
-
-                /* 调整顺序，确保文字上下分别显示 */
-                .label-top {
-                    order: 0;
-                }
-
-                .floating-icon:first-of-type {
-                    order: 1;
-                }
-
-                .floating-icon:last-of-type {
-                    order: 2;
-                }
-
-                .label-bottom {
-                    order: 3;
-                }
-
-                /* 保留悬停动画 */
-                .floating-icon:nth-child(2):hover {
-                    animation: floatUpDown 1s ease-in-out infinite;
-                }
-
-                .floating-icon:nth-child(3):hover {
-                    animation: floatLeftRight 1s ease-in-out infinite;
+                /* 下方按钮样式 */
+                .floating-icon:last-child {
+                    width: 75px; /* 与上方按钮同宽 */
+                    height: 22.5px; /* 根据图片比例 967:230 计算得出 */
                 }
 
                 /* 图片样式 */
@@ -656,6 +609,32 @@
                     object-fit: cover; /* 保持图片比例，覆盖整个按钮区域 */
                 }
 
+                .floating-icon span {
+                    position: absolute;
+                    font-size: 0.8rem;
+                    color: #C6653A;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    white-space: nowrap;
+                    font-weight: 600;
+                    opacity: 1; /* 始终显示文字 */
+                    transition: opacity 0.3s ease; /* 保留过渡效果 */
+                }
+
+                /* 第一个按钮（记忆小舟）的文字在上方 */
+                .floating-icon:first-child span {
+                    bottom: calc(100% + 8px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                /* 第二个按钮（欢迎分享）的文字在下方 */
+                .floating-icon:last-child span {
+                    top: calc(100% + 8px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
 
                 /* 呼吸动画按钮 */
                 @keyframes pulse {
@@ -1050,9 +1029,8 @@
                 }
 
                 .close-share:hover {
-                    transform: rotate(90deg);        
+                    transform: rotate(90deg);
                 }
-
             </style>
         </head>
 
@@ -1260,18 +1238,17 @@
                 <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
             </footer>
                 
-                     <!-- 浮动图标按钮（文字在外部） -->
+                      <!-- 浮动图标按钮 -->
                 <div class="floating-icons">
-                    <div class="floating-icon-label">开始讲述</div>
                     <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="floating-icon" target="_blank">
-                        <img src="images/boat_icon.png" alt="记忆小舟">
+                        <img src="images/boat_icon.png" alt="记忆小舟"> <!-- 路径正确，无需修改 -->
+                        <span>开始讲述</span> <!-- 文字正常显示 -->
                     </a>
                     <div class="floating-icon" id="shareButton">
-                        <img src="images/sea_icon.png" alt="欢迎分享">
+                        <img src="images/sea_icon.png" alt="欢迎分享"> <!-- 关键修改：将sea_icon.png改为boat_icon.png -->
+                        <span>欢迎分享</span> <!-- 文字正常显示 -->
                     </div>
-                    <div class="floating-icon-label">欢迎分享</div>
                 </div>
-
              <!-- 弹窗 -->
             <div class="submit-modal" id="submitModal">
                 <div class="modal-content">
