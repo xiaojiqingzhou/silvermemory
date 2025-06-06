@@ -565,21 +565,19 @@
                     letter-spacing: 0.1rem;
                 }
 
-               /* ========== 浮动图标按钮 ========== */
+            /* ========== 浮动图标按钮 ========== */
                 .floating-icons {
                     position: fixed;
                     bottom: 30px;
                     right: 30px;
                     display: flex;
                     flex-direction: column;
-                    gap: 0; /* 调整按钮间距 */
+                    gap: 0; /* 消除间距，使按钮紧贴 */
                     z-index: 10000;
                 }
 
                 .floating-icon {
                     background-color: rgba(255, 255, 255, 0.8);
-                    width: 80px; /* 限定按钮宽度 */
-                    height: 80px; /* 限定按钮高度 */
                     border-radius: 8px;
                     box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
                     cursor: pointer;
@@ -589,28 +587,26 @@
                     transition: all 0.3s ease;
                     position: relative;
                     animation: pulse 3s infinite;
+                    overflow: hidden; /* 防止图片溢出 */
                 }
-                /* 调整按钮间距和圆角，使接触边同宽 */
+
+                /* 上方按钮样式 */
                 .floating-icon:first-child {
-                    border-bottom-left-radius: 0;
-                    border-bottom-right-radius: 0;
+                    width: 100px; /* 固定宽度，使两个按钮接触边同宽 */
+                    height: 119px; /* 根据图片比例 633:754 计算得出 */
                 }
 
+                /* 下方按钮样式 */
                 .floating-icon:last-child {
-                    border-top-left-radius: 0;
-                    border-top-right-radius: 0;
-                    margin-top: -1px; /* 消除间隙 */
-                }
-                /* 移除边框 */
-                .floating-icon {
-                    border: none;
+                    width: 100px; /* 与上方按钮同宽 */
+                    height: 24px; /* 根据图片比例 967:230 计算得出 */
                 }
 
-               /* 调整图片大小 */
+                /* 图片样式 */
                 .floating-icon img {
-                    width: 90%; /* 增大图片比例 */
-                    height: 90%;
-                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover; /* 保持图片比例，覆盖整个按钮区域 */
                 }
 
                 .floating-icon span {
@@ -623,6 +619,7 @@
                     white-space: nowrap;
                     font-weight: 600;
                 }
+
                 /* 第一个按钮（记忆小舟）的文字在上方 */
                 .floating-icon:first-child span {
                     bottom: calc(100% + 8px);
@@ -630,7 +627,7 @@
                     transform: translateX(-50%);
                 }
 
-                /* 第二个按钮（海洋按钮）的文字在下方 */
+                /* 第二个按钮（欢迎分享）的文字在下方 */
                 .floating-icon:last-child span {
                     top: calc(100% + 8px);
                     left: 50%;
