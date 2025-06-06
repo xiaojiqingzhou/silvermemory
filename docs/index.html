@@ -1,1385 +1,1385 @@
-<html lang="zh-CN"><head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" name="description">
-    <meta content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" name="keywords">
-    <title>银发记忆工程</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&amp;display=swap" rel="stylesheet">
-    <style>
-        /* ========== 基础重置 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #E9D4C1;
-            color: #6D7663;
-        }
-
-        body {
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* ========== 页面整体布局 ========== */
-        .page-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            z-index: 9999;
-            padding: 0.8rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .page-header.scrolled {
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .page-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #B45647;
-            user-select: none;
-            letter-spacing: 0.05rem;
-        }
-
-        /* ========== 导航菜单优化 ========== */
-        .page-nav ul {
-            transform-origin: top center;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-            list-style: none;
-            display: flex;
-            gap: 1.3rem;
-        }
-
-        .page-nav a {
-            color: #C6653A;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.3rem 0.5rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            position: relative;
-            letter-spacing: 0.05rem;
-        }
-
-        .page-nav a:hover,
-        .page-nav a:focus {
-            background-color: #EACB9C;
-            color: #B45647;
-            outline: none;
-        }
-
-        .page-nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #C6653A;
-            transition: width 0.3s ease;
-        }
-
-        .page-nav a:hover::after,
-        .page-nav a:focus::after {
-            width: 100%;
-        }
-
-        /* 汉堡菜单优化 */
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 28px;
-            height: 24px;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            padding: 0;
-            position: relative;
-            z-index: 10001;
-        }
-
-        .nav-toggle .hamburger,
-        .nav-toggle .hamburger::before,
-        .nav-toggle .hamburger::after {
-            content: '';
-            display: block;
-            width: 28px;
-            height: 3px;
-            background-color: #B45647;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-toggle .hamburger::before {
-            position: absolute;
-            top: -8px;
-        }
-
-        .nav-toggle .hamburger::after {
-            position: absolute;
-            top: 8px;
-        }
-
-        .nav-toggle.active .hamburger {
-            background-color: transparent;
-        }
-
-        .nav-toggle.active .hamburger::before {
-            transform: rotate(45deg);
-            top: 0;
-        }
-
-        .nav-toggle.active .hamburger::after {
-            transform: rotate(-45deg);
-            top: 0;
-        }
-
-        /* 移动端菜单优化 */
-        @media (max-width: 768px) {
-            .page-nav ul {
-                transform-origin: top center;
-                transition: transform 0.4s ease, opacity 0.4s ease;
-                display: none;
-                flex-direction: column;
-                background: rgba(255, 255, 255, 0.98);
-                padding: 1.5rem;
-                position: absolute;
-                left: 0;
-                top: 60px;
-                width: 240px;
-                height: 100vh;
-                border-radius: 0 8px 8px 0;
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-                transform-origin: top left;
-                opacity: 0;
-                transform: scaleY(0.8) translateX(-10px);
-                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-
-            .page-nav ul.open {
-                transform: scaleY(1);
-                opacity: 1;
-                display: flex;
-                opacity: 1;
-                transform: scaleY(1) translateX(0);
-            }
-
-            .page-nav ul li {
-                margin-bottom: 0.8rem;
-                opacity: 0;
-                transform: translateX(-15px);
-                transition: all 0.3s ease;
-                transition-delay: calc(0.05s * var(--i));
-            }
-
-            .page-nav ul.open li {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            .page-nav ul a {
-                color: #B45647;
-                font-size: 1.1rem;
-                padding: 0.5rem 1rem;
-                display: block;
-                border-radius: 8px;
-                transition: all 0.3s ease;
-            }
-
-            .page-nav ul a:hover,
-            .page-nav ul a:focus {
-                background-color: #EACB9C;
-                transform: translateX(5px);
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-        }
-
-        /* ========== 主体内容 ========== */
-        .page-main {
-            padding: 100px 1.5rem 3rem;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        /* 模块统一包裹样式 */
-        .section-wrapper {
-            background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .section-wrapper:hover {
-            transform: translateY(-5px);
-        }
-
-        /* 标题层次 */
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #B45647;
-            margin-bottom: 1rem;
-            user-select: none;
-            text-align: center;
-            position: relative;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: #C6653A;
-            border-radius: 3px;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #C6653A;
-            margin-bottom: 1rem;
-            user-select: none;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: #C6653A;
-            border-radius: 2px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #956E50;
-            margin-bottom: 0.5rem;
-            user-select: none;
-        }
-
-        .text-content p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #6D7663;
-            padding-left: 0.2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* 图片样式 */
-        .section-image {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            display: block;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .section-image:hover {
-            transform: scale(1.02);
-        }
-
-        /* ========== 视频容器优化 ========== */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .video-container:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 12px;
-        }
-
-        /* ========== 轮播图优化 ========== */
-        .image-slider {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            user-select: none;
-            margin-bottom: 2rem;
-            height: 380px;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .image-slider:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .slider-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease;
-            border-radius: 15px;
-            object-fit: cover;
-            user-select: none;
-        }
-
-        .slider-image.active {
-            opacity: 1;
-            visibility: visible;
-            position: relative;
-        }
-
-        /* 轮播按钮 */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #C6653A;
-            color: #C6653A;
-            padding: 0.6rem 1rem;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            user-select: none;
-            z-index: 10;
-            opacity: 0.7;
-        }
-
-        .slider-btn:hover,
-        .slider-btn:focus {
-            background-color: #C6653A;
-            color: #FFFFFF;
-            outline: none;
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .slider-btn.prev {
-            left: 15px;
-        }
-
-        .slider-btn.next {
-            right: 15px;
-        }
-
-        /* 轮播指示器 */
-        .slider-indicators {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            user-select: none;
-            z-index: 10;
-        }
-
-        .slider-indicators button {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #C6653A;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            margin: 0 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .slider-indicators button.active {
-            background-color: #C6653A;
-            transform: scale(1.2);
-        }
-
-        /* ========== 按钮链接样式（通用） ========== */
-        .button-link {
-            display: inline-block;
-            background-color: #C6653A;
-            color: #FFFFFF;
-            padding: 0.8rem 2rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            border: 2px solid #C6653A;
-            text-decoration: none;
-            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
-            transition: all 0.3s ease;
-            user-select: none;
-            cursor: pointer;
-            line-height: 1.4;
-            text-align: center;
-            letter-spacing: 0.05rem;
-        }
-
-        /* 立即体验按钮容器，居中对齐 */
-        .experience-section {
-            text-align: center;
-            padding: 2rem 0 3rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* 按钮悬浮及聚焦效果 */
-        .button-link:hover,
-        .button-link:focus {
-            background-color: #FFFFFF;
-            color: #C6653A;
-            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
-            outline: none;
-            transform: translateY(-3px);
-        }
-
-        /* ========== 卡片式团队成员优化 ========== */
-        .team-members {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .team-member {
-            text-align: center;
-            padding: 1.5rem;
-            border-radius: 15px;
-            background-color: #FDFDFD;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-            border: 1px solid #EACB9C;
-        }
-
-        .team-member:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            object-fit: cover;
-            border: 4px solid #C6653A;
-            transition: transform 0.3s ease;
-        }
-
-        .team-member:hover img {
-            transform: scale(1.05);
-        }
-
-        .team-member h4 {
-            font-size: 1.3rem;
-            color: #B45647;
-            margin-bottom: 0.3rem;
-        }
-
-        .team-member p {
-            font-size: 1rem;
-            color: #6D7663;
-            line-height: 1.5;
-        }
-
-        /* 窄屏模式下团队成员模块的缩放调整 */
-        @media (max-width: 768px) {
-            .team-member {
-                padding: 1rem;
-            }
-
-            .team-member img {
-                width: 80px;
-                height: 80px;
-            }
-
-            .team-member h4 {
-                font-size: 1.1rem;
-            }
-
-            .team-member p {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ========== 页脚 ========== */
-        .page-footer {
-            background: linear-gradient(90deg, #C6653A 0%, #B45647 100%);
-            color: #FFFFFF;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            user-select: none;
-            font-weight: 600;
-            margin-top: 3rem;
-            border-radius: 12px 12px 0 0;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 新增页脚文字样式 */
-        .page-footer-text {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-            letter-spacing: 0.1rem;
-        }
-
-        /* ========== 浮动图标按钮 ========== */
-        .floating-icons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 0; /* 调整按钮间距 */
-            z-index: 10000;
-        }
-
-        .floating-icon {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            animation: pulse 3s infinite;
-        }
-
-        /* 移除边框 */
-        .floating-icon {
-            border: none;
-        }
-
-        /* 空图片占位 */
-        .floating-icon img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-
-        .floating-icon span {
-            position: absolute;
-            font-size: 0.8rem;
-            color: #C6653A;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 2px 6px;
-            border-radius: 4px;
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        /* 第一个按钮（记忆小舟）的文字在上方 */
-        .floating-icon:first-child span {
-            bottom: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 第二个按钮（海洋按钮）的文字在下方 */
-        .floating-icon:last-child span {
-            top: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 呼吸动画按钮 */
-        @keyframes pulse {
-            0% {
-                transform: scale(0.98);
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3);
-            }
-            70% {
-                transform: scale(1.02);
-                box-shadow: 0 0 0 10px rgba(198, 101, 58, 0);
-            }
-            100% {
-                transform: scale(0.98);
-                box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
-            }
-        }
-
-        /* 新增上下浮动动画 */
-        @keyframes floatUpDown {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        /* 新增左右浮动动画 */
-        @keyframes floatLeftRight {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(-8px);
-            }
-        }
-
-        /* 应用动画 */
-        .floating-icon:nth-child(1):hover {
-            animation: floatUpDown 1s ease-in-out infinite;
-        }
-
-        .floating-icon:nth-child(2):hover {
-            animation: floatLeftRight 1s ease-in-out infinite;
-        }
-
-        /* ========== 弹窗样式 ========== */
-        .submit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .submit-modal.open {
-            display: flex;
-            animation: modalFadeIn 0.3s ease forwards;
-        }
-
-        .modal-content {
-            background-color: #FFFFFF;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transform: scale(0);
-            animation: modalZoomIn 0.3s ease forwards;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .close-button {
-            background-color: #C6653A;
-            color: #FFFFFF;
-            padding: 0.8rem 2rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            border: 2px solid #C6653A;
-            text-decoration: none;
-            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
-            transition: all 0.3s ease;
-            user-select: none;
-            cursor: pointer;
-            line-height: 1.4;
-            text-align: center;
-            letter-spacing: 0.05rem;
-            margin-top: 1rem;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            background-color: #FFFFFF;
-            color: #C6653A;
-            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
-            outline: none;
-            transform: translateY(-3px);
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes modalZoomIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        /* ========== 新增：.split-section 样式 ========== */
-        .split-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem 1.5rem;
-            background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .split-section > div {
-            flex: 1 1 50%;
-            min-width: 300px;
-            padding: 0 1rem;
-        }
-
-        .split-section img,
-        .split-section video {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .split-section img:hover,
-        .split-section video:hover {
-            transform: scale(1.02);
-        }
-
-        /* 响应式：窄屏时堆叠 */
-        @media (max-width: 768px) {
-            .page-header {
-                padding: 0.7rem 1rem;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-
-            .page-main {
-                padding: 90px 1rem 2rem;
-                max-width: 100%;
-            }
-
-            .section-wrapper {
-                padding: 1.5rem;
-            }
-
-            .split-section {
-                grid-template-columns: 1fr;
-                padding: 1.5rem 1rem;
-                gap: 1.5rem;
-            }
-
-            .split-section > div {
-                min-width: auto;
-                padding: 0;
-                margin-bottom: 1rem;
-            }
-
-            .image-slider {
-                height: 250px;
-            }
-
-            .slider-btn {
-                font-size: 1.2rem;
-                padding: 0.4rem 0.7rem;
-            }
-
-            .team-members {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-
-            .team-member {
-                padding: 1rem;
-            }
-
-            .team-member img {
-                width: 80px;
-                height: 80px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* ========== 了解更多内容动画 ========== */
-        .more-content {
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
-        }
-
-        .more-content.expanded {
-            max-height: 1000px;
-            opacity: 1;
-        }
-
-        .btn-toggle-more {
-            display: inline-block;
-            background-color: #C6653A;
-            color: #FFFFFF;
-            padding: 0.8rem 2rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            border: 2px solid #C6653A;
-            text-decoration: none;
-            box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
-            transition: all 0.3s ease;
-            user-select: none;
-            cursor: pointer;
-            line-height: 1.4;
-            text-align: center;
-            letter-spacing: 0.05rem;
-        }
-
-        .btn-toggle-more:hover,
-        .btn-toggle-more:focus {
-            background-color: #FFFFFF;
-            color: #C6653A;
-            box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
-            outline: none;
-            transform: translateY(-3px);
-        }
-
-        @media (min-width: 769px) {
-            .page-nav ul {
-                transform-origin: top center;
-                transition: transform 0.4s ease, opacity 0.4s ease;
-                display: flex !important;
-                flex-direction: row;
-                position: static;
-                background: transparent;
-                height: auto;
-                padding: 0;
-                gap: 1.5rem;
-            }
-
-            .nav-toggle {
-                display: none !important;
-            }
-        }
-
-        /* 增加分条文本美化 */
-        /* 只保留网页主体内容的列表样式，导航栏的列表样式已移除 */
-        .text-content ul {
-            padding-left: 20px;
-            list-style: none;
-        }
-
-        .text-content ul li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .text-content ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #C6653A;
-            font-size: 1.2rem;
-        }
-
-        .text-content ul ul {
-            padding-left: 20px;
-            list-style: none;
-        }
-
-        .text-content ul ul li {
-            margin-bottom: 0.2rem;
-        }
-
-        .text-content ul ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #C6653A;
-            font-size: 1rem;
-        }
-
-        /* 分享弹窗样式 */
-        .share-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .share-modal.open {
-            display: flex;
-            animation: modalFadeIn 0.3s ease forwards;
-        }
-
-        .share-content {
-            background-color: #FFFFFF;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transform: scale(0);
-            animation: modalZoomIn 0.3s ease forwards;
-            max-width: 400px;
-            width: 90%;
-            position: relative;
-        }
-
-        .share-content h3 {
-            color: #B45647;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .share-channels {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .share-channel {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            background-color: #f5f5f5;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #6D7663;
-        }
-
-        .share-channel:hover {
-            background-color: #EACB9C;
-            transform: translateY(-2px);
-        }
-
-        .share-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 1rem;
-        }
-
-        .close-share {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: #C6653A;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .close-share:hover {
-            transform: rotate(90deg);
-        }
-    </style>
-</head>
-
-<body>
-    <header class="page-header" id="header" role="banner">
-        <div class="header-inner">
-            <h1 class="page-title">银发记忆工程</h1>
-            <button aria-controls="navMenu" aria-expanded="false" aria-label="切换导航菜单" class="nav-toggle" id="navToggle">
-                <span class="hamburger"></span>
-            </button>
-            <nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
-                <ul class="nav-list" id="navMenu">
-                    <li><a href="#initial-intent">初心所系</a></li>
-                    <li><a href="#memory-heritage">智忆传承</a></li>
-                    <li><a href="#demo">操作演示</a></li>
-                    <li><a href="#team">专业护航</a></li>
-                    <li><a href="#achievements">成果展示</a></li>
-                    <li><a href="#join-us">立即体验</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main class="page-main" id="main" role="main">
-        <!-- 初心所系 -->
-        <section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
-            <div class="split-section">
-                <div class="text-content">
-                    <h1 id="initial-intent-title">初心所系</h1>
-                    <h2>项目缘起</h2>
-                    <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
-                    <h2>目标人群</h2>
-                    <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
-                    <button aria-controls="initial-intent-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
-                    <div class="more-content" id="initial-intent-more">
-                        <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
-                        <ul>
-                            <li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
-                            <li>同行伙伴：
-                                <ul>
-                                    <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
-                                    <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
-                                    <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
-                                </ul>
-                            </li>
-                            <li>特别场景：
-                                <ul>
-                                    <li>多代同堂家庭的「跨代记忆对话」</li>
-                                    <li>地方文化机构的「方言口述史工程」</li>
-                                    <li>养老社区的「长者生命故事集」</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg">
-            </div>
-        </section>
-        <!-- 智忆传承 -->
-        <section aria-labelledby="memory-heritage-title" class="section-wrapper" id="memory-heritage" tabindex="-1">
-            <div class="split-section">
-                <img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg">
-                <div class="text-content">
-                    <h1 id="memory-heritage-title">智忆传承</h1>
-                    <h2>项目介绍</h2>
-                    <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
-                    <h2>核心价值</h2>
-                    <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-                    <button aria-controls="memory-heritage-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
-                    <div class="more-content" id="memory-heritage-more">
-                        <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存：</p>
-                        <ul>
-                            <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
-                            <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
-                            <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
-                        </ul>
-                        <ul>
-                            <li>对长者：
-                                <ul>
-                                    <li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
-                                    <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
-                                </ul>
-                            </li>
-                            <li>对家庭：
-                                <ul>
-                                    <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
-                                    <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
-                                </ul>
-                            </li>
-                            <li>对社会：
-                                <ul>
-                                    <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
-                                    <li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- 操作演示 -->
-        <section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
-            <h1 id="demo-title">操作演示</h1>
-            <div class="video-container">
-                <!-- 这里替换为实际的视频ID -->
-                <iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
-            </div>
-        </section>
-        <!-- 专业护航 -->
-        <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
-            <h1 id="team-title">专业护航</h1>
-            <div class="team-introduction">
-                <div>
-                    <h2>指导教师</h2>
-                    <div class="team-members">
-                        <div class="team-member">
-                            <img alt="指导教师1" src="images/teacher1.jpg">
-                            <h4>某某某某</h4>
-                            <p>计算语言学专家</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="指导教师2" src="images/teacher2.jpg">
-                            <h4>某某某某</h4>
-                            <p>中国文学专家</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="指导教师3" src="images/teacher3.jpg">
-                            <h4>某某某某</h4>
-                            <p>口述史研究专家</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2>团队成员</h2>
-                    <div class="team-members">
-                        <div class="team-member">
-                            <img alt="团队成员1" src="images/member1.jpg">
-                            <h4>某某某某</h4>
-                            <p>算法设计</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="团队成员2" src="images/member2.jpg">
-                            <h4>某某某某</h4>
-                            <p>产品设计</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="团队成员3" src="images/member3.jpg">
-                            <h4>某某某某</h4>
-                            <p>前端开发</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="团队成员4" src="images/member4.jpg">
-                            <h4>某某某某</h4>
-                            <p>后端开发</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="团队成员5" src="images/member5.jpg">
-                            <h4>某某某某</h4>
-                            <p>UI/UX设计</p>
-                        </div>
-                        <div class="team-member">
-                            <img alt="团队成员6" src="images/member6.jpg">
-                            <h4>某某某某</h4>
-                            <p>数据处理</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- 成果展示 -->
-        <section aria-labelledby="achievements-title" class="section-wrapper" id="achievements" tabindex="-1">
-            <h1 id="achievements-title">成果展示</h1>
-            <div aria-label="成果展示轮播图" class="image-slider">
-                <button aria-label="上一张图片" class="slider-btn prev">‹</button>
-                <button aria-label="下一张图片" class="slider-btn next">›</button>
-                <div class="slider-images" role="region">
-                    <img src="image1.jpg" alt="成果展示1" class="slider-image active">
-                    <img src="image2.jpg" alt="成果展示2" class="slider-image">
-                    <img src="image3.jpg" alt="成果展示3" class="slider-image">
-                </div>
-                <div class="slider-indicators">
-                    <button class="active"></button>
-                    <button></button>
-                    <button></button>
-                </div>
-            </div>
-        </section>
-        <!-- 加入记忆守护计划 -->
-        <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
-            <h1 id="join-us-title">加入记忆守护计划</h1>
-            <div class="text-content">
-                <p>即刻行动：</p>
-                <ul>
-                    <li>家庭用户：免费试用，为长辈制作专属记忆档案</li>
-                    <li>机构合作：申请「记忆方舟」公益项目，获取技术支持</li>
-                    <li>志愿者招募：欢迎技术、传媒、社会学背景的伙伴加入</li>
-                </ul>
-                <div class="experience-section">
-                    <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="page-footer">
-        © 银发记忆工程 版权所有
-        <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-    </footer>
-    <!-- 浮动图标按钮 -->
-    <div class="floating-icons">
-        <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="floating-icon" target="_blank">
-            <img src="images/icon1.png" alt="记忆小舟">
-            <span>开始讲述</span>
-        </a>
-        <div class="floating-icon" id="shareButton">
-            <img src="images/icon2.png" alt="分享按钮">
-            <span>欢迎分享</span>
-        </div>
-    </div>
-    <!-- 弹窗 -->
-    <div class="submit-modal" id="submitModal">
-        <div class="modal-content">
-            <h2>提交成功</h2>
-            <p>感谢您的参与！</p>
-            <button class="close-button" id="closeModal">关闭</button>
-        </div>
-    </div>
-    <!-- 分享弹窗 -->
-    <div class="share-modal" id="shareModal">
-        <div class="share-content">
-            <div class="close-share" id="closeShare">×</div>
-            <h3>分享渠道</h3>
-            <div class="share-channels">
-                <a href="mailto:example@example.com" class="share-channel" target="_blank">
-                    <img src="images/email-icon.png" alt="邮箱图标" class="share-icon">
-                    <span>官方邮箱：example@example.com</span>
-                </a>
-                <a href="https://www.xiaohongshu.com/user/profile/xxxxxx" class="share-channel" target="_blank">
-                    <img src="images/xiaohongshu-icon.png" alt="小红书图标" class="share-icon">
-                    <span>官方小红书：银发记忆工程</span>
-                </a>
-                <!-- 可根据需要添加更多分享渠道 -->
-            </div>
-        </div>
-    </div>
-    <script>
-        // 导航菜单切换
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navMenu.classList.toggle('open');
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-
-        // 了解更多按钮
-        const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-        toggleButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('aria-controls');
-                const targetElement = document.getElementById(targetId);
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                button.setAttribute('aria-expanded', !isExpanded);
-                targetElement.classList.toggle('expanded');
-            });
-        });
-
-        // 轮播图
-        const sliderImages = document.querySelectorAll('.slider-image');
-        const sliderIndicators = document.querySelectorAll('.slider-indicators button');
-        const prevButton = document.querySelector('.slider-btn.prev');
-        const nextButton = document.querySelector('.slider-btn.next');
-        let currentIndex = 0;
-
-        function showImage(index) {
-            sliderImages.forEach((image, i) => {
-                if (i === index) {
-                    image.classList.add('active');
-                } else {
-                    image.classList.remove('active');
+<html lang="zh-CN">
+        <head>
+            <meta charset="utf-8">
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" name="description">
+            <meta content="AI, 记忆小舟, 银发工程, 老年人, 数字记忆, 口述史, 家族档案" name="keywords">
+            <title>银发记忆工程</title>
+            <link href="https://fonts.googleapis.com" rel="preconnect">
+            <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&amp;display=swap" rel="stylesheet">
+            <style>
+                /* ========== 基础重置 ========== */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
                 }
-            });
-            sliderIndicators.forEach((indicator, i) => {
-                if (i === index) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
+
+                html {
+                    scroll-behavior: smooth;
+                    font-size: 16px;
+                    font-family: 'Noto Sans SC', sans-serif;
+                    background-color: #E9D4C1;
+                    color: #6D7663;
                 }
-            });
-        }
 
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % sliderImages.length;
-            showImage(currentIndex);
-        }
+                body {
+                    line-height: 1.6;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
 
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-            showImage(currentIndex);
-        }
+                /* ========== 页面整体布局 ========== */
+                .page-header {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: rgba(255, 255, 255, 0.95);
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                    z-index: 9999;
+                    padding: 0.8rem 1.5rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                }
 
-        nextButton.addEventListener('click', nextImage);
-        prevButton.addEventListener('click', prevImage);
+                .page-header.scrolled {
+                    background-color: rgba(255, 255, 255, 0.98);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                }
 
-        sliderIndicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
-                showImage(currentIndex);
-            });
-        });
+                .page-title {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: #B45647;
+                    user-select: none;
+                    letter-spacing: 0.05rem;
+                }
 
-        // 弹窗
-        const submitModal = document.getElementById('submitModal');
-        const closeModalButton = document.getElementById('closeModal');
+                /* ========== 导航菜单优化 ========== */
+                .page-nav ul {
+                    transform-origin: top center;
+                    transition: transform 0.4s ease, opacity 0.4s ease;
+                    list-style: none;
+                    display: flex;
+                    gap: 1.3rem;
+                }
 
-        function openModal() {
-            submitModal.classList.add('open');
-        }
+                .page-nav a {
+                    color: #C6653A;
+                    text-decoration: none;
+                    font-weight: 600;
+                    padding: 0.3rem 0.5rem;
+                    border-radius: 5px;
+                    transition: background-color 0.3s ease, color 0.3s ease;
+                    position: relative;
+                    letter-spacing: 0.05rem;
+                }
 
-        function closeModal() {
-            submitModal.classList.remove('open');
-        }
+                .page-nav a:hover,
+                .page-nav a:focus {
+                    background-color: #EACB9C;
+                    color: #B45647;
+                    outline: none;
+                }
 
-        closeModalButton.addEventListener('click', closeModal);
+                .page-nav a::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: #C6653A;
+                    transition: width 0.3s ease;
+                }
 
-        // 分享弹窗
-        const shareModal = document.getElementById('shareModal');
-        const shareButton = document.getElementById('shareButton');
-        const closeShareButton = document.getElementById('closeShare');
+                .page-nav a:hover::after,
+                .page-nav a:focus::after {
+                    width: 100%;
+                }
 
-        function openShareModal() {
-            shareModal.classList.add('open');
-        }
+                /* 汉堡菜单优化 */
+                .nav-toggle {
+                    display: none;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    width: 28px;
+                    height: 24px;
+                    cursor: pointer;
+                    background: transparent;
+                    border: none;
+                    padding: 0;
+                    position: relative;
+                    z-index: 10001;
+                }
 
-        function closeShareModal() {
-            shareModal.classList.remove('open');
-        }
+                .nav-toggle .hamburger,
+                .nav-toggle .hamburger::before,
+                .nav-toggle .hamburger::after {
+                    content: '';
+                    display: block;
+                    width: 28px;
+                    height: 3px;
+                    background-color: #B45647;
+                    border-radius: 2px;
+                    transition: all 0.3s ease;
+                    position: relative;
+                }
 
-        shareButton.addEventListener('click', openShareModal);
-        closeShareButton.addEventListener('click', closeShareModal);
+                .nav-toggle .hamburger::before {
+                    position: absolute;
+                    top: -8px;
+                }
 
-        // 点击模态框外部关闭弹窗
-        shareModal.addEventListener('click', (e) => {
-            if (e.target === shareModal) {
-                closeShareModal();
-            }
-        });
+                .nav-toggle .hamburger::after {
+                    position: absolute;
+                    top: 8px;
+                }
 
-        // 滚动时导航栏样式变化
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
+                .nav-toggle.active .hamburger {
+                    background-color: transparent;
+                }
 
+                .nav-toggle.active .hamburger::before {
+                    transform: rotate(45deg);
+                    top: 0;
+                }
 
+                .nav-toggle.active .hamburger::after {
+                    transform: rotate(-45deg);
+                    top: 0;
+                }
 
-    </body></html>
+                /* 移动端菜单优化 */
+                @media (max-width: 768px) {
+                    .page-nav ul {
+                        transform-origin: top center;
+                        transition: transform 0.4s ease, opacity 0.4s ease;
+                        display: none;
+                        flex-direction: column;
+                        background: rgba(255, 255, 255, 0.98);
+                        padding: 1.5rem;
+                        position: absolute;
+                        left: 0;
+                        top: 60px;
+                        width: 240px;
+                        height: 100vh;
+                        border-radius: 0 8px 8px 0;
+                        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                        transform-origin: top left;
+                        opacity: 0;
+                        transform: scaleY(0.8) translateX(-10px);
+                        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    }
+
+                    .page-nav ul.open {
+                        transform: scaleY(1);
+                        opacity: 1;
+                        display: flex;
+                        opacity: 1;
+                        transform: scaleY(1) translateX(0);
+                    }
+
+                    .page-nav ul li {
+                        margin-bottom: 0.8rem;
+                        opacity: 0;
+                        transform: translateX(-15px);
+                        transition: all 0.3s ease;
+                        transition-delay: calc(0.05s * var(--i));
+                    }
+
+                    .page-nav ul.open li {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+
+                    .page-nav ul a {
+                        color: #B45647;
+                        font-size: 1.1rem;
+                        padding: 0.5rem 1rem;
+                        display: block;
+                        border-radius: 8px;
+                        transition: all 0.3s ease;
+                    }
+
+                    .page-nav ul a:hover,
+                    .page-nav ul a:focus {
+                        background-color: #EACB9C;
+                        transform: translateX(5px);
+                    }
+
+                    .nav-toggle {
+                        display: flex;
+                    }
+                }
+
+                /* ========== 主体内容 ========== */
+                .page-main {
+                    padding: 100px 1.5rem 3rem;
+                    max-width: 960px;
+                    margin: 0 auto;
+                }
+
+                /* 模块统一包裹样式 */
+                .section-wrapper {
+                    background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
+                    padding: 2rem;
+                    border-radius: 15px;
+                    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+                    margin-bottom: 2rem;
+                    transition: transform 0.3s ease;
+                }
+
+                .section-wrapper:hover {
+                    transform: translateY(-5px);
+                }
+
+                /* 标题层次 */
+                h1 {
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                    color: #B45647;
+                    margin-bottom: 1rem;
+                    user-select: none;
+                    text-align: center;
+                    position: relative;
+                }
+
+                h1::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 80px;
+                    height: 3px;
+                    background-color: #C6653A;
+                    border-radius: 3px;
+                }
+
+                h2 {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: #C6653A;
+                    margin-bottom: 1rem;
+                    user-select: none;
+                    position: relative;
+                }
+
+                h2::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                    width: 50px;
+                    height: 2px;
+                    background-color: #C6653A;
+                    border-radius: 2px;
+                }
+
+                h3 {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    color: #956E50;
+                    margin-bottom: 0.5rem;
+                    user-select: none;
+                }
+
+                .text-content p {
+                    font-size: 1rem;
+                    line-height: 1.7;
+                    color: #6D7663;
+                    padding-left: 0.2rem;
+                    margin-bottom: 1rem;
+                }
+
+                /* 图片样式 */
+                .section-image {
+                    width: 100%;
+                    max-width: 600px;
+                    border-radius: 10px;
+                    margin-bottom: 1rem;
+                    display: block;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+                }
+
+                .section-image:hover {
+                    transform: scale(1.02);
+                }
+
+                /* ========== 视频容器优化 ========== */
+                .video-container {
+                    position: relative;
+                    padding-bottom: 56.25%;
+                    height: 0;
+                    overflow: hidden;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 2rem;
+                    transition: box-shadow 0.3s ease;
+                }
+
+                .video-container:hover {
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                }
+
+                .video-container iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    border-radius: 12px;
+                }
+
+                /* ========== 轮播图优化 ========== */
+                .image-slider {
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    user-select: none;
+                    margin-bottom: 2rem;
+                    height: 380px;
+                    transition: box-shadow 0.3s ease;
+                }
+
+                .image-slider:hover {
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                }
+
+                .slider-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.5s ease;
+                    border-radius: 15px;
+                    object-fit: cover;
+                    user-select: none;
+                }
+
+                .slider-image.active {
+                    opacity: 1;
+                    visibility: visible;
+                    position: relative;
+                }
+
+                /* 轮播按钮 */
+                .slider-btn {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(255, 255, 255, 0.8);
+                    border: 2px solid #C6653A;
+                    color: #C6653A;
+                    padding: 0.6rem 1rem;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    font-size: 1.5rem;
+                    transition: all 0.3s ease;
+                    user-select: none;
+                    z-index: 10;
+                    opacity: 0.7;
+                }
+
+                .slider-btn:hover,
+                .slider-btn:focus {
+                    background-color: #C6653A;
+                    color: #FFFFFF;
+                    outline: none;
+                    opacity: 1;
+                    transform: translateY(-50%) scale(1.1);
+                }
+
+                .slider-btn.prev {
+                    left: 15px;
+                }
+
+                .slider-btn.next {
+                    right: 15px;
+                }
+
+                /* 轮播指示器 */
+                .slider-indicators {
+                    position: absolute;
+                    bottom: 20px;
+                    width: 100%;
+                    text-align: center;
+                    user-select: none;
+                    z-index: 10;
+                }
+
+                .slider-indicators button {
+                    background: rgba(255, 255, 255, 0.8);
+                    border: 2px solid #C6653A;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    margin: 0 6px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+
+                .slider-indicators button.active {
+                    background-color: #C6653A;
+                    transform: scale(1.2);
+                }
+
+                /* ========== 按钮链接样式（通用） ========== */
+                .button-link {
+                    display: inline-block;
+                    background-color: #C6653A;
+                    color: #FFFFFF;
+                    padding: 0.8rem 2rem;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    border-radius: 30px;
+                    border: 2px solid #C6653A;
+                    text-decoration: none;
+                    box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+                    transition: all 0.3s ease;
+                    user-select: none;
+                    cursor: pointer;
+                    line-height: 1.4;
+                    text-align: center;
+                    letter-spacing: 0.05rem;
+                }
+
+                /* 立即体验按钮容器，居中对齐 */
+                .experience-section {
+                    text-align: center;
+                    padding: 2rem 0 3rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                /* 按钮悬浮及聚焦效果 */
+                .button-link:hover,
+                .button-link:focus {
+                    background-color: #FFFFFF;
+                    color: #C6653A;
+                    box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+                    outline: none;
+                    transform: translateY(-3px);
+                }
+
+                /* ========== 卡片式团队成员优化 ========== */
+                .team-members {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    gap: 1.5rem;
+                }
+
+                .team-member {
+                    text-align: center;
+                    padding: 1.5rem;
+                    border-radius: 15px;
+                    background-color: #FDFDFD;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    margin-bottom: 1rem;
+                    border: 1px solid #EACB9C;
+                }
+
+                .team-member:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+                }
+
+                .team-member img {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    margin-bottom: 1rem;
+                    object-fit: cover;
+                    border: 4px solid #C6653A;
+                    transition: transform 0.3s ease;
+                }
+
+                .team-member:hover img {
+                    transform: scale(1.05);
+                }
+
+                .team-member h4 {
+                    font-size: 1.3rem;
+                    color: #B45647;
+                    margin-bottom: 0.3rem;
+                }
+
+                .team-member p {
+                    font-size: 1rem;
+                    color: #6D7663;
+                    line-height: 1.5;
+                }
+
+                /* 窄屏模式下团队成员模块的缩放调整 */
+                @media (max-width: 768px) {
+                    .team-member {
+                        padding: 1rem;
+                    }
+
+                    .team-member img {
+                        width: 80px;
+                        height: 80px;
+                    }
+
+                    .team-member h4 {
+                        font-size: 1.1rem;
+                    }
+
+                    .team-member p {
+                        font-size: 0.9rem;
+                    }
+                }
+
+                /* ========== 页脚 ========== */
+                .page-footer {
+                    background: linear-gradient(90deg, #C6653A 0%, #B45647 100%);
+                    color: #FFFFFF;
+                    text-align: center;
+                    padding: 1.5rem 1rem;
+                    user-select: none;
+                    font-weight: 600;
+                    margin-top: 3rem;
+                    border-radius: 12px 12px 0 0;
+                    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                /* 新增页脚文字样式 */
+                .page-footer-text {
+                    font-size: 1.2rem;
+                    margin-top: 0.5rem;
+                    letter-spacing: 0.1rem;
+                }
+
+                /* ========== 浮动图标按钮 ========== */
+                .floating-icons {
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0; /* 调整按钮间距 */
+                    z-index: 10000;
+                }
+
+                .floating-icon {
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    animation: pulse 3s infinite;
+                }
+
+                /* 移除边框 */
+                .floating-icon {
+                    border: none;
+                }
+
+                /* 空图片占位 */
+                .floating-icon img {
+                    width: 80%;
+                    height: 80%;
+                    object-fit: contain;
+                }
+
+                .floating-icon span {
+                    position: absolute;
+                    font-size: 0.8rem;
+                    color: #C6653A;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    white-space: nowrap;
+                    font-weight: 600;
+                }
+
+                /* 第一个按钮（记忆小舟）的文字在上方 */
+                .floating-icon:first-child span {
+                    bottom: calc(100% + 8px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                /* 第二个按钮（海洋按钮）的文字在下方 */
+                .floating-icon:last-child span {
+                    top: calc(100% + 8px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                /* 呼吸动画按钮 */
+                @keyframes pulse {
+                    0% {
+                        transform: scale(0.98);
+                        box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3);
+                    }
+                    70% {
+                        transform: scale(1.02);
+                        box-shadow: 0 0 0 10px rgba(198, 101, 58, 0);
+                    }
+                    100% {
+                        transform: scale(0.98);
+                        box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
+                    }
+                }
+
+                /* 新增上下浮动动画 */
+                @keyframes floatUpDown {
+                    0%, 100% {
+                        transform: translateY(0);
+                    }
+                    50% {
+                        transform: translateY(-8px);
+                    }
+                }
+
+                /* 新增左右浮动动画 */
+                @keyframes floatLeftRight {
+                    0%, 100% {
+                        transform: translateX(0);
+                    }
+                    50% {
+                        transform: translateX(-8px);
+                    }
+                }
+
+                /* 应用动画 */
+                .floating-icon:nth-child(1):hover {
+                    animation: floatUpDown 1s ease-in-out infinite;
+                }
+
+                .floating-icon:nth-child(2):hover {
+                    animation: floatLeftRight 1s ease-in-out infinite;
+                }
+
+                /* ========== 弹窗样式 ========== */
+                .submit-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 10001;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .submit-modal.open {
+                    display: flex;
+                    animation: modalFadeIn 0.3s ease forwards;
+                }
+
+                .modal-content {
+                    background-color: #FFFFFF;
+                    padding: 2rem;
+                    border-radius: 10px;
+                    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+                    text-align: center;
+                    transform: scale(0);
+                    animation: modalZoomIn 0.3s ease forwards;
+                    max-width: 400px;
+                    width: 90%;
+                }
+
+                .close-button {
+                    background-color: #C6653A;
+                    color: #FFFFFF;
+                    padding: 0.8rem 2rem;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    border-radius: 30px;
+                    border: 2px solid #C6653A;
+                    text-decoration: none;
+                    box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+                    transition: all 0.3s ease;
+                    user-select: none;
+                    cursor: pointer;
+                    line-height: 1.4;
+                    text-align: center;
+                    letter-spacing: 0.05rem;
+                    margin-top: 1rem;
+                }
+
+                .close-button:hover,
+                .close-button:focus {
+                    background-color: #FFFFFF;
+                    color: #C6653A;
+                    box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+                    outline: none;
+                    transform: translateY(-3px);
+                }
+
+                @keyframes modalFadeIn {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes modalZoomIn {
+                    from {
+                        transform: scale(0);
+                    }
+                    to {
+                        transform: scale(1);
+                    }
+                }
+
+                /* ========== 新增：.split-section 样式 ========== */
+                .split-section {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                    padding: 2rem 1.5rem;
+                    background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
+                    border-radius: 15px;
+                    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .split-section > div {
+                    flex: 1 1 50%;
+                    min-width: 300px;
+                    padding: 0 1rem;
+                }
+
+                .split-section img,
+                .split-section video {
+                    width: 100%;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    object-fit: cover;
+                    display: block;
+                    transition: transform 0.3s ease;
+                }
+
+                .split-section img:hover,
+                .split-section video:hover {
+                    transform: scale(1.02);
+                }
+
+                /* 响应式：窄屏时堆叠 */
+                @media (max-width: 768px) {
+                    .page-header {
+                        padding: 0.7rem 1rem;
+                    }
+
+                    .page-title {
+                        font-size: 1.5rem;
+                    }
+
+                    .page-main {
+                        padding: 90px 1rem 2rem;
+                        max-width: 100%;
+                    }
+
+                    .section-wrapper {
+                        padding: 1.5rem;
+                    }
+
+                    .split-section {
+                        grid-template-columns: 1fr;
+                        padding: 1.5rem 1rem;
+                        gap: 1.5rem;
+                    }
+
+                    .split-section > div {
+                        min-width: auto;
+                        padding: 0;
+                        margin-bottom: 1rem;
+                    }
+
+                    .image-slider {
+                        height: 250px;
+                    }
+
+                    .slider-btn {
+                        font-size: 1.2rem;
+                        padding: 0.4rem 0.7rem;
+                    }
+
+                    .team-members {
+                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    }
+
+                    .team-member {
+                        padding: 1rem;
+                    }
+
+                    .team-member img {
+                        width: 80px;
+                        height: 80px;
+                    }
+
+                    h1 {
+                        font-size: 1.8rem;
+                    }
+
+                    h2 {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                /* ========== 了解更多内容动画 ========== */
+                .more-content {
+                    overflow: hidden;
+                    max-height: 0;
+                    opacity: 0;
+                    transition: max-height 0.5s ease, opacity 0.5s ease;
+                }
+
+                .more-content.expanded {
+                    max-height: 1000px;
+                    opacity: 1;
+                }
+
+                .btn-toggle-more {
+                    display: inline-block;
+                    background-color: #C6653A;
+                    color: #FFFFFF;
+                    padding: 0.8rem 2rem;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    border-radius: 30px;
+                    border: 2px solid #C6653A;
+                    text-decoration: none;
+                    box-shadow: 0 6px 15px rgba(198, 101, 58, 0.25);
+                    transition: all 0.3s ease;
+                    user-select: none;
+                    cursor: pointer;
+                    line-height: 1.4;
+                    text-align: center;
+                    letter-spacing: 0.05rem;
+                }
+
+                .btn-toggle-more:hover,
+                .btn-toggle-more:focus {
+                    background-color: #FFFFFF;
+                    color: #C6653A;
+                    box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+                    outline: none;
+                    transform: translateY(-3px);
+                }
+
+                @media (min-width: 769px) {
+                    .page-nav ul {
+                        transform-origin: top center;
+                        transition: transform 0.4s ease, opacity 0.4s ease;
+                        display: flex !important;
+                        flex-direction: row;
+                        position: static;
+                        background: transparent;
+                        height: auto;
+                        padding: 0;
+                        gap: 1.5rem;
+                    }
+
+                    .nav-toggle {
+                        display: none !important;
+                    }
+                }
+
+                /* 增加分条文本美化 */
+                /* 只保留网页主体内容的列表样式，导航栏的列表样式已移除 */
+                .text-content ul {
+                    padding-left: 20px;
+                    list-style: none;
+                }
+
+                .text-content ul li {
+                    margin-bottom: 0.5rem;
+                    position: relative;
+                    padding-left: 20px;
+                }
+
+                .text-content ul li::before {
+                    content: '•';
+                    position: absolute;
+                    left: 0;
+                    color: #C6653A;
+                    font-size: 1.2rem;
+                }
+
+                .text-content ul ul {
+                    padding-left: 20px;
+                    list-style: none;
+                }
+
+                .text-content ul ul li {
+                    margin-bottom: 0.2rem;
+                }
+
+                .text-content ul ul li::before {
+                    content: '•';
+                    position: absolute;
+                    left: 0;
+                    color: #C6653A;
+                    font-size: 1rem;
+                }
+
+                /* 分享弹窗样式 */
+                .share-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 10001;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .share-modal.open {
+                    display: flex;
+                    animation: modalFadeIn 0.3s ease forwards;
+                }
+
+                .share-content {
+                    background-color: #FFFFFF;
+                    padding: 2rem;
+                    border-radius: 15px;
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+                    text-align: center;
+                    transform: scale(0);
+                    animation: modalZoomIn 0.3s ease forwards;
+                    max-width: 400px;
+                    width: 90%;
+                    position: relative;
+                }
+
+                .share-content h3 {
+                    color: #B45647;
+                    margin-bottom: 1.5rem;
+                    font-size: 1.5rem;
+                }
+
+                .share-channels {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .share-channel {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.8rem 1.2rem;
+                    border-radius: 10px;
+                    background-color: #f5f5f5;
+                    transition: all 0.3s ease;
+                    text-decoration: none;
+                    color: #6D7663;
+                }
+
+                .share-channel:hover {
+                    background-color: #EACB9C;
+                    transform: translateY(-2px);
+                }
+
+                .share-icon {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 1rem;
+                }
+
+                .close-share {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    font-size: 1.5rem;
+                    color: #C6653A;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                }
+
+                .close-share:hover {
+                    transform: rotate(90deg);
+                }
+            </style>
+        </head>
+
+        <body>
+            <header class="page-header" id="header" role="banner">
+                <div class="header-inner">
+                    <h1 class="page-title">银发记忆工程</h1>
+                    <button aria-controls="navMenu" aria-expanded="false" aria-label="切换导航菜单" class="nav-toggle" id="navToggle">
+                        <span class="hamburger"></span>
+                    </button>
+                    <nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
+                        <ul class="nav-list" id="navMenu">
+                            <li><a href="#initial-intent">初心所系</a></li>
+                            <li><a href="#memory-heritage">智忆传承</a></li>
+                            <li><a href="#demo">操作演示</a></li>
+                            <li><a href="#team">专业护航</a></li>
+                            <li><a href="#achievements">成果展示</a></li>
+                            <li><a href="#join-us">立即体验</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <main class="page-main" id="main" role="main">
+                <!-- 初心所系 -->
+                <section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
+                    <div class="split-section">
+                        <div class="text-content">
+                            <h1 id="initial-intent-title">初心所系</h1>
+                            <h2>项目缘起</h2>
+                            <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
+                            <h2>目标人群</h2>
+                            <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
+                            <button aria-controls="initial-intent-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
+                            <div class="more-content" id="initial-intent-more">
+                                <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
+                                <ul>
+                                    <li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
+                                    <li>同行伙伴：
+                                        <ul>
+                                            <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
+                                            <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
+                                            <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
+                                        </ul>
+                                    </li>
+                                    <li>特别场景：
+                                        <ul>
+                                            <li>多代同堂家庭的「跨代记忆对话」</li>
+                                            <li>地方文化机构的「方言口述史工程」</li>
+                                            <li>养老社区的「长者生命故事集」</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg">
+                    </div>
+                </section>
+                <!-- 智忆传承 -->
+                <section aria-labelledby="memory-heritage-title" class="section-wrapper" id="memory-heritage" tabindex="-1">
+                    <div class="split-section">
+                        <img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg">
+                        <div class="text-content">
+                            <h1 id="memory-heritage-title">智忆传承</h1>
+                            <h2>项目介绍</h2>
+                            <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
+                            <h2>核心价值</h2>
+                            <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
+                            <button aria-controls="memory-heritage-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
+                            <div class="more-content" id="memory-heritage-more">
+                                <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存：</p>
+                                <ul>
+                                    <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
+                                    <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
+                                    <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
+                                </ul>
+                                <ul>
+                                    <li>对长者：
+                                        <ul>
+                                            <li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
+                                            <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
+                                        </ul>
+                                    </li>
+                                    <li>对家庭：
+                                        <ul>
+                                            <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
+                                            <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
+                                        </ul>
+                                    </li>
+                                    <li>对社会：
+                                        <ul>
+                                            <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
+                                            <li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 操作演示 -->
+                <section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
+                    <h1 id="demo-title">操作演示</h1>
+                    <div class="video-container">
+                        <!-- 这里替换为实际的视频ID -->
+                        <iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
+                    </div>
+                </section>
+                <!-- 专业护航 -->
+                <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
+                    <h1 id="team-title">专业护航</h1>
+                    <div class="team-introduction">
+                        <div>
+                            <h2>指导教师</h2>
+                            <div class="team-members">
+                                <div class="team-member">
+                                    <img alt="指导教师1" src="images/teacher1.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>计算语言学专家</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="指导教师2" src="images/teacher2.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>中国文学专家</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="指导教师3" src="images/teacher3.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>口述史研究专家</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h2>团队成员</h2>
+                            <div class="team-members">
+                                <div class="team-member">
+                                    <img alt="团队成员1" src="images/member1.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>算法设计</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="团队成员2" src="images/member2.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>产品设计</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="团队成员3" src="images/member3.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>前端开发</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="团队成员4" src="images/member4.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>后端开发</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="团队成员5" src="images/member5.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>UI/UX设计</p>
+                                </div>
+                                <div class="team-member">
+                                    <img alt="团队成员6" src="images/member6.jpg">
+                                    <h4>某某某某</h4>
+                                    <p>数据处理</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 成果展示 -->
+                <section aria-labelledby="achievements-title" class="section-wrapper" id="achievements" tabindex="-1">
+                    <h1 id="achievements-title">成果展示</h1>
+                    <div aria-label="成果展示轮播图" class="image-slider">
+                        <button aria-label="上一张图片" class="slider-btn prev">‹</button>
+                        <button aria-label="下一张图片" class="slider-btn next">›</button>
+                        <div class="slider-images" role="region">
+                            <img src="image1.jpg" alt="成果展示1" class="slider-image active">
+                            <img src="image2.jpg" alt="成果展示2" class="slider-image">
+                            <img src="image3.jpg" alt="成果展示3" class="slider-image">
+                        </div>
+                        <div class="slider-indicators">
+                            <button class="active"></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                    </div>
+                </section>
+                <!-- 加入记忆守护计划 -->
+                <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
+                    <h1 id="join-us-title">加入记忆守护计划</h1>
+                    <div class="text-content">
+                        <p>即刻行动：</p>
+                        <ul>
+                            <li>家庭用户：免费试用，为长辈制作专属记忆档案</li>
+                            <li>机构合作：申请「记忆方舟」公益项目，获取技术支持</li>
+                            <li>志愿者招募：欢迎技术、传媒、社会学背景的伙伴加入</li>
+                        </ul>
+                        <div class="experience-section">
+                            <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <footer class="page-footer">
+                © 银发记忆工程 版权所有
+                <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
+            </footer>
+            <!-- 浮动图标按钮 -->
+            <div class="floating-icons">
+                <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="floating-icon" target="_blank">
+                    <img src="docs/images/boat_icon.png" alt="记忆小舟">
+                    <span>开始讲述</span>
+                </a>
+                <div class="floating-icon" id="shareButton">
+                    <img src="docs/images/share_icon.png" alt="分享按钮">
+                    <span>欢迎分享</span>
+                </div>
+            </div>
+            <!-- 弹窗 -->
+            <div class="submit-modal" id="submitModal">
+                <div class="modal-content">
+                    <h2>提交成功</h2>
+                    <p>感谢您的参与！</p>
+                    <button class="close-button" id="closeModal">关闭</button>
+                </div>
+            </div>
+            <!-- 分享弹窗 -->
+            <div class="share-modal" id="shareModal">
+                <div class="share-content">
+                    <div class="close-share" id="closeShare">×</div>
+                    <h3>分享渠道</h3>
+                    <div class="share-channels">
+                        <a href="mailto:example@example.com" class="share-channel" target="_blank">
+                            <img src="images/email-icon.png" alt="邮箱图标" class="share-icon">
+                            <span>官方邮箱：example@example.com</span>
+                        </a>
+                        <a href="https://www.xiaohongshu.com/user/profile/xxxxxx" class="share-channel" target="_blank">
+                            <img src="images/xiaohongshu-icon.png" alt="小红书图标" class="share-icon">
+                            <span>官方小红书：银发记忆工程</span>
+                        </a>
+                        <!-- 可根据需要添加更多分享渠道 -->
+                    </div>
+                </div>
+            </div>
+            <script>
+                // 导航菜单切换
+                const navToggle = document.getElementById('navToggle');
+                const navMenu = document.getElementById('navMenu');
+
+                navToggle.addEventListener('click', () => {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('open');
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+
+                // 了解更多按钮
+                const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+                toggleButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetId = button.getAttribute('aria-controls');
+                        const targetElement = document.getElementById(targetId);
+                        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                        button.setAttribute('aria-expanded', !isExpanded);
+                        targetElement.classList.toggle('expanded');
+                    });
+                });
+
+                // 轮播图
+                const sliderImages = document.querySelectorAll('.slider-image');
+                const sliderIndicators = document.querySelectorAll('.slider-indicators button');
+                const prevButton = document.querySelector('.slider-btn.prev');
+                const nextButton = document.querySelector('.slider-btn.next');
+                let currentIndex = 0;
+
+                function showImage(index) {
+                    sliderImages.forEach((image, i) => {
+                        if (i === index) {
+                            image.classList.add('active');
+                        } else {
+                            image.classList.remove('active');
+                        }
+                    });
+                    sliderIndicators.forEach((indicator, i) => {
+                        if (i === index) {
+                            indicator.classList.add('active');
+                        } else {
+                            indicator.classList.remove('active');
+                        }
+                    });
+                }
+
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % sliderImages.length;
+                    showImage(currentIndex);
+                }
+
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
+                    showImage(currentIndex);
+                }
+
+                nextButton.addEventListener('click', nextImage);
+                prevButton.addEventListener('click', prevImage);
+
+                sliderIndicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        currentIndex = index;
+                        showImage(currentIndex);
+                    });
+                });
+
+                // 弹窗
+                const submitModal = document.getElementById('submitModal');
+                const closeModalButton = document.getElementById('closeModal');
+
+                function openModal() {
+                    submitModal.classList.add('open');
+                }
+
+                function closeModal() {
+                    submitModal.classList.remove('open');
+                }
+
+                closeModalButton.addEventListener('click', closeModal);
+
+                // 分享弹窗
+                const shareModal = document.getElementById('shareModal');
+                const shareButton = document.getElementById('shareButton');
+                const closeShareButton = document.getElementById('closeShare');
+
+                function openShareModal() {
+                    shareModal.classList.add('open');
+                }
+
+                function closeShareModal() {
+                    shareModal.classList.remove('open');
+                }
+
+                shareButton.addEventListener('click', openShareModal);
+                closeShareButton.addEventListener('click', closeShareModal);
+
+                // 点击模态框外部关闭弹窗
+                shareModal.addEventListener('click', (e) => {
+                    if (e.target === shareModal) {
+                        closeShareModal();
+                    }
+                });
+
+                // 滚动时导航栏样式变化
+                window.addEventListener('scroll', () => {
+                    const header = document.getElementById('header');
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            </script>
+        </body>
+        </html>
+    
