@@ -577,7 +577,7 @@
                 }
 
                 .floating-icon {
-                    background-color: rgba(255, 255, 255, 0.8);
+                    background-color: rgba(255, 255, 255, 0.5);
                     border-radius: 8px;
                     box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
                     cursor: pointer;
@@ -592,14 +592,14 @@
 
                 /* 上方按钮样式 */
                 .floating-icon:first-child {
-                    width: 100px; /* 固定宽度，使两个按钮接触边同宽 */
-                    height: 119px; /* 根据图片比例 633:754 计算得出 */
+                    width: 50px; /* 固定宽度，使两个按钮接触边同宽 */
+                    height: 60px; /* 根据图片比例 633:754 计算得出 */
                 }
 
                 /* 下方按钮样式 */
                 .floating-icon:last-child {
-                    width: 100px; /* 与上方按钮同宽 */
-                    height: 24px; /* 根据图片比例 967:230 计算得出 */
+                    width: 50px; /* 与上方按钮同宽 */
+                    height: 15px; /* 根据图片比例 967:230 计算得出 */
                 }
 
                 /* 图片样式 */
@@ -618,6 +618,8 @@
                     border-radius: 4px;
                     white-space: nowrap;
                     font-weight: 600;
+                    opacity: 1; /* 始终显示文字 */
+                    transition: opacity 0.3s ease; /* 保留过渡效果 */
                 }
 
                 /* 第一个按钮（记忆小舟）的文字在上方 */
