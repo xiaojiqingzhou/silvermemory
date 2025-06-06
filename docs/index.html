@@ -565,78 +565,83 @@
                     letter-spacing: 0.1rem;
                 }
 
-            /* ========== 浮动图标按钮 ========== */
+              /* ========== 浮动图标按钮 ========== */
                 .floating-icons {
                     position: fixed;
                     bottom: 30px;
                     right: 30px;
                     display: flex;
                     flex-direction: column;
-                    gap: 0; /* 消除间距，使按钮紧贴 */
+                    gap: 0; /* 保持原有间距 */
                     z-index: 10000;
                 }
 
+
                 .floating-icon {
-                    background-color: rgba(255, 255, 255, 0.2);/* 降低背景透明度 */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    position: relative;
+                }            
+
+                /* 按钮样式 */
+                .floating-icon-button {
+                    background-color: rgba(255, 255, 255, 0.2);
                     border-radius: 8px;
                     box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
-                    cursor: pointer;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     transition: all 0.3s ease;
-                    position: relative;
+                    overflow: hidden;
                     animation: pulse 3s infinite;
-                    overflow: hidden; /* 防止图片溢出 */
                 }
 
                 /* 上方按钮样式 */
-                .floating-icon:first-child {
-                    width: 75px; /* 固定宽度，使两个按钮接触边同宽 */
-                    height: 90px; /* 根据图片比例 633:754 计算得出 */
+                .floating-icon:first-child .floating-icon-button {
+                    width: 75px; /* 保持原有宽度 */
+                    height: 90px; /* 保持原有高度 */
                 }
 
                 /* 下方按钮样式 */
-                .floating-icon:last-child {
-                    width: 75px; /* 与上方按钮同宽 */
-                    height: 22.5px; /* 根据图片比例 967:230 计算得出 */
+                .floating-icon:last-child .floating-icon-button {
+                    width: 75px; /* 保持原有宽度 */
+                    height: 22.5px; /* 保持原有高度 */
                 }
 
                 /* 图片样式 */
-                .floating-icon img {
+                .floating-icon-button img {
                     width: 100%;
                     height: 100%;
-                    object-fit: cover; /* 保持图片比例，覆盖整个按钮区域 */
+                    object-fit: cover;
                 }
 
-                .floating-icon span {
-                    position: absolute;
+                /* 文字样式 - 按钮外侧 */
+                .floating-icon-text {
                     font-size: 0.8rem;
                     color: #C6653A;
                     background-color: rgba(255, 255, 255, 0.8);
                     padding: 2px 6px;
                     border-radius: 4px;
-                    white-space: nowrap;
                     font-weight: 600;
-                    opacity: 1; /* 始终显示文字 */
-                    transition: opacity 0.3s ease; /* 保留过渡效果 */
+                    white-space: nowrap;
+                    opacity: 1;
+                    transition: all 0.3s ease;
                 }
 
                 /* 第一个按钮（记忆小舟）的文字在上方 */
-                .floating-icon:first-child span {
-                    bottom: calc(100% + 8px);
-                    left: 50%;
-                    transform: translateX(-50%);
+                .floating-icon:first-child .floating-icon-text {
+                    margin-bottom: 8px; /* 保持与原代码一致的间距 */
                 }
 
                 /* 第二个按钮（欢迎分享）的文字在下方 */
-                .floating-icon:last-child span {
-                    top: calc(100% + 8px);
-                    left: 50%;
-                    transform: translateX(-50%);
+                .floating-icon:last-child .floating-icon-text {
+                    margin-top: 8px; /* 保持与原代码一致的间距 */
                 }
 
-                /* 呼吸动画按钮 */
+                /* 呼吸动画 */
                 @keyframes pulse {
                     0% {
                         transform: scale(0.99);
@@ -673,12 +678,22 @@
                 }
 
                 /* 应用动画 */
-                .floating-icon:nth-child(1):hover {
+                .floating-icon:nth-child(1):hover .floating-icon-button {
                     animation: floatUpDown 1s ease-in-out infinite;
                 }
 
-                .floating-icon:nth-child(2):hover {
+                .floating-icon:nth-child(2):hover .floating-icon-button {
                     animation: floatLeftRight 1s ease-in-out infinite;
+                }
+
+                /* 鼠标悬停效果 */
+                .floating-icon:hover .floating-icon-button {
+                    box-shadow: 0 8px 25px rgba(198, 101, 58, 0.4);
+                    transform: scale(1.05);
+                }
+
+                .floating-icon:hover .floating-icon-text {
+                    transform: translateY(-2px);
                 }
 
                 /* ========== 弹窗样式 ========== */
@@ -1241,12 +1256,16 @@
                       <!-- 浮动图标按钮 -->
                 <div class="floating-icons">
                     <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="floating-icon" target="_blank">
-                        <img src="images/boat_icon.png" alt="记忆小舟"> <!-- 路径正确，无需修改 -->
-                        <span>开始讲述</span> <!-- 文字正常显示 -->
-                    </a>
+                        <span class="floating-icon-text">开始讲述</span>
+                        <div class="floating-icon-button">
+                                <img src="images/boat_icon.png" alt="记忆小舟">
+                        </div>
+                    </a>     
                     <div class="floating-icon" id="shareButton">
-                        <img src="images/sea_icon.png" alt="欢迎分享"> <!-- 关键修改：将sea_icon.png改为boat_icon.png -->
-                        <span>欢迎分享</span> <!-- 文字正常显示 -->
+                        <div class="floating-icon-button">
+                                <img src="images/sea_icon.png" alt="欢迎分享">
+                        </div>
+                        <span class="floating-icon-text">欢迎分享</span>
                     </div>
                 </div>
              <!-- 弹窗 -->
