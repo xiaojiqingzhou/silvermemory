@@ -577,7 +577,7 @@
                 }
 
                 .floating-icon {
-                    background-color: rgba(255, 255, 255, 0.5);
+                    background-color: rgba(255, 255, 255, 0.2);/* 降低背景透明度 */
                     border-radius: 8px;
                     box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
                     cursor: pointer;
@@ -592,14 +592,14 @@
 
                 /* 上方按钮样式 */
                 .floating-icon:first-child {
-                    width: 50px; /* 固定宽度，使两个按钮接触边同宽 */
-                    height: 60px; /* 根据图片比例 633:754 计算得出 */
+                    width: 75px; /* 固定宽度，使两个按钮接触边同宽 */
+                    height: 90px; /* 根据图片比例 633:754 计算得出 */
                 }
 
                 /* 下方按钮样式 */
                 .floating-icon:last-child {
-                    width: 50px; /* 与上方按钮同宽 */
-                    height: 15px; /* 根据图片比例 967:230 计算得出 */
+                    width: 75px; /* 与上方按钮同宽 */
+                    height: 22.5px; /* 根据图片比例 967:230 计算得出 */
                 }
 
                 /* 图片样式 */
@@ -639,15 +639,15 @@
                 /* 呼吸动画按钮 */
                 @keyframes pulse {
                     0% {
-                        transform: scale(0.98);
-                        box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3);
+                        transform: scale(0.99);
+                        box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.2);
                     }
                     70% {
-                        transform: scale(1.02);
+                        transform: scale(1.01);
                         box-shadow: 0 0 0 10px rgba(198, 101, 58, 0);
                     }
                     100% {
-                        transform: scale(0.98);
+                        transform: scale(0.99);
                         box-shadow: 0 0 0 0 rgba(198, 101, 58, 0);
                     }
                 }
@@ -668,7 +668,7 @@
                         transform: translateX(0);
                     }
                     50% {
-                        transform: translateX(-8px);
+                        transform: translateX(-6px);
                     }
                 }
 
