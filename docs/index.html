@@ -1031,6 +1031,22 @@
                 .close-share:hover {
                     transform: rotate(90deg);
                 }
+
+                .floating-icon-label {
+                    font-size: 0.85rem;
+                    color: #C6653A;
+                    font-weight: 600;
+                    text-align: center;
+                    background-color: rgba(255,255,255,0.9);
+                    padding: 3px 6px;
+                    border-radius: 6px;
+                    margin: 6px auto;
+                    width: fit-content;
+                    max-width: 100px;
+                    align-self: center;
+                    z-index: 10001;
+                }
+    
             </style>
         </head>
 
@@ -1240,14 +1256,14 @@
                 
                       <!-- 浮动图标按钮 -->
                 <div class="floating-icons">
+                    <div class="floating-icon-label">开始讲述</div>
                     <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" class="floating-icon" target="_blank">
                         <img src="images/boat_icon.png" alt="记忆小舟"> <!-- 路径正确，无需修改 -->
-                        <span>开始讲述</span> <!-- 文字正常显示 -->
                     </a>
                     <div class="floating-icon" id="shareButton">
                         <img src="images/sea_icon.png" alt="欢迎分享"> <!-- 关键修改：将sea_icon.png改为boat_icon.png -->
-                        <span>欢迎分享</span> <!-- 文字正常显示 -->
                     </div>
+                    <div class="floating-icon-label">欢迎分享</div>
                 </div>
              <!-- 弹窗 -->
             <div class="submit-modal" id="submitModal">
