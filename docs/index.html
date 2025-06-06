@@ -572,14 +572,14 @@
                     right: 30px;
                     display: flex;
                     flex-direction: column;
-                    gap: 10px; /* 调整按钮间距 */
+                    gap: 0; /* 调整按钮间距 */
                     z-index: 10000;
                 }
 
                 .floating-icon {
                     background-color: rgba(255, 255, 255, 0.8);
-                    width: 50px; /* 限定按钮宽度 */
-                    height: 50px; /* 限定按钮高度 */
+                    width: 80px; /* 限定按钮宽度 */
+                    height: 80px; /* 限定按钮高度 */
                     border-radius: 8px;
                     box-shadow: 0 6px 18px rgba(198, 101, 58, 0.3);
                     cursor: pointer;
@@ -590,16 +590,26 @@
                     position: relative;
                     animation: pulse 3s infinite;
                 }
+                /* 调整按钮间距和圆角，使接触边同宽 */
+                .floating-icon:first-child {
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
 
+                .floating-icon:last-child {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    margin-top: -1px; /* 消除间隙 */
+                }
                 /* 移除边框 */
                 .floating-icon {
                     border: none;
                 }
 
-                /* 空图片占位 */
+               /* 调整图片大小 */
                 .floating-icon img {
-                    width: 60%; /* 调整图片大小 */
-                    height: 60%;
+                    width: 90%; /* 增大图片比例 */
+                    height: 90%;
                     object-fit: contain;
                 }
 
