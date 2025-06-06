@@ -588,7 +588,6 @@
                     position: relative;
                     animation: pulse 3s infinite;
                     overflow: hidden; /* 防止图片溢出 */
-                    z-index: 10000; /* 确保按钮层级足够高 */
                 }
 
                 /* 上方按钮样式 */
@@ -621,7 +620,6 @@
                     font-weight: 600;
                     opacity: 1; /* 始终显示文字 */
                     transition: opacity 0.3s ease; /* 保留过渡效果 */
-                    z-index: 10001; /* 确保文字层级比按钮更高 */
                 }
 
                 /* 第一个按钮（记忆小舟）的文字在上方 */
@@ -1249,7 +1247,7 @@
                     <div class="floating-icon" id="shareButton">
                         <img src="images/sea_icon.png" alt="欢迎分享"> <!-- 关键修改：将sea_icon.png改为boat_icon.png -->
                         <span>欢迎分享</span> <!-- 文字正常显示 -->
-                    </a>
+                    </div>
                 </div>
              <!-- 弹窗 -->
             <div class="submit-modal" id="submitModal">
