@@ -525,6 +525,44 @@
                     line-height: 1.5;
                 }
 
+                /* 团队分组容器 */
+                .team-groups {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+
+                /* 团队分组卡片 */
+                .team-group {
+                    background-color: #FDFDFD;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    border: 1px solid #EACB9C;
+                    padding: 1.5rem;
+                }
+
+                .team-group:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+                }
+
+                /* 组标题 */
+                .group-title {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    color: #956E50;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                    user-select: none;
+                }
+
+                /* 组内成员容器 */
+                .group-members {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+
                 /* 窄屏模式下团队成员模块的缩放调整 */
                 @media (max-width: 768px) {
                     .team-member {
@@ -542,6 +580,61 @@
 
                     .team-member p {
                         font-size: 0.9rem;
+                    }
+
+                  /* 分组在窄屏模式下的调整 */
+                    .group-members {
+                        grid-template-columns: 1fr;
+                    }
+                 /* 其他响应式调整 */
+                    .page-header {
+                        padding: 0.7rem 1rem;
+                    }
+
+                    .page-title {
+                        font-size: 1.5rem;
+                    }
+
+                    .page-main {
+                        padding: 90px 1rem 2rem;
+                        max-width: 100%;
+                    }
+
+                    .section-wrapper {
+                        padding: 1.5rem;
+                    }
+
+                    .split-section {
+                        grid-template-columns: 1fr;
+                        padding: 1.5rem 1rem;
+                        gap: 1.5rem;
+                    }
+
+                    .split-section > div {
+                        min-width: auto;
+                        padding: 0;
+                        margin-bottom: 1rem;
+                    }
+
+                    .image-slider {
+                        height: 250px;
+                    }
+
+                    .slider-btn {
+                        font-size: 1.2rem;
+                        padding: 0.4rem 0.7rem;
+                    }
+
+                    .team-members {
+                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    }
+
+                    h1 {
+                        font-size: 1.8rem;
+                    }
+
+                    h2 {
+                        font-size: 1.5rem;
                     }
                 }
 
@@ -1153,7 +1246,7 @@
                         <iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.youtube.com/embed/your-video-id" title="记忆小舟操作演示视频"></iframe>
                     </div>
                 </section>
-                <!-- 专业护航 -->
+              <!-- 专业护航 -->
                 <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
                     <h1 id="team-title">专业护航</h1>
                     <div class="team-introduction">
@@ -1179,36 +1272,56 @@
                         </div>
                         <div>
                             <h2>团队成员</h2>
-                            <div class="team-members">
-                                <div class="team-member">
-                                    <img alt="团队成员1" src="images/member1.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>算法设计</p>
+                            <div class="team-groups">
+                                <!-- 第1组 -->
+                                <div class="team-group">
+                                    <h3 class="group-title">第1组</h3>
+                                    <div class="team-members group-members">
+                                        <div class="team-member">
+                                            <img alt="团队成员1" src="images/member1.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>算法设计</p>
+                                        </div>
+                                        <div class="team-member">
+                                            <img alt="团队成员2" src="images/member2.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>产品设计</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="team-member">
-                                    <img alt="团队成员2" src="images/member2.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>产品设计</p>
+                
+                                <!-- 第2组 -->
+                                <div class="team-group">
+                                    <h3 class="group-title">第2组</h3>
+                                    <div class="team-members group-members">
+                                        <div class="team-member">
+                                            <img alt="团队成员3" src="images/member3.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>前端开发</p>
+                                        </div>
+                                        <div class="team-member">
+                                            <img alt="团队成员4" src="images/member4.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>后端开发</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="team-member">
-                                    <img alt="团队成员3" src="images/member3.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>前端开发</p>
-                                </div>
-                                <div class="team-member">
-                                    <img alt="团队成员4" src="images/member4.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>后端开发</p>
-                                </div>
-                                <div class="team-member">
-                                    <img alt="团队成员5" src="images/member5.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>UI/UX设计</p>
-                                </div>
-                                <div class="team-member">
-                                    <img alt="团队成员6" src="images/member6.jpg">
-                                    <h4>某某某某</h4>
-                                    <p>数据处理</p>
+                
+                                <!-- 第3组 -->
+                                <div class="team-group">
+                                    <h3 class="group-title">第3组</h3>
+                                    <div class="team-members group-members">
+                                        <div class="team-member">
+                                            <img alt="团队成员5" src="images/member5.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>UI/UX设计</p>
+                                        </div>
+                                        <div class="team-member">
+                                            <img alt="团队成员6" src="images/member6.jpg">
+                                            <h4>某某某某</h4>
+                                            <p>数据处理</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
