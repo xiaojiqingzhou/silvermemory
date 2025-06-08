@@ -566,20 +566,21 @@
                 /* 窄屏模式下团队成员模块的缩放调整 */
                 @media (max-width: 768px) {
                     .team-member {
-                        padding: 1rem;
+                        padding: 0.8rem;
                     }
 
                     .team-member img {
-                        width: 80px;
-                        height: 80px;
+                        width: 60px;
+                        height: 60px;
+                        margin-bottom: 0.5rem; /* 缩小图片底部间距 */
                     }
 
                     .team-member h4 {
-                        font-size: 1.1rem;
+                        font-size: 1rem;
                     }
 
                     .team-member p {
-                        font-size: 0.9rem;
+                        font-size: 0.8rem;
                     }
 
                   /* 分组在窄屏模式下的调整 */
@@ -626,7 +627,7 @@
                     }
 
                     .team-members {
-                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                     }
 
                     h1 {
