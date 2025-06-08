@@ -177,8 +177,6 @@
                     }
 
                     .page-nav ul.open {
-                        transform: scaleY(1);
-                        opacity: 1;
                         display: flex;
                         opacity: 1;
                         transform: scaleY(1) translateX(0);
@@ -214,6 +212,12 @@
 
                     .nav-toggle {
                         display: flex;
+                    }
+
+                /* 确保关闭菜单时也有动画效果 */
+                    .page-nav ul.closing {
+                        opacity: 0;
+                        transform: scaleY(0.8) translateX(-10px);
                     }
                 }
 
@@ -1413,12 +1417,28 @@
                 const navToggle = document.getElementById('navToggle');
                 const navMenu = document.getElementById('navMenu');
 
-                navToggle.addEventListener('click', () => {
-                    navToggle.classList.toggle('active');
-                    navMenu.classList.toggle('open');
-                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-                    navToggle.setAttribute('aria-expanded', !isExpanded);
-                });
+                navToggle.addEventListener('click', function() {
+                        if (pageNav.classList.contains('open')) {
+                            // 收起菜单的动画逻辑
+                            pageNav.classList.remove('open');
+                            pageNav.classList.add('closing');
+                            setTimeout(() => {
+                                pageNav.classList.remove('closing');
+                                pageNav.style.display = 'none';
+                            }, 400); // 与 CSS 过渡时间一致
+                        } else {
+                            // 展开菜单的动画逻辑
+                            pageNav.style.display = 'flex';
+                            setTimeout(() => {
+                                pageNav.classList.add('open');
+                            }, 10); // 确保显示后再添加 open 类
+                        }
+                        this.classList.toggle('active');
+        
+                        // 更新无障碍属性
+                        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                        navToggle.setAttribute('aria-expanded', !isExpanded);
+                    });
 
                 // 了解更多按钮
                 const toggleButtons = document.querySelectorAll('.btn-toggle-more');
