@@ -1434,16 +1434,20 @@
                 });
 
                 // 了解更多按钮
-                const toggleButtons = document.querySelectorAll('.btn-toggle-more');
                 toggleButtons.forEach(button => {
                     button.addEventListener('click', () => {
                         const targetId = button.getAttribute('aria-controls');
                         const targetElement = document.getElementById(targetId);
                         const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
                         button.setAttribute('aria-expanded', !isExpanded);
                         targetElement.classList.toggle('expanded');
+
+                        // 切换按钮文字
+                        button.textContent = isExpanded ? '了解更多' : '收起';
                     });
                 });
+
 
                 // 轮播图
                 const sliderImages = document.querySelectorAll('.slider-image');
