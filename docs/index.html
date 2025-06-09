@@ -1436,12 +1436,23 @@
                 // 了解更多按钮
                 const toggleButtons = document.querySelectorAll('.btn-toggle-more');
                 toggleButtons.forEach(button => {
+                    // 保存原始文本作为"了解更多"状态
+                    const moreText = button.textContent;
+                    const lessText = '收起'; // 定义"收起"状态的文本
+    
                     button.addEventListener('click', () => {
                         const targetId = button.getAttribute('aria-controls');
                         const targetElement = document.getElementById(targetId);
                         const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+                        // 更新aria-expanded属性
                         button.setAttribute('aria-expanded', !isExpanded);
+        
+                        // 切换目标元素的展开状态
                         targetElement.classList.toggle('expanded');
+                        
+                        // 根据展开状态更新按钮文本
+                        button.textContent = isExpanded ? moreText : lessText;
                     });
                 });
 
