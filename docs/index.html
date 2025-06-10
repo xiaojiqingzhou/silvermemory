@@ -229,30 +229,6 @@
                     margin-bottom: 2rem;
                     transition: transform 0.3s ease;
                 }
-                 /* ========== 卡片布局 ========== */
-                .card-container {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 2rem;
-                    margin: 4rem 1.5rem;
-                }
-
-                .vertical-card {
-                    grid-row: span 2; /* 纵向占两列高度 */
-                }
-
-                .horizontal-card-group {
-                    display: grid;
-                     grid-template-rows: 1fr 1fr;
-                    gap: 2rem;
-                }
-
-                .horizontal-card {
-                    background: linear-gradient(135deg, #EACB9C 0%, #FDFDFD 100%);
-                    padding: 2rem;
-                    border-radius: 15px;
-                    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-                }
 
                 .section-wrapper:hover {
                     transform: translateY(-5px);
@@ -1177,457 +1153,387 @@
 </head>
 <body>
 <header class="page-header" id="header" role="banner">
-  <div class="header-inner">
-    <h1 class="page-title">银发记忆工程</h1>
-    <button aria-controls="navMenu" aria-expanded="false" aria-label="切换导航菜单" class="nav-toggle" id="navToggle">
-      <span class="hamburger"></span>
-    </button>
-    <nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
-      <ul class="nav-list" id="navMenu">
-        <li><a href="#demo">操作演示</a></li>
-        <li><a href="#join-us">立即体验</a></li>
-        <li><a href="#initial-intent">初心所系</a></li>
-        <li><a href="#memory-heritage">智忆传承</a></li>
-        <li><a href="#team">专业护航</a></li>
-        <li><a href="#achievements">成果展示</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="header-inner">
+<h1 class="page-title">银发记忆工程</h1>
+<button aria-controls="navMenu" aria-expanded="false" aria-label="切换导航菜单" class="nav-toggle" id="navToggle">
+<span class="hamburger"></span>
+</button>
+<nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
+<ul class="nav-list" id="navMenu"><li><a href="#demo">操作演示</a></li><li><a href="#join-us">立即体验</a></li><li><a href="#initial-intent">初心所系</a></li><li><a href="#memory-heritage">智忆传承</a></li><li><a href="#team">专业护航</a></li><li><a href="#achievements">成果展示</a></li></ul>
+</nav>
+</div>
 </header>
-
 <main class="page-main" id="main" role="main">
-  <!-- 新增卡片布局区域 -->
-  <div class="card-container">
-    <!-- 左侧纵向卡片：立即体验 -->
-    <section aria-labelledby="join-us-title" class="section-wrapper vertical-card" id="join-us" tabindex="-1">
-      <h1 id="join-us-title">加入记忆守护计划</h1>
-      <div class="text-content">
-        <p>即刻行动：</p>
-        <ul>
-          <li>家庭用户：免费试用，为长辈制作专属记忆档案</li>
-          <li>机构合作：申请「记忆方舟」公益项目，获取技术支持</li>
-          <li>志愿者招募：欢迎技术、传媒、社会学背景的伙伴加入</li>
-        </ul>
-        <div class="experience-section">
-          <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
-        </div>
-      </div>
-    </section>
+<!-- 初心所系 -->
 
-    <!-- 右侧横向卡片组 -->
-    <div class="horizontal-card-group">
-      <!-- 顶部卡片：操作指南（原操作演示） -->
-      <section aria-labelledby="demo-title" class="section-wrapper horizontal-card" id="demo" tabindex="-1">
-        <h1 id="demo-title">操作指南</h1>
-        <div class="video-container">
-          <video controls="" poster="images/video-poster.jpg" preload="metadata">
-            <source src="videos/1402120320.mp4" type="video/mp4"/>
-            您的浏览器不支持 HTML5 视频播放，请尝试更新浏览器版本。
-          </video>
-        </div>
-      </section>
+<!-- 智忆传承 -->
 
-      <!-- 底部卡片：投稿分享（复制悬浮按钮功能） -->
-      <section class="section-wrapper horizontal-card" id="share-card" tabindex="-1">
-        <h2 class="card-title">投稿分享</h2>
-        <div class="text-content">
-          <p>分享长辈记忆，让故事被更多人看见</p>
-          <ul>
-            <li>点击按钮提交长辈的记忆故事</li>
-            <li>支持文字、语音、照片多形式投稿</li>
-            <li>优秀作品将入选「时光博物馆」</li>
-          </ul>
-          <div class="share-button" onclick="openShareModal()">
-            <a class="button-link">立即投稿</a>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
 
-  <!-- 原有内容区域：初心所系 -->
-  <section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
-    <div class="split-section">
-      <div class="text-content">
-        <h1 id="initial-intent-title">初心所系</h1>
-        <h2>项目缘起</h2>
-        <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
-        <h2>目标人群</h2>
-        <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
-        <button aria-controls="initial-intent-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
-        <div class="more-content" id="initial-intent-more">
-          <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
-          <ul>
-            <li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
-            <li>同行伙伴：
-              <ul>
-                <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
-                <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
-                <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
-              </ul>
-            </li>
-            <li>特别场景：
-              <ul>
-                <li>多代同堂家庭的「跨代记忆对话」</li>
-                <li>地方文化机构的「方言口述史工程」</li>
-                <li>养老社区的「长者生命故事集」</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg"/>
-    </div>
-  </section>
+<!-- 操作演示 -->
 
-  <!-- 原有内容区域：智忆传承 -->
-  <section aria-labelledby="memory-heritage-title" class="section-wrapper" id="memory-heritage" tabindex="-1">
-    <div class="split-section">
-      <img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg"/>
-      <div class="text-content">
-        <h1 id="memory-heritage-title">智忆传承</h1>
-        <h2>项目介绍</h2>
-        <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
-        <h2>核心价值</h2>
-        <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
-        <button aria-controls="memory-heritage-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
-        <div class="more-content" id="memory-heritage-more">
-          <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存：</p>
-          <ul>
-            <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
-            <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
-            <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
-          </ul>
-          <ul>
-            <li>对长者：
-              <ul>
-                <li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
-                <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
-              </ul>
-            </li>
-            <li>对家庭：
-              <ul>
-                <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
-                <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
-              </ul>
-            </li>
-            <li>对社会：
-              <ul>
-                <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
-                <li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- 专业护航 -->
 
-  <!-- 原有内容区域：专业护航 -->
-  <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
-    <h1 id="team-title">专业护航</h1>
-    <div class="team-introduction">
-      <div>
-        <h2>指导教师</h2>
-        <div class="team-members">
-          <div class="team-member">
-            <img alt="指导教师1" src="images/teacher1.jpg"/>
-            <h4>何伟</h4>
-            <p>计算语言学专家</p>
-          </div>
-          <div class="team-member">
-            <img alt="指导教师2" src="images/teacher2.jpg"/>
-            <h4>王永</h4>
-            <p>中国文学专家</p>
-          </div>
-          <div class="team-member">
-            <img alt="指导教师3" src="images/teacher3.jpg"/>
-            <h4>林卉</h4>
-            <p>口述史研究专家</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2>团队成员</h2>
-        <div class="team-groups">
-          <!-- 第1组 -->
-          <div class="team-group">
-            <h3 class="group-title">技术开发</h3>
-            <div class="team-members group-members">
-              <div class="team-member">
-                <img alt="团队成员1" src="images/member1.jpg"/>
-                <h4>陆新蕊</h4>
-                <p>计算语言学 硕士生</p>
-              </div>
-              <div class="team-member">
-                <img alt="团队成员2" src="images/member2.jpg"/>
-                <h4>刘思怡</h4>
-                <p>计算语言学 硕士生</p>
-              </div>
-            </div>
-          </div>
-          <!-- 第2组 -->
-          <div class="team-group">
-            <h3 class="group-title">文化策划</h3>
-            <div class="team-members group-members">
-              <div class="team-member">
-                <img alt="团队成员3" src="images/member3.jpg"/>
-                <h4>武羽柯</h4>
-                <p>出版学 硕士生</p>
-              </div>
-              <div class="team-member">
-                <img alt="团队成员4" src="images/member4.jpg"/>
-                <h4>张乐怡</h4>
-                <p>出版学 硕士生</p>
-              </div>
-            </div>
-          </div>
-          <!-- 第3组 -->
-          <div class="team-group">
-            <h3 class="group-title">传播运营</h3>
-            <div class="team-members group-members">
-              <div class="team-member">
-                <img alt="团队成员5" src="images/member5.jpg"/>
-                <h4>万旭</h4>
-                <p>数字出版 本科生</p>
-              </div>
-              <div class="team-member">
-                <img alt="团队成员6" src="images/member6.jpg"/>
-                <h4>张怡卓含</h4>
-                <p>汉语国际教育 本科生</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- 成果展示 -->
 
-  <!-- 原有内容区域：成果展示 -->
-  <section aria-labelledby="achievements-title" class="section-wrapper" id="achievements" tabindex="-1">
-    <h1 id="achievements-title">成果展示</h1>
-    <div aria-label="成果展示轮播图" class="image-slider">
-      <button aria-label="上一张图片" class="slider-btn prev">‹</button>
-      <button aria-label="下一张图片" class="slider-btn next">›</button>
-      <div class="slider-images" role="region">
-        <img alt="成果展示1" class="slider-image active" src="images/image1.jpg"/>
-        <img alt="成果展示2" class="slider-image" src="images/image2.jpg"/>
-        <img alt="成果展示3" class="slider-image" src="images/image3.jpg"/>
-      </div>
-      <div class="slider-indicators">
-        <button class="active"></button>
-        <button></button>
-        <button></button>
-      </div>
-    </div>
-  </section>
-</main>
+<!-- 加入记忆守护计划 -->
 
+<section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
+<h1 id="demo-title">操作演示</h1>
+<div class="video-container">
+<video controls="" poster="images/video-poster.jpg" preload="metadata">
+<source src="videos/1402120320.mp4" type="video/mp4"/>
+                            您的浏览器不支持 HTML5 视频播放，请尝试更新浏览器版本。
+                        </video>
+</div>
+</section><section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
+<h1 id="join-us-title">加入记忆守护计划</h1>
+<div class="text-content">
+<p>即刻行动：</p>
+<ul>
+<li>家庭用户：免费试用，为长辈制作专属记忆档案</li>
+<li>机构合作：申请「记忆方舟」公益项目，获取技术支持</li>
+<li>志愿者招募：欢迎技术、传媒、社会学背景的伙伴加入</li>
+</ul>
+<div class="experience-section">
+<a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
+</div>
+</div>
+</section><section aria-labelledby="initial-intent-title" class="section-wrapper" id="initial-intent" tabindex="-1">
+<div class="split-section">
+<div class="text-content">
+<h1 id="initial-intent-title">初心所系</h1>
+<h2>项目缘起</h2>
+<p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台</p>
+<h2>目标人群</h2>
+<p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库</p>
+<button aria-controls="initial-intent-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
+<div class="more-content" id="initial-intent-more">
+<p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
+<ul>
+<li>核心主角：60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
+<li>同行伙伴：
+                                        <ul>
+<li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
+<li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
+<li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
+</ul>
+</li>
+<li>特别场景：
+                                        <ul>
+<li>多代同堂家庭的「跨代记忆对话」</li>
+<li>地方文化机构的「方言口述史工程」</li>
+<li>养老社区的「长者生命故事集」</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<img alt="项目缘起图示" loading="lazy" src="images/project-start.jpg"/>
+</div>
+</section><section aria-labelledby="memory-heritage-title" class="section-wrapper" id="memory-heritage" tabindex="-1">
+<div class="split-section">
+<img alt="项目介绍图示" loading="lazy" src="images/advantage.jpg"/>
+<div class="text-content">
+<h1 id="memory-heritage-title">智忆传承</h1>
+<h2>项目介绍</h2>
+<p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库</p>
+<h2>核心价值</h2>
+<p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁</p>
+<button aria-controls="memory-heritage-more" aria-expanded="false" class="btn-toggle-more" type="button">了解更多</button>
+<div class="more-content" id="memory-heritage-more">
+<p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存：</p>
+<ul>
+<li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
+<li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
+<li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容，让个人记忆升华为时代注脚</li>
+</ul>
+<ul>
+<li>对长者：
+                                        <ul>
+<li>打破「表达障碍」：AI助手化身耐心倾听者，让记忆讲述如日常聊天般轻松</li>
+<li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
+</ul>
+</li>
+<li>对家庭：
+                                        <ul>
+<li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生，解锁「熟悉又陌生」的家族密码</li>
+<li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体，让家风故事穿越时光</li>
+</ul>
+</li>
+<li>对社会：
+                                        <ul>
+<li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆，为地方文化保护提供鲜活素材</li>
+<li>科技温度实践：探索「AI适老化」新范式，让银发群体成为技术红利的受益者而非旁观者</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
+<h1 id="team-title">专业护航</h1>
+<div class="team-introduction">
+<div>
+<h2>指导教师</h2>
+<div class="team-members">
+<div class="team-member">
+<img alt="指导教师1" src="images/teacher1.jpg"/>
+<h4>何伟</h4>
+<p>计算语言学专家</p>
+</div>
+<div class="team-member">
+<img alt="指导教师2" src="images/teacher2.jpg"/>
+<h4>王永</h4>
+<p>中国文学专家</p>
+</div>
+<div class="team-member">
+<img alt="指导教师3" src="images/teacher3.jpg"/>
+<h4>林卉</h4>
+<p>口述史研究专家</p>
+</div>
+</div>
+</div>
+<div>
+<h2>团队成员</h2>
+<div class="team-groups">
+<!-- 第1组 -->
+<div class="team-group">
+<h3 class="group-title">技术开发</h3>
+<div class="team-members group-members">
+<div class="team-member">
+<img alt="团队成员1" src="images/member1.jpg"/>
+<h4>陆新蕊</h4>
+<p>计算语言学 硕士生</p>
+</div>
+<div class="team-member">
+<img alt="团队成员2" src="images/member2.jpg"/>
+<h4>刘思怡</h4>
+<p>计算语言学 硕士生</p>
+</div>
+</div>
+</div>
+<!-- 第2组 -->
+<div class="team-group">
+<h3 class="group-title">文化策划</h3>
+<div class="team-members group-members">
+<div class="team-member">
+<img alt="团队成员3" src="images/member3.jpg"/>
+<h4>武羽柯</h4>
+<p>出版学 硕士生</p>
+</div>
+<div class="team-member">
+<img alt="团队成员4" src="images/member4.jpg"/>
+<h4>张乐怡</h4>
+<p>出版学 硕士生</p>
+</div>
+</div>
+</div>
+<!-- 第3组 -->
+<div class="team-group">
+<h3 class="group-title">传播运营</h3>
+<div class="team-members group-members">
+<div class="team-member">
+<img alt="团队成员5" src="images/member5.jpg"/>
+<h4>万旭</h4>
+<p>数字出版 本科生</p>
+</div>
+<div class="team-member">
+<img alt="团队成员6" src="images/member6.jpg"/>
+<h4>张怡卓含</h4>
+<p>汉语国际教育 本科生</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section aria-labelledby="achievements-title" class="section-wrapper" id="achievements" tabindex="-1">
+<h1 id="achievements-title">成果展示</h1>
+<div aria-label="成果展示轮播图" class="image-slider">
+<button aria-label="上一张图片" class="slider-btn prev">‹</button>
+<button aria-label="下一张图片" class="slider-btn next">›</button>
+<div class="slider-images" role="region">
+<img alt="成果展示1" class="slider-image active" src="images/image1.jpg"/>
+<img alt="成果展示2" class="slider-image" src="images/image2.jpg"/>
+<img alt="成果展示3" class="slider-image" src="images/image3.jpg"/>
+</div>
+<div class="slider-indicators">
+<button class="active"></button>
+<button></button>
+<button></button>
+</div>
+</div>
+</section></main>
 <footer class="page-footer">
-  © 银发记忆工程 版权所有
-  <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
+                © 银发记忆工程 版权所有
+                <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
 </footer>
-
-<!-- 浮动图标按钮（完全保留原始代码） -->
+<!-- 浮动图标按钮 -->
 <div class="floating-icons">
-  <a class="floating-icon" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank">
-    <span class="floating-icon-text">开始讲述</span>
-    <div class="floating-icon-button">
-      <img alt="记忆小舟" src="images/boat_icon.png"/>
-    </div>
-
+<a class="floating-icon" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank">
+<span class="floating-icon-text">开始讲述</span>
+<div class="floating-icon-button">
+<img alt="记忆小舟" src="images/boat_icon.png"/>
+</div>
+</a>
+<div class="floating-icon" id="shareButton">
+<div class="floating-icon-button">
+<img alt="欢迎分享" src="images/sea_icon.png"/>
+</div>
+<span class="floating-icon-text">欢迎分享</span>
+</div>
+</div>
+<!-- 弹窗 -->
+<div class="submit-modal" id="submitModal">
+<div class="modal-content">
+<h2>提交成功</h2>
+<p>感谢您的参与！</p>
+<button class="close-button" id="closeModal">关闭</button>
+</div>
+</div>
+<!-- 分享弹窗 -->
+<div class="share-modal" id="shareModal">
+<div class="share-content">
+<div class="close-share" id="closeShare">×</div>
+<h3>分享渠道</h3>
+<div class="share-channels">
+<a class="share-channel" href="mailto:example@example.com" target="_blank">
+<img alt="邮箱图标" class="share-icon" src="images/email-icon.png"/>
+<span>官方邮箱：example@example.com</span>
+</a>
+<a class="share-channel" href="https://www.xiaohongshu.com/user/profile/xxxxxx" target="_blank">
+<img alt="小红书图标" class="share-icon" src="images/xiaohongshu-icon.png"/>
+<span>官方小红书：银发记忆工程</span>
+</a>
+<!-- 可根据需要添加更多分享渠道 -->
+</div>
+</div>
+</div>
 <script>
-  // 导航菜单切换
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
+                // 导航菜单切换
+                const navToggle = document.getElementById('navToggle');
+                const navMenu = document.getElementById('navMenu');
 
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('open');
-    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', !isExpanded);
-  });
+                navToggle.addEventListener('click', () => {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('open');
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                });
 
-  // 平滑滚动
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // 关闭移动端菜单
-      if(navMenu.classList.contains('open')) {
-        navToggle.click();
-      }
-      
-      const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      if(targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100, // 导航栏高度偏移
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  // 了解更多按钮
-  const toggleButtons = document.querySelectorAll('.btn-toggle-more');
-  toggleButtons.forEach(button => {
-    const moreText = button.textContent;
-    const lessText = '收起';
-
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('aria-controls');
-      const targetElement = document.getElementById(targetId);
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-      button.setAttribute('aria-expanded', !isExpanded);
-      targetElement.classList.toggle('expanded');
-      button.textContent = isExpanded ? moreText : lessText;
-    });
-  });
-
-  // 轮播图
-  const sliderImages = document.querySelectorAll('.slider-image');
-  const sliderIndicators = document.querySelectorAll('.slider-indicators button');
-  const prevButton = document.querySelector('.slider-btn.prev');
-  const nextButton = document.querySelector('.slider-btn.next');
-  let currentIndex = 0;
-
-  function showImage(index) {
-    sliderImages.forEach((image, i) => {
-      if (i === index) {
-        image.classList.add('active');
-      } else {
-        image.classList.remove('active');
-      }
-    });
-    sliderIndicators.forEach((indicator, i) => {
-      if (i === index) {
-        indicator.classList.add('active');
-      } else {
-        indicator.classList.remove('active');
-      }
-    });
-  }
-
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % sliderImages.length;
-    showImage(currentIndex);
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-    showImage(currentIndex);
-  }
-
-  nextButton.addEventListener('click', nextImage);
-  prevButton.addEventListener('click', prevImage);
-
-  sliderIndicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      currentIndex = index;
-      showImage(currentIndex);
-    });
-  });
-
-  // 自动轮播
-  let sliderInterval = setInterval(nextImage, 5000);
-
-  // 鼠标悬停时暂停轮播
-  const imageSlider = document.querySelector('.image-slider');
-  imageSlider.addEventListener('mouseenter', () => {
-    clearInterval(sliderInterval);
-  });
-
-  imageSlider.addEventListener('mouseleave', () => {
-    sliderInterval = setInterval(nextImage, 5000);
-  });
-
-  // 弹窗
-  const submitModal = document.getElementById('submitModal');
-  const closeModalButton = document.getElementById('closeModal');
-
-  function openModal() {
-    submitModal.classList.add('open');
-  }
-
-  function closeModal() {
-    submitModal.classList.remove('open');
-  }
-
-  closeModalButton.addEventListener('click', closeModal);
-
-  // 分享弹窗
-  const shareModal = document.getElementById('shareModal');
-  const shareButton = document.getElementById('shareButton');
-  const closeShareButton = document.getElementById('closeShare');
-  const shareCardButton = document.querySelector('.share-button');
-
-  function openShareModal() {
-    shareModal.classList.add('open');
-  }
-
-  function closeShareModal() {
-    shareModal.classList.remove('open');
-  }
-
-  shareButton.addEventListener('click', openShareModal);
-  closeShareButton.addEventListener('click', closeShareModal);
-  shareCardButton.addEventListener('click', openShareModal); // 新增投稿分享按钮事件
-
-  // 点击模态框外部关闭弹窗
-  shareModal.addEventListener('click', (e) => {
-    if (e.target === shareModal) {
-      closeShareModal();
-    }
-  });
-
-  submitModal.addEventListener('click', (e) => {
-    if (e.target === submitModal) {
-      closeModal();
-    }
-  });
-
-  // 滚动时导航栏样式变化
-  window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  // 页面加载完成后执行
-  document.addEventListener('DOMContentLoaded', () => {
-    // 初始化视频
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-      video.addEventListener('loadedmetadata', () => {
-        // 视频元数据加载完成后的处理
-      });
-    });
+                // 了解更多按钮
+                const toggleButtons = document.querySelectorAll('.btn-toggle-more');
+                toggleButtons.forEach(button => {
+                    // 保存原始文本作为"了解更多"状态
+                    const moreText = button.textContent;
+                    const lessText = '收起'; // 定义"收起"状态的文本
     
-    // 初始化图片懒加载
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const image = entry.target;
-            image.classList.add('loaded');
-            imageObserver.unobserve(image);
-          }
-        });
-      });
-      
-      lazyImages.forEach(image => {
-        imageObserver.observe(image);
-      });
-    }
-  });
-</script>
+                    button.addEventListener('click', () => {
+                        const targetId = button.getAttribute('aria-controls');
+                        const targetElement = document.getElementById(targetId);
+                        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+                        // 更新aria-expanded属性
+                        button.setAttribute('aria-expanded', !isExpanded);
+        
+                        // 切换目标元素的展开状态
+                        targetElement.classList.toggle('expanded');
+                        
+                        // 根据展开状态更新按钮文本
+                        button.textContent = isExpanded ? moreText : lessText;
+                    });
+                });
 
+                // 轮播图
+                const sliderImages = document.querySelectorAll('.slider-image');
+                const sliderIndicators = document.querySelectorAll('.slider-indicators button');
+                const prevButton = document.querySelector('.slider-btn.prev');
+                const nextButton = document.querySelector('.slider-btn.next');
+                let currentIndex = 0;
+
+                function showImage(index) {
+                    sliderImages.forEach((image, i) => {
+                        if (i === index) {
+                            image.classList.add('active');
+                        } else {
+                            image.classList.remove('active');
+                        }
+                    });
+                    sliderIndicators.forEach((indicator, i) => {
+                        if (i === index) {
+                            indicator.classList.add('active');
+                        } else {
+                            indicator.classList.remove('active');
+                        }
+                    });
+                }
+
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % sliderImages.length;
+                    showImage(currentIndex);
+                }
+
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
+                    showImage(currentIndex);
+                }
+
+                nextButton.addEventListener('click', nextImage);
+                prevButton.addEventListener('click', prevImage);
+
+                sliderIndicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        currentIndex = index;
+                        showImage(currentIndex);
+                    });
+                });
+
+                // 弹窗
+                const submitModal = document.getElementById('submitModal');
+                const closeModalButton = document.getElementById('closeModal');
+
+                function openModal() {
+                    submitModal.classList.add('open');
+                }
+
+                function closeModal() {
+                    submitModal.classList.remove('open');
+                }
+
+                closeModalButton.addEventListener('click', closeModal);
+
+                // 分享弹窗
+                const shareModal = document.getElementById('shareModal');
+                const shareButton = document.getElementById('shareButton');
+                const closeShareButton = document.getElementById('closeShare');
+
+                function openShareModal() {
+                    shareModal.classList.add('open');
+                }
+
+                function closeShareModal() {
+                    shareModal.classList.remove('open');
+                }
+
+                shareButton.addEventListener('click', openShareModal);
+                closeShareButton.addEventListener('click', closeShareModal);
+
+                // 点击模态框外部关闭弹窗
+                shareModal.addEventListener('click', (e) => {
+                    if (e.target === shareModal) {
+                        closeShareModal();
+                    }
+                });
+
+                // 滚动时导航栏样式变化
+                window.addEventListener('scroll', () => {
+                    const header = document.getElementById('header');
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            </script>
 </body>
 </html>
