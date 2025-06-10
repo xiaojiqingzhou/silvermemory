@@ -1227,7 +1227,7 @@
         </div>
       </section>
 
-      <!-- 底部卡片：投稿分享（复制悬浮按钮功能） -->
+      <!-- 底部卡片：投稿分享（共用分享弹窗） -->
       <section class="section-wrapper horizontal-card" id="share-card" tabindex="-1">
         <h2 class="card-title">投稿分享</h2>
         <div class="text-content">
@@ -1237,6 +1237,7 @@
             <li>支持文字、语音、照片多形式投稿</li>
             <li>优秀作品将入选「时光博物馆」</li>
           </ul>
+          <!-- 统一调用分享弹窗 -->
           <div class="share-button" onclick="openShareModal()">
             <a class="button-link">立即投稿</a>
           </div>
@@ -1428,13 +1429,41 @@
   <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
 </footer>
 
-<!-- 浮动图标按钮（完全保留原始代码） -->
+<!-- 浮动图标按钮（保留分享功能） -->
 <div class="floating-icons">
   <a class="floating-icon" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank">
     <span class="floating-icon-text">开始讲述</span>
     <div class="floating-icon-button">
       <img alt="记忆小舟" src="images/boat_icon.png"/>
     </div>
+  </a>
+  <!-- 右下角悬浮分享按钮（与卡片按钮共用弹窗） -->
+  <div class="floating-icon" id="shareButton">
+    <div class="floating-icon-button">
+      <img alt="欢迎分享" src="images/sea_icon.png"/>
+    </div>
+    <span class="floating-icon-text">欢迎分享</span>
+  </div>
+</div>
+
+<!-- 统一的分享弹窗（shareModal） -->
+<div class="share-modal" id="shareModal">
+  <div class="share-content">
+    <div class="close-share" id="closeShare">×</div>
+    <h3>分享渠道</h3>
+    <div class="share-channels">
+      <a class="share-channel" href="mailto:example@example.com" target="_blank">
+        <img alt="邮箱图标" class="share-icon" src="images/email-icon.png"/>
+        <span>官方邮箱：example@example.com</span>
+      </a>
+      <a class="share-channel" href="https://www.xiaohongshu.com/user/profile/xxxxxx" target="_blank">
+        <img alt="小红书图标" class="share-icon" src="images/xiaohongshu-icon.png"/>
+        <span>官方小红书：银发记忆工程</span>
+      </a>
+      <!-- 可添加更多分享渠道 -->
+    </div>
+  </div>
+</div>
 
 <script>
   // 导航菜单切换
