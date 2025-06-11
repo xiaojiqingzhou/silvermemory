@@ -1154,6 +1154,7 @@
                     padding: 0;
                     font-family: 'Noto Sans SC', sans-serif;
                 }
+                /* 主要新增样式优化 */
                 .hero-trail {
                     height: 100vh;
                     background: url('images/hero-bg.jpg') center/cover no-repeat;
@@ -1161,26 +1162,28 @@
                     align-items: center;
                     justify-content: center;
                     text-align: center;
-                    padding: 2rem;
                     position: relative;
+                    padding: 2rem;
                 }
                 .hero-trail::after {
                     content: "";
                     position: absolute;
-                    top: 0; left: 0;
-                    width: 100%; height: 100%;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
                     background-color: rgba(198, 101, 58, 0.5);
                     z-index: 1;
                 }
                 .hero-trail-content {
                     position: relative;
                     z-index: 2;
-                    background-color: rgba(255, 255, 255, 0.85);
+                    background-color: rgba(255, 255, 255, 0.88);
                     color: #B45647;
-                    padding: 2rem 2.5rem;
-                    border-radius: 20px;
+                    padding: 2.5rem 3rem;
+                    border-radius: 24px;
                     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-                    max-width: 720px;
+                    max-width: 800px;
                     animation: fadeInUp 1s ease;
                 }
                 .hero-trail-content h1 {
@@ -1189,9 +1192,14 @@
                     margin-bottom: 1rem;
                 }
                 .hero-trail-content p {
-                    font-size: 1.25rem;
+                    font-size: 1.3rem;
                     line-height: 1.8;
+                    margin-bottom: 1.5rem;
+                }
+                .hero-trail-content .hero-subtext {
+                    font-size: 1rem;
                     margin-bottom: 2rem;
+                    color: #6D7663;
                 }
                 .hero-trail-content a {
                     background-color: #C6653A;
@@ -1209,35 +1217,47 @@
                     color: #C6653A;
                     transform: translateY(-3px);
                 }
-                @keyframes fadeInUp {
-                  from {
-                    opacity: 0;
-                    transform: translateY(40px);
+                .hero-wave-divider {
+                    position: relative;
+                    margin-top: -8px;
+                    z-index: 1;
                 }
-                  to {
-                    opacity: 1;
-                    transform: translateY(0);
-                  }
+                .hero-wave-divider svg {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(40px); }
+                    to { opacity: 1; transform: translateY(0); }
                 }
                 @media (max-width: 768px) {
-                    .hero-trail-content h1 {
+                .hero-trail-content h1 {
                     font-size: 2rem;
-                }
-                    .hero-trail-content p {
+                  }
+                .hero-trail-content p {
                     font-size: 1rem;
                   }
                 }
             </style>
 </head>
 <body>
-  <!-- Hero 首屏模块 -->
+  <!-- Hero 首屏模块（优化版） -->
   <section class="hero-trail">
     <div class="hero-trail-content" data-aos="fade-up">
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
+      <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
       <a href="#join-us">立即参与</a>
     </div>
   </section>
+  <!-- 弧形过渡 SVG 分割（TRAE 风格） -->
+  <div class="hero-wave-divider">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#E9D4C1" fill-opacity="1" d="M0,0 C360,100 1080,0 1440,100 L1440,120 L0,120 Z"></path>
+    </svg>
+  </div>
+
   
   <header class="page-header" id="header" role="banner">
     <div class="header-inner">
