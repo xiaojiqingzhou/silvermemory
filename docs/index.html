@@ -1149,9 +1149,96 @@
                 .close-share:hover {
                     transform: rotate(90deg);
                 }
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Noto Sans SC', sans-serif;
+                }
+                .hero-trail {
+                    height: 100vh;
+                    background: url('images/hero-bg.jpg') center/cover no-repeat;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 2rem;
+                    position: relative;
+                }
+                .hero-trail::after {
+                    content: "";
+                    position: absolute;
+                    top: 0; left: 0;
+                    width: 100%; height: 100%;
+                    background-color: rgba(198, 101, 58, 0.5);
+                    z-index: 1;
+                }
+                .hero-trail-content {
+                    position: relative;
+                    z-index: 2;
+                    background-color: rgba(255, 255, 255, 0.85);
+                    color: #B45647;
+                    padding: 2rem 2.5rem;
+                    border-radius: 20px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+                    max-width: 720px;
+                    animation: fadeInUp 1s ease;
+                }
+                .hero-trail-content h1 {
+                    font-size: 3rem;
+                    font-weight: 700;
+                    margin-bottom: 1rem;
+                }
+                .hero-trail-content p {
+                    font-size: 1.25rem;
+                    line-height: 1.8;
+                    margin-bottom: 2rem;
+                }
+                .hero-trail-content a {
+                    background-color: #C6653A;
+                    color: #fff;
+                    padding: 0.8rem 2rem;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    border-radius: 30px;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 6px 18px rgba(198, 101, 58, 0.4);
+                }
+                .hero-trail-content a:hover {
+                    background-color: #fff;
+                    color: #C6653A;
+                    transform: translateY(-3px);
+                }
+                @keyframes fadeInUp {
+                  from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                @media (max-width: 768px) {
+                    .hero-trail-content h1 {
+                    font-size: 2rem;
+                }
+                    .hero-trail-content p {
+                    font-size: 1rem;
+                  }
+                }
             </style>
 </head>
 <body>
+  <!-- Hero 首屏模块 -->
+  <section class="hero-trail">
+    <div class="hero-trail-content" data-aos="fade-up">
+      <h1>每段记忆，都是时代的温柔注脚</h1>
+      <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
+      <a href="#join-us">立即参与</a>
+    </div>
+  </section>
+  
   <header class="page-header" id="header" role="banner">
     <div class="header-inner">
       <h1 class="page-title">银发记忆工程</h1>
@@ -1430,6 +1517,7 @@
     </div>
   </div>
 </body>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
 
                 // 导航菜单切换
@@ -1556,6 +1644,7 @@
                         header.classList.remove('scrolled');
                     }
                 });
+                AOS.init({ duration: 800, once: true });
             </script>
 </body>
 </html>
