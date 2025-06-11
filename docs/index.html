@@ -1282,7 +1282,7 @@
       </button>
       <nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
         <ul class="nav-list" id="navMenu">
-          <li><a href="#join-us">立即体验</a></li> 
+          <li><a href="#anchor-join-us">立即体验</a></li>  
           <li><a href="#demo">操作演示</a></li>
           <li><a href="#initial-intent">初心所系</a></li>
           <li><a href="#memory-heritage">智忆传承</a></li>
@@ -1292,7 +1292,12 @@
       </nav>
     </div>
   </header>
+ 
   <main class="page-main" id="main" role="main"> 
+   
+   <!-- 修复导航遮挡问题的锚点偏移 -->
+  <div id="anchor-join-us" style="position: relative; top: -100px;"></div>
+
 
     <!-- 加入记忆守护计划 -->
     <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
