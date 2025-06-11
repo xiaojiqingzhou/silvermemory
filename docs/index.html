@@ -1257,7 +1257,8 @@
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
       <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
-      <a href="#join-us">立即参与</a>
+      <a href="#join-us" class="scroll-fix">立即参与</a>
+
     </div>
   </section>
   <!-- 弧形分割线 -->
@@ -1553,8 +1554,7 @@
 </body>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-
-                // 导航菜单切换
+               // 导航菜单切换
                 const navToggle = document.getElementById('navToggle');
                 const navMenu = document.getElementById('navMenu');
 
@@ -1679,6 +1679,19 @@
                     }
                 });
                 AOS.init({ duration: 800, once: true });
+                // 精确平滑滚动处理“立即参与”按钮跳转偏移问题
+                document.querySelectorAll('a.scroll-fix[href^=\"#\"]').forEach(link => {
+                  link.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                      e.preventDefault();
+                      const yOffset = -80;
+                      const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                  });
+                });
             </script>
 </body>
 </html>
