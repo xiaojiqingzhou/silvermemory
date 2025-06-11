@@ -9,6 +9,9 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
+  html {
+      scroll-behavior: smooth;
+    }
                 /* ========== 基础重置 ========== */
                 * {
                     margin: 0;
@@ -1157,7 +1160,7 @@
                 /* 主要新增样式优化 */
                 .hero-trail {
                     height: 100vh;
-                    background: url('images/hero-bg.jpg') center/cover no-repeat;
+                    background: linear-gradient(135deg, #f2d3be 0%, #c6653a 100%);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1172,7 +1175,7 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background-color: rgba(198, 101, 58, 0.5);
+                    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
                     z-index: 1;
                 }
                 .hero-trail-content {
@@ -1223,7 +1226,7 @@
                     z-index: 1;
                 }
                 .hero-wave-divider svg {
-                    display: block;
+                   display: block;
                     width: 100%;
                     height: auto;
                 }
@@ -1232,7 +1235,7 @@
                     to { opacity: 1; transform: translateY(0); }
                 }
                 @media (max-width: 768px) {
-                .hero-trail-content h1 {
+                    .hero-trail-content h1 {
                     font-size: 2rem;
                   }
                 .hero-trail-content p {
@@ -1242,7 +1245,7 @@
             </style>
 </head>
 <body>
-  <!-- Hero 首屏模块（优化版） -->
+  <!-- Hero 首屏模块（优化渐变配色） -->
   <section class="hero-trail">
     <div class="hero-trail-content" data-aos="fade-up">
       <h1>每段记忆，都是时代的温柔注脚</h1>
@@ -1251,7 +1254,7 @@
       <a href="#join-us">立即参与</a>
     </div>
   </section>
-  <!-- 弧形过渡 SVG 分割（TRAE 风格） -->
+  <!-- 弧形分割线 -->
   <div class="hero-wave-divider">
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
       <path fill="#E9D4C1" fill-opacity="1" d="M0,0 C360,100 1080,0 1440,100 L1440,120 L0,120 Z"></path>
