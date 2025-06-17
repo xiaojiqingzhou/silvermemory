@@ -68,7 +68,35 @@
                     letter-spacing: 0.05rem;
                 }
 
-                /* ========== 导航菜单优化 ========== */
+                
+/* 下滑提示图标动画 */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: bounceDown 2s infinite;
+  z-index: 2;
+  opacity: 0.9;
+}
+@keyframes bounceDown {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+
+/* ========== 导航菜单优化 ========== */
+
+.page-nav a.active {
+  background-color: #EACB9C;
+  color: #B45647;
+}
+
                 .page-nav ul {
                     transform-origin: top center;
                     transition: transform 0.4s ease, opacity 0.4s ease;
@@ -1257,7 +1285,7 @@
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
       <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
-      <a href="#join-us" class="scroll-fix">立即参与</a>
+      <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank" rel="noopener noreferrer">立即参与</a>
 
     </div>
   </section>
@@ -1283,7 +1311,7 @@
       </button>
       <nav aria-label="主导航" class="page-nav" id="primary-navigation" role="navigation">
         <ul class="nav-list" id="navMenu">
-          <li><a href="#anchor-join-us">立即体验</a></li>  
+            
           <li><a href="#demo">操作演示</a></li>
           <li><a href="#initial-intent">初心所系</a></li>
           <li><a href="#memory-heritage">智忆传承</a></li>
@@ -1296,28 +1324,7 @@
  
   <main class="page-main" id="main" role="main"> 
    
-   <!-- 修复导航遮挡问题的锚点偏移 -->
-  <div id="anchor-join-us" style="position: relative; top: -100px;"></div>
-
-
-    <!-- 加入记忆守护计划 -->
-    <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
-      <h1 id="join-us-title">加入记忆守护计划</h1>
-      <h2>立即为长辈制作记忆档案：免费试用入口</h2>
-      <div class="text-content">
-        <p>即刻行动：</p>
-        <ul>
-          <li>家庭用户：为长辈制作专属记忆档案，留住人生故事</li>
-          <li>机构合作：申请「记忆方舟」公益项目，获取AI技术支持</li>
-          <li>志愿者招募：诚邀各方志愿者，共同守护银发群体的记忆财富</li>
-        </ul>
-        <div class="experience-section">
-          <a class="button-link" href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" rel="noopener noreferrer" target="_blank">立即体验</a>
-        </div>
-      </div>
-    </section>
-
-       <!-- 操作演示 -->
+   <!-- 修复导航遮挡问题的锚点偏移 --><!-- 操作演示 -->
     <section aria-labelledby="demo-title" class="section-wrapper" id="demo" tabindex="-1">
       <h1 id="demo-title">操作演示</h1>
       <h2>一键留存记忆：操作演示</h2>
@@ -1505,7 +1512,29 @@
         </div>
       </div>
     </section>
-  </main>
+  
+  
+
+
+    <!-- 加入记忆守护计划 -->
+    <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
+      <h1 id="join-us-title">加入记忆守护计划</h1>
+      <h2>立即为长辈制作记忆档案：免费试用入口</h2>
+      <div class="text-content">
+        <p>即刻行动：</p>
+        <ul>
+          <li>家庭用户：为长辈制作专属记忆档案，留住人生故事</li>
+          <li>机构合作：申请「记忆方舟」公益项目，获取AI技术支持</li>
+          <li>志愿者招募：诚邀各方志愿者，共同守护银发群体的记忆财富</li>
+        </ul>
+        <div class="experience-section">
+          <a class="button-link scroll-fix" href="#header">立即体验</a>
+        </div>
+      </div>
+    </section>
+
+       
+</main>
   <footer class="page-footer">
     © 银发记忆工程 版权所有
     <p class="page-footer-text">小舟载记，字字生光。岁岁留痕，代代相传。</p>
@@ -1679,7 +1708,30 @@
                     }
                 });
                 AOS.init({ duration: 800, once: true });
-                // 精确平滑滚动处理“立即参与”按钮跳转偏移问题
+                
+// 当前导航项高亮
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll(".page-nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 120;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
+  });
+});
+
+
+// 精确平滑滚动处理“立即参与”按钮跳转偏移问题
                 document.querySelectorAll('a.scroll-fix[href^=\"#\"]').forEach(link => {
                   link.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href').substring(1);
