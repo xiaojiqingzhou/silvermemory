@@ -1276,11 +1276,28 @@
                     font-size: 1rem;
                   }
                 }
-            </style>
+            
+@keyframes fadeInScaleUp {
+  from { opacity: 0; transform: scale(0.95) translateY(50px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-trail-content {
+  animation: fadeInScaleUp 1s ease;
+}
+@keyframes pulseButton {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3); }
+  70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(198, 101, 58, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0); }
+}
+.experience-section .button-link {
+  animation: pulseButton 2.5s infinite;
+}
+
+</style>
 </head>
 <body>
   <!-- Hero 首屏模块（优化渐变配色） -->
-  <section class="hero-trail">
+  <section class="hero-trail" id="hero">
     <div class="hero-trail-content" data-aos="fade-up">
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
@@ -1288,7 +1305,8 @@
       <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank" rel="noopener noreferrer">立即参与</a>
 
     </div>
-  </section>
+  <div class="scroll-down-indicator">↓</div>
+</section>
   <!-- 弧形分割线 -->
   <div class="hero-wave-divider">
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
@@ -1528,7 +1546,7 @@
           <li>志愿者招募：诚邀各方志愿者，共同守护银发群体的记忆财富</li>
         </ul>
         <div class="experience-section">
-          <a class="button-link scroll-fix" href="#header">立即体验</a>
+          <a class="button-link scroll-fix" href="#hero">立即体验</a>
         </div>
       </div>
     </section>
@@ -1747,4 +1765,3 @@ window.addEventListener("scroll", () => {
             </script>
 </body>
 </html>
- 
