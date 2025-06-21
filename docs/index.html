@@ -1277,28 +1277,23 @@
                   }
                 }
             
-                @keyframes fadeInScaleUp {
-                  from { opacity: 0; transform: scale(0.95) 
-                translateY(50px); }
-                  to { opacity: 1; transform: scale(1) translateY(0); 
-                }
-                }
-                .hero-trail-content {
-                  animation: fadeInScaleUp 1s ease;
-                }
-                @keyframes pulseButton {
-                  0% { transform: scale(1); box-shadow: 0 0 0 0 
-                rgba(198, 101, 58, 0.3); }
-                  70% { transform: scale(1.03); box-shadow: 0 0 0 
-                15px rgba(198, 101, 58, 0); }
-                  100% { transform: scale(1); box-shadow: 0 0 0 0 
-                rgba(198, 101, 58, 0); }
-                }
-                .experience-section .button-link {
-                  animation: pulseButton 2.5s infinite;
-                }
+@keyframes fadeInScaleUp {
+  from { opacity: 0; transform: scale(0.95) translateY(50px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-trail-content {
+  animation: fadeInScaleUp 1s ease;
+}
+@keyframes pulseButton {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3); }
+  70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(198, 101, 58, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0); }
+}
+.experience-section .button-link {
+  animation: pulseButton 2.5s infinite;
+}
 
-                </style>
+</style>
 </head>
 <body>
   <!-- Hero 首屏模块（优化渐变配色） -->
@@ -1309,9 +1304,9 @@
       <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
       <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank" rel="noopener noreferrer">立即参与</a>
 
-     </div>
-    <div class="scroll-down-indicator">↓</div>Add commentMore actions
-  </section>
+    </div>
+  <div class="scroll-down-indicator">↓</div>
+</section>
   <!-- 弧形分割线 -->
   <div class="hero-wave-divider">
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
@@ -1541,7 +1536,7 @@
 
     <!-- 加入记忆守护计划 -->
     <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
-      <h1 id="join-us-title">加入我们 · 守护记忆</h1>
+      <h1 id="join-us-title">	加入我们 · 守护记忆</h1>
       <h2>立即为长辈制作记忆档案：免费试用入口</h2>
       <div class="text-content">
         <p>即刻行动：</p>
