@@ -1276,28 +1276,11 @@
                     font-size: 1rem;
                   }
                 }
-            
-@keyframes fadeInScaleUp {
-  from { opacity: 0; transform: scale(0.95) translateY(50px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.hero-trail-content {
-  animation: fadeInScaleUp 1s ease;
-}
-@keyframes pulseButton {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0.3); }
-  70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(198, 101, 58, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 101, 58, 0); }
-}
-.experience-section .button-link {
-  animation: pulseButton 2.5s infinite;
-}
-
-</style>
+            </style>
 </head>
 <body>
   <!-- Hero 首屏模块（优化渐变配色） -->
-  <section class="hero-trail" id="hero">
+  <section class="hero-trail">
     <div class="hero-trail-content" data-aos="fade-up">
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
@@ -1305,8 +1288,7 @@
       <a href="https://www.coze.cn/store/agent/7489440833709129747?bot_id=true" target="_blank" rel="noopener noreferrer">立即参与</a>
 
     </div>
-  <div class="scroll-down-indicator">↓</div>
-</section>
+  </section>
   <!-- 弧形分割线 -->
   <div class="hero-wave-divider">
     <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
@@ -1434,24 +1416,24 @@
 
     <!-- 专业护航 -->
     <section aria-labelledby="team-title" class="section-wrapper" id="team" tabindex="-1">
-      <h1 id="team-title">专业护航（匿名）</h1>
+      <h1 id="team-title">专业护航</h1>
       <div class="team-introduction">
         <div>
           <h2>指导教师</h2>
           <div class="team-members">
             <div class="team-member">
               <img alt="指导教师1" src="images/teacher1.jpg"/>
-              <h4>H教授</h4>
+              <h4>何伟</h4>
               <p>计算语言学专家</p>
             </div>
             <div class="team-member">
               <img alt="指导教师2" src="images/teacher2.jpg"/>
-              <h4>W教授</h4>
+              <h4>王永</h4>
               <p>中国文学专家</p>
             </div>
             <div class="team-member">
               <img alt="指导教师3" src="images/teacher3.jpg"/>
-              <h4>L教授</h4>
+              <h4>林卉</h4>
               <p>口述史研究专家</p>
             </div>
           </div>
@@ -1465,12 +1447,12 @@
               <div class="team-members group-members">
                 <div class="team-member">
                   <img alt="团队成员1" src="images/member1.jpg"/>
-                  <h4>L同学</h4>
+                  <h4>陆新蕊</h4>
                   <p>计算语言学 硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="团队成员2" src="images/member2.jpg"/>
-                  <h4>L同学</h4>
+                  <h4>刘思怡</h4>
                   <p>计算语言学 硕士生</p>
                 </div>
               </div>
@@ -1481,12 +1463,12 @@
               <div class="team-members group-members">
                 <div class="team-member">
                   <img alt="团队成员3" src="images/member3.jpg"/>
-                  <h4>W同学</h4>
+                  <h4>武羽柯</h4>
                   <p>出版学 硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="团队成员4" src="images/member4.jpg"/>
-                  <h4>Z同学</h4>
+                  <h4>张乐怡</h4>
                   <p>出版学 硕士生</p>
                 </div>
               </div>
@@ -1497,12 +1479,12 @@
               <div class="team-members group-members">
                 <div class="team-member">
                   <img alt="团队成员5" src="images/member5.jpg"/>
-                  <h4>W同学</h4>
+                  <h4>万旭</h4>
                   <p>数字出版 本科生</p>
                 </div>
                 <div class="team-member">
                   <img alt="团队成员6" src="images/member6.jpg"/>
-                  <h4>Z同学</h4>
+                  <h4>张怡卓含</h4>
                   <p>汉语国际教育 本科生</p>
                 </div>
               </div>
@@ -1536,7 +1518,7 @@
 
     <!-- 加入记忆守护计划 -->
     <section aria-labelledby="join-us-title" class="section-wrapper" id="join-us" tabindex="-1">
-      <h1 id="join-us-title">	加入我们 · 守护记忆</h1>
+      <h1 id="join-us-title">加入我们 · 守护记忆</h1>
       <h2>立即为长辈制作记忆档案：免费试用入口</h2>
       <div class="text-content">
         <p>即刻行动：</p>
@@ -1546,7 +1528,7 @@
           <li>志愿者招募：诚邀各方志愿者，共同守护银发群体的记忆财富</li>
         </ul>
         <div class="experience-section">
-          <a class="button-link scroll-fix" href="#hero">加入记忆守护计划</a>
+          <a class="button-link scroll-fix" href="#header">加入记忆守护计划</a>
         </div>
       </div>
     </section>
