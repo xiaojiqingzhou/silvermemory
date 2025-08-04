@@ -1293,6 +1293,27 @@
   animation: pulseButton 2.5s infinite;
 }
 
+ /* ===== 一键美颜补丁 ===== */
+:root{--radius:16px;--shadow:0 4px 12px rgba(198,101,58,.12);--font:'Noto Sans SC',sans-serif}
+body{font-family:var(--font);scroll-padding-top:100px}
+.page-header{background:rgba(255,255,255,.9);backdrop-filter:blur(8px)}
+.page-title{color:#B45647}
+.page-nav a{color:#C6653A}
+.page-nav a:hover{background:#EACB9C;color:#B45647}
+.hero-trail{background:linear-gradient(135deg,#E9D4C1 0%,#C6653A 100%)}
+.hero-trail-content{background:rgba(255,255,255,.9);border-radius:var(--radius);box-shadow:var(--shadow);max-width:900px;width:calc(100% - 4rem)}
+.hero-trail-content h1{white-space:nowrap;font-size:clamp(2.4rem,5vw,3rem)}
+.hero-trail-content a{background:#C6653A;color:#fff;border-radius:30px;transition:.3s}
+.hero-trail-content a:hover{background:#fff;color:#C6653A;transform:translateY(-3px)}
+.section-wrapper{background:linear-gradient(135deg,#EACB9C 0%,#FDFDFD 100%);border-radius:var(--radius);box-shadow:var(--shadow)}
+.team-member{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);transition:.3s}
+.team-member:hover{transform:translateY(-5px)}
+.btn-toggle-more{background:#C6653A;color:#fff;border-radius:30px;margin-bottom:1.2rem;transition:.3s}
+.btn-toggle-more:hover{background:#fff;color:#C6653A}
+h1,h2,h3{color:#B45647}
+h1::after,h2::after{background:#C6653A;border-radius:2px}
+.page-footer{background:#C6653A;color:#fff;border-radius:var(--radius) var(--radius) 0 0}
+ 
 </style>
 </head>
 <body>
