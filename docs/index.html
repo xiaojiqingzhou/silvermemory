@@ -1091,19 +1091,12 @@ h1::after,h2::after{background:#C6653A;border-radius:2px}
     </div>
   <div class="scroll-down-indicator">↓</div>
 </section>
-<!-- 折角弧顶分割线（保留原折角，仅柔化渐变） -->
-<div class="hero-wave-divider">
-  <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#E9D4C1" stop-opacity="0"/>
-        <stop offset="100%" stop-color="#E9D4C1"/>
-      </linearGradient>
-    </defs>
-    <path fill="url(#waveGradient)"
-          d="M0,0 C240,100 480,0 720,80 C960,0 1200,100 1440,0 L1440,120 L0,120 Z"/>
-  </svg>
-</div>
+  <!-- 弧形分割线 -->
+  <div class="hero-wave-divider">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg SVG namespace SVG namespace   ">
+      <path fill="#E9D4C1" fill-opacity="1" d="M0,0 C360,100 1080,0 1440,100 L1440,120 L0,120 Z"></path>
+    </svg>
+  </div>
 
   
   <header class="page-header" id="header" role="banner">
