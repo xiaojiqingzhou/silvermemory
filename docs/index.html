@@ -1017,15 +1017,19 @@ html, body { margin: 0; padding: 0; font-family: 'Noto Sans SC', sans-serif; }
   color: #C6653A;
   transform: translateY(-3px);
 }
+/* 让 SVG 撑开并可见 */
 .hero-wave-divider {
   position: relative;
   margin-top: -8px;
   z-index: 1;
+  /* 给分割线一个固定高度，确保 SVG 可见 */
+  height: 160px;      /* 与 viewBox 高度一致 */
+  overflow: hidden;
 }
 .hero-wave-divider svg {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;       /* 占满父级高度 */
 }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(40px); }
