@@ -1063,7 +1063,8 @@ body{font-family:var(--font);scroll-padding-top:100px}
 .page-nav a:hover{background:#EACB9C;color:#B45647}
 .hero-trail{background:linear-gradient(135deg,#E9D4C1 0%,#C6653A 100%)}
 .hero-trail-content{background:rgba(255,255,255,.9);border-radius:var(--radius);box-shadow:var(--shadow);max-width:900px;width:calc(100% - 4rem)}
-.hero-trail-content h1{white-space:nowrap;font-size:clamp(2.4rem,5vw,3rem)}
+/* ✅ 窄屏文字防溢出补丁（替换原有 .hero-trail-content h1） */
+.hero-trail-content h1 {font-size: clamp(2.4rem,5vw,3rem);font-weight: 700;margin-bottom: 1rem;overflow-wrap: break-word; /* 允许长单词/长串字符断行 */word-break: break-word;    /* 兼容旧浏览器 */}
 .hero-trail-content a{background:#C6653A;color:#fff;border-radius:30px;transition:.3s}
 .hero-trail-content a:hover{background:#fff;color:#C6653A;transform:translateY(-3px)}
 .section-wrapper{background:linear-gradient(135deg,#EACB9C 0%,#FDFDFD 100%);border-radius:var(--radius);box-shadow:var(--shadow)}
