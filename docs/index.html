@@ -1313,8 +1313,49 @@ body{font-family:var(--font);scroll-padding-top:100px}
 h1,h2,h3{color:#B45647}
 h1::after,h2::after{background:#C6653A;border-radius:2px}
 .page-footer{background:#C6653A;color:#fff;border-radius:var(--radius) var(--radius) 0 0}
+
+/* ===== 字体 & 排版 & 动效美化补丁 ===== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap');
+
+:root{
+  --font-title:'Noto Serif SC',serif;
+  --font-body:'Noto Sans SC',sans-serif;
+  --radius:16px;
+}
+
+/* 全局字体替换 */
+html,body{font-family:var(--font-body);letter-spacing:.04em}
+.page-title,h1,h2,h3{font-family:var(--font-title)}
+
+/* 标题精致化 */
+h1{font-size:clamp(2.2rem,4.5vw,2.8rem);font-weight:600}
+h2{font-size:clamp(1.6rem,3vw,2rem);font-weight:600}
+h3{font-size:clamp(1.3rem,2.5vw,1.6rem);font-weight:500}
+h1::after,h2::after{transform:translateX(-50%) scaleX(0);transition:transform .4s}
+.section-wrapper:hover h1::after,
+.section-wrapper:hover h2::after{transform:translateX(-50%) scaleX(1)}
+
+/* 段落优雅缩进 & 字距 */
+.text-content p{text-indent:2em;line-height:1.9;margin-bottom:.8em}
+.text-content ul li{line-height:1.85}
+
+/* 按钮呼吸动效 */
+@keyframes breath {
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(198,101,58,.25);}
+  50%{transform:scale(1.03);box-shadow:0 0 0 10px rgba(198,101,58,0);}
+}
+.btn-toggle-more,.button-link{animation:breath 3s infinite}
+.btn-toggle-more:hover,.button-link:hover{animation:none}
+
+/* 卡片轻微浮现 */
+.section-wrapper{transition:transform .4s cubic-bezier(.175,.885,.32,1.275),box-shadow .4s}
+.section-wrapper:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(198,101,58,.2)}
+
+/* 视频圆角阴影 */
+.video-container{border-radius:var(--radius);box-shadow:var(--shadow)}
  
 </style>
+ 
 </head>
 <body>
   <!-- Hero 首屏模块（优化渐变配色） -->
