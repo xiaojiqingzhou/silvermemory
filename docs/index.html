@@ -3,455 +3,420 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="‘银发记忆工程’是一项基于AI技术的老年人记忆采集与传承项目，助力构建个体故事与国家叙事的数字桥梁。" name="description"/>
+<meta content="银发记忆工程 - 用AI守护时光的温度" name="description"/>
 <title>银发记忆工程 | 守护时光的温度</title>
 
-<!-- 引入字体：Noto Serif (宋体-标题) / Noto Sans (黑体-正文) -->
+<!-- 引入字体：Noto Serif (宋体) / Noto Sans (黑体) -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"/>
+<!-- 引入 AOS 动画库 -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
 /* ================================
-   1. 设计系统 (Design Tokens) - 高级感核心
+   1. 设计系统 (Design Tokens)
 ================================ */
 :root {
-  /* 🎨 雅致色彩系统 */
-  --primary-color: #A84A36;      /* 丹砂红：深沉、古典、记忆 */
-  --primary-light: #E0C8C2;      /* 浅藕荷：柔和装饰 */
-  --secondary-color: #6A7A5B;    /* 苍绿：生机与沉静 */
-  --gold-accent: #C5A065;        /* 鎏金：高光与尊贵 */
+  /* 🎨 色彩：丹砂、流金、墨灰 */
+  --c-primary: #9E3E2E;          /* 丹砂红：沉稳的主色 */
+  --c-primary-deep: #7A2E21;     /* 深丹砂：交互态 */
+  --c-accent: #C5A065;           /* 流光金：高贵点缀 */
+  --c-text-main: #433D38;        /* 墨灰：正文 */
+  --c-text-light: #756A60;       /* 浅灰：辅助文字 */
   
   /* 📜 材质与背景 */
-  --bg-paper: #F2EFE6;           /* 羊皮纸色 */
-  --bg-glass: rgba(255, 255, 255, 0.75); /* 晶透磨砂 */
-  --bg-glass-strong: rgba(255, 255, 255, 0.92); /* 实体磨砂 */
+  --bg-body: #F7F5F0;            /* 暖宣纸色 */
+  --bg-card: rgba(255, 255, 255, 0.85); /* 晶透磨砂 */
+  --bg-card-solid: #FFFFFF;      /* 实体卡片 */
   
-  /* ✨ 光影与深度 */
-  --shadow-floating: 0 15px 35px rgba(168, 74, 54, 0.12);
-  --shadow-inner: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-  --border-glass: 1px solid rgba(255, 255, 255, 0.8);
+  /* ✨ 光影系统 (Shadow & Blur) */
+  --glass-blur: blur(20px);
+  --shadow-sm: 0 4px 12px rgba(158, 62, 46, 0.06);
+  --shadow-md: 0 12px 32px rgba(158, 62, 46, 0.08), 0 2px 6px rgba(0,0,0,0.02);
+  --shadow-float: 0 20px 50px rgba(158, 62, 46, 0.15);
   
-  /* ✒️ 排版系统 */
+  /* 📐 几何属性 */
+  --radius-box: 24px;
+  --radius-btn: 100px;
+  
+  /* ✒️ 字体栈 */
   --font-serif: 'Noto Serif SC', serif;
   --font-sans: 'Noto Sans SC', sans-serif;
-  
-  --radius-card: 20px;
 }
 
 /* ================================
-   2. 基础排版与质感
+   2. 基础重置与动态纹理
 ================================ */
 html { scroll-behavior: smooth; font-size: 16px; }
+::selection { background: var(--c-primary); color: #fff; }
 
 body {
   margin: 0; padding: 0;
   font-family: var(--font-sans);
-  background-color: var(--bg-paper);
-  color: #4A4036;
-  line-height: 1.85; /* 增加行高，提升阅读高级感 */
-  /* 纹理：极细微的宣纸噪点 */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  background-color: var(--bg-body);
+  color: var(--c-text-main);
+  line-height: 1.9;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* 标题排版：杂志级质感 */
-h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  color: var(--primary-color);
-  margin-top: 0;
-  letter-spacing: 0.05em;
+/* 🎞️ 动态噪点纹理层：让画面有电影胶片的呼吸感 */
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: -1; opacity: 0.6;
+  animation: grain 8s steps(10) infinite;
+}
+@keyframes grain { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-1%, -1%); } 20% { transform: translate(1%, 1%); } 30% { transform: translate(-2%, 2%); } }
+
+/* 顶部阅读进度条 */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; height: 3px; background: var(--c-primary);
+  width: 0%; z-index: 2000; transition: width 0.1s;
+  box-shadow: 0 0 10px var(--c-primary);
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.3; margin-bottom: 1.5rem; }
+/* 排版美化 */
+h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--c-primary); margin-top: 0; letter-spacing: 0.02em; }
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; font-weight: 700; }
 
 h2 { 
-  font-size: 2rem; margin-bottom: 1.5rem; 
+  font-size: 2.2rem; margin-bottom: 1.5rem; 
   position: relative; display: inline-block;
-  padding-bottom: 10px;
+  background: linear-gradient(to right, var(--c-primary), #BD5D4D);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-/* H2 底部精致的鎏金线 */
+/* H2 底部精致的金缮线条 */
 h2::after {
-  content: ''; position: absolute; bottom: 0; left: 0; 
-  width: 40%; height: 3px; 
-  background: linear-gradient(90deg, var(--gold-accent), transparent);
+  content: ''; position: absolute; bottom: -5px; left: 0; width: 60px; height: 3px;
+  background: var(--c-accent); border-radius: 2px;
 }
 
-h3 { font-size: 1.3rem; color: #7D6C60; margin-bottom: 1rem; font-weight: 600; }
-h4 { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 600; }
+h3 { font-size: 1.4rem; color: var(--c-text-light); font-weight: 600; margin-bottom: 1rem; }
+p { margin-bottom: 1.5rem; text-align: justify; font-weight: 300; font-size: 1.05rem; }
 
-p { margin-bottom: 1.5rem; text-align: justify; opacity: 0.9; }
-a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 * { box-sizing: border-box; }
 
 /* ================================
-   3. 导航栏 (高透毛玻璃)
+   3. 导航栏 (极简磨砂)
 ================================ */
 .page-header {
   position: fixed; top: 0; left: 0; width: 100%;
-  padding: 1rem 2rem; z-index: 1000;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.4);
-  transition: all 0.4s ease;
+  padding: 1.2rem 2rem; z-index: 1000;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.page-header.scrolled { padding: 0.8rem 2rem; background: rgba(255,255,255,0.9); box-shadow: var(--shadow-sm); }
 
-.header-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-}
+.header-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
 .page-title {
-  font-family: var(--font-serif);
-  font-size: 1.6rem; font-weight: 700;
-  color: var(--primary-color);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--c-primary);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+/* 简单的Logo图标模拟 */
+.page-title::before {
+  content: ''; display: block; width: 24px; height: 24px;
+  background: var(--c-primary); border-radius: 4px 12px 4px 12px;
 }
 
-/* 桌面导航 */
-.page-nav ul { display: flex; gap: 2.5rem; margin: 0; padding: 0; list-style: none; }
-.page-nav a { 
-  font-weight: 500; position: relative; padding: 5px 0; color: #5A4E44;
-  font-size: 1.05rem;
+.page-nav ul { display: flex; gap: 3rem; list-style: none; margin: 0; padding: 0; }
+.page-nav a {
+  font-family: var(--font-sans); font-size: 1rem; font-weight: 500; color: var(--c-text-main);
+  position: relative; padding: 0.5rem 0; opacity: 0.8;
 }
-.page-nav a:hover, .page-nav a.active { color: var(--primary-color); }
-/* 悬停时的优雅金线 */
+.page-nav a:hover, .page-nav a.active { opacity: 1; color: var(--c-primary); }
 .page-nav a::after {
-  content: ''; position: absolute; bottom: -2px; left: 50%; 
-  width: 0; height: 2px; background: var(--gold-accent);
-  transition: all 0.3s ease; transform: translateX(-50%);
+  content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+  background: var(--c-accent); transition: all 0.4s ease; transform: translateX(-50%);
 }
 .page-nav a:hover::after, .page-nav a.active::after { width: 100%; }
 
-/* 移动端汉堡菜单 */
-.nav-toggle {
-  display: none; flex-direction: column; justify-content: space-between;
-  width: 30px; height: 22px; background: transparent; border: none;
-  cursor: pointer; z-index: 1002; padding: 0;
-}
-.nav-toggle span {
-  display: block; width: 100%; height: 2px;
-  background-color: var(--primary-color);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* 回弹效果 */
-}
-.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); background: var(--primary-color); }
+/* 移动端菜单 (果冻回弹效果) */
+.nav-toggle { display: none; cursor: pointer; background: none; border: none; flex-direction: column; gap: 6px; padding: 5px; z-index: 1002; }
+.nav-toggle span { width: 28px; height: 2px; background: var(--c-primary); transition: all 0.4s; border-radius: 2px; }
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -8px); background: var(--primary-color); }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
   .nav-toggle { display: flex; }
   .page-nav {
-    position: fixed; top: 0; right: 0; width: 80%; height: 100vh;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: -10px 0 40px rgba(0,0,0,0.1);
-    padding-top: 90px;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
+    position: fixed; top: 0; right: 0; width: 85%; height: 100vh;
+    background: #fff; padding-top: 100px;
+    transform: translateX(100%); transition: transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6); /* 果冻回弹 */
+    box-shadow: -10px 0 40px rgba(0,0,0,0.1); z-index: 1001;
   }
   .page-nav.open { transform: translateX(0); }
   .page-nav ul { flex-direction: column; gap: 0; padding: 0 2rem; }
-  .page-nav a { 
-    display: block; padding: 1.5rem 0; 
-    font-size: 1.2rem; border-bottom: 1px solid rgba(0,0,0,0.05); 
-    font-family: var(--font-serif);
-  }
+  .page-nav a { display: block; padding: 1.5rem 0; font-size: 1.2rem; border-bottom: 1px solid #f0f0f0; }
 }
 
 /* ================================
-   4. Hero 首屏 (波浪保留 + 字体升级)
+   4. Hero 首屏 (电影感与波浪)
 ================================ */
 .hero-trail {
-  position: relative; min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; overflow: hidden;
-  background: linear-gradient(180deg, #F9F7F2 0%, #EFE5DA 100%);
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(180deg, #F7F5F0 0%, #EBE5DC 100%);
+  overflow: hidden;
 }
 
-/* 背景波浪 - 调整透明度更显高级 */
-.hero-bg-waves {
-  position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
-  z-index: 0; pointer-events: none;
-}
+/* 🌊 动态波浪 (保留并优化透明度) */
+.hero-bg-waves { position: absolute; bottom: 0; left: 0; width: 100%; height: 55%; z-index: 0; pointer-events: none; }
 .hero-wave {
   position: absolute; bottom: 0; left: 0; width: 200%; height: 100%;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23A84A36' fill-opacity='0.06' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%239E3E2E' fill-opacity='0.05' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
   background-size: 50% 100%; animation: waveMove 25s linear infinite;
 }
-.hero-wave:nth-child(2) {
-  bottom: 10px; opacity: 0.5; animation: waveMove 18s linear infinite reverse;
-  filter: hue-rotate(10deg);
-}
+.hero-wave:nth-child(2) { bottom: 15px; opacity: 0.6; animation: waveMove 18s linear infinite reverse; filter: hue-rotate(15deg); }
 @keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-.hero-content {
-  position: relative; z-index: 2; max-width: 900px; padding: 0 1.5rem;
-}
-.hero-content h1 {
-  margin-bottom: 1.5rem;
-  background: linear-gradient(45deg, var(--primary-color), #8A3A29);
+.hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 1.5rem; }
+
+/* 标题文字动效 */
+.hero-title-wrapper h1 {
+  background: linear-gradient(45deg, var(--c-primary), #70271C);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
 }
 .hero-subtext {
-  font-family: var(--font-sans); font-weight: 300;
-  letter-spacing: 0.3rem; color: var(--primary-color); opacity: 0.8;
-  margin-bottom: 3rem; text-transform: uppercase; font-size: 0.9rem;
+  display: inline-block; padding: 0.5rem 1rem; border: 1px solid rgba(197, 160, 101, 0.3);
+  border-radius: 50px; color: var(--c-text-light); font-size: 0.9rem; letter-spacing: 0.15rem;
+  margin-bottom: 2.5rem; background: rgba(255,255,255,0.5);
 }
 
-/* 按钮：印章风格 */
-.btn-hero {
+/* 🖋️ 按钮：印章风格 */
+.btn-primary {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 1rem 3.5rem;
-  background: var(--primary-color); color: #fff;
-  border-radius: 50px; font-weight: 600; font-size: 1.1rem;
-  box-shadow: 0 10px 30px rgba(168, 74, 54, 0.25);
-  transition: all 0.4s ease; letter-spacing: 0.1em;
+  padding: 1.1rem 3rem; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.05em;
+  color: #fff; background: var(--c-primary); border-radius: var(--radius-btn);
+  box-shadow: 0 10px 25px rgba(158, 62, 46, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative; overflow: hidden; z-index: 1;
 }
-.btn-hero:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(168, 74, 54, 0.35);
-  background: #943E2D;
+.btn-primary::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%); transition: 0.6s; z-index: -1;
 }
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(158, 62, 46, 0.4); }
+.btn-primary:hover::before { transform: translateX(100%); }
 
 /* ================================
-   5. 通用布局与卡片 (Glassmorphism + Border)
+   5. 主体布局 & 卡片 (Archival Look)
 ================================ */
-.page-main {
-  max-width: 1100px; margin: 0 auto; padding: 5rem 1.5rem;
-  position: relative; z-index: 2;
-}
+.page-main { max-width: 1140px; margin: 0 auto; padding: 6rem 1.5rem; position: relative; z-index: 2; }
 
 .section-wrapper {
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: var(--border-glass);
-  box-shadow: var(--shadow-floating);
-  border-radius: var(--radius-card);
-  padding: 3.5rem; margin-bottom: 5rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: var(--radius-box);
+  padding: 4rem; margin-bottom: 6rem;
+  box-shadow: var(--shadow-md);
   transition: transform 0.5s ease;
 }
-.section-wrapper:hover { transform: translateY(-5px); }
+.section-wrapper:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); }
 
-.split-section {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-}
-@media (max-width: 900px) {
-  .split-section { grid-template-columns: 1fr; gap: 2.5rem; }
-  .split-section img { order: -1; }
-}
+.split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+@media (max-width: 960px) { .split-section { grid-template-columns: 1fr; gap: 3rem; } .split-section img { order: -1; } }
 
-/* 图片：复古滤镜交互 */
+/* 🖼️ 图片：画廊相框风格 */
 .split-section img {
-  width: 100%; border-radius: var(--radius-card);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  display: block; object-fit: cover;
-  filter: sepia(20%) contrast(95%); /* 默认微复古 */
-  transition: all 0.5s ease;
+  width: 100%; border-radius: var(--radius-box); display: block; object-fit: cover;
+  /* 双层边框效果 */
+  border: 8px solid #fff; outline: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-md);
+  transition: all 0.6s ease;
+  filter: sepia(15%) contrast(95%); /* 默认微复古 */
 }
-.split-section img:hover {
-  filter: sepia(0%) contrast(105%); /* 悬停变清晰 */
-  transform: scale(1.01);
-}
+.split-section img:hover { transform: scale(1.02); filter: sepia(0%) contrast(105%); box-shadow: var(--shadow-float); }
 
-/* 视频容器 */
+/* 视频：影院感 */
 .video-container {
   position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
-  border-radius: var(--radius-card); box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-  background: #000;
+  border-radius: var(--radius-box); box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  background: #000; border: 4px solid #fff;
 }
 .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 /* ================================
-   6. 内容细节美化
+   6. 内容排版与展开
 ================================ */
+/* 首字下沉 */
+.drop-cap::first-letter {
+  float: left; font-size: 3.5rem; line-height: 0.8; font-weight: 700;
+  margin-right: 0.8rem; color: var(--c-primary); font-family: var(--font-serif);
+}
+
+/* 列表：精致符号 */
+.text-content ul { list-style: none; padding: 0; }
+.text-content ul > li { position: relative; padding-left: 2rem; margin-bottom: 1rem; }
+.text-content ul > li::before {
+  content: '✦'; position: absolute; left: 0; top: 5px;
+  color: var(--c-accent); font-size: 0.8rem;
+}
+
 /* 展开区域 */
 .more-content {
-  overflow: hidden; max-height: 0; opacity: 0;
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255,255,255,0.5); border-radius: 12px;
-  margin-top: 1.5rem;
+  overflow: hidden; max-height: 0; opacity: 0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255,255,255,0.6); border-radius: 12px; margin-top: 1.5rem;
 }
-.more-content.expanded {
-  max-height: 2000px; opacity: 1; padding: 2rem;
-  border: 1px solid rgba(197, 160, 101, 0.2);
-}
+.more-content.expanded { max-height: 2000px; opacity: 1; padding: 2rem; border-left: 3px solid var(--c-accent); }
 
-/* 列表：金色星标 */
-.text-content ul { list-style: none; padding: 0; }
-.text-content ul > li {
-  position: relative; padding-left: 1.8rem; margin-bottom: 1rem;
+.btn-text {
+  background: none; border: none; color: var(--c-primary); font-weight: 600;
+  font-size: 1rem; cursor: pointer; border-bottom: 1px solid var(--c-primary);
+  padding-bottom: 2px; margin-top: 1rem; transition: all 0.3s;
 }
-.text-content ul > li::before {
-  content: '✦'; position: absolute; left: 0; top: 4px;
-  color: var(--gold-accent); font-size: 0.9rem;
-}
-
-.btn-toggle-more {
-  background: transparent; color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  padding: 0.7rem 2rem; border-radius: 30px;
-  font-weight: 600; margin-top: 1.5rem; transition: all 0.3s;
-  letter-spacing: 1px; cursor: pointer;
-}
-.btn-toggle-more:hover { background: var(--primary-color); color: #fff; }
+.btn-text:hover { color: var(--c-accent); border-color: var(--c-accent); }
 
 /* ================================
-   7. 团队展示 (您要求的特定结构美化)
+   7. 团队成员 (档案袋风格 - 核心需求)
 ================================ */
-.team-introduction { display: flex; flex-direction: column; gap: 4rem; }
+.team-introduction { display: flex; flex-direction: column; gap: 5rem; }
 
-/* 指导教师区 - 居中优雅 */
-.team-teachers { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-.teacher-card {
-  text-align: center; width: 160px;
+/* 指导教师 */
+.team-teachers { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+.teacher-card { text-align: center; transition: transform 0.4s; }
+.teacher-card:hover { transform: translateY(-8px); }
+.teacher-card img {
+  width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
+  border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-bottom: 1rem; filter: grayscale(20%); transition: filter 0.4s;
+}
+.teacher-card:hover img { filter: grayscale(0%); }
+
+/* 📁 团队分组容器 - Grid Layout */
+.team-groups-container {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+/* 📂 档案袋式卡片 */
+.team-group-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  /* 纸张堆叠效果阴影 */
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.05), 
+    0 10px 0 -5px #f5f5f5, 
+    0 10px 1px -4px rgba(0,0,0,0.05),
+    0 20px 0 -10px #ebebeb,
+    0 20px 1px -9px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
   transition: transform 0.3s;
 }
-.teacher-card:hover { transform: translateY(-5px); }
-.teacher-card img {
-  width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
-  border: 3px solid #fff; box-shadow: 0 0 0 1px var(--primary-light);
-  margin-bottom: 1rem;
-}
+.team-group-card:hover { transform: translateY(-5px); }
 
-/* --- 核心：团队分组容器 --- */
-.team-groups-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-/* 团队分组卡片 - 档案袋风格 */
-.team-group-card {
-  background: var(--bg-glass-strong);
-  border-radius: 16px;
-  padding: 2rem 1.5rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-top: 4px solid var(--primary-color); /* 顶部色彩条 */
-  transition: transform 0.3s ease;
-}
-.team-group-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+/* 顶部彩色标签条 */
+.team-group-card::before {
+  content: ''; position: absolute; top: 0; left: 20px; right: 20px; height: 4px;
+  background: var(--c-accent); border-radius: 0 0 4px 4px; opacity: 0.6;
 }
 
 .team-group-card h3 {
-  text-align: center; margin-bottom: 2rem;
-  font-size: 1.25rem; color: var(--primary-color);
-  letter-spacing: 2px;
+  text-align: center; margin-bottom: 2rem; font-size: 1.2rem; letter-spacing: 2px;
+  color: var(--c-text-light); text-transform: uppercase;
 }
 
-.group-members-list {
-  display: flex; justify-content: space-around; gap: 1rem;
-}
+.group-members-list { display: flex; justify-content: space-around; gap: 1rem; }
 
-/* 成员单体 */
-.team-member {
-  text-align: center;
-  display: flex; flex-direction: column; align-items: center;
-}
-
+.team-member { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .team-member img {
-  width: 80px; height: 80px;
-  border-radius: 50%; object-fit: cover;
-  border: 2px solid #fff;
-  /* 双环呼吸光圈 */
-  box-shadow: 0 0 0 2px var(--primary-light), 0 5px 15px rgba(0,0,0,0.1);
-  margin-bottom: 0.8rem;
-  transition: transform 0.3s ease;
+  width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+  margin-bottom: 1rem; border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--c-primary-light, #ddd);
+  transition: transform 0.3s;
 }
-.team-member:hover img { transform: scale(1.08); border-color: var(--bg-paper); }
-
-.team-member h4 {
-  font-family: var(--font-serif); font-size: 1.1rem;
-  margin: 0.2rem 0; color: #333;
-}
-.team-member p {
-  font-size: 0.8rem; color: #888; margin: 0;
-  line-height: 1.4; max-width: 120px;
-}
+.team-member:hover img { transform: scale(1.1); border-color: var(--c-primary); }
+.team-member h4 { font-size: 1.05rem; margin: 0 0 0.3rem 0; color: var(--c-text-main); font-weight: 600; }
+.team-member p { font-size: 0.8rem; color: #888; margin: 0; line-height: 1.4; }
 
 /* ================================
-   8. 轮播图 & 页脚
+   8. 轮播 & 底部 & 浮窗
 ================================ */
 .image-slider {
-  position: relative; border-radius: var(--radius-card); overflow: hidden;
-  height: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  position: relative; border-radius: var(--radius-box); overflow: hidden; height: 500px;
+  box-shadow: var(--shadow-md);
 }
-.slider-image {
-  width: 100%; height: 100%; object-fit: cover;
-  position: absolute; opacity: 0; transition: opacity 1s ease;
-  filter: sepia(10%);
-}
+.slider-image { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; filter: brightness(0.95); }
 .slider-image.active { opacity: 1; }
 
 .slider-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.8); width: 48px; height: 48px;
+  width: 56px; height: 56px; background: rgba(255,255,255,0.9);
   border-radius: 50%; border: none; cursor: pointer; z-index: 10;
-  color: var(--primary-color); font-size: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s;
-  display: flex; align-items: center; justify-content: center;
+  color: var(--c-primary); font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-.slider-btn.prev { left: 25px; }
-.slider-btn.next { right: 25px; }
+.slider-btn:hover { transform: translateY(-50%) scale(1.1); color: #fff; background: var(--c-primary); }
+.slider-btn.prev { left: 30px; } .slider-btn.next { right: 30px; }
 
-/* 页脚 - 沉浸式底部 */
+/* 页脚 */
 .page-footer {
-  background: var(--primary-color); color: rgba(255,255,255,0.9);
-  text-align: center; padding: 4rem 1.5rem; margin-top: 6rem;
-  border-radius: 40px 40px 0 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e3e2e' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background: var(--c-primary); color: rgba(255,255,255,0.9);
+  text-align: center; padding: 5rem 1.5rem 3rem; margin-top: 8rem;
+  border-radius: 50% 50% 0 0 / 40px 40px 0 0;
+  position: relative;
+}
+/* 装饰纹理 */
+.page-footer::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px; opacity: 0.3; pointer-events: none;
 }
 
-/* 浮动按钮 */
+/* 浮窗 */
 .floating-icons {
   position: fixed; bottom: 40px; right: 30px; z-index: 990;
   display: flex; flex-direction: column; gap: 15px;
 }
 .floating-icon-button {
-  width: 64px; height: 64px; background: #fff; border-radius: 50%;
-  box-shadow: 0 8px 25px rgba(168, 74, 54, 0.25);
+  width: 60px; height: 60px; background: #fff; border-radius: 50%;
+  box-shadow: var(--shadow-float); border: 2px solid #fff;
   display: flex; justify-content: center; align-items: center;
-  border: 2px solid rgba(255,255,255,0.8); 
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.floating-icon:hover .floating-icon-button { transform: scale(1.1); border-color: var(--primary-color); }
-.floating-icon-button img { width: 32px; height: 32px; object-fit: contain; }
+.floating-icon:hover .floating-icon-button { transform: scale(1.15); border-color: var(--c-accent); }
+.floating-icon-button img { width: 30px; height: 30px; object-fit: contain; }
 
-/* 弹窗 */
+/* 分享弹窗 */
 .share-modal {
   display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(74, 64, 54, 0.6); backdrop-filter: blur(8px);
+  background: rgba(67, 61, 56, 0.7); backdrop-filter: blur(10px);
   z-index: 2000; justify-content: center; align-items: center;
 }
 .share-content {
-  background: #fff; padding: 3rem; border-radius: 24px;
-  width: 90%; max-width: 450px; text-align: center; position: relative;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  background: #fff; padding: 3rem 2rem; border-radius: 20px;
+  width: 90%; max-width: 420px; text-align: center; position: relative;
+  box-shadow: var(--shadow-float);
 }
-.close-share { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #aaa; transition: color 0.3s;}
-.close-share:hover { color: var(--primary-color); }
+.close-share { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #bbb; }
+.close-share:hover { color: var(--c-primary); }
 
 </style>
 </head>
 <body>
 
-  <!-- 顶部导航 -->
+  <!-- 进度条 -->
+  <div id="scrollProgress"></div>
+
+  <!-- 导航 -->
   <header class="page-header" id="header">
     <div class="header-inner">
       <div class="page-title">银发记忆工程</div>
-      
-      <!-- 汉堡按钮 -->
-      <button class="nav-toggle" id="navToggle" aria-label="菜单">
-        <span></span><span></span><span></span>
-      </button>
-
+      <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
       <nav class="page-nav" id="pageNav">
         <ul id="navMenu">
           <li><a href="#demo">操作演示</a></li>
@@ -464,20 +429,21 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
     </div>
   </header>
 
-  <!-- Hero 首屏：波浪 + 高级排版 -->
+  <!-- Hero -->
   <section class="hero-trail" id="hero">
     <div class="hero-bg-waves">
       <div class="hero-wave"></div>
       <div class="hero-wave"></div>
     </div>
     
-    <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
-      <h1>每段记忆<br>都是时代的温柔注脚</h1>
-      <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
+    <div class="hero-content" data-aos="zoom-out-up" data-aos-duration="1200">
+      <div class="hero-title-wrapper">
+        <h1>每段记忆<br>都是时代的温柔注脚</h1>
+      </div>
+      <div class="hero-subtext">RECORD · CONNECT · INHERIT</div>
       <p>以AI技术守护银发群体的珍贵回忆，让每段人生被倾听、被铭记、被传承。</p>
-      
       <div style="margin-top: 3rem;">
-        <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-hero scroll-fix" target="_blank">立即参与</a>
+        <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-primary scroll-fix" target="_blank">立即参与</a>
       </div>
     </div>
   </section>
@@ -486,9 +452,9 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
    
     <!-- 操作演示 -->
     <section class="section-wrapper" id="demo" data-aos="fade-up">
-      <div style="text-align: center; margin-bottom: 2.5rem;">
+      <div style="text-align: center; margin-bottom: 3rem;">
         <h1>操作演示</h1>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto;">简单几步，一键留存长辈珍贵记忆</p>
+        <p style="max-width: 600px; margin: 0 auto;">简单几步，一键留存长辈珍贵记忆</p>
       </div>
       <div class="video-container">
         <video controls poster="images/video-poster.jpg" preload="metadata">
@@ -504,12 +470,12 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
         <div class="text-content">
           <h1>初心所系</h1>
           <h2>项目缘起</h2>
-          <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事，正随着传统记录方式的式微逐渐模糊。</p>
+          <p class="drop-cap">聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事，正随着传统记录方式的式微逐渐模糊。</p>
           
           <h2>目标人群</h2>
           <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
           
-          <button aria-controls="initial-intent-more" class="btn-toggle-more" type="button">了解更多详情</button>
+          <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button">阅读完整详情 ▾</button>
           
           <div class="more-content" id="initial-intent-more">
             <ul>
@@ -543,7 +509,7 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
           <h2>核心价值</h2>
           <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别与情感计算，以“对话式引导”轻松实现记忆数字化。</p>
           
-          <button aria-controls="memory-heritage-more" class="btn-toggle-more" type="button">查看技术与价值</button>
+          <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button">查看技术细节 ▾</button>
           
           <div class="more-content" id="memory-heritage-more">
             <p><strong>技术亮点：</strong></p>
@@ -562,14 +528,14 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
       </div>
     </section>
 
-    <!-- 专业护航：结构已严格更新 -->
+    <!-- 专业护航 (档案袋风格) -->
     <section class="section-wrapper" id="team" data-aos="fade-up">
-      <h1 style="text-align: center; margin-bottom: 3.5rem;">专业护航</h1>
+      <h1 style="text-align: center; margin-bottom: 4rem;">专业护航</h1>
       
       <div class="team-introduction">
         <!-- 指导教师 -->
         <div>
-          <h2 style="text-align: center; border: none;">指导教师</h2>
+          <h2 style="text-align: center; border: none; display: block;">指导教师</h2>
           <div class="team-teachers">
             <div class="teacher-card">
               <img alt="H教授" src="images/teacher1.jpg"/>
@@ -586,24 +552,21 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
           </div>
         </div>
 
-        <!-- 团队成员分组 (植入您的代码并美化) -->
+        <!-- 团队成员分组 -->
         <div>
-          <h2 style="text-align: center; border: none; margin-top: 2rem;">团队成员</h2>
+          <h2 style="text-align: center; border: none; margin-top: 2rem; display: block;">团队成员</h2>
           <div class="team-groups-container">
-
             <!-- 技术开发 -->
             <div class="team-group-card">
               <h3>技术开发</h3>
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="陆新蕊" src="images/member1.jpg"/>
-                  <h4>陆新蕊</h4>
-                  <p>计算语言学 硕士生</p>
+                  <h4>陆新蕊</h4><p>计算语言学 硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="刘思怡" src="images/member2.jpg"/>
-                  <h4>刘思怡</h4>
-                  <p>计算语言学 硕士生</p>
+                  <h4>刘思怡</h4><p>计算语言学 硕士生</p>
                 </div>
               </div>
             </div>
@@ -614,13 +577,11 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="武羽柯" src="images/member3.jpg"/>
-                  <h4>武羽柯</h4>
-                  <p>出版学 硕士生</p>
+                  <h4>武羽柯</h4><p>出版学 硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="张乐怡" src="images/member4.jpg"/>
-                  <h4>张乐怡</h4>
-                  <p>出版学 硕士生</p>
+                  <h4>张乐怡</h4><p>出版学 硕士生</p>
                 </div>
               </div>
             </div>
@@ -631,17 +592,14 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="万旭" src="images/member5.jpg"/>
-                  <h4>万旭</h4>
-                  <p>数字出版学 本科生</p>
+                  <h4>万旭</h4><p>数字出版学 本科生</p>
                 </div>
                 <div class="team-member">
                   <img alt="张怡卓含" src="images/member6.jpg"/>
-                  <h4>张怡卓含</h4>
-                  <p>汉语国际教育 本科生</p>
+                  <h4>张怡卓含</h4><p>汉语国际教育 本科生</p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -662,24 +620,24 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
     </section>
   
     <!-- 加入我们 -->
-    <section class="section-wrapper" id="join-us" style="text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(242, 239, 230, 0.8));">
+    <section class="section-wrapper" id="join-us" style="text-align: center; background: linear-gradient(135deg, #fff, #f7f4ef);">
       <h1>加入我们 · 守护记忆</h1>
-      <p style="max-width: 600px; margin: 0 auto 2rem; text-align: center;">无论是为家人制作一份记忆档案，还是作为志愿者参与公益，您的每一步都在对抗遗忘。</p>
-      <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-hero scroll-fix" target="_blank">立即参与</a>
+      <p style="max-width: 600px; margin: 0 auto 2.5rem;">无论是为家人制作一份记忆档案，还是作为志愿者参与公益，您的每一步都在对抗遗忘。</p>
+      <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-primary scroll-fix" target="_blank">立即参与</a>
     </section>
        
   </main>
 
   <footer class="page-footer">
-    <div style="font-size: 2rem; font-weight: bold; font-family: var(--font-serif); margin-bottom: 0.5rem;">银发记忆工程</div>
-    <p style="margin-top: 0.5rem; opacity: 0.9; font-size: 1.1rem; color: rgba(255,255,255,0.8);">小舟载记，字字生光 · 岁岁留痕，代代相传</p>
-    <div style="font-size: 0.85rem; opacity: 0.5; margin-top: 2.5rem;">© 2025 Silver Memory Project. All Rights Reserved.</div>
+    <div style="font-size: 2.2rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 1rem;">银发记忆工程</div>
+    <p style="opacity: 0.8; font-size: 1.1rem;">小舟载记，字字生光 · 岁岁留痕，代代相传</p>
+    <div style="font-size: 0.85rem; opacity: 0.5; margin-top: 3rem;">© 2025 Silver Memory Project. All Rights Reserved.</div>
   </footer>
 
   <!-- 浮动图标 -->
   <div class="floating-icons">
     <a class="floating-icon" href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" target="_blank">
-      <div class="floating-icon-button" style="background: var(--primary-color);">
+      <div class="floating-icon-button" style="background: var(--c-primary);">
         <img alt="开始" src="images/boat_icon.png" style="filter: brightness(0) invert(1);"/>
       </div>
     </a>
@@ -694,14 +652,10 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
   <div class="share-modal" id="shareModal">
     <div class="share-content">
       <div class="close-share" id="closeShare">×</div>
-      <h3 style="color: var(--primary-color); margin-bottom: 2rem;">分享这份温情</h3>
-      <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-        <a href="#" style="padding: 1.2rem; background: #f9f8f5; border-radius: 12px; color: #555; display:flex; align-items:center; justify-content:center; transition:background 0.3s;">
-          📧 官方邮箱
-        </a>
-        <a href="#" style="padding: 1.2rem; background: #f9f8f5; border-radius: 12px; color: #555; display:flex; align-items:center; justify-content:center; transition:background 0.3s;">
-          📕 小红书 @银发记忆
-        </a>
+      <h3 style="color: var(--c-primary); margin-bottom: 2rem;">分享这份温情</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <a href="#" style="padding: 1.2rem; background: #f9f9f9; border-radius: 12px; color: #555; border: 1px solid #eee;">📧 官方邮箱</a>
+        <a href="#" style="padding: 1.2rem; background: #f9f9f9; border-radius: 12px; color: #555; border: 1px solid #eee;">📕 小红书 @银发记忆</a>
       </div>
     </div>
   </div>
@@ -710,7 +664,19 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
   <script>
     AOS.init({ duration: 1000, once: true, offset: 120 });
 
-    /* --- 移动端菜单逻辑 --- */
+    // 顶部滚动进度条
+    window.onscroll = function() {
+      let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (winScroll / height) * 100;
+      document.getElementById("scrollProgress").style.width = scrolled + "%";
+      
+      // 导航栏玻璃态切换
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', winScroll > 50);
+    };
+
+    /* 移动端菜单 */
     const navToggle = document.getElementById('navToggle');
     const pageNav = document.getElementById('pageNav');
     const navLinks = document.querySelectorAll('.page-nav a');
@@ -731,17 +697,17 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
       }
     });
 
-    /* --- 展开更多逻辑 --- */
+    /* 展开更多 */
     document.querySelectorAll('.btn-toggle-more').forEach(button => {
       button.addEventListener('click', () => {
         const content = document.getElementById(button.getAttribute('aria-controls'));
         const isExpanded = content.classList.contains('expanded');
         content.classList.toggle('expanded');
-        button.textContent = isExpanded ? '了解更多详情' : '收起详细内容';
+        button.textContent = isExpanded ? '了解更多详情 ▾' : '收起内容 ▴';
       });
     });
 
-    /* --- 轮播图 --- */
+    /* 轮播图 */
     const sliderImages = document.querySelectorAll('.slider-image');
     let currentIdx = 0;
     function showSlide(idx) {
@@ -755,7 +721,7 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
       currentIdx = (currentIdx - 1 + sliderImages.length) % sliderImages.length; showSlide(currentIdx);
     });
 
-    /* --- 弹窗 --- */
+    /* 弹窗 */
     const shareModal = document.getElementById('shareModal');
     document.getElementById('shareButton').addEventListener('click', () => shareModal.style.display = 'flex');
     document.getElementById('closeShare').addEventListener('click', () => shareModal.style.display = 'none');
