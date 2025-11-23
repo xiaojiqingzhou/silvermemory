@@ -11,540 +11,358 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet"/>
-<!-- 引入动画库 -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
 /* ================================
-   1. 核心变量定义 (Design Tokens)
+   1. 设计系统 (Design Tokens) - 视觉灵魂回归
 ================================ */
 :root {
-  /* 品牌色系 - 温暖时光感 */
-  --primary-color: #BA5C45;      /* 陶土红：主色 */
-  --primary-dark: #9A4532;       /* 深红：按钮悬停 */
+  /* 🎨 配色：温情时光感 */
+  --primary-color: #BA5C45;      /* 陶土红：主色，象征记忆与砖瓦 */
+  --primary-dark: #9A4532;       /* 深红：交互态 */
   --primary-light: #E8B4A2;      /* 浅陶土：装饰 */
-  --secondary-color: #7A8B69;    /* 苔藓绿：辅助色 */
-  --accent-color: #D4AF37;       /* 哑光金：高光 */
+  --secondary-color: #7A8B69;    /* 苔藓绿：生命力 */
+  --accent-color: #D4AF37;       /* 哑光金：珍贵时刻 (列表符号) */
   
-  /* 背景色系 */
+  /* 📜 背景：纸张质感 */
   --bg-body: #F9F7F2;            /* 米宣纸色 */
-  --bg-card: rgba(255, 255, 255, 0.9); /* 卡片背景 */
+  --bg-glass: rgba(255, 255, 255, 0.75); /* 毛玻璃背景 */
   
-  /* 字体 */
-  --font-serif: 'Noto Serif SC', serif;  /* 标题 */
-  --font-sans: 'Noto Sans SC', sans-serif; /* 正文 */
+  /* ✒️ 字体：书卷气 */
+  --font-serif: 'Noto Serif SC', serif;  /* 标题专用 */
+  --font-sans: 'Noto Sans SC', sans-serif; /* 正文专用 */
 
-  /* 阴影与圆角 */
-  --shadow-soft: 0 10px 30px -10px rgba(186, 92, 69, 0.15);
-  --shadow-hover: 0 20px 40px -12px rgba(186, 92, 69, 0.25);
-  --radius-lg: 20px;
+  /* ✨ 质感：阴影与圆角 */
+  --shadow-glass: 0 8px 32px 0 rgba(186, 92, 69, 0.1);
+  --shadow-hover: 0 20px 50px -10px rgba(186, 92, 69, 0.25);
+  --radius-card: 24px;
   --radius-btn: 50px;
 }
 
 /* ================================
    2. 全局基础样式
 ================================ */
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   font-family: var(--font-sans);
   background-color: var(--bg-body);
   color: #5A504B;
-  line-height: 1.7;
-  /* 噪点纹理，增加纸张质感 */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  line-height: 1.8;
+  /* ✅ 找回：SVG噪点纹理，模拟老照片/纸张质感 */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* 防止横向滚动条 */
+  overflow-x: hidden;
 }
 
-/* 标题美化 */
+/* ✅ 找回：标题使用宋体 (Noto Serif) */
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   color: var(--primary-color);
   margin-top: 0;
+  letter-spacing: 0.02em;
 }
 
-h1 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; display: inline-block; }
-/* H1 下方的装饰线 */
-h1::after {
-  content: ''; display: block; width: 60%; height: 4px; 
-  background: var(--accent-color); margin: 8px auto 0; border-radius: 2px;
+h1 { font-size: 2.8rem; margin-bottom: 1.2rem; line-height: 1.2; }
+h2 { font-size: 2rem; margin-bottom: 1.2rem; position: relative; display: inline-block; }
+/* H2 下方的哑光金装饰线 */
+h2::after {
+  content: ''; display: block; width: 40px; height: 3px; 
+  background: var(--accent-color); margin-top: 8px; border-radius: 2px;
 }
-
-h2 { font-size: 1.8rem; margin-bottom: 1rem; border-left: 5px solid var(--primary-color); padding-left: 15px; }
 h3 { font-size: 1.4rem; color: #8B5E3C; margin-bottom: 0.8rem; }
 
-p { margin-bottom: 1rem; text-align: justify; }
-ul { list-style: none; padding: 0; }
+p { margin-bottom: 1.2rem; text-align: justify; color: #5A504B; }
 a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-button { font-family: inherit; cursor: pointer; }
 * { box-sizing: border-box; }
 
 /* ================================
-   3. 导航栏 (适配移动端)
+   3. 导航栏 (毛玻璃 + 移动端适配)
 ================================ */
 .page-header {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  padding: 0.8rem 1.5rem;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  position: fixed; top: 0; left: 0; width: 100%;
+  padding: 0.8rem 1.5rem; z-index: 1000;
+  /* ✅ 找回：毛玻璃效果 */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
   transition: all 0.3s ease;
 }
 
 .header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
 }
 
 .page-title {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  letter-spacing: 1px;
-}
-
-/* 桌面端导航 */
-.page-nav ul {
-  display: flex;
-  gap: 2rem;
-  margin: 0;
-}
-
-.page-nav a {
-  font-weight: 500;
-  color: #5A504B;
-  position: relative;
-  padding: 5px 0;
-}
-
-.page-nav a:hover, .page-nav a.active {
+  font-size: 1.5rem; font-weight: 700;
   color: var(--primary-color);
 }
 
+/* 桌面导航 */
+.page-nav ul { display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none; }
+.page-nav a { font-weight: 500; position: relative; padding: 5px 0; }
+.page-nav a:hover, .page-nav a.active { color: var(--primary-color); }
 .page-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; width: 0; height: 2px;
-  background: var(--primary-color);
-  transition: width 0.3s;
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+  background: var(--primary-color); transition: width 0.3s;
 }
 .page-nav a:hover::after, .page-nav a.active::after { width: 100%; }
 
-/* --- 移动端汉堡菜单逻辑 --- */
+/* --- 移动端汉堡菜单 (保留您的功能需求) --- */
 .nav-toggle {
-  display: none; /* 桌面端隐藏 */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 22px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  z-index: 1001;
-  cursor: pointer;
+  display: none; flex-direction: column; justify-content: space-between;
+  width: 28px; height: 20px; background: transparent; border: none;
+  cursor: pointer; z-index: 1002; padding: 0;
 }
-
 .nav-toggle span {
-  display: block;
-  width: 100%;
-  height: 3px;
+  display: block; width: 100%; height: 2px;
   background-color: var(--primary-color);
-  border-radius: 3px;
   transition: all 0.3s ease;
-  transform-origin: left center;
 }
+/* 动画：变叉号 */
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-/* 汉堡变叉号动画 */
-.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(0px, -1px); }
-.nav-toggle.active span:nth-child(2) { opacity: 0; width: 0; }
-.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(0px, 0px); }
-
-/* 移动端适配 */
 @media (max-width: 768px) {
-  .nav-toggle { display: flex; } /* 显示按钮 */
-  
+  .nav-toggle { display: flex; }
   .page-nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%; /* 侧边抽屉宽度 */
-    height: 100vh;
-    background: #fff;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+    position: fixed; top: 0; right: 0;
+    width: 75%; height: 100vh;
+    background: #fff; /* 抽屉背景 */
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     padding-top: 80px;
-    transform: translateX(100%); /* 默认移出屏幕 */
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000; /* 位于按钮下方 */
+    z-index: 1001;
   }
-  
-  .page-nav ul.open {
-    display: flex; /* 确保显示 */
-    /* 这里的类名逻辑在JS中控制 .page-nav 的 transform */
-  }
-  
-  .page-nav.open {
-    transform: translateX(0); /* 滑入屏幕 */
-  }
-
-  .page-nav ul {
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-  }
-
-  .page-nav li {
-    width: 100%;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .page-nav a {
-    display: block;
-    padding: 1.2rem 2rem;
-    font-size: 1.1rem;
-  }
+  .page-nav.open { transform: translateX(0); }
+  .page-nav ul { flex-direction: column; gap: 0; }
+  .page-nav a { display: block; padding: 1.2rem 2rem; font-size: 1.1rem; border-bottom: 1px solid #f5f5f5; }
 }
 
 /* ================================
-   4. Hero 首屏 (优化后的波浪与文字)
+   4. Hero 首屏 (✅ 找回：流动的波浪动画)
 ================================ */
 .hero-trail {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(180deg, #FDFBF8 0%, #F5E6D8 100%);
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
+  background: linear-gradient(180deg, #FDFBF8 0%, #FCEFE9 100%);
   padding: 0 1.5rem;
-  overflow: hidden;
 }
 
-/* 背景波浪 */
-.hero-wave-bg {
-  position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 40%;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23BA5C45' fill-opacity='0.1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
+/* 波浪动画层 */
+.hero-bg-waves {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+  z-index: 0; pointer-events: none;
 }
+.hero-wave {
+  position: absolute; bottom: 0; left: 0; width: 200%; height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23BA5C45' fill-opacity='0.07' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 50% 100%;
+  animation: waveMove 20s linear infinite;
+}
+.hero-wave:nth-child(2) {
+  bottom: 10px; opacity: 0.6;
+  animation: waveMove 15s linear infinite reverse;
+  filter: hue-rotate(15deg);
+}
+@keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  background: rgba(255,255,255,0.6);
-  padding: 2rem;
-  border-radius: var(--radius-lg);
+  position: relative; z-index: 2; max-width: 800px;
+  /* 简单的卡片衬底，增加文字可读性 */
+  background: rgba(255,255,255,0.4);
+  padding: 2rem; border-radius: var(--radius-card);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255,255,255,0.5);
 }
 
-.hero-content h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-/* 去掉h1下划线在Hero中的样式，改用这里 */
-.hero-content h1::after { display: none; }
+.hero-content h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+.hero-content p { font-size: 1.2rem; margin-bottom: 2rem; color: #6D635E; }
 
-.hero-content p {
-  font-size: 1.2rem;
-  color: #6D635E;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
+/* ✅ 找回：微交互按钮 (光影流动) */
 .btn-hero {
-  display: inline-block;
-  background: var(--primary-color);
-  color: #fff;
-  padding: 1rem 2.5rem;
-  border-radius: var(--radius-btn);
-  font-weight: 600;
-  box-shadow: 0 6px 20px rgba(186, 92, 69, 0.4);
-  transition: transform 0.3s, background 0.3s;
+  display: inline-block; padding: 1rem 3rem;
+  background: var(--primary-color); color: #fff;
+  border-radius: var(--radius-btn); font-weight: 600;
+  box-shadow: 0 10px 25px rgba(186, 92, 69, 0.3);
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
 }
 .btn-hero:hover {
-  background: var(--primary-dark);
   transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(186, 92, 69, 0.45);
+  background: var(--primary-dark);
 }
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 30px;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  animation: bounce 2s infinite;
-  z-index: 2;
-}
-@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
 
 /* ================================
-   5. 内容区域容器
+   5. 内容区块 (✅ 找回：毛玻璃卡片 Glassmorphism)
 ================================ */
 .page-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
-  position: relative;
-  z-index: 5;
+  max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem;
+  position: relative; z-index: 2;
 }
 
-/* 卡片式区块 */
 .section-wrapper {
-  background: var(--bg-card);
-  padding: 3rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 4rem;
-  border: 1px solid rgba(255,255,255,0.8);
-  transition: transform 0.3s ease;
+  /* 核心毛玻璃样式 */
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-card);
+  padding: 3rem; margin-bottom: 4rem;
+  box-shadow: var(--shadow-glass);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .section-wrapper:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
 }
 
-/* 分栏布局 */
 .split-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
 }
 @media (max-width: 900px) {
   .split-section { grid-template-columns: 1fr; }
-  .split-section img { order: -1; margin-bottom: 1rem; } /* 图片在移动端置顶 */
+  .split-section img { order: -1; margin-bottom: 1.5rem; }
 }
 
-/* 图片与视频美化 */
-.split-section img, .video-container {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  object-fit: cover;
+/* ✅ 找回：图片相册效果 (微旋转) */
+.split-section img {
+  width: 100%; border-radius: var(--radius-card);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease;
+  display: block; object-fit: cover;
 }
+.split-section img:hover { transform: scale(1.02) rotate(1deg); }
 
+/* 视频容器 */
 .video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
+  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+  border-radius: var(--radius-card); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   background: #000;
 }
-.video-container video {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-}
+.video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 /* ================================
-   6. 文案与列表样式 (还原内容)
+   6. 列表与展开 (✅ 找回：金色星号列表)
 ================================ */
 .more-content {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.6s ease, opacity 0.6s ease;
-  background: rgba(255, 245, 240, 0.5); /* 浅暖色背景 */
-  border-radius: 10px;
-  padding: 0 1.5rem; /* 初始padding设0防止跳动，展开时再加 */
-}
-
-.more-content.expanded {
-  max-height: 1500px; /* 足够大以容纳还原的长文本 */
-  opacity: 1;
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-  border: 1px solid rgba(186, 92, 69, 0.1);
-}
-
-/* 精致列表样式 */
-.text-content ul { padding-left: 0; }
-.text-content ul > li {
-  margin-bottom: 1rem;
-  position: relative;
-  padding-left: 1.5rem;
-}
-/* 一级列表符号 */
-.text-content ul > li::before {
-  content: '✦';
-  position: absolute; left: 0; top: 2px;
-  color: var(--primary-color);
-  font-size: 0.8rem;
-}
-/* 二级列表 */
-.text-content ul ul {
-  margin-top: 0.5rem;
-  padding-left: 0.5rem;
+  overflow: hidden; max-height: 0; opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   background: rgba(255,255,255,0.5);
-  border-radius: 8px;
-  padding: 0.8rem;
+  border-radius: 12px; margin-top: 1rem;
 }
-.text-content ul ul li {
-  margin-bottom: 0.5rem;
-  padding-left: 1rem;
-  font-size: 0.95rem;
-}
-.text-content ul ul li::before {
-  content: '•'; color: var(--secondary-color);
+.more-content.expanded {
+  max-height: 1500px; opacity: 1; padding: 1.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
+/* 列表美化 */
+.text-content ul { list-style: none; padding: 0; }
+.text-content ul > li {
+  position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem;
+}
+/* 金色星号 */
+.text-content ul > li::before {
+  content: '✦'; position: absolute; left: 0; top: 3px;
+  color: var(--accent-color); font-size: 0.9rem;
+}
+
+/* 了解更多按钮 */
 .btn-toggle-more {
-  background: transparent;
-  color: var(--primary-color);
+  background: transparent; color: var(--primary-color);
   border: 1px solid var(--primary-color);
-  padding: 0.6rem 1.5rem;
-  border-radius: 30px;
-  margin-top: 1rem;
-  transition: all 0.3s;
+  padding: 0.6rem 1.5rem; border-radius: 30px;
+  font-weight: 600; margin-top: 1rem; transition: all 0.3s;
 }
-.btn-toggle-more:hover {
-  background: var(--primary-color);
-  color: #fff;
-}
+.btn-toggle-more:hover { background: var(--primary-color); color: #fff; }
 
 /* ================================
-   7. 团队展示 (还原分组)
+   7. 团队展示 (保持完整分组 + 美化卡片)
 ================================ */
-.team-introduction {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-/* 指导教师 - 横排 */
-.team-teachers {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-/* 团队分组 - 网格 */
-.team-groups-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
+.team-introduction { display: flex; flex-direction: column; gap: 3rem; }
+.team-teachers { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.team-groups-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 
 .team-group-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  border-top: 4px solid var(--secondary-color); /* 分组顶栏颜色 */
+  background: #fff; padding: 1.5rem; border-radius: var(--radius-card);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-top: 3px solid var(--secondary-color); /* 苔藓绿顶条 */
 }
-
 .team-group-card h3 { text-align: center; margin-bottom: 1.5rem; }
 
-.group-members-list {
-  display: flex;
-  justify-content: space-around;
-  gap: 1rem;
-}
+.group-members-list { display: flex; justify-content: space-around; gap: 1rem; }
 
-.team-member {
-  text-align: center;
-  transition: transform 0.3s;
-}
+.team-member { text-align: center; transition: transform 0.3s; }
 .team-member:hover { transform: translateY(-5px); }
-
 .team-member img {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 2px var(--primary-light);
+  width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+  border: 3px solid #fff; box-shadow: 0 0 0 2px var(--primary-light);
   margin-bottom: 0.5rem;
 }
-.team-member h4 { font-size: 1.1rem; margin: 0.3rem 0; color: #333; font-family: var(--font-sans); }
-.team-member p { font-size: 0.85rem; color: #777; margin: 0; }
+.team-member h4 { font-family: var(--font-sans); font-size: 1.1rem; margin: 0.3rem 0; color: #333; }
+.team-member p { font-size: 0.85rem; color: #777; }
 
 /* ================================
-   8. 轮播图 (Slider)
+   8. 轮播图与页脚
 ================================ */
 .image-slider {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  height: 400px;
-  box-shadow: var(--shadow-soft);
+  position: relative; border-radius: var(--radius-card); overflow: hidden;
+  height: 450px; box-shadow: var(--shadow-glass);
 }
-.slider-image {
-  width: 100%; height: 100%; object-fit: cover;
-  position: absolute; opacity: 0; transition: opacity 0.8s ease;
-}
+.slider-image { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 0.8s; }
 .slider-image.active { opacity: 1; }
-
 .slider-btn {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.7);
-  width: 40px; height: 40px; border-radius: 50%;
-  border: none; cursor: pointer; z-index: 10;
-  font-size: 1.2rem; color: var(--primary-color);
-  transition: all 0.3s;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.8); width: 45px; height: 45px;
+  border-radius: 50%; border: none; cursor: pointer; z-index: 10;
+  color: var(--primary-color); font-size: 1.5rem; transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center;
 }
 .slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-.slider-btn.prev { left: 15px; }
-.slider-btn.next { right: 15px; }
+.slider-btn.prev { left: 20px; }
+.slider-btn.next { right: 20px; }
 
-/* ================================
-   9. 页脚 & 浮动元素
-================================ */
+/* 页脚 */
 .page-footer {
-  background: var(--primary-color);
-  color: rgba(255,255,255,0.9);
-  text-align: center;
-  padding: 3rem 1rem;
-  margin-top: 3rem;
-  border-radius: 30px 30px 0 0;
+  background: var(--primary-color); color: rgba(255,255,255,0.95);
+  text-align: center; padding: 3rem 1rem; margin-top: 4rem;
+  border-radius: 40px 40px 0 0; /* 柔和的顶部圆角 */
 }
 
-/* 浮动图标 */
+/* 浮动按钮 */
 .floating-icons {
-  position: fixed; bottom: 30px; right: 20px; z-index: 999;
+  position: fixed; bottom: 40px; right: 30px; z-index: 990;
   display: flex; flex-direction: column; gap: 15px;
 }
 .floating-icon-button {
-  width: 56px; height: 56px;
-  background: #fff; border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 60px; height: 60px; background: #fff; border-radius: 50%;
+  box-shadow: 0 5px 20px rgba(186, 92, 69, 0.3);
   display: flex; justify-content: center; align-items: center;
-  border: 2px solid var(--primary-light);
-  transition: transform 0.3s;
+  border: 2px solid var(--primary-light); transition: transform 0.3s;
 }
-.floating-icon-button img { width: 28px; }
-.floating-icon:hover .floating-icon-button { transform: scale(1.1); border-color: var(--primary-color); }
+.floating-icon:hover .floating-icon-button { transform: scale(1.1) rotate(5deg); border-color: var(--primary-color); }
+.floating-icon-button img { width: 30px; height: 30px; object-fit: contain; }
 
-/* 弹窗 */
+/* 分享弹窗 */
 .share-modal {
-  display: none;
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6); z-index: 2000;
-  justify-content: center; align-items: center;
-  backdrop-filter: blur(3px);
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(60, 50, 40, 0.7); backdrop-filter: blur(4px);
+  z-index: 2000; justify-content: center; align-items: center;
 }
 .share-content {
-  background: #fff; padding: 2rem; border-radius: var(--radius-lg);
+  background: #fff; padding: 2.5rem; border-radius: var(--radius-card);
   width: 90%; max-width: 400px; text-align: center; position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
-.close-share {
-  position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer;
-}
+.close-share { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
 
 </style>
 </head>
@@ -555,11 +373,9 @@ button { font-family: inherit; cursor: pointer; }
     <div class="header-inner">
       <div class="page-title">银发记忆工程</div>
       
-      <!-- 汉堡菜单按钮 -->
+      <!-- 移动端汉堡按钮 -->
       <button class="nav-toggle" id="navToggle" aria-label="菜单">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
       <nav class="page-nav" id="pageNav">
@@ -574,18 +390,21 @@ button { font-family: inherit; cursor: pointer; }
     </div>
   </header>
 
-  <!-- Hero 首屏 -->
+  <!-- Hero 首屏：波浪动画 + 情感化文案 -->
   <section class="hero-trail" id="hero">
-    <div class="hero-wave-bg"></div>
-    <div class="hero-content" data-aos="fade-up">
+    <div class="hero-bg-waves">
+      <div class="hero-wave"></div>
+      <div class="hero-wave"></div>
+    </div>
+    
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
       <h1>每段记忆<br>都是时代的温柔注脚</h1>
       <p>用AI技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。</p>
-      <div style="margin-bottom: 2rem; font-size: 0.9rem; color: var(--primary-color); letter-spacing: 2px;">
+      <div style="margin-bottom: 2.5rem; font-size: 0.95rem; color: var(--primary-color); letter-spacing: 2px; font-weight: 500;">
         记录个人记忆 · 链接时代脉络 · 留住世代温情
       </div>
       <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-hero scroll-fix" target="_blank">立即参与</a>
     </div>
-    <div class="scroll-indicator">↓</div>
   </section>
  
   <main class="page-main"> 
@@ -594,7 +413,7 @@ button { font-family: inherit; cursor: pointer; }
     <section class="section-wrapper" id="demo" data-aos="fade-up">
       <div style="text-align: center; margin-bottom: 2rem;">
         <h1>操作演示</h1>
-        <h2>一键留存记忆：操作演示</h2>
+        <p>简单几步，一键留存长辈珍贵记忆</p>
       </div>
       <div class="video-container">
         <video controls poster="images/video-poster.jpg" preload="metadata">
@@ -604,20 +423,20 @@ button { font-family: inherit; cursor: pointer; }
       </div>
     </section>
    
-    <!-- 初心所系 (文案已完全恢复) -->
+    <!-- 初心所系：全量文案保留 -->
     <section class="section-wrapper" id="initial-intent" data-aos="fade-up">
       <div class="split-section">
         <div class="text-content">
           <h1>初心所系</h1>
           <h2>项目缘起</h2>
-          <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。</p>
+          <p>聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事，正随着传统记录方式的式微逐渐模糊。</p>
           
           <h2>目标人群</h2>
           <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
           
           <button aria-controls="initial-intent-more" class="btn-toggle-more" type="button">了解更多详情</button>
           
-          <!-- 恢复后的详细内容 -->
+          <!-- 详细内容 -->
           <div class="more-content" id="initial-intent-more">
             <ul>
               <li><strong>核心主角：</strong>60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
@@ -625,153 +444,121 @@ button { font-family: inherit; cursor: pointer; }
                 <ul>
                   <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
                   <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
-                  <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
+                  <li>专注历史存档的「文明守望者」（档案馆）</li>
                 </ul>
               </li>
               <li><strong>特别场景：</strong>
                 <ul>
                   <li>多代同堂家庭的「跨代记忆对话」</li>
                   <li>地方文化机构的「方言口述史工程」</li>
-                  <li>养老社区的「长者生命故事集」</li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
+        <!-- 恢复照片风格：旋转、阴影 -->
         <img alt="项目缘起图示" src="images/project-start.jpg" loading="lazy"/>
       </div>
     </section>
 
-    <!-- 智忆传承 (文案已完全恢复) -->
+    <!-- 智忆传承 -->
     <section class="section-wrapper" id="memory-heritage" data-aos="fade-up">
       <div class="split-section">
         <img alt="项目介绍图示" src="images/advantage.jpg" loading="lazy"/>
         <div class="text-content">
           <h1>智忆传承</h1>
-          <h2>项目介绍</h2>
-          <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库。「记忆小舟」是专为老年人设计的AI记忆采集系统。</p>
           <h2>核心价值</h2>
-          <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
+          <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别与情感计算，以“对话式引导”轻松实现记忆数字化。</p>
           
           <button aria-controls="memory-heritage-more" class="btn-toggle-more" type="button">查看技术与价值</button>
           
-          <!-- 恢复后的详细内容 -->
           <div class="more-content" id="memory-heritage-more">
             <p><strong>技术亮点：</strong></p>
             <ul>
-              <li>适老化交互：数字人「记忆小舟」共情交互支持方言自然对话（如上海话、粤语、四川话），打破传统访谈的隔阂感</li>
-              <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」全流程，自动生成带时间轴的电子档案</li>
-              <li>文化价值延伸：系统内置历史事件库（如抗战、改革开放等），自动关联讲述内容</li>
+              <li>适老化交互：支持方言自然对话（如上海话、粤语），打破传统访谈隔阂。</li>
+              <li>一站式服务：一键完成「语音采集→文字转写→故事润色→档案生成」。</li>
             </ul>
             <p><strong>社会价值：</strong></p>
             <ul>
-              <li><strong>对长者：</strong>
-                <ul>
-                  <li>打破「表达障碍」：AI助手化身耐心倾听者</li>
-                  <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」，收获「被看见」的尊严感</li>
-                </ul>
-              </li>
-              <li><strong>对家庭：</strong>
-                <ul>
-                  <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生</li>
-                  <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体</li>
-                </ul>
-              </li>
-              <li><strong>对社会：</strong>
-                <ul>
-                  <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆</li>
-                  <li>科技温度实践：探索「AI适老化」新范式</li>
-                </ul>
-              </li>
+              <li><strong>对长者：</strong>打破“表达障碍”，赋予生命“被看见”的尊严。</li>
+              <li><strong>对家庭：</strong>生成电子档案+纸质纪念册，成为可触摸的传家宝。</li>
+              <li><strong>对社会：</strong>用AI抢救性记录濒危方言与个体记忆。</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 专业护航 (分组结构已恢复) -->
+    <!-- 专业护航：分组结构 -->
     <section class="section-wrapper" id="team" data-aos="fade-up">
-      <h1 style="text-align: center; margin-bottom: 2rem;">专业护航</h1>
+      <h1 style="text-align: center; margin-bottom: 3rem;">专业护航</h1>
       
       <div class="team-introduction">
-        <!-- 指导教师部分 -->
+        <!-- 指导教师 -->
         <div>
           <h2 style="text-align: center; border: none;">指导教师</h2>
           <div class="team-teachers">
             <div class="team-member">
-              <img alt="指导教师1" src="images/teacher1.jpg"/>
-              <h4>H教授</h4>
-              <p>计算语言学专家</p>
+              <img alt="H教授" src="images/teacher1.jpg"/>
+              <h4>H教授</h4><p>计算语言学专家</p>
             </div>
             <div class="team-member">
-              <img alt="指导教师2" src="images/teacher2.jpg"/>
-              <h4>W教授</h4>
-              <p>中国文学专家</p>
+              <img alt="W教授" src="images/teacher2.jpg"/>
+              <h4>W教授</h4><p>中国文学专家</p>
             </div>
             <div class="team-member">
-              <img alt="指导教师3" src="images/teacher3.jpg"/>
-              <h4>L教授</h4>
-              <p>口述史研究专家</p>
+              <img alt="L教授" src="images/teacher3.jpg"/>
+              <h4>L教授</h4><p>口述史研究专家</p>
             </div>
           </div>
         </div>
 
-        <!-- 团队成员分组部分 -->
+        <!-- 团队成员分组 -->
         <div>
-          <h2 style="text-align: center; border: none; margin-top: 1rem;">团队成员</h2>
+          <h2 style="text-align: center; border: none; margin-top: 2rem;">团队成员</h2>
           <div class="team-groups-container">
-            
-            <!-- 技术开发组 -->
+            <!-- 技术开发 -->
             <div class="team-group-card">
               <h3>技术开发</h3>
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="陆新蕊" src="images/member1.jpg"/>
-                  <h4>陆新蕊</h4>
-                  <p>硕士生</p>
+                  <h4>陆新蕊</h4><p>硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="刘思怡" src="images/member2.jpg"/>
-                  <h4>刘思怡</h4>
-                  <p>硕士生</p>
+                  <h4>刘思怡</h4><p>硕士生</p>
                 </div>
               </div>
             </div>
-
-            <!-- 文化策划组 -->
+            <!-- 文化策划 -->
             <div class="team-group-card">
               <h3>文化策划</h3>
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="武羽柯" src="images/member3.jpg"/>
-                  <h4>武羽柯</h4>
-                  <p>硕士生</p>
+                  <h4>武羽柯</h4><p>硕士生</p>
                 </div>
                 <div class="team-member">
                   <img alt="张乐怡" src="images/member4.jpg"/>
-                  <h4>张乐怡</h4>
-                  <p>硕士生</p>
+                  <h4>张乐怡</h4><p>硕士生</p>
                 </div>
               </div>
             </div>
-
-            <!-- 传播运营组 -->
+            <!-- 传播运营 -->
             <div class="team-group-card">
               <h3>传播运营</h3>
               <div class="group-members-list">
                 <div class="team-member">
                   <img alt="万旭" src="images/member5.jpg"/>
-                  <h4>万旭</h4>
-                  <p>本科生</p>
+                  <h4>万旭</h4><p>本科生</p>
                 </div>
                 <div class="team-member">
                   <img alt="张怡卓含" src="images/member6.jpg"/>
-                  <h4>张怡卓含</h4>
-                  <p>本科生</p>
+                  <h4>张怡卓含</h4><p>本科生</p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -784,43 +571,33 @@ button { font-family: inherit; cursor: pointer; }
         <button class="slider-btn prev">‹</button>
         <button class="slider-btn next">›</button>
         <div class="slider-images">
-          <img src="images/image1.jpg" class="slider-image active" alt="成果展示1"/>
-          <img src="images/image2.jpg" class="slider-image" alt="成果展示2"/>
-          <img src="images/image3.jpg" class="slider-image" alt="成果展示3"/>
+          <img src="images/image1.jpg" class="slider-image active" alt="成果1"/>
+          <img src="images/image2.jpg" class="slider-image" alt="成果2"/>
+          <img src="images/image3.jpg" class="slider-image" alt="成果3"/>
         </div>
       </div>
     </section>
   
     <!-- 加入我们 -->
-    <section class="section-wrapper" id="join-us" style="text-align: center; background: rgba(255,255,255,0.6);">
+    <section class="section-wrapper" id="join-us" style="text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(232, 180, 162, 0.2));">
       <h1>加入我们 · 守护记忆</h1>
-      <h2>立即为长辈制作记忆档案：免费试用入口</h2>
-      <div class="text-content" style="max-width: 700px; margin: 0 auto;">
-        <p>即刻行动：</p>
-        <ul style="text-align: left; display: inline-block;">
-          <li>家庭用户：为长辈制作专属记忆档案，留住人生故事</li>
-          <li>机构合作：申请「记忆方舟」公益项目，获取AI技术支持</li>
-          <li>志愿者招募：诚邀各方志愿者，共同守护银发群体的记忆财富</li>
-        </ul>
-      </div>
-      <div style="margin-top: 2rem;">
-        <a href="#hero" class="btn-hero scroll-fix">加入记忆守护计划</a>
-      </div>
+      <p style="max-width: 600px; margin: 0 auto 2rem;">无论是为家人制作一份记忆档案，还是作为志愿者参与公益，您的每一步都在对抗遗忘。</p>
+      <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-hero scroll-fix" target="_blank">立即参与</a>
     </section>
        
   </main>
 
   <footer class="page-footer">
-    <div style="font-size: 1.5rem; font-weight: bold; font-family: var(--font-serif);">银发记忆工程</div>
-    <p style="margin-top: 1rem; opacity: 0.8;">小舟载记，字字生光。岁岁留痕，代代相传。</p>
-    <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 2rem;">© 2025 Silver Memory Project 版权所有</div>
+    <div style="font-size: 1.8rem; font-weight: bold; font-family: var(--font-serif);">银发记忆工程</div>
+    <p style="margin-top: 1rem; opacity: 0.9; font-size: 1.1rem;">小舟载记，字字生光 · 岁岁留痕，代代相传</p>
+    <div style="font-size: 0.85rem; opacity: 0.6; margin-top: 2rem;">© 2025 Silver Memory Project. All Rights Reserved.</div>
   </footer>
 
   <!-- 浮动图标 -->
   <div class="floating-icons">
     <a class="floating-icon" href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" target="_blank">
       <div class="floating-icon-button" style="background: var(--primary-color);">
-        <img alt="记忆小舟" src="images/boat_icon.png" style="filter: brightness(0) invert(1);"/>
+        <img alt="开始" src="images/boat_icon.png" style="filter: brightness(0) invert(1);"/>
       </div>
     </a>
     <div class="floating-icon" id="shareButton">
@@ -836,104 +613,66 @@ button { font-family: inherit; cursor: pointer; }
       <div class="close-share" id="closeShare">×</div>
       <h3 style="color: var(--primary-color);">分享这份温情</h3>
       <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
-        <a href="mailto:example@example.com" style="padding: 0.8rem; background: #f5f5f5; border-radius: 8px; color: #555;">
-          📧 官方邮箱
-        </a>
-        <a href="#" style="padding: 0.8rem; background: #f5f5f5; border-radius: 8px; color: #555;">
-          📕 小红书：银发记忆工程
-        </a>
+        <a href="#" style="padding: 1rem; background: #f9f9f9; border-radius: 10px; color: #555; display:block;">📧 官方邮箱</a>
+        <a href="#" style="padding: 1rem; background: #f9f9f9; border-radius: 10px; color: #555; display:block;">📕 小红书 @银发记忆</a>
       </div>
     </div>
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // 初始化动画
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 800, once: true, offset: 100 });
 
-    /* --- 移动端汉堡菜单逻辑 (完美修复) --- */
+    /* --- 移动端菜单逻辑 (完美复用) --- */
     const navToggle = document.getElementById('navToggle');
     const pageNav = document.getElementById('pageNav');
     const navLinks = document.querySelectorAll('.page-nav a');
 
-    // 点击按钮切换菜单
     navToggle.addEventListener('click', (e) => {
-      e.stopPropagation(); // 防止冒泡
+      e.stopPropagation();
       const isOpened = pageNav.classList.contains('open');
-      
-      if (isOpened) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      if(isOpened) closeMenu(); else openMenu();
     });
 
-    function openMenu() {
-      navToggle.classList.add('active');
-      pageNav.classList.add('open');
-    }
+    function openMenu() { navToggle.classList.add('active'); pageNav.classList.add('open'); }
+    function closeMenu() { navToggle.classList.remove('active'); pageNav.classList.remove('open'); }
 
-    function closeMenu() {
-      navToggle.classList.remove('active');
-      pageNav.classList.remove('open');
-    }
-
-    // 点击链接后自动关闭菜单
-    navLinks.forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // 点击页面空白处关闭菜单
+    navLinks.forEach(link => link.addEventListener('click', closeMenu));
     document.addEventListener('click', (e) => {
-      if (pageNav.classList.contains('open') && !pageNav.contains(e.target) && !navToggle.contains(e.target)) {
+      if(pageNav.classList.contains('open') && !pageNav.contains(e.target) && !navToggle.contains(e.target)) {
         closeMenu();
       }
     });
 
-    /* --- 了解更多折叠逻辑 --- */
+    /* --- 展开更多逻辑 --- */
     document.querySelectorAll('.btn-toggle-more').forEach(button => {
       button.addEventListener('click', () => {
-        const targetId = button.getAttribute('aria-controls');
-        const content = document.getElementById(targetId);
+        const content = document.getElementById(button.getAttribute('aria-controls'));
         const isExpanded = content.classList.contains('expanded');
-        
         content.classList.toggle('expanded');
         button.textContent = isExpanded ? '了解更多详情' : '收起详细内容';
       });
     });
 
-    /* --- 轮播图逻辑 --- */
+    /* --- 轮播图 --- */
     const sliderImages = document.querySelectorAll('.slider-image');
-    let currentIndex = 0;
-    
-    function showSlide(index) {
+    let currentIdx = 0;
+    function showSlide(idx) {
       sliderImages.forEach(img => img.classList.remove('active'));
-      sliderImages[index].classList.add('active');
+      sliderImages[idx].classList.add('active');
     }
-    
     document.querySelector('.slider-btn.next').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % sliderImages.length;
-      showSlide(currentIndex);
+      currentIdx = (currentIdx + 1) % sliderImages.length; showSlide(currentIdx);
     });
-    
     document.querySelector('.slider-btn.prev').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-      showSlide(currentIndex);
+      currentIdx = (currentIdx - 1 + sliderImages.length) % sliderImages.length; showSlide(currentIdx);
     });
 
-    /* --- 分享弹窗逻辑 --- */
+    /* --- 弹窗 --- */
     const shareModal = document.getElementById('shareModal');
     document.getElementById('shareButton').addEventListener('click', () => shareModal.style.display = 'flex');
     document.getElementById('closeShare').addEventListener('click', () => shareModal.style.display = 'none');
-    shareModal.addEventListener('click', (e) => {
-      if(e.target === shareModal) shareModal.style.display = 'none';
-    });
-
-    /* --- 滚动时导航栏样式 --- */
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      header.style.padding = window.scrollY > 50 ? '0.5rem 1.5rem' : '0.8rem 1.5rem';
-    });
+    shareModal.addEventListener('click', (e) => { if(e.target === shareModal) shareModal.style.display = 'none'; });
 
   </script>
 </body>
