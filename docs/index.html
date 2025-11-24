@@ -551,19 +551,16 @@ ul { list-style: none; padding: 0; margin: 0; }
   .hero-content { padding: 0 1.2rem; }
   .hero-subtext { font-size: 0.8rem; padding: 0.5rem 1rem; letter-spacing: 0.1em; white-space: nowrap; }
   
-  /* 🌊 文字海优化：取消3D，改为垂直流动 */
-  .sea-section-wrapper {
-    height: 40vh;
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  }
+  /* 🌊 文字海优化：保留 3D 效果，但适配窄屏 */
+  .sea-section-wrapper { height: 45vh; } /* 稍微增加高度以容纳3D效果 */
   .hero-sea-plane {
-    transform: rotateX(0deg); /* 拍平 */
-    bottom: 0; left: 0; width: 100%; gap: 2vh;
+    /* 不进行拍平 (rotateX(0deg))，保留原有的 rotateX(60deg) */
+    /* 调整宽度和位置，使文字在窄屏上也能错落有致 */
+    width: 200%; 
+    left: -50%;
+    bottom: -10%;
   }
-  .sea-row { width: auto; margin-left: 0; flex-wrap: nowrap; animation-duration: 20s !important; }
-  /* 隐藏部分密集层 */
-  .layer-1, .layer-2 { display: none; } 
-  .paper-float { font-size: 0.9rem !important; padding: 8px 16px; background: rgba(255, 253, 248, 0.95); }
+  .paper-float { font-size: 0.8rem !important; padding: 6px 12px; } /* 稍微缩小文字以防拥挤 */
   
   /* 调整大船 */
   .hero-big-boat { width: 180px; bottom: 5%; opacity: 0.6; }
