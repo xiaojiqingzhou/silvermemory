@@ -15,15 +15,15 @@
 
 <style>
 /* ================================
-   1. 设计哲学：水墨·诗意 (来自版本 9 的配色)
+   1. 设计哲学：水墨·诗意
 ================================ */
 :root {
-  /* 🎨 色彩：低饱和度的自然色系 (Version 9 Palette) */
-  --c-ink: #2B2623;              /* 浓墨：主文字 */
-  --c-charcoal: #5A5048;         /* 淡墨：次要文字 */
-  --c-vermilion: #9E3E30;        /* 朱砂：点缀色 (更克制沉稳) */
-  --c-vermilion-deep: #78261C;   /* 殷红：历史厚重感 */
-  --c-gold: #C2A676;             /* 枯金：高光 */
+  /* 🎨 色彩：低饱和度的自然色系 */
+  --c-ink: #2B2623;              /* 浓墨 */
+  --c-charcoal: #5A5048;         /* 淡墨 */
+  --c-vermilion: #9E3E30;        /* 朱砂 */
+  --c-vermilion-deep: #78261C;   /* 殷红 */
+  --c-gold: #C2A676;             /* 枯金 */
   
   /* 📜 背景：水彩纸质感 */
   --bg-body: #F7F5F0;            /* 暖白纸基 */
@@ -32,7 +32,6 @@
   /* ✨ 质感与光影 */
   --shadow-sm: 0 4px 12px rgba(43, 38, 35, 0.04);
   --shadow-lg: 0 20px 50px rgba(43, 38, 35, 0.08), 0 2px 10px rgba(0,0,0,0.01);
-  --shadow-float: 0 15px 35px rgba(158, 62, 48, 0.1);
   
   /* ✒️ 字体 */
   --font-serif: 'Noto Serif SC', serif;
@@ -56,28 +55,41 @@ body {
   position: relative;
 }
 
-/* 🌫️ (来自 9) 全局雾气纹理 */
+/* 🌫️ 全局雾气纹理 */
 body::before {
   content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
 }
 
-/* 顶部进度条 */
+/* ================================
+   顶部进度条与小船 (优化版)
+================================ */
 #scrollProgressContainer {
-  position: fixed; top: 0; left: 0; width: 100%; height: 3px; 
-  background: transparent; z-index: 2000;
+  position: fixed; top: 0; left: 0; width: 100%; height: 4px; 
+  background: rgba(194, 166, 118, 0.2); /* 轨道底色 */
+  z-index: 2000;
 }
 #scrollProgressBar {
-  height: 100%; background: var(--c-vermilion); width: 0%; position: relative; opacity: 0.8;
+  height: 100%; 
+  background: linear-gradient(90deg, var(--c-vermilion), var(--c-vermilion-deep)); 
+  width: 0%; position: relative; opacity: 1;
+  border-radius: 0 2px 2px 0;
   box-shadow: 0 0 10px rgba(158, 62, 48, 0.3);
 }
 #scrollBoat {
-  position: absolute; right: -15px; top: -14px; width: 34px; height: 34px;
-  /* 简笔画乌篷船图标 */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239E3E30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 15c0 0 2 3 10 3s10-3 10-3l-2-5H4l-2 5z'/%3E%3Cpath d='M8 15V8c0-2 2-3 4-3s4 1 4 3v7'/%3E%3C/svg%3E");
-  background-size: contain; background-repeat: no-repeat;
+  position: absolute; 
+  right: -24px; /* 调整水平位置，使船头对准进度末端 */
+  top: -16px;   /* 向上浮动，位于线条之上 */
+  width: 48px; 
+  height: 30px;
+  /* 更精致的乌篷船剪影 SVG (带金色船桨) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'%3E%3Cpath d='M4 24C4 24 16 32 32 32C48 32 60 24 60 24L58 22C48 28 16 28 6 22L4 24Z' fill='%2378261C'/%3E%3Cpath d='M38 22V12C38 9 32 8 32 8C32 8 26 9 26 12V22' stroke='%2378261C' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M44 24L40 10' stroke='%23C2A676' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: contain; 
+  background-repeat: no-repeat;
   transition: transform 0.1s linear;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+  z-index: 2001;
 }
 
 h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--c-ink); margin-top: 0; font-weight: 700; }
@@ -105,15 +117,14 @@ ul { list-style: none; padding: 0; margin: 0; }
 * { box-sizing: border-box; }
 
 /* ================================
-   3. 导航栏：完全复刻版本 9 逻辑
+   3. 导航栏 (红印章Logo + 汉堡菜单)
 ================================ */
 .page-header {
   position: fixed; top: 0; left: 0; width: 100%;
   padding: 2rem 3rem; z-index: 1000;
-  background: transparent; /* 初始完全透明 */
+  background: transparent;
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* 滚动后的磨砂效果 */
 .page-header.scrolled { 
   padding: 1rem 3rem; 
   background: rgba(253, 251, 248, 0.95); 
@@ -124,18 +135,16 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
-/* 🔴 LOGO 修正：完全复刻版本 9 的红印章样式 */
+/* LOGO：红印章样式 */
 .page-title {
   font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--c-ink);
   display: flex; align-items: center; letter-spacing: 2px;
 }
-/* 红印章 */
 .page-title::before {
   content: '记忆'; font-family: var(--font-art); font-size: 0.8rem; 
   color: #fff; background: var(--c-vermilion);
   width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
   border-radius: 4px; margin-right: 12px; opacity: 0.9;
-  /* 确保没有旋转，保持端正 */
   transform: none; box-shadow: none; 
 }
 
@@ -148,16 +157,12 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .page-nav a:hover::after, .page-nav a.active::after { width: 100%; }
 
-/* 🍔 移动端汉堡菜单：带动画变叉 */
+/* 汉堡菜单动画 */
 .nav-toggle { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
 .nav-toggle span { 
   width: 24px; height: 2px; background: var(--c-ink); 
-  transition: all 0.3s ease-in-out; 
-  border-radius: 2px;
-  transform-origin: center;
+  transition: all 0.3s ease-in-out; border-radius: 2px; transform-origin: center;
 }
-
-/* 激活状态：变成 X */
 .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -168,8 +173,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   .page-nav { 
     position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--bg-body);
     padding-top: 8rem; clip-path: inset(0 0 100% 0); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex; justify-content: center;
-    z-index: 1000; /* 确保在 Toggle 按钮下方 */
+    display: flex; justify-content: center; z-index: 1000;
   }
   .page-nav.open { clip-path: inset(0 0 0 0); }
   .page-nav ul { flex-direction: column; align-items: center; gap: 2rem; }
@@ -177,7 +181,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 
 /* ================================
-   4. Hero Section：岁月长河
+   4. Hero Section
 ================================ */
 .hero-trail {
   position: relative; 
@@ -209,7 +213,6 @@ ul { list-style: none; padding: 0; margin: 0; }
   font-weight: 400; opacity: 0.9; text-shadow: 0 1px 1px rgba(255,255,255,0.8);
 }
 
-/* 按钮样式 */
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 1.1rem 3.5rem; font-size: 1.1rem; letter-spacing: 0.1em;
@@ -226,7 +229,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   background: #B93E2F;
 }
 
-/* 🌊 沉浸式文字海 */
+/* 沉浸式文字海 */
 .sea-section-wrapper {
   position: absolute; bottom: 0; left: 0; width: 100%; height: 55vh;
   z-index: 1; overflow: hidden;
@@ -264,7 +267,6 @@ ul { list-style: none; padding: 0; margin: 0; }
 @keyframes flowL { from { transform: translateX(0); } to { transform: translateX(-10%); } }
 @keyframes flowR { from { transform: translateX(-10%); } to { transform: translateX(0); } }
 
-/* 🚣‍♀️ (来自 9) 乌篷船：透明度、呼吸感、极简线条 */
 .hero-big-boat {
   position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
   z-index: 20; width: 250px; opacity: 0.9;
@@ -277,7 +279,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 
 /* ================================
-   5. 通用版块容器 (保留 10 的档案袋结构)
+   5. 通用版块容器 & 艺术背景层
 ================================ */
 .page-main { max-width: 1080px; margin: 0 auto; padding: 4rem 1.5rem; position: relative; z-index: 2; }
 
@@ -287,18 +289,18 @@ ul { list-style: none; padding: 0; margin: 0; }
   padding: 5rem 4rem; margin-bottom: 7rem;
   box-shadow: var(--shadow-lg);
   position: relative;
-  overflow: hidden; /* 确保背景图不溢出 */
+  overflow: hidden; 
   background-image: 
     linear-gradient(rgba(140, 130, 121, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(140, 130, 121, 0.03) 1px, transparent 1px);
   background-size: 30px 30px;
 }
 
-/* 🎨 艺术背景 1: 勒特河 (Lethe) - 初心所系 */
+/* 🎨 艺术背景 1: 勒特河 (Lethe) */
 .lethe-bg-layer {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   z-index: -1; pointer-events: none;
-  background-image: url('images/lethe.jpeg'); /* 需替换图片 */
+  background-image: url('images/lethe.jpeg'); 
   background-size: cover; background-position: center 30%;
   opacity: 0.08;
   filter: grayscale(100%) sepia(40%) contrast(1.2);
@@ -309,50 +311,35 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 @keyframes bgBreatheEffect { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-/* 🎨 艺术背景 2: 记忆女神 (Mnemosyne) - 智忆传承 (油画去色处理版) */
+/* 🎨 艺术背景 2: 记忆女神 (Mnemosyne) - 优化版 */
 .mnemosyne-bg-layer {
   position: absolute; 
   top: 0; 
-  right: 0; 
-  width: 55%; 
+  left: 0; 
+  width: 100%; /* 宽度占满以支持居中 */
   height: 100%;
   z-index: -1; 
   pointer-events: none;
-  
-  /* 请确保文件名正确为 mnemosyne_oil.jpg */
-  background-image: url('images/mnemosyne_oil.jpg'); 
-  
+  background-image: url('images/mnemosyne_oil.jpg'); /* 保持原名或使用您上传的 .jpg */
   background-size: contain; 
-  background-position: top right; 
+  background-position: center center; /* 居中放置，配合羽化 */
   background-repeat: no-repeat;
   
-  /* 视觉核心：模拟蚀刻版画效果 */
-  opacity: 0.08; 
-  mix-blend-mode: multiply; 
+  /* 透明度调整 */
+  opacity: 0.08;
   
-  /* 滤镜：去色 + 泛黄 + 对比度 + 提亮 */
-  filter: grayscale(100%) sepia(60%) contrast(1.2) brightness(1.1);
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) sepia(30%) contrast(1.1);
   
-  /* 边缘羽化遮罩 */
-  -webkit-mask-image: radial-gradient(ellipse at 60% 40%, black 40%, transparent 90%);
-  mask-image: radial-gradient(ellipse at 60% 40%, black 40%, transparent 90%);
+  /* 四周羽化遮罩 - 确保不突兀 */
+  -webkit-mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
+  mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
   
-  animation: mnemosyneFloat 18s ease-in-out infinite alternate;
+  animation: mnemosyneFloat 15s ease-in-out infinite alternate;
 }
-@keyframes mnemosyneFloat { 
-  0% { transform: translateY(0) scale(1); } 
-  100% { transform: translateY(-15px) scale(1.03); } 
-}
+@keyframes mnemosyneFloat { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-15px) scale(1.02); } }
 
-/* 移动端背景适配 */
 @media (max-width: 900px) {
-  .mnemosyne-bg-layer { 
-    width: 100%; 
-    opacity: 0.08; 
-    background-position: center 20%;
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-  }
   .section-wrapper { padding: 3rem 1.5rem; }
 }
 
@@ -398,19 +385,70 @@ ul { list-style: none; padding: 0; margin: 0; }
 .text-content ul ul li { font-size: 0.95rem; margin-bottom: 0.5rem; }
 .text-content ul ul li::before { content: '—'; color: var(--c-charcoal); }
 
+/* ================================
+   交互组件：展开内容 & 按钮 (优化版)
+================================ */
 .more-content {
-  overflow: hidden; max-height: 0; opacity: 0; transition: all 0.6s ease;
-  background: #FDFBF8; margin-top: 2rem; border-left: 3px solid var(--c-vermilion);
-  padding: 0 2.5rem;
+  overflow: hidden; max-height: 0; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 1.5rem;
+  /* 增加纸张质感容器 */
+  background: rgba(255, 255, 255, 0.6); 
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  border: 1px dashed rgba(194, 166, 118, 0.4);
+  padding: 0 2rem;
 }
-.more-content.expanded { max-height: 2000px; opacity: 1; padding: 2rem 2.5rem; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02); }
+.more-content.expanded { 
+  max-height: 2000px; 
+  opacity: 1; 
+  padding: 2rem; 
+  margin-bottom: 1rem;
+  box-shadow: inset 0 0 20px rgba(194, 166, 118, 0.1);
+}
 
+/* 按钮 - 胶囊线框风格 */
 .btn-text {
-  background: none; border: none; color: var(--c-vermilion); font-weight: 600; font-family: var(--font-serif);
-  font-size: 1.05rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-  border-bottom: 1px solid rgba(158, 62, 48, 0.3); padding-bottom: 4px; margin-top: 1.5rem;
+  background: transparent;
+  border: 1px solid var(--c-vermilion);
+  color: var(--c-vermilion);
+  
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  
+  padding: 0.6rem 2rem;
+  border-radius: 50px;
+  margin-top: 2rem;
+  cursor: pointer;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
-.btn-text:hover { border-bottom-color: var(--c-vermilion); color: var(--c-vermilion-deep); }
+
+.btn-text:hover {
+  background: var(--c-vermilion);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(158, 62, 48, 0.25);
+  transform: translateY(-2px);
+  border-color: transparent;
+}
+
+/* 箭头动画 */
+.btn-text::after {
+  content: '↓'; font-size: 1.1em; transition: transform 0.3s ease; line-height: 1;
+}
+.btn-text[aria-expanded="true"] {
+  background-color: var(--c-charcoal); border-color: var(--c-charcoal); color: #fff;
+}
+.btn-text[aria-expanded="true"]::after { content: '↑'; }
 
 /* ================================
    6. 团队与展示
@@ -562,7 +600,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     <!-- 沉浸式文字海 -->
     <div class="sea-section-wrapper">
       
-      <!-- 🚣‍♀️ 乌篷船 (版本 9 样式) -->
+      <!-- 🚣‍♀️ 乌篷船 (主视觉大船) -->
       <div class="hero-big-boat">
          <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
            <!-- 阴影 -->
@@ -641,7 +679,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     <section class="section-wrapper" id="initial-intent" data-aos="fade-up">
       <div class="tape-decor"></div>
       
-      <!-- 【新增】勒特河背景层：抵抗遗忘 -->
+      <!-- 勒特河背景层：抵抗遗忘 -->
       <div class="lethe-bg-layer"></div>
       
       <div class="bg-decor">ORIGIN</div>
@@ -655,7 +693,8 @@ ul { list-style: none; padding: 0; margin: 0; }
           <h2>目标人群</h2>
           <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
           
-          <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button">了解更多 ▾</button>
+          <!-- 升级后的胶囊按钮，移除内部箭头字符，由CSS处理 -->
+          <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
           
           <div class="more-content" id="initial-intent-more">
             <p>在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
@@ -688,7 +727,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     <section class="section-wrapper" id="memory-heritage" data-aos="fade-up">
       <div class="tape-decor"></div>
       
-      <!-- 【新增】记忆女神背景层：守护记忆 -->
+      <!-- 记忆女神背景层：守护记忆 (调整为0.08透明度+四周羽化) -->
       <div class="mnemosyne-bg-layer"></div>
       
       <div class="split-section">
@@ -704,7 +743,8 @@ ul { list-style: none; padding: 0; margin: 0; }
           <h2>核心价值</h2>
           <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
           
-          <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button">了解更多 ▾</button>
+          <!-- 升级后的胶囊按钮 -->
+          <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
           
           <div class="more-content" id="memory-heritage-more">
             <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存。</p>
@@ -871,6 +911,7 @@ ul { list-style: none; padding: 0; margin: 0; }
       let scrolled = (winScroll / height) * 100;
       document.getElementById("scrollProgressBar").style.width = scrolled + "%";
       
+      // 让船只随波浪轻微摇摆
       const boat = document.getElementById("scrollBoat");
       boat.style.transform = `translateY(${Math.sin(winScroll / 50) * 3}px) rotate(${Math.sin(winScroll / 100) * 5}deg)`;
 
@@ -895,16 +936,15 @@ ul { list-style: none; padding: 0; margin: 0; }
       });
     };
 
-    // 移动端菜单逻辑：点击 Toggle 按钮切换 Active 状态和菜单显示
+    // 移动端菜单逻辑
     const navToggle = document.getElementById('navToggle');
     const pageNav = document.getElementById('pageNav');
     
     navToggle.addEventListener('click', () => { 
       pageNav.classList.toggle('open'); 
-      navToggle.classList.toggle('active'); // 关键：切换图标状态为 X
+      navToggle.classList.toggle('active'); 
     });
 
-    // 点击菜单内链接后，自动关闭菜单并恢复图标
     document.querySelectorAll('.page-nav a').forEach(link => {
       link.addEventListener('click', () => {
         pageNav.classList.remove('open');
@@ -912,13 +952,26 @@ ul { list-style: none; padding: 0; margin: 0; }
       });
     });
 
-    // 展开更多逻辑
+    // 展开更多逻辑 - 升级版 (配合 CSS 动画和文字切换)
     document.querySelectorAll('.btn-toggle-more').forEach(button => {
       button.addEventListener('click', () => {
-        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const contentId = button.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+        
+        // 检查当前状态
         const isExpanded = content.classList.contains('expanded');
-        content.classList.toggle('expanded');
-        button.textContent = isExpanded ? '了解更多 ▾' : '收起内容 ▴';
+        
+        if (isExpanded) {
+          // 收起
+          content.classList.remove('expanded');
+          button.setAttribute('aria-expanded', 'false');
+          button.innerHTML = '了解更多';
+        } else {
+          // 展开
+          content.classList.add('expanded');
+          button.setAttribute('aria-expanded', 'true');
+          button.innerHTML = '收起内容';
+        }
       });
     });
 
