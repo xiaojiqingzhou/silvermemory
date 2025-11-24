@@ -51,9 +51,12 @@ body {
   background-color: var(--bg-body);
   color: var(--c-ink);
   line-height: 2.0;
-  overflow-x: hidden;
+  overflow-x: hidden; /* 防止横向溢出 */
   position: relative;
 }
+
+/* 移动端菜单打开时禁止背景滚动 */
+body.nav-open { overflow: hidden; }
 
 /* 🌫️ 全局雾气纹理 */
 body::before {
@@ -63,11 +66,11 @@ body::before {
 }
 
 /* ================================
-   顶部进度条与小船 (优化版)
+   顶部进度条与小船
 ================================ */
 #scrollProgressContainer {
   position: fixed; top: 0; left: 0; width: 100%; height: 4px; 
-  background: rgba(194, 166, 118, 0.2); /* 轨道底色 */
+  background: rgba(194, 166, 118, 0.2);
   z-index: 2000;
 }
 #scrollProgressBar {
@@ -79,11 +82,10 @@ body::before {
 }
 #scrollBoat {
   position: absolute; 
-  right: -24px; /* 调整水平位置，使船头对准进度末端 */
-  top: -16px;   /* 向上浮动，位于线条之上 */
+  right: -24px;
+  top: -16px;
   width: 48px; 
   height: 30px;
-  /* 更精致的乌篷船剪影 SVG (带金色船桨) */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'%3E%3Cpath d='M4 24C4 24 16 32 32 32C48 32 60 24 60 24L58 22C48 28 16 28 6 22L4 24Z' fill='%2378261C'/%3E%3Cpath d='M38 22V12C38 9 32 8 32 8C32 8 26 9 26 12V22' stroke='%2378261C' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M44 24L40 10' stroke='%23C2A676' stroke-width='1.5'/%3E%3C/svg%3E");
   background-size: contain; 
   background-repeat: no-repeat;
@@ -296,7 +298,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   background-size: 30px 30px;
 }
 
-/* 🎨 艺术背景 1: 勒特河 (Lethe) */
+/* 🎨 艺术背景 1 */
 .lethe-bg-layer {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   z-index: -1; pointer-events: none;
@@ -311,37 +313,21 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 @keyframes bgBreatheEffect { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-/* 🎨 艺术背景 2: 记忆女神 (Mnemosyne) - 优化版 */
+/* 🎨 艺术背景 2 */
 .mnemosyne-bg-layer {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; /* 宽度占满以支持居中 */
-  height: 100%;
-  z-index: -1; 
-  pointer-events: none;
-  background-image: url('images/mnemosyne_oil.jpg'); /* 保持原名或使用您上传的 .jpg */
-  background-size: contain; 
-  background-position: center center; /* 居中放置，配合羽化 */
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none;
+  background-image: url('images/mnemosyne_oil.jpg');
+  background-size: contain; background-position: center center;
   background-repeat: no-repeat;
-  
-  /* 透明度调整 */
   opacity: 0.08;
-  
   mix-blend-mode: multiply;
   filter: grayscale(100%) sepia(30%) contrast(1.1);
-  
-  /* 四周羽化遮罩 - 确保不突兀 */
   -webkit-mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
   mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
-  
   animation: mnemosyneFloat 15s ease-in-out infinite alternate;
 }
 @keyframes mnemosyneFloat { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-15px) scale(1.02); } }
-
-@media (max-width: 900px) {
-  .section-wrapper { padding: 3rem 1.5rem; }
-}
 
 .tape-decor {
   position: absolute; width: 120px; height: 35px;
@@ -357,7 +343,6 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 
 .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1;}
-@media (max-width: 900px) { .split-section { grid-template-columns: 1fr; gap: 3rem; } .split-section img { order: -1; } }
 
 .split-section img, .video-container {
   width: 100%; display: block; object-fit: cover;
@@ -367,7 +352,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .split-section img:hover, .video-container:hover { transform: rotate(0deg) scale(1.02); z-index: 5; }
 
-.video-container { padding: 10px; transform: rotate(1deg); padding-bottom: 56.25%; height: 0; }
+.video-container { padding: 10px; transform: rotate(1deg); padding-bottom: 56.25%; height: 0; position: relative; }
 .video-inner { position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; background: #000; }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
@@ -386,12 +371,11 @@ ul { list-style: none; padding: 0; margin: 0; }
 .text-content ul ul li::before { content: '—'; color: var(--c-charcoal); }
 
 /* ================================
-   交互组件：展开内容 & 按钮 (优化版)
+   交互组件：展开内容 & 按钮
 ================================ */
 .more-content {
   overflow: hidden; max-height: 0; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 1.5rem;
-  /* 增加纸张质感容器 */
   background: rgba(255, 255, 255, 0.6); 
   backdrop-filter: blur(5px);
   border-radius: 8px;
@@ -406,48 +390,25 @@ ul { list-style: none; padding: 0; margin: 0; }
   box-shadow: inset 0 0 20px rgba(194, 166, 118, 0.1);
 }
 
-/* 按钮 - 胶囊线框风格 */
 .btn-text {
   background: transparent;
   border: 1px solid var(--c-vermilion);
   color: var(--c-vermilion);
-  
   font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  
-  padding: 0.6rem 2rem;
-  border-radius: 50px;
-  margin-top: 2rem;
-  cursor: pointer;
-  
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  
+  font-weight: 600; font-size: 1rem; letter-spacing: 0.05em;
+  padding: 0.6rem 2rem; border-radius: 50px; margin-top: 2rem; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  position: relative; overflow: hidden; z-index: 1;
 }
 
 .btn-text:hover {
-  background: var(--c-vermilion);
-  color: #fff;
+  background: var(--c-vermilion); color: #fff;
   box-shadow: 0 8px 20px rgba(158, 62, 48, 0.25);
-  transform: translateY(-2px);
-  border-color: transparent;
+  transform: translateY(-2px); border-color: transparent;
 }
-
-/* 箭头动画 */
-.btn-text::after {
-  content: '↓'; font-size: 1.1em; transition: transform 0.3s ease; line-height: 1;
-}
-.btn-text[aria-expanded="true"] {
-  background-color: var(--c-charcoal); border-color: var(--c-charcoal); color: #fff;
-}
+.btn-text::after { content: '↓'; font-size: 1.1em; transition: transform 0.3s ease; line-height: 1; }
+.btn-text[aria-expanded="true"] { background-color: var(--c-charcoal); border-color: var(--c-charcoal); color: #fff; }
 .btn-text[aria-expanded="true"]::after { content: '↑'; }
 
 /* ================================
@@ -543,6 +504,106 @@ ul { list-style: none; padding: 0; margin: 0; }
 .share-content {
   background: #FFFBF7; padding: 3rem; border-radius: 4px; width: 90%; max-width: 400px; text-align: center; position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* ================================
+   📱 移动端深度适配 (Mobile Responsive)
+================================ */
+@media (max-width: 900px) {
+  .page-header { padding: 1.5rem; }
+  .nav-toggle { display: flex; }
+  .page-nav { 
+    position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--bg-body);
+    padding-top: 8rem; clip-path: inset(0 0 100% 0); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; justify-content: center; z-index: 1000;
+  }
+  .page-nav.open { clip-path: inset(0 0 0 0); }
+  .page-nav ul { flex-direction: column; align-items: center; gap: 2rem; }
+  .page-nav a { font-size: 1.2rem; }
+  .split-section { grid-template-columns: 1fr; gap: 3rem; } 
+  .split-section img { order: -1; }
+  .section-wrapper { padding: 3rem 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  /* --- 全局调整 --- */
+  html { font-size: 14px; } 
+  h1 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 1rem; }
+  h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+  .drop-cap::first-letter { font-size: 3rem; margin-right: 0.5rem; }
+  
+  /* --- 导航栏优化 --- */
+  .page-header { padding: 1rem 1.5rem; }
+  .page-title { font-size: 1.1rem; }
+  .page-title::before { width: 24px; height: 24px; font-size: 0.7rem; margin-right: 8px; }
+  
+  .page-nav {
+    background: rgba(247, 245, 240, 0.98);
+    backdrop-filter: blur(15px);
+    padding-top: 6rem;
+    justify-content: flex-start;
+  }
+  .page-nav ul { gap: 1.5rem; width: 100%; }
+  .page-nav a { font-size: 1.3rem; display: block; padding: 10px 0; width: 100%; text-align: center; }
+
+  /* --- Hero 区域重构 --- */
+  .hero-trail { height: auto; min-height: 100vh; padding-top: 140px; padding-bottom: 60px; }
+  .hero-content { padding: 0 1.2rem; }
+  .hero-subtext { font-size: 0.8rem; padding: 0.5rem 1rem; letter-spacing: 0.1em; white-space: nowrap; }
+  
+  /* 🌊 文字海优化：取消3D，改为垂直流动 */
+  .sea-section-wrapper {
+    height: 40vh;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  }
+  .hero-sea-plane {
+    transform: rotateX(0deg); /* 拍平 */
+    bottom: 0; left: 0; width: 100%; gap: 2vh;
+  }
+  .sea-row { width: auto; margin-left: 0; flex-wrap: nowrap; animation-duration: 20s !important; }
+  /* 隐藏部分密集层 */
+  .layer-1, .layer-2 { display: none; } 
+  .paper-float { font-size: 0.9rem !important; padding: 8px 16px; background: rgba(255, 253, 248, 0.95); }
+  
+  /* 调整大船 */
+  .hero-big-boat { width: 180px; bottom: 5%; opacity: 0.6; }
+
+  /* --- 通用版块 --- */
+  .page-main { padding: 0 1rem; margin-top: -50px; }
+  .section-wrapper { padding: 3rem 1.2rem; margin-bottom: 3rem; border-radius: 8px; }
+  
+  /* 取消图片和视频的倾斜设计 */
+  .split-section { display: flex; flex-direction: column; gap: 2rem; }
+  .split-section img, .video-container {
+    transform: rotate(0deg) !important;
+    width: 100%; margin: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+  .split-section img:hover, .video-container:hover { transform: scale(1.02) !important; }
+  
+  /* 视频高度 */
+  .video-container { padding: 6px; padding-bottom: 58%; }
+  .video-inner { top: 6px; left: 6px; right: 6px; bottom: 6px; }
+
+  /* --- 团队展示 --- */
+  .team-teachers { gap: 1.5rem; justify-content: space-around; }
+  .teacher-card { width: 45%; max-width: 140px; margin-bottom: 1rem; }
+  .teacher-card img { width: 90px; height: 90px; }
+  .team-groups-container { grid-template-columns: 1fr; gap: 1.5rem; }
+  .team-group-card { padding: 2rem 1rem; }
+  
+  /* --- 轮播图 --- */
+  .image-slider { height: 250px; padding: 6px; }
+  .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
+  
+  /* --- Footer & Floating --- */
+  #join-us { padding: 3rem 1.5rem; }
+  .btn-scroll-top { width: 100%; padding: 1rem; }
+  .page-footer { padding: 4rem 1.5rem 8rem; }
+  .floating-icons { bottom: 20px; right: 20px; gap: 10px; }
+  .floating-icon-button { width: 48px; height: 48px; }
+  .floating-icon-button img { width: 24px; }
+  .share-content { width: 85%; padding: 2rem 1.5rem; }
+  #scrollBoat { width: 36px; height: 22px; right: -18px; top: -10px; }
 }
 
 </style>
@@ -679,7 +740,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     <section class="section-wrapper" id="initial-intent" data-aos="fade-up">
       <div class="tape-decor"></div>
       
-      <!-- 勒特河背景层：抵抗遗忘 -->
+      <!-- 勒特河背景层 -->
       <div class="lethe-bg-layer"></div>
       
       <div class="bg-decor">ORIGIN</div>
@@ -691,9 +752,8 @@ ul { list-style: none; padding: 0; margin: 0; }
           <p class="drop-cap">聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量。</p>
           
           <h2>目标人群</h2>
-          <p>关注长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
+          <p>聚焦长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
           
-          <!-- 升级后的胶囊按钮，移除内部箭头字符，由CSS处理 -->
           <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
           
           <div class="more-content" id="initial-intent-more">
@@ -705,13 +765,6 @@ ul { list-style: none; padding: 0; margin: 0; }
                   <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
                   <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
                   <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
-                </ul>
-              </li>
-              <li><strong>特别场景：</strong>
-                <ul>
-                  <li>多代同堂家庭的「跨代记忆对话」</li>
-                  <li>地方文化机构的「方言口述史工程」</li>
-                  <li>养老社区的「长者生命故事集」</li>
                 </ul>
               </li>
             </ul>
@@ -727,7 +780,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     <section class="section-wrapper" id="memory-heritage" data-aos="fade-up">
       <div class="tape-decor"></div>
       
-      <!-- 记忆女神背景层：守护记忆 (调整为0.08透明度+四周羽化) -->
+      <!-- 记忆女神背景层 -->
       <div class="mnemosyne-bg-layer"></div>
       
       <div class="split-section">
@@ -738,12 +791,11 @@ ul { list-style: none; padding: 0; margin: 0; }
         <div class="text-content">
           <h1>智忆传承</h1>
           <h2>项目介绍</h2>
-          <p class="drop-cap">深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库。</p>
+          <p>深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库。</p>
           
           <h2>核心价值</h2>
-          <p>承担记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
+          <p>聚焦记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
           
-          <!-- 升级后的胶囊按钮 -->
           <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
           
           <div class="more-content" id="memory-heritage-more">
@@ -760,12 +812,6 @@ ul { list-style: none; padding: 0; margin: 0; }
                 <ul>
                    <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生</li>
                    <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体</li>
-                </ul>
-              </li>
-              <li><strong>对社会：</strong>
-                <ul>
-                   <li>构建「平民史观」：用AI抢救性记录濒危方言与个体记忆</li>
-                   <li>科技温度实践：探索「AI适老化」新范式</li>
                 </ul>
               </li>
             </ul>
@@ -785,15 +831,15 @@ ul { list-style: none; padding: 0; margin: 0; }
           <h2 style="text-align: center; border: none; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 指导教师 ·</h2>
           <div class="team-teachers">
             <div class="teacher-card">
-              <img alt="H教授" src="images/teacher1.jpg"/>
+              <img alt="H教授" src="images/teacher1.jpg" loading="lazy"/>
               <h4>H教授</h4><p>计算语言学专家</p>
             </div>
             <div class="teacher-card">
-              <img alt="W教授" src="images/teacher2.jpg"/>
+              <img alt="W教授" src="images/teacher2.jpg" loading="lazy"/>
               <h4>W教授</h4><p>中国文学专家</p>
             </div>
             <div class="teacher-card">
-              <img alt="L教授" src="images/teacher3.jpg"/>
+              <img alt="L教授" src="images/teacher3.jpg" loading="lazy"/>
               <h4>L教授</h4><p>口述史研究专家</p>
             </div>
           </div>
@@ -806,22 +852,22 @@ ul { list-style: none; padding: 0; margin: 0; }
             <div class="team-group-card">
               <h3>技术开发</h3>
               <div class="group-members-list">
-                <div class="team-member"><img alt="陆新蕊" src="images/member1.jpg"/><h4>陆新蕊</h4><p>计算语言学 硕士</p></div>
-                <div class="team-member"><img alt="刘思怡" src="images/member2.jpg"/><h4>刘思怡</h4><p>计算语言学 硕士</p></div>
+                <div class="team-member"><img alt="陆新蕊" src="images/member1.jpg" loading="lazy"/><h4>陆新蕊</h4><p>计算语言学 硕士</p></div>
+                <div class="team-member"><img alt="刘思怡" src="images/member2.jpg" loading="lazy"/><h4>刘思怡</h4><p>计算语言学 硕士</p></div>
               </div>
             </div>
             <div class="team-group-card">
               <h3>文化策划</h3>
               <div class="group-members-list">
-                <div class="team-member"><img alt="武羽柯" src="images/member3.jpg"/><h4>武羽柯</h4><p>出版学 硕士</p></div>
-                <div class="team-member"><img alt="张乐怡" src="images/member4.jpg"/><h4>张乐怡</h4><p>出版学 硕士</p></div>
+                <div class="team-member"><img alt="武羽柯" src="images/member3.jpg" loading="lazy"/><h4>武羽柯</h4><p>出版学 硕士</p></div>
+                <div class="team-member"><img alt="张乐怡" src="images/member4.jpg" loading="lazy"/><h4>张乐怡</h4><p>出版学 硕士</p></div>
               </div>
             </div>
             <div class="team-group-card">
               <h3>传播运营</h3>
               <div class="group-members-list">
-                <div class="team-member"><img alt="万旭" src="images/member5.jpg"/><h4>万旭</h4><p>数字出版 本科</p></div>
-                <div class="team-member"><img alt="张怡卓含" src="images/member6.jpg"/><h4>张怡卓含</h4><p>汉语国际教育 本科</p></div>
+                <div class="team-member"><img alt="万旭" src="images/member5.jpg" loading="lazy"/><h4>万旭</h4><p>数字出版 本科</p></div>
+                <div class="team-member"><img alt="张怡卓含" src="images/member6.jpg" loading="lazy"/><h4>张怡卓含</h4><p>汉语国际教育 本科</p></div>
               </div>
             </div>
           </div>
@@ -838,9 +884,9 @@ ul { list-style: none; padding: 0; margin: 0; }
         <button class="slider-btn prev">‹</button>
         <button class="slider-btn next">›</button>
         <div class="slider-images">
-          <img src="images/image1.jpg" class="slider-image active" alt="成果1"/>
-          <img src="images/image2.jpg" class="slider-image" alt="成果2"/>
-          <img src="images/image3.jpg" class="slider-image" alt="成果3"/>
+          <img src="images/image1.jpg" class="slider-image active" alt="成果1" loading="lazy"/>
+          <img src="images/image2.jpg" class="slider-image" alt="成果2" loading="lazy"/>
+          <img src="images/image3.jpg" class="slider-image" alt="成果3" loading="lazy"/>
         </div>
       </div>
     </section>
@@ -911,14 +957,13 @@ ul { list-style: none; padding: 0; margin: 0; }
       let scrolled = (winScroll / height) * 100;
       document.getElementById("scrollProgressBar").style.width = scrolled + "%";
       
-      // 让船只随波浪轻微摇摆
       const boat = document.getElementById("scrollBoat");
       boat.style.transform = `translateY(${Math.sin(winScroll / 50) * 3}px) rotate(${Math.sin(winScroll / 100) * 5}deg)`;
 
       const header = document.getElementById('header');
       header.classList.toggle('scrolled', winScroll > 50);
 
-      // 导航高亮逻辑
+      // 导航高亮
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll(".page-nav a");
       let current = "";
@@ -936,38 +981,37 @@ ul { list-style: none; padding: 0; margin: 0; }
       });
     };
 
-    // 移动端菜单逻辑
+    // 移动端菜单逻辑 (含背景锁定)
     const navToggle = document.getElementById('navToggle');
     const pageNav = document.getElementById('pageNav');
+    const body = document.body;
     
     navToggle.addEventListener('click', () => { 
       pageNav.classList.toggle('open'); 
       navToggle.classList.toggle('active'); 
+      body.classList.toggle('nav-open'); // 锁定/解锁滚动
     });
 
     document.querySelectorAll('.page-nav a').forEach(link => {
       link.addEventListener('click', () => {
         pageNav.classList.remove('open');
         navToggle.classList.remove('active');
+        body.classList.remove('nav-open');
       });
     });
 
-    // 展开更多逻辑 - 升级版 (配合 CSS 动画和文字切换)
+    // 展开更多逻辑
     document.querySelectorAll('.btn-toggle-more').forEach(button => {
       button.addEventListener('click', () => {
         const contentId = button.getAttribute('aria-controls');
         const content = document.getElementById(contentId);
-        
-        // 检查当前状态
         const isExpanded = content.classList.contains('expanded');
         
         if (isExpanded) {
-          // 收起
           content.classList.remove('expanded');
           button.setAttribute('aria-expanded', 'false');
           button.innerHTML = '了解更多';
         } else {
-          // 展开
           content.classList.add('expanded');
           button.setAttribute('aria-expanded', 'true');
           button.innerHTML = '收起内容';
@@ -975,19 +1019,48 @@ ul { list-style: none; padding: 0; margin: 0; }
       });
     });
 
-    // 轮播图逻辑
+    // 轮播图逻辑 (含触摸滑动)
     const sliderImages = document.querySelectorAll('.slider-image');
+    const sliderContainer = document.querySelector('.image-slider');
     let currentIdx = 0;
+
     function showSlide(idx) {
       sliderImages.forEach(img => { img.style.opacity = '0'; img.classList.remove('active'); });
       sliderImages[idx].style.opacity = '1'; sliderImages[idx].classList.add('active');
     }
-    document.querySelector('.slider-btn.next').addEventListener('click', () => {
+
+    const nextBtn = document.querySelector('.slider-btn.next');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+
+    nextBtn.addEventListener('click', () => {
       currentIdx = (currentIdx + 1) % sliderImages.length; showSlide(currentIdx);
     });
-    document.querySelector('.slider-btn.prev').addEventListener('click', () => {
+    prevBtn.addEventListener('click', () => {
       currentIdx = (currentIdx - 1 + sliderImages.length) % sliderImages.length; showSlide(currentIdx);
     });
+
+    // 触摸滑动支持
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sliderContainer.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const threshold = 50; 
+      if (touchEndX < touchStartX - threshold) {
+        nextBtn.click(); // 左滑下一张
+      }
+      if (touchEndX > touchStartX + threshold) {
+        prevBtn.click(); // 右滑上一张
+      }
+    }
 
     // 弹窗逻辑
     const shareModal = document.getElementById('shareModal');
