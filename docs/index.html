@@ -85,10 +85,35 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
 .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .page-title { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; display: flex; align-items: center; letter-spacing: 2px; }
 .page-title::before { content: '记忆'; font-family: var(--font-art); font-size: 0.8rem; color: #fff; background: var(--c-vermilion); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-right: 12px; }
+/* ★ 当 header 有 .hide-nav 时，只隐藏右侧目录，左侧 logo/名称 保持 */
+.page-header.hide-nav .page-nav {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
 
+/* ★ 但在移动端打开菜单时，仍然要能看见 */
+@media (max-width: 900px) {
+  .page-header.hide-nav .page-nav.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
 .page-nav ul { display: flex; gap: 2.5rem; }
-.page-nav a { font-size: 1rem; font-weight: 500; color: var(--c-charcoal); font-family: var(--font-serif); cursor: pointer; position: relative;}
-.page-nav a:hover { color: var(--c-vermilion); }
+.page-nav {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .page-nav a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--c-charcoal);
+    font-family: var(--font-serif);
+    cursor: pointer;
+    position: relative;
+  }
+  .page-nav a:hover { color: var(--c-vermilion); }
 
 .nav-toggle { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
 .nav-toggle span { width: 24px; height: 2px; background: var(--c-ink); transition: 0.3s; border-radius: 2px; }
@@ -254,7 +279,7 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
 .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; background: rgba(255,255,255,0.9); border: 1px solid #eee; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; }
 .slider-btn.prev { left: 25px; } .slider-btn.next { right: 25px; }
 
-/* Join Us & Footer */
+/* Join Us*/
 #join-us {
   text-align: center; 
   background: #FFF; 
@@ -266,6 +291,17 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
   position: relative;
   border-radius: 2px;
   background-image: repeating-linear-gradient(#FFF, #FFF 29px, #F0EAD6 30px);
+  /* ★ 初始状态：稍微在下方 + 透明，看不到 */
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+#join-us.join-visible {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
 }
 
 #join-us::after {
@@ -714,7 +750,7 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
 
   </div> <!-- End Stack -->
 
-  <section id="join-us" data-aos="fade-up">
+  <section id="join-us">
     <h1>加入我们 · 守护记忆</h1>
     <h2 style="font-size: 1.2rem; color: var(--c-charcoal); margin-bottom: 2rem; border:none;">立即为长辈制作记忆档案：免费试用入口</h2>
     
@@ -733,12 +769,17 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
         <span style="margin-left:8px; font-size:1.2em;">↑</span>
       </a>
     </div>
-
-    <footer class="page-footer">
-      <div style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 1rem; color: #E8DCC5;">© 银发记忆工程 版权所有</div>
-      <p style="opacity: 0.7; font-size: 1.1rem; font-family: var(--font-serif);">小舟载记，字字生光 · 岁岁留痕，代代相传。</p>
-    </footer>
   </section>
+
+  <footer class="page-footer">
+    <div style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 1rem; color: #E8DCC5;">
+      © 银发记忆工程 版权所有
+    </div>
+    <p style="opacity: 0.7; font-size: 1.1rem; font-family: var(--font-serif);">
+      小舟载记，字字生光 · 岁岁留痕，代代相传。
+    </p>
+  </footer>
+  
 
   <!-- 悬浮图标 -->
   <div class="floating-icons">
@@ -775,6 +816,7 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
     const stackCards = document.querySelectorAll('.stack-card');
     const joinSection = document.getElementById('join-us');
     const header = document.getElementById('header');
+    const heroSection = document.getElementById('hero');
 
     // 辅助函数：判断卡片是否处于“吸顶激活”状态
     function isCardActive(card, nextCard) {
@@ -876,6 +918,29 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
       }
 
       if(header) header.classList.toggle('scrolled', winScroll > 50);
+      // ★ 补丁：控制 #join-us 从下往上出现
+      if (joinSection) {
+        const rect = joinSection.getBoundingClientRect();
+        const windowH = window.innerHeight || document.documentElement.clientHeight;
+
+        // 当 join-us 的顶部进入视口下缘上方 120px 时触发出现
+        if (rect.top < windowH - 120) {
+        joinSection.classList.add('join-visible');
+        }
+        // ★ 新增：根据是否还在 Hero 区，决定是否隐藏右上角目录
+          if (heroSection && header) {
+            const heroRect = heroSection.getBoundingClientRect();
+            const headerHeight = header.offsetHeight || 80;
+
+            // 当 hero 底边 ≤ 头部高度 + 一点缓冲，就认为已经“离开 hero”
+            if (heroRect.bottom <= headerHeight + 40) {
+              header.classList.add('hide-nav');    // 隐藏右侧目录
+            } else {
+                header.classList.remove('hide-nav'); // 在 hero 区，显示目录
+            }
+        }
+      }
+
     });
 
     const navToggle = document.getElementById('navToggle');
