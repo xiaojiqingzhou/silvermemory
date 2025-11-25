@@ -15,21 +15,21 @@
 
 <style>
 /* ================================
-   1. 设计哲学：水墨·诗意
+   1. 设计哲学：水墨·诗意 (来自 Index.html)
 ================================ */
 :root {
-  /* 🎨 色彩：低饱和度的自然色系 */
-  --c-ink: #2B2623;              /* 浓墨 */
-  --c-charcoal: #5A5048;         /* 淡墨 */
-  --c-vermilion: #9E3E30;        /* 朱砂 */
-  --c-vermilion-deep: #78261C;   /* 殷红 */
-  --c-gold: #C2A676;             /* 枯金 */
+  /* 🎨 色彩 */
+  --c-ink: #2B2623;
+  --c-charcoal: #5A5048;
+  --c-vermilion: #9E3E30;
+  --c-vermilion-deep: #78261C;
+  --c-gold: #C2A676;
   
-  /* 📜 背景：水彩纸质感 */
-  --bg-body: #F7F5F0;            /* 暖白纸基 */
-  --bg-card: #FFFCF9;            /* 卡片背景 */
+  /* 📜 背景 */
+  --bg-body: #F7F5F0;
+  --bg-card: #FFFCF9;
   
-  /* ✨ 质感与光影 */
+  /* ✨ 质感 */
   --shadow-sm: 0 4px 12px rgba(43, 38, 35, 0.04);
   --shadow-lg: 0 20px 50px rgba(43, 38, 35, 0.08), 0 2px 10px rgba(0,0,0,0.01);
   
@@ -37,10 +37,14 @@
   --font-serif: 'Noto Serif SC', serif;
   --font-sans: 'Noto Sans SC', sans-serif;
   --font-art: 'Ma Shan Zheng', cursive;
+
+  /* 🏗️ 堆叠参数 (来自 1941.html) */
+  --header-h: 80px;      /* 顶部导航高度 */
+  --tab-h: 55px;         /* 标签露出的高度 */
 }
 
 /* ================================
-   2. 全局重置与氛围
+   2. 全局设置
 ================================ */
 html { scroll-behavior: smooth; font-size: 16px; }
 ::selection { background: var(--c-vermilion); color: #fff; }
@@ -51,12 +55,8 @@ body {
   background-color: var(--bg-body);
   color: var(--c-ink);
   line-height: 2.0;
-  overflow-x: hidden; /* 防止横向溢出 */
-  position: relative;
+  overflow-x: hidden;
 }
-
-/* 移动端菜单打开时禁止背景滚动 */
-body.nav-open { overflow: hidden; }
 
 /* 🌫️ 全局雾气纹理 */
 body::before {
@@ -65,400 +65,196 @@ body::before {
   pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
 }
 
-/* ================================
-   顶部进度条与小船
-================================ */
-#scrollProgressContainer {
-  position: fixed; top: 0; left: 0; width: 100%; height: 4px; 
-  background: rgba(194, 166, 118, 0.2);
-  z-index: 2000;
-}
-#scrollProgressBar {
-  height: 100%; 
-  background: linear-gradient(90deg, var(--c-vermilion), var(--c-vermilion-deep)); 
-  width: 0%; position: relative; opacity: 1;
-  border-radius: 0 2px 2px 0;
-  box-shadow: 0 0 10px rgba(158, 62, 48, 0.3);
-}
-#scrollBoat {
-  position: absolute; 
-  right: -24px;
-  top: -16px;
-  width: 48px; 
-  height: 30px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'%3E%3Cpath d='M4 24C4 24 16 32 32 32C48 32 60 24 60 24L58 22C48 28 16 28 6 22L4 24Z' fill='%2378261C'/%3E%3Cpath d='M38 22V12C38 9 32 8 32 8C32 8 26 9 26 12V22' stroke='%2378261C' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M44 24L40 10' stroke='%23C2A676' stroke-width='1.5'/%3E%3C/svg%3E");
-  background-size: contain; 
-  background-repeat: no-repeat;
-  transition: transform 0.1s linear;
-  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
-  z-index: 2001;
-}
+/* 顶部进度条 & 小船 */
+#scrollProgressContainer { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(194, 166, 118, 0.2); z-index: 2000; }
+#scrollProgressBar { height: 100%; background: linear-gradient(90deg, var(--c-vermilion), var(--c-vermilion-deep)); width: 0%; position: relative; border-radius: 0 2px 2px 0; }
+#scrollBoat { position: absolute; right: -24px; top: -16px; width: 48px; height: 30px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'%3E%3Cpath d='M4 24C4 24 16 32 32 32C48 32 60 24 60 24L58 22C48 28 16 28 6 22L4 24Z' fill='%2378261C'/%3E%3Cpath d='M38 22V12C38 9 32 8 32 8C32 8 26 9 26 12V22' stroke='%2378261C' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M44 24L40 10' stroke='%23C2A676' stroke-width='1.5'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; transition: transform 0.1s linear; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15)); z-index: 2001; }
 
 h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--c-ink); margin-top: 0; font-weight: 700; }
-
-h1 { 
-  font-size: clamp(2.4rem, 4vw, 3.6rem); 
-  letter-spacing: -0.01em;
-  text-shadow: 2px 2px 0 rgba(230,220,200, 0.3);
-  margin-bottom: 1.5rem;
-}
-
-h2 { font-size: 2rem; color: var(--c-ink); position: relative; display: inline-block; margin-bottom: 2.5rem; padding-bottom: 12px; }
-h2::after {
-  content: ''; position: absolute; bottom: 0; left: 0;
-  width: 100%; height: 2px; background: rgba(194, 166, 118, 0.5);
-  border-radius: 2px;
-}
-h2::before {
-  content: '·'; color: var(--c-vermilion); position: absolute; top: -15px; left: 50%; transform: translateX(-50%); 
-  font-size: 2rem; line-height: 1; opacity: 0.5;
-}
-
-a { text-decoration: none; color: inherit; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-ul { list-style: none; padding: 0; margin: 0; }
-* { box-sizing: border-box; }
+h1 { font-size: clamp(2.4rem, 4vw, 3.6rem); letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: 2px 2px 0 rgba(230,220,200, 0.3); }
+h2 { font-size: 2rem; position: relative; display: inline-block; margin-bottom: 2.5rem; padding-bottom: 12px; }
+h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: rgba(194, 166, 118, 0.5); border-radius: 2px; }
+h2::before { content: '·'; color: var(--c-vermilion); position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 2rem; line-height: 1; opacity: 0.5; }
+a { text-decoration: none; color: inherit; transition: all 0.3s; }
 
 /* ================================
-   3. 导航栏 (红印章Logo + 汉堡菜单)
+   3. 导航栏 (Index 样式)
 ================================ */
-.page-header {
-  position: fixed; top: 0; left: 0; width: 100%;
-  padding: 2rem 3rem; z-index: 1000;
-  background: transparent;
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.page-header.scrolled { 
-  padding: 1rem 3rem; 
-  background: rgba(253, 251, 248, 0.95); 
-  backdrop-filter: blur(10px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-  border-bottom: 1px solid rgba(0,0,0,0.02);
-}
-
+.page-header { position: fixed; top: 0; left: 0; width: 100%; padding: 2rem 3rem; z-index: 1000; transition: all 0.6s; }
+.page-header.scrolled { padding: 1rem 3rem; background: rgba(253, 251, 248, 0.95); backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
 .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-
-/* LOGO：红印章样式 */
-.page-title {
-  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--c-ink);
-  display: flex; align-items: center; letter-spacing: 2px;
-}
-.page-title::before {
-  content: '记忆'; font-family: var(--font-art); font-size: 0.8rem; 
-  color: #fff; background: var(--c-vermilion);
-  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-  border-radius: 4px; margin-right: 12px; opacity: 0.9;
-  transform: none; box-shadow: none; 
-}
+.page-title { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; display: flex; align-items: center; letter-spacing: 2px; }
+.page-title::before { content: '记忆'; font-family: var(--font-art); font-size: 0.8rem; color: #fff; background: var(--c-vermilion); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-right: 12px; }
 
 .page-nav ul { display: flex; gap: 2.5rem; }
-.page-nav a { font-size: 1rem; font-weight: 500; color: var(--c-charcoal); position: relative; letter-spacing: 0.05em; font-family: var(--font-serif); }
-.page-nav a.active, .page-nav a:hover { color: var(--c-vermilion); }
-.page-nav a::after {
-  content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-  width: 0; height: 1px; background: var(--c-vermilion); transition: 0.4s; opacity: 0.6;
-}
-.page-nav a:hover::after, .page-nav a.active::after { width: 100%; }
+.page-nav a { font-size: 1rem; font-weight: 500; color: var(--c-charcoal); font-family: var(--font-serif); cursor: pointer; position: relative;}
+.page-nav a:hover { color: var(--c-vermilion); }
 
-/* 汉堡菜单动画 */
 .nav-toggle { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
-.nav-toggle span { 
-  width: 24px; height: 2px; background: var(--c-ink); 
-  transition: all 0.3s ease-in-out; border-radius: 2px; transform-origin: center;
-}
-.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle span { width: 24px; height: 2px; background: var(--c-ink); transition: 0.3s; border-radius: 2px; }
 
 @media (max-width: 900px) {
   .page-header { padding: 1.5rem; }
   .nav-toggle { display: flex; }
-  .page-nav { 
-    position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--bg-body);
-    padding-top: 8rem; clip-path: inset(0 0 100% 0); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex; justify-content: center; z-index: 1000;
-  }
+  .page-nav { position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--bg-body); padding-top: 8rem; clip-path: inset(0 0 100% 0); transition: 0.5s; display: flex; justify-content: center; z-index: 1000; }
   .page-nav.open { clip-path: inset(0 0 0 0); }
-  .page-nav ul { flex-direction: column; align-items: center; gap: 2rem; }
-  .page-nav a { font-size: 1.2rem; }
+  .page-nav ul { flex-direction: column; gap: 2rem; }
 }
 
 /* ================================
-   4. Hero Section
+   4. Hero Section (Index 样式 + 文字海)
 ================================ */
 .hero-trail {
-  position: relative; 
-  height: 100vh; min-height: 850px;
-  display: flex; flex-direction: column; 
-  align-items: center; 
-  padding-top: 18vh; 
-  text-align: center;
-  background: radial-gradient(circle at 50% 30%, #FFFCF7 0%, #E9D4C1 60%, #C69C7B 100%);
-  overflow: hidden;
+  position: relative; height: 100vh; min-height: 850px;
+  display: flex; flex-direction: column; align-items: center; padding-top: 18vh; text-align: center;
+  background: radial-gradient(circle at 50% 30%, #FFFCF7 0%, #E9D4C1 60%, #C69C7B 100%); overflow: hidden;
 }
-
-.hero-content { 
-  position: relative; z-index: 10; 
-  max-width: 900px; padding: 0 1.5rem;
-  animation: fadeUp 1.2s ease-out;
-}
+.hero-content { position: relative; z-index: 10; max-width: 900px; padding: 0 1.5rem; animation: fadeUp 1.2s ease-out; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hero-subtext { display: inline-block; padding: 0.6rem 1.8rem; border-top: 1px solid var(--c-vermilion); border-bottom: 1px solid var(--c-vermilion); color: var(--c-vermilion); font-size: 0.9rem; letter-spacing: 0.3em; font-weight: 600; font-family: var(--font-serif); margin-bottom: 2.5rem; background: rgba(255,255,255,0.4); backdrop-filter: blur(4px); }
+.hero-desc { font-size: 1.2rem; color: var(--c-charcoal); max-width: 680px; margin: 0 auto 3.5rem; opacity: 0.9; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 1.1rem 3.5rem; font-size: 1.1rem; letter-spacing: 0.1em; color: #fff; background: var(--c-vermilion); border-radius: 50px; box-shadow: 0 10px 25px rgba(158, 62, 48, 0.25); transition: 0.4s; position: relative; overflow: hidden; }
+.btn-primary:hover { transform: translateY(-4px); background: #B93E2F; }
 
-.hero-subtext {
-  display: inline-block; padding: 0.6rem 1.8rem; 
-  border-top: 1px solid var(--c-vermilion); border-bottom: 1px solid var(--c-vermilion);
-  color: var(--c-vermilion); font-size: 0.9rem; letter-spacing: 0.3em; font-weight: 600; font-family: var(--font-serif);
-  margin-bottom: 2.5rem; background: rgba(255,255,255,0.4); backdrop-filter: blur(4px);
-}
-
-.hero-desc {
-  font-size: 1.2rem; color: var(--c-charcoal); max-width: 680px; margin: 0 auto 3.5rem;
-  font-weight: 400; opacity: 0.9; text-shadow: 0 1px 1px rgba(255,255,255,0.8);
-}
-
-.btn-primary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 1.1rem 3.5rem; font-size: 1.1rem; letter-spacing: 0.1em;
-  color: #fff; background: var(--c-vermilion); 
-  border-radius: 50px;
-  box-shadow: 0 10px 25px rgba(158, 62, 48, 0.25);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative; overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.05);
-}
-.btn-primary:hover { 
-  transform: translateY(-4px); 
-  box-shadow: 0 15px 40px rgba(158, 62, 48, 0.35); 
-  background: #B93E2F;
-}
-
-/* 沉浸式文字海 */
-.sea-section-wrapper {
-  position: absolute; bottom: 0; left: 0; width: 100%; height: 55vh;
-  z-index: 1; overflow: hidden;
-  mask-image: linear-gradient(to bottom, transparent 0%, transparent 5%, black 40%, black 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 5%, black 40%, black 100%);
-  perspective: 1200px;
-}
-.hero-sea-plane {
-  position: absolute; bottom: -20%; left: -25%; width: 150%; height: 120%;
-  transform: rotateX(60deg); transform-style: preserve-3d;
-  display: flex; flex-direction: column; justify-content: flex-end; gap: 4vh;
-}
-.sea-row { 
-  display: flex; justify-content: center; gap: 4vw; width: 220%; margin-left: -60%; 
-  transform-style: preserve-3d; 
-}
-
-.paper-float {
-  background: rgba(255, 253, 248, 0.92); color: var(--c-charcoal);
-  font-family: var(--font-serif); white-space: nowrap; 
-  padding: 12px 24px; border-radius: 3px;
-  box-shadow: 0 4px 15px rgba(43, 38, 35, 0.05);
-  border: 1px solid rgba(255,255,255,0.5);
-  display: flex; align-items: center;
-  transition: transform 0.3s;
-}
+/* 沉浸式文字海 (3D效果) */
+.sea-section-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; height: 55vh; z-index: 1; overflow: hidden; mask-image: linear-gradient(to bottom, transparent 0%, transparent 5%, black 40%, black 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 5%, black 40%, black 100%); perspective: 1200px; }
+.hero-sea-plane { position: absolute; bottom: -20%; left: -25%; width: 150%; height: 120%; transform: rotateX(60deg); transform-style: preserve-3d; display: flex; flex-direction: column; justify-content: flex-end; gap: 4vh; }
+.sea-row { display: flex; justify-content: center; gap: 4vw; width: 220%; margin-left: -60%; transform-style: preserve-3d; }
+.paper-float { background: rgba(255, 253, 248, 0.92); color: var(--c-charcoal); font-family: var(--font-serif); white-space: nowrap; padding: 12px 24px; border-radius: 3px; box-shadow: 0 4px 15px rgba(43, 38, 35, 0.05); border: 1px solid rgba(255,255,255,0.5); display: flex; align-items: center; transition: transform 0.3s; }
 .paper-float:hover { transform: scale(1.05) translateY(-5px); color: var(--c-vermilion); border-color: var(--c-gold); z-index: 10;}
-
-.layer-1 { animation: flowL 120s linear infinite; opacity: 0.3; filter: blur(3px); font-size: 0.9rem; }
-.layer-2 { animation: flowR 100s linear infinite; opacity: 0.5; filter: blur(1.5px); font-size: 1rem; }
-.layer-3 { animation: flowL 80s linear infinite; opacity: 0.7; font-size: 1.1rem; }
-.layer-4 { animation: flowR 60s linear infinite; opacity: 0.9; font-size: 1.3rem; }
+.layer-1 { animation: flowL 120s linear infinite; opacity: 0.3; filter: blur(3px); }
+.layer-2 { animation: flowR 100s linear infinite; opacity: 0.5; filter: blur(1.5px); }
+.layer-3 { animation: flowL 80s linear infinite; opacity: 0.7; }
+.layer-4 { animation: flowR 60s linear infinite; opacity: 0.9; }
 .layer-5 { animation: flowL 50s linear infinite; opacity: 1; margin-bottom: 50px; font-weight: 600; color: var(--c-ink); font-size: 1.5rem; }
-
 @keyframes flowL { from { transform: translateX(0); } to { transform: translateX(-10%); } }
 @keyframes flowR { from { transform: translateX(-10%); } to { transform: translateX(0); } }
+.hero-big-boat { position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); z-index: 20; width: 250px; opacity: 0.9; filter: drop-shadow(0 40px 30px rgba(43, 38, 35, 0.15)); animation: boatBreathe 8s ease-in-out infinite; }
+@keyframes boatBreathe { 0%, 100% { transform: translateX(-50%) translateY(0) rotate(0.5deg); } 50% { transform: translateX(-50%) translateY(-10px) rotate(-0.5deg); } }
 
-.hero-big-boat {
-  position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
-  z-index: 20; width: 250px; opacity: 0.9;
-  filter: drop-shadow(0 40px 30px rgba(43, 38, 35, 0.15));
-  animation: boatBreathe 8s ease-in-out infinite; 
+/* =========================================================================
+   5. 核心：阶梯堆叠 + 滚动联动 (1941 Logic)
+========================================================================= */
+
+.stack-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 100px;
 }
-@keyframes boatBreathe {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0.5deg); }
-  50% { transform: translateX(-50%) translateY(-10px) rotate(-0.5deg); }
+
+.stack-card {
+  position: sticky; 
+  background: var(--bg-card);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -5px 15px rgba(43, 38, 35, 0.05), 0 10px 40px rgba(43, 38, 35, 0.1);
+  border: 1px solid rgba(194, 166, 118, 0.2);
+  background-image: linear-gradient(rgba(140, 130, 121, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 130, 121, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  overflow: hidden; 
+  transition: transform 0.3s ease;
 }
+
+/* 阶梯配置 */
+.stack-card:nth-child(1) { top: var(--header-h); height: calc(100vh - var(--header-h)); z-index: 10; }
+.stack-card:nth-child(1) .card-index-tab { left: 5%; background: #F9F7F3; }
+
+.stack-card:nth-child(2) { top: calc(var(--header-h) + var(--tab-h)); height: calc(100vh - var(--header-h) - var(--tab-h)); z-index: 20; }
+.stack-card:nth-child(2) .card-index-tab { left: 23%; background: #F2EFE9; }
+
+.stack-card:nth-child(3) { top: calc(var(--header-h) + var(--tab-h) * 2); height: calc(100vh - var(--header-h) - var(--tab-h) * 2); z-index: 30; }
+.stack-card:nth-child(3) .card-index-tab { left: 41%; background: #EBE5D9; }
+
+.stack-card:nth-child(4) { top: calc(var(--header-h) + var(--tab-h) * 3); height: calc(100vh - var(--header-h) - var(--tab-h) * 3); z-index: 40; }
+.stack-card:nth-child(4) .card-index-tab { left: 59%; background: #E6DCC8; }
+
+.stack-card:nth-child(5) { top: calc(var(--header-h) + var(--tab-h) * 4); height: calc(100vh - var(--header-h) - var(--tab-h) * 4); z-index: 50; }
+.stack-card:nth-child(5) .card-index-tab { left: 77%; background: #DFD3BC; border-right: none; }
+
+/* 标签 */
+.card-index-tab {
+  position: absolute; top: 0; left: 0;
+  width: 16%; min-width: 140px; height: var(--tab-h);
+  border-bottom: 1px solid rgba(194, 166, 118, 0.1);
+  border-right: 1px solid rgba(194, 166, 118, 0.3);
+  border-radius: 0 0 10px 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-weight: 600; color: var(--c-charcoal);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.05); cursor: pointer; z-index: 100; transition: all 0.3s;
+}
+.card-index-tab:hover { color: var(--c-vermilion); background: #FAF8F5 !important; transform: translateY(2px); }
+
+/* 内部滚动区域 (关键修改：增加大量 Padding) */
+.card-scroll-area {
+  margin-top: var(--tab-h); 
+  height: calc(100% - var(--tab-h));
+  overflow-y: auto; 
+  overflow-x: hidden;
+  /* 关键修改：底部留白增加到 50vh，确保内容滚到底部时有巨大空间 */
+  padding: 3rem 4rem 50vh 4rem; 
+  
+  /* 隐藏滚动条 */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.card-scroll-area::-webkit-scrollbar { display: none; }
 
 /* ================================
-   5. 通用版块容器 & 艺术背景层
+   6. 内部内容样式 (Index Design)
 ================================ */
-.page-main { max-width: 1080px; margin: 0 auto; padding: 4rem 1.5rem; position: relative; z-index: 2; }
-
-.section-wrapper {
-  background: var(--bg-card);
-  border-radius: 4px;
-  padding: 5rem 4rem; margin-bottom: 7rem;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden; 
-  background-image: 
-    linear-gradient(rgba(140, 130, 121, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(140, 130, 121, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
+/* 艺术背景层 */
+.lethe-bg-layer, .mnemosyne-bg-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.1; mix-blend-mode: multiply;
 }
-
-/* 🎨 艺术背景 1 */
-.lethe-bg-layer {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none;
-  background-image: url('images/lethe.jpeg'); 
-  background-size: cover; background-position: center 30%;
-  opacity: 0.11;
-  filter: grayscale(100%) sepia(40%) contrast(1.2);
-  mix-blend-mode: multiply;
-  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
-  mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
-  animation: bgBreatheEffect 20s ease-in-out infinite alternate;
-}
+.lethe-bg-layer { background-image: url('images/lethe.jpeg'); background-size: cover; filter: grayscale(100%); animation: bgBreatheEffect 20s ease-in-out infinite alternate; }
+.mnemosyne-bg-layer { background-image: url('images/mnemosyne_oil.jpg'); background-size: contain; background-repeat: no-repeat; animation: mnemosyneFloat 15s ease-in-out infinite alternate; }
 @keyframes bgBreatheEffect { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-
-/* 🎨 艺术背景 2 */
-.mnemosyne-bg-layer {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none;
-  background-image: url('images/mnemosyne_oil.jpg');
-  background-size: contain; background-position: center center;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  mix-blend-mode: multiply;
-  filter: grayscale(100%) sepia(30%) contrast(1.1);
-  -webkit-mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
-  mask-image: radial-gradient(closest-side, black 30%, transparent 100%);
-  animation: mnemosyneFloat 15s ease-in-out infinite alternate;
-}
 @keyframes mnemosyneFloat { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-15px) scale(1.02); } }
 
-.tape-decor {
-  position: absolute; width: 120px; height: 35px;
-  background: rgba(194, 166, 118, 0.3);
-  transform: rotate(-2deg) translateX(-50%); left: 50%; top: -18px;
-  backdrop-filter: blur(2px); box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  border-left: 2px dotted rgba(255,255,255,0.8); border-right: 2px dotted rgba(255,255,255,0.8);
-}
-
-.bg-decor {
-  position: absolute; font-family: var(--font-art); color: var(--c-vermilion); opacity: 0.03;
-  font-size: 9rem; right: 10px; top: 10px; pointer-events: none; z-index: 0; writing-mode: vertical-rl;
-}
+.tape-decor { position: absolute; width: 120px; height: 35px; background: rgba(194, 166, 118, 0.3); transform: rotate(-2deg) translateX(-50%); left: 50%; top: -18px; backdrop-filter: blur(2px); border-left: 2px dotted rgba(255,255,255,0.8); border-right: 2px dotted rgba(255,255,255,0.8); }
+.bg-decor { position: absolute; font-family: var(--font-art); color: var(--c-vermilion); opacity: 0.03; font-size: 9rem; right: 10px; top: 10px; pointer-events: none; z-index: 0; writing-mode: vertical-rl; }
 
 .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1;}
-
-.split-section img, .video-container {
-  width: 100%; display: block; object-fit: cover;
-  background: #fff; padding: 12px 12px 45px 12px; 
-  box-shadow: var(--shadow-lg); border-radius: 2px;
-  transform: rotate(-1.5deg); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
+.split-section img, .video-container { width: 100%; display: block; object-fit: cover; background: #fff; padding: 12px 12px 45px 12px; box-shadow: var(--shadow-lg); border-radius: 2px; transform: rotate(-1.5deg); transition: 0.6s; }
 .split-section img:hover, .video-container:hover { transform: rotate(0deg) scale(1.02); z-index: 5; }
-
 .video-container { padding: 10px; transform: rotate(1deg); padding-bottom: 56.25%; height: 0; position: relative; }
 .video-inner { position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; background: #000; }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
-
-.drop-cap::first-letter {
-  float: left; font-size: 4rem; line-height: 0.8; font-weight: 700;
-  margin-right: 1rem; color: var(--c-vermilion); font-family: var(--font-serif);
-}
+.drop-cap::first-letter { float: left; font-size: 4rem; line-height: 0.8; font-weight: 700; margin-right: 1rem; color: var(--c-vermilion); font-family: var(--font-serif); }
 
 .text-content ul { padding-left: 0.5rem; margin-top: 1.5rem; }
 .text-content ul li { margin-bottom: 1rem; padding-left: 1.8rem; position: relative; color: var(--c-charcoal); }
-.text-content ul li::before {
-  content: '✦'; color: var(--c-gold); position: absolute; left: 0; font-size: 0.9rem; top: 3px;
-}
-.text-content ul ul { margin-top: 0.6rem; border-left: 1px solid rgba(194, 166, 118, 0.3); padding-left: 1.2rem; }
-.text-content ul ul li { font-size: 0.95rem; margin-bottom: 0.5rem; }
-.text-content ul ul li::before { content: '—'; color: var(--c-charcoal); }
+.text-content ul li::before { content: '✦'; color: var(--c-gold); position: absolute; left: 0; font-size: 0.9rem; top: 3px; }
 
-/* ================================
-   交互组件：展开内容 & 按钮
-================================ */
-.more-content {
-  overflow: hidden; max-height: 0; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 1.5rem;
-  background: rgba(255, 255, 255, 0.6); 
-  backdrop-filter: blur(5px);
-  border-radius: 8px;
-  border: 1px dashed rgba(194, 166, 118, 0.4);
-  padding: 0 2rem;
-}
-.more-content.expanded { 
-  max-height: 2000px; 
-  opacity: 1; 
-  padding: 2rem; 
-  margin-bottom: 1rem;
-  box-shadow: inset 0 0 20px rgba(194, 166, 118, 0.1);
-}
+/* 展开更多 */
+.more-content { overflow: hidden; max-height: 0; opacity: 0; transition: all 0.6s; margin-top: 1.5rem; background: rgba(255,255,255,0.6); padding: 0 2rem; border-radius: 8px; border: 1px dashed rgba(194,166,118,0.4); }
+.more-content.expanded { max-height: 2000px; opacity: 1; padding: 2rem; margin-bottom: 2rem; padding-bottom: 4rem; }
+.btn-text { background: transparent; border: 1px solid var(--c-vermilion); color: var(--c-vermilion); padding: 0.6rem 2rem; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); margin-top: 2rem;margin-bottom: 3rem; }
+.btn-text:hover { background: var(--c-vermilion); color: #fff; }
 
-.btn-text {
-  background: transparent;
-  border: 1px solid var(--c-vermilion);
-  color: var(--c-vermilion);
-  font-family: var(--font-serif);
-  font-weight: 600; font-size: 1rem; letter-spacing: 0.05em;
-  padding: 0.6rem 2rem; border-radius: 50px; margin-top: 2rem; cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative; overflow: hidden; z-index: 1;
-}
-
-.btn-text:hover {
-  background: var(--c-vermilion); color: #fff;
-  box-shadow: 0 8px 20px rgba(158, 62, 48, 0.25);
-  transform: translateY(-2px); border-color: transparent;
-}
-.btn-text::after { content: '↓'; font-size: 1.1em; transition: transform 0.3s ease; line-height: 1; }
-.btn-text[aria-expanded="true"] { background-color: var(--c-charcoal); border-color: var(--c-charcoal); color: #fff; }
-.btn-text[aria-expanded="true"]::after { content: '↑'; }
-
-/* ================================
-   6. 团队与展示
-================================ */
+/* 团队 */
 .team-teachers { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 4rem; }
 .teacher-card { text-align: center; width: 160px; }
-.teacher-card img {
-  width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-  border: 4px solid #fff; box-shadow: var(--shadow-sm); margin-bottom: 1.2rem;
-  filter: sepia(0.1); transition: 0.4s;
-}
+.teacher-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: var(--shadow-sm); margin-bottom: 1.2rem; filter: sepia(0.1); transition: 0.4s;}
 .teacher-card:hover img { filter: sepia(0); transform: scale(1.05); border-color: var(--c-gold); }
-
 .team-groups-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; }
-.team-group-card {
-  background: #fff; border: 1px solid rgba(0,0,0,0.03); position: relative;
-  padding: 3rem 1.5rem; text-align: center; border-radius: 4px;
-  box-shadow: var(--shadow-sm); transition: 0.3s;
-}
+.team-group-card { background: #fff; border: 1px solid rgba(0,0,0,0.03); padding: 3rem 1.5rem; text-align: center; border-radius: 4px; box-shadow: var(--shadow-sm); position: relative; transition: 0.3s; }
 .team-group-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-.team-group-card::before {
-  content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
-  width: 10px; height: 10px; background: var(--c-gold); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+.team-group-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--c-gold); border-radius: 50%; }
 .group-members-list { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
-.team-member img { 
-  width: 70px; height: 70px; border-radius: 50%; object-fit: cover; 
-  margin-bottom: 0.8rem; border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.08); 
-}
+.team-member img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 0.8rem; border: 2px solid #fff; }
 
-/* 轮播图 */
-.image-slider {
-  position: relative; border-radius: 4px; overflow: hidden; height: 500px;
-  background: #fff; padding: 12px; box-shadow: var(--shadow-lg);
-}
-.slider-images { width: 100%; height: 100%; position: relative; overflow: hidden; }
+/* 轮播 */
+.image-slider { position: relative; border-radius: 4px; overflow: hidden; height: 500px; background: #fff; padding: 12px; box-shadow: var(--shadow-lg); }
+.slider-images { width: 100%; height: 100%; position: relative; }
 .slider-image { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; }
 .slider-image.active { opacity: 1; }
-.slider-btn {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
-  width: 48px; height: 48px; background: rgba(255,255,255,0.9); border: 1px solid #eee; border-radius: 50%;
-  cursor: pointer; font-size: 1.5rem; color: var(--c-vermilion); transition: 0.3s; display: flex; align-items: center; justify-content: center;
-}
-.slider-btn:hover { background: var(--c-vermilion); color: #fff; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; background: rgba(255,255,255,0.9); border: 1px solid #eee; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; }
 .slider-btn.prev { left: 25px; } .slider-btn.next { right: 25px; }
 
-/* ================================
-   7. 加入我们
-================================ */
+/* Join Us & Footer */
 #join-us {
   text-align: center; 
   background: #FFF; 
@@ -471,136 +267,191 @@ ul { list-style: none; padding: 0; margin: 0; }
   border-radius: 2px;
   background-image: repeating-linear-gradient(#FFF, #FFF 29px, #F0EAD6 30px);
 }
+
 #join-us::after {
-  content: ''; position: absolute; top: 25px; right: 25px; width: 60px; height: 75px;
-  border: 2px dotted #E0D8C8; opacity: 0.6;
+  content: ''; 
+  position: absolute; 
+  top: 25px; 
+  right: 25px; 
+  width: 60px; 
+  height: 75px;
+  border: 2px dotted #E0D8C8; 
+  opacity: 0.6;
 }
 
+/* 按钮：返回顶部 / 重新回到 Hero */
 .btn-scroll-top {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 1.1rem 3.5rem; font-size: 1.1rem; color: #fff; background: var(--c-ink);
-  border-radius: 50px; transition: 0.3s; margin-top: 2rem; cursor: pointer; letter-spacing: 1px;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  padding: 1.1rem 3.5rem; 
+  font-size: 1.1rem; 
+  color: #fff; 
+  background: var(--c-ink);
+  border-radius: 50px; 
+  transition: 0.3s; 
+  margin-top: 2rem; 
+  cursor: pointer; 
+  letter-spacing: 1px;
 }
-.btn-scroll-top:hover { background: var(--c-vermilion); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(158, 62, 48, 0.2); }
+.btn-scroll-top:hover { 
+  background: var(--c-vermilion); 
+  transform: translateY(-3px); 
+  box-shadow: 0 10px 20px rgba(158, 62, 48, 0.2); 
+}
 
+/* 页脚（和 index 一致） */
 .page-footer {
-  background: #201C1A; color: rgba(255,255,255,0.6);
-  text-align: center; padding: 6rem 1.5rem 4rem; margin-top: 8rem;
+  background: #201C1A; 
+  color: rgba(255,255,255,0.6);
+  text-align: center; 
+  padding: 6rem 1.5rem 4rem; 
+  margin-top: 8rem;
   border-top: 4px solid var(--c-vermilion);
 }
 
-.floating-icons { position: fixed; bottom: 40px; right: 30px; z-index: 990; display: flex; flex-direction: column; gap: 15px; }
-.floating-icon-button {
-  width: 56px; height: 56px; background: #fff; border-radius: 50%;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid #fff;
-  display: flex; justify-content: center; align-items: center; transition: 0.3s;
+/* 悬浮图标 & 分享弹窗保持不变 */
+.floating-icons { 
+  position: fixed; 
+  bottom: 40px; 
+  right: 30px; 
+  z-index: 990; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 15px; 
 }
-.floating-icon:hover .floating-icon-button { transform: scale(1.1); }
+.floating-icon-button {
+  width: 56px; 
+  height: 56px; 
+  background: #fff; 
+  border-radius: 50%;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+  border: 2px solid #fff;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  transition: 0.3s;
+}
+.floating-icon-button:hover { transform: scale(1.1); }
+
 .share-modal {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(32, 28, 26, 0.9); backdrop-filter: blur(5px); z-index: 2000;
-  justify-content: center; align-items: center;
+  display: none; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background: rgba(32, 28, 26, 0.9); 
+  backdrop-filter: blur(5px); 
+  z-index: 2000;
+  justify-content: center; 
+  align-items: center;
 }
 .share-content {
-  background: #FFFBF7; padding: 3rem; border-radius: 4px; width: 90%; max-width: 400px; text-align: center; position: relative;
+  background: #FFFBF7; 
+  padding: 3rem; 
+  border-radius: 4px; 
+  width: 90%; 
+  max-width: 400px; 
+  text-align: center; 
+  position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
-/* ================================
-   📱 移动端深度适配 (Mobile Responsive)
-================================ */
+/* 移动端下，保留 index 的适配 */
 @media (max-width: 900px) {
-  .page-header { padding: 1.5rem; }
-  .nav-toggle { display: flex; }
-  .page-nav { 
-    position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--bg-body);
-    padding-top: 8rem; clip-path: inset(0 0 100% 0); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex; justify-content: center; z-index: 1000;
-  }
-  .page-nav.open { clip-path: inset(0 0 0 0); }
-  .page-nav ul { flex-direction: column; align-items: center; gap: 2rem; }
-  .page-nav a { font-size: 1.2rem; }
-  .split-section { grid-template-columns: 1fr; gap: 3rem; } 
-  .split-section img { order: -1; }
+  .split-section { grid-template-columns: 1fr; gap: 3rem; }
+  .split-section img { order: -1; transform: rotate(0deg); }
+  .video-container { transform: rotate(0deg); }
+
   .section-wrapper { padding: 3rem 1.5rem; }
-}
 
-@media (max-width: 768px) {
-  /* --- 全局调整 --- */
-  html { font-size: 14px; } 
-  h1 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 1rem; }
-  h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
-  .drop-cap::first-letter { font-size: 3rem; margin-right: 0.5rem; }
-  
-  /* --- 导航栏优化 --- */
-  .page-header { padding: 1rem 1.5rem; }
-  .page-title { font-size: 1.1rem; }
-  .page-title::before { width: 24px; height: 24px; font-size: 0.7rem; margin-right: 8px; }
-  
-  .page-nav {
-    background: rgba(247, 245, 240, 0.98);
-    backdrop-filter: blur(15px);
-    padding-top: 6rem;
-    justify-content: flex-start;
-  }
-  .page-nav ul { gap: 1.5rem; width: 100%; }
-  .page-nav a { font-size: 1.3rem; display: block; padding: 10px 0; width: 100%; text-align: center; }
-
-  /* --- Hero 区域重构 --- */
+  /* Hero 区域适配、文字海参数你原来已经有的话可保留 */
   .hero-trail { height: auto; min-height: 100vh; padding-top: 140px; padding-bottom: 60px; }
-  .hero-content { padding: 0 1.2rem; }
-  .hero-subtext { font-size: 0.8rem; padding: 0.5rem 1rem; letter-spacing: 0.1em; white-space: nowrap; }
-  
-  /* 🌊 文字海优化：保留 3D 效果，但适配窄屏 */
-  .sea-section-wrapper { height: 45vh; } /* 稍微增加高度以容纳3D效果 */
-  .hero-sea-plane {
-    /* 不进行拍平 (rotateX(0deg))，保留原有的 rotateX(60deg) */
-    /* 调整宽度和位置，使文字在窄屏上也能错落有致 */
-    width: 200%; 
-    left: -50%;
-    bottom: -10%;
-  }
-  .paper-float { font-size: 0.8rem !important; padding: 6px 12px; } /* 稍微缩小文字以防拥挤 */
-  
-  /* 调整大船 */
+  .sea-section-wrapper { height: 45vh; }
+  .hero-sea-plane { width: 200%; left: -50%; bottom: -10%; }
   .hero-big-boat { width: 180px; bottom: 5%; opacity: 0.6; }
 
-  /* --- 通用版块 --- */
-  .page-main { padding: 0 1rem; margin-top: -50px; }
-  .section-wrapper { padding: 3rem 1.2rem; margin-bottom: 3rem; border-radius: 8px; }
-  
-  /* 取消图片和视频的倾斜设计 */
-  .split-section { display: flex; flex-direction: column; gap: 2rem; }
-  .split-section img, .video-container {
-    transform: rotate(0deg) !important;
-    width: 100%; margin: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  }
-  .split-section img:hover, .video-container:hover { transform: scale(1.02) !important; }
-  
-  /* 视频高度 */
-  .video-container { padding: 6px; padding-bottom: 58%; }
-  .video-inner { top: 6px; left: 6px; right: 6px; bottom: 6px; }
+  /* join-us 在手机上撑满宽度即可 */
+  #join-us { margin: 3rem 1.5rem 0; padding: 3.5rem 1.5rem; max-width: none; }
+}
 
-  /* --- 团队展示 --- */
-  .team-teachers { gap: 1.5rem; justify-content: space-around; }
-  .teacher-card { width: 45%; max-width: 140px; margin-bottom: 1rem; }
-  .teacher-card img { width: 90px; height: 90px; }
-  .team-groups-container { grid-template-columns: 1fr; gap: 1.5rem; }
-  .team-group-card { padding: 2rem 1rem; }
+/* 移动端适配 */
+@media (max-width: 900px) {
+  .split-section { grid-template-columns: 1fr; gap: 3rem; }
+  .split-section img { order: -1; transform: rotate(0deg); }
+  .video-container { transform: rotate(0deg); }
+  :root { --tab-h: 45px; }
+  .card-index-tab { width: auto; padding: 0 15px; min-width: 100px; font-size: 0.8rem; left: 0 !important; right: auto; border-radius: 0 0 10px 0;}
+  .stack-card:nth-child(even) .card-index-tab { left: auto !important; right: 0 !important; border-radius: 0 0 0 10px; border-right: none; border-left: 1px solid rgba(194, 166, 118, 0.3); }
+  .card-scroll-area { padding: 2rem 1.5rem 25vh; } /* 移动端底部留白稍小一点但依然足够 */
   
-  /* --- 轮播图 --- */
-  .image-slider { height: 250px; padding: 6px; }
-  .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
-  
-  /* --- Footer & Floating --- */
-  #join-us { padding: 3rem 1.5rem; }
-  .btn-scroll-top { width: 100%; padding: 1rem; }
-  .page-footer { padding: 4rem 1.5rem 8rem; }
-  .floating-icons { bottom: 20px; right: 20px; gap: 10px; }
-  .floating-icon-button { width: 48px; height: 48px; }
-  .floating-icon-button img { width: 24px; }
-  .share-content { width: 85%; padding: 2rem 1.5rem; }
-  #scrollBoat { width: 36px; height: 22px; right: -18px; top: -10px; }
+  /* Index 特有的 Hero 适配 */
+  .hero-trail { height: auto; min-height: 100vh; padding-top: 140px; padding-bottom: 60px; }
+  .sea-section-wrapper { height: 45vh; }
+  .hero-sea-plane { width: 200%; left: -50%; bottom: -10%; }
+  .hero-big-boat { width: 180px; bottom: 5%; opacity: 0.6; }
+}
+/* ============================================================
+   ★ BONUS PATCH：为每个 “了解更多” 展开区添加“虚拟底部空白层”
+   ------------------------------------------------------------
+   功能：避免展开内容一不小心就滚出卡片（空白不足），
+         通过 ::after 添加 240px 的可滚动缓冲区，
+         并确保其参与 scrollHeight 判断。
+   ============================================================ */
+
+.more-content.expanded {
+  position: relative;
+}
+
+/* ★ 关键：虚拟底部空白层（防误触跳卡） */
+.more-content.expanded::after {
+  content: "";
+  display: block;
+  height: 100px;   /* ← 想更明显可以调成 300px 或 400px */
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ★ 同时强化内部 padding 防止文字贴底 */
+.more-content.expanded {
+  padding-bottom: 3.5rem !important;
+}
+
+/* ============================================================
+   ★ PATCH A：为视频 / 图集 / 团队卡片增加“整卡底部空白层”
+   ------------------------------------------------------------
+   解决的痛点：
+   - 演示卡（视频）
+   - 团队卡（成员小卡片）
+   - 成果展示卡（轮播）
+   在内容滚完后，底部可滚动的留白不够，一下就切到下一卡。
+   这里为这几张卡的内部滚动区添加一个额外的 ::after 空白块。
+   ============================================================ */
+
+#demo .card-scroll-area::after,
+#team .card-scroll-area::after,
+#achievements .card-scroll-area::after {
+  content: "";
+  display: block;
+  height: 200px;    /* ★ 可以按手感调：200 / 260 / 320 px */
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ============================================================
+   ★ PATCH B：给 “了解更多” 按钮本身下面加额外留白
+   ------------------------------------------------------------
+   解决的痛点：
+   - 按钮和下面展开区 / 其他内容贴得太近
+   做法：
+   - 统一给 .btn-text 增加 margin-bottom
+   ============================================================ */
+
+.btn-text {
+  /* 保留你原有的样式，这里只强调间距 */
+  margin-top: 2rem;
+  margin-bottom: 3rem;   /* ★ 新增：按钮下再留一两排空间 */
 }
 
 </style>
@@ -618,19 +469,14 @@ ul { list-style: none; padding: 0; margin: 0; }
   <header class="page-header" id="header">
     <div class="header-inner">
       <div class="page-title">银发记忆工程</div>
-      <!-- 汉堡菜单按钮 -->
-      <button class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
       <nav class="page-nav" id="pageNav">
         <ul>
-          <li><a href="#demo">操作演示</a></li>
-          <li><a href="#initial-intent">初心所系</a></li>
-          <li><a href="#memory-heritage">智忆传承</a></li>
-          <li><a href="#team">专业护航</a></li>
-          <li><a href="#achievements">成果展示</a></li>
+          <li><a onclick="scrollToCard('demo')">操作演示</a></li>
+          <li><a onclick="scrollToCard('initial-intent')">初心所系</a></li>
+          <li><a onclick="scrollToCard('memory-heritage')">智忆传承</a></li>
+          <li><a onclick="scrollToCard('team')">专业护航</a></li>
+          <li><a onclick="scrollToCard('achievements')">成果展示</a></li>
         </ul>
       </nav>
     </div>
@@ -638,42 +484,34 @@ ul { list-style: none; padding: 0; margin: 0; }
 
   <!-- Hero Section -->
   <section class="hero-trail" id="hero">
-    
-    <!-- 内容区 -->
-    <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+    <div class="hero-content" data-aos="fade-up">
       <h1>每段记忆，都是时代的温柔注脚</h1>
       <p class="hero-desc">
         用 AI 技术守护银发群体的珍贵记忆，让每段人生被倾听、被铭记、被传承。
       </p>
       <div class="hero-subtext">记录个人记忆 · 链接时代脉络 · 留住世代温情</div>
-      
       <div>
-        <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" class="btn-primary" target="_blank">
+        <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" 
+           class="btn-primary" target="_blank">
           <span>立即参与</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
         </a>
       </div>
     </div>
-
+    
     <!-- 沉浸式文字海 -->
     <div class="sea-section-wrapper">
-      
-      <!-- 🚣‍♀️ 乌篷船 (主视觉大船) -->
+      <!-- 中央大船 -->
       <div class="hero-big-boat">
-         <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-           <!-- 阴影 -->
-           <ellipse cx="150" cy="120" rx="100" ry="8" fill="rgba(43, 38, 35, 0.1)" filter="blur(8px)" />
-           <!-- 船身 -->
-           <path d="M50,95 Q150,145 250,95 L240,85 Q150,125 60,85 Z" fill="#2B2623" /> 
-           <!-- 乌篷 -->
-           <path d="M180,88 Q180,40 230,50 L230,88" fill="#3E3836" stroke="#2B2623" stroke-width="1"/>
-           <path d="M120,88 Q120,30 190,40 L190,88" fill="#36302E" stroke="#2B2623" stroke-width="1"/>
-           <path d="M70,85 Q70,40 130,50 L130,88" fill="#3E3836" stroke="#2B2623" stroke-width="1"/>
-           <!-- 桨 -->
-           <path d="M160,85 L110,120 L105,115 L155,80 Z" fill="#C2A676" opacity="0.8"/>
-         </svg>
+        <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="150" cy="120" rx="100" ry="8" fill="rgba(43, 38, 35, 0.1)" filter="blur(8px)" />
+          <path d="M50,95 Q150,145 250,95 L240,85 Q150,125 60,85 Z" fill="#2B2623" /> 
+          <path d="M180,88 Q180,40 230,50 L230,88" fill="#3E3836" stroke="#2B2623"/>
+          <path d="M120,88 Q120,30 190,40 L190,88" fill="#36302E" stroke="#2B2623"/>
+          <path d="M70,85 Q70,40 130,50 L130,88" fill="#3E3836" stroke="#2B2623"/>
+          <path d="M160,85 L110,120 L105,115 L155,80 Z" fill="#C2A676" opacity="0.8"/>
+        </svg>
       </div>
-
+  
       <!-- 漂浮文字 -->
       <div class="hero-sea-plane">
         <div class="sea-row layer-1">
@@ -711,234 +549,217 @@ ul { list-style: none; padding: 0; margin: 0; }
       </div>
     </div>
   </section>
- 
-  <main class="page-main"> 
-   
-    <!-- 操作演示 -->
-    <section class="section-wrapper" id="demo" data-aos="fade-up">
-      <div class="tape-decor"></div>
-      <div class="bg-decor">DEMO</div>
-      <div style="text-align: center; margin-bottom: 3rem;">
-        <h1>操作演示</h1>
-        <h2 style="font-size: 1.2rem; border:none; color: var(--c-charcoal); margin-bottom: 0;">一键留存记忆：操作演示</h2>
-        <p style="color: var(--c-charcoal); margin-top: 10px;">简单几步，一键留存长辈珍贵记忆</p>
-      </div>
-      <div class="video-container">
-        <div class="video-inner">
-            <video controls poster="images/video-poster.jpg" preload="metadata">
-              <source src="videos/1402120320.mp4" type="video/mp4"/>
-              您的浏览器不支持 HTML5 视频播放。
-            </video>
-        </div>
-      </div>
-    </section>
-   
-    <!-- 初心所系 -->
-    <section class="section-wrapper" id="initial-intent" data-aos="fade-up">
-      <div class="tape-decor"></div>
-      
-      <!-- 勒特河背景层 -->
-      <div class="lethe-bg-layer"></div>
-      
-      <div class="bg-decor">ORIGIN</div>
-      <div class="split-section">
-        <div class="text-content">
-          <h1>初心所系</h1>
-          
-          <h2>项目缘起</h2>
-          <p class="drop-cap">聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量。</p>
-          
-          <h2>目标人群</h2>
-          <p>关注长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
-          
-          <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
-          
-          <div class="more-content" id="initial-intent-more">
-            <p>在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
-            <ul>
-              <li><strong>核心主角：</strong>60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
-              <li><strong>同行伙伴：</strong>
-                <ul>
-                  <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
-                  <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
-                  <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div style="position: relative;">
-          <img alt="项目缘起图示" src="images/project-start.jpg" loading="lazy"/>
-        </div>
-      </div>
-    </section>
 
-    <!-- 智忆传承 -->
-    <section class="section-wrapper" id="memory-heritage" data-aos="fade-up">
-      <div class="tape-decor"></div>
-      
-      <!-- 记忆女神背景层 -->
-      <div class="mnemosyne-bg-layer"></div>
-      
-      <div class="split-section">
-        <div style="position: relative;">
-           <img alt="项目介绍图示" src="images/advantage.jpg" loading="lazy"/>
-           <div style="position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-radius: 50%; background: var(--c-gold); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; transform: rotate(-15deg); box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 3px solid #fff;">AI</div>
+  <!-- 核心：堆叠容器 (1941 Logic) -->
+  <div class="stack-container">
+
+    <!-- Card 1: 操作演示 -->
+    <div class="stack-card" id="demo">
+      <div class="card-index-tab" onclick="scrollToCard('demo')">01 · 操作演示</div>
+      <div class="card-scroll-area">
+        <div class="tape-decor"></div>
+        <div class="bg-decor">DEMO</div>
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <h1>操作演示</h1>
+          <h2 style="font-size: 1.2rem; border:none; color: var(--c-charcoal); margin-bottom: 0;">一键留存记忆：操作演示</h2>
+          <p style="color: var(--c-charcoal); margin-top: 10px;">简单几步，一键留存长辈珍贵记忆</p>
         </div>
-        <div class="text-content">
-          <h1>智忆传承</h1>
-          <h2>项目介绍</h2>
-          <p class="drop-cap">深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库。</p>
-          
-          <h2>核心价值</h2>
-          <p>承担记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
-          
-          <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
-          
-          <div class="more-content" id="memory-heritage-more">
-            <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存。</p>
-            <p><strong>一键完成：</strong>语音采集 → 文字转写 → 故事润色 → 档案生成</p>
-            <ul>
-              <li><strong>对长者：</strong>
-                <ul>
-                   <li>打破「表达障碍」：AI助手化身耐心倾听者</li>
-                   <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」</li>
-                </ul>
-              </li>
-              <li><strong>对家庭：</strong>
-                <ul>
-                   <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生</li>
-                   <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体</li>
-                </ul>
-              </li>
-            </ul>
+        <div class="video-container">
+          <div class="video-inner">
+              <video controls poster="images/video-poster.jpg" preload="metadata">
+                <source src="videos/1402120320.mp4" type="video/mp4"/>
+                您的浏览器不支持 HTML5 视频播放。
+              </video>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 专业护航 -->
-    <section class="section-wrapper" id="team" data-aos="fade-up">
-      <div class="tape-decor"></div>
-      <h1 style="text-align: center; margin-bottom: 3rem;">专业护航</h1>
-      
-      <div class="team-introduction">
-        <!-- 指导教师 -->
-        <div>
-          <h2 style="text-align: center; border: none; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 指导教师 ·</h2>
-          <div class="team-teachers">
-            <div class="teacher-card">
-              <img alt="H教授" src="images/teacher1.jpg" loading="lazy"/>
-              <h4>H教授</h4><p>计算语言学专家</p>
+    <!-- Card 2: 初心所系 -->
+    <div class="stack-card" id="initial-intent">
+      <div class="card-index-tab" onclick="scrollToCard('initial-intent')">02 · 初心所系</div>
+      <div class="card-scroll-area">
+        <div class="lethe-bg-layer"></div>
+        <div class="bg-decor">ORIGIN</div>
+        <div class="split-section">
+          <div class="text-content">
+            <h1>初心所系</h1>
+            <h2>项目缘起</h2>
+            <p class="drop-cap">聚焦老人记忆留存难题，以科技之力构建记忆守护平台。在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量。</p>
+            <h2>目标人群</h2>
+            <p>关注长者记忆珍藏，携手家属与社会机构共筑人生宝库。</p>
+            <button aria-controls="initial-intent-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
+            <div class="more-content" id="initial-intent-more">
+              <p>在与社区银发长者的深度交流中，我们触摸到时光沉淀的重量——那些裹挟着方言乡音的故土记忆、家族变迁的跌宕故事、时代浪潮中的个体印记，正随着传统记录方式的式微逐渐模糊。「记忆小舟」的诞生，源于对「遗忘」的抵抗。我们深耕老年群体记忆传承困境，以AI技术为笔，为时光留白处填上温暖注脚，让每个生命故事都值得被郑重收藏。</p>
+              <ul>
+                <li><strong>核心主角：</strong>60岁+长者（尤对方言使用者、有特殊人生经历者友好）</li>
+                <li><strong>同行伙伴：</strong>
+                  <ul>
+                    <li>珍视家族根系的「记忆传承人」（子女/孙辈）</li>
+                    <li>深耕社区文化的「在地记录者」（街道办/养老机构）</li>
+                    <li>专注历史存档的「文明守望者」（档案馆/文化研究机构）</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-            <div class="teacher-card">
-              <img alt="W教授" src="images/teacher2.jpg" loading="lazy"/>
-              <h4>W教授</h4><p>中国文学专家</p>
-            </div>
-            <div class="teacher-card">
-              <img alt="L教授" src="images/teacher3.jpg" loading="lazy"/>
-              <h4>L教授</h4><p>口述史研究专家</p>
+          </div>
+          <div style="position: relative;">
+            <img alt="项目缘起图示" src="images/project-start.jpg" loading="lazy"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: 智忆传承 -->
+    <div class="stack-card" id="memory-heritage">
+      <div class="card-index-tab" onclick="scrollToCard('memory-heritage')">03 · 智忆传承</div>
+      <div class="card-scroll-area">
+        <div class="mnemosyne-bg-layer"></div>
+        <div class="split-section">
+          <div style="position: relative;">
+             <img alt="项目介绍图示" src="images/advantage.jpg" loading="lazy"/>
+             <div style="position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-radius: 50%; background: var(--c-gold); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; transform: rotate(-15deg); border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">AI</div>
+          </div>
+          <div class="text-content">
+            <h1>智忆传承</h1>
+            <h2>项目介绍</h2>
+            <p class="drop-cap">深耕老年记忆传承困境，借 AI 技术铸就智慧记忆宝库。</p>
+            <h2>核心价值</h2>
+            <p>承担记忆传承使命，以 AI 赋能搭建全民叙事桥梁。</p>
+            <button aria-controls="memory-heritage-more" class="btn-text btn-toggle-more" type="button" aria-expanded="false">了解更多</button>
+            <div class="more-content" id="memory-heritage-more">
+              <p>「记忆小舟」是专为老年人设计的AI记忆采集系统，融合语音识别、情感计算、动态数据库等核心技术，以「对话式引导+智能化处理」模式，轻松实现记忆的数字化留存。</p>
+              <p><strong>一键完成：</strong>语音采集 → 文字转写 → 故事润色 → 档案生成</p>
+              <ul>
+                <li><strong>对长者：</strong>
+                  <ul>
+                     <li>打破「表达障碍」：AI助手化身耐心倾听者</li>
+                     <li>赋予「生命重量」：将碎片化回忆整合成可传承的「人生故事集」</li>
+                  </ul>
+                </li>
+                <li><strong>对家庭：</strong>
+                  <ul>
+                     <li>跨越代际的「情感纽带」：子女可通过系统回溯长辈人生</li>
+                     <li>可触摸的「传家之宝」：电子档案+纸质纪念册双载体</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- 团队成员 -->
-        <div>
-          <h2 style="text-align: center; border: none; margin-top: 4rem; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 团队成员 ·</h2>
-          <div class="team-groups-container">
-            <div class="team-group-card">
-              <h3>技术开发</h3>
-              <div class="group-members-list">
-                <div class="team-member"><img alt="陆新蕊" src="images/member1.jpg" loading="lazy"/><h4>陆新蕊</h4><p>计算语言学 硕士</p></div>
-                <div class="team-member"><img alt="刘思怡" src="images/member2.jpg" loading="lazy"/><h4>刘思怡</h4><p>计算语言学 硕士</p></div>
+    <!-- Card 4: 专业护航 -->
+    <div class="stack-card" id="team">
+      <div class="card-index-tab" onclick="scrollToCard('team')">04 · 专业护航</div>
+      <div class="card-scroll-area">
+        <h1 style="text-align: center; margin-bottom: 3rem;">专业护航</h1>
+        <div class="team-introduction">
+          <div>
+            <h2 style="text-align: center; border: none; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 指导教师 ·</h2>
+            <div class="team-teachers">
+              <div class="teacher-card"><img alt="H教授" src="images/teacher1.jpg"/><h4>H教授</h4><p>计算语言学专家</p></div>
+              <div class="teacher-card"><img alt="W教授" src="images/teacher2.jpg"/><h4>W教授</h4><p>中国文学专家</p></div>
+              <div class="teacher-card"><img alt="L教授" src="images/teacher3.jpg"/><h4>L教授</h4><p>口述史研究专家</p></div>
+            </div>
+          </div>
+          <div>
+            <h2 style="text-align: center; border: none; margin-top: 4rem; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 团队成员 ·</h2>
+            <div class="team-groups-container">
+              <div class="team-group-card">
+                <h3>技术开发</h3>
+                <div class="group-members-list">
+                  <div class="team-member"><img alt="陆新蕊" src="images/member1.jpg"/><h4>陆新蕊</h4><p>计算语言学 硕士</p></div>
+                  <div class="team-member"><img alt="刘思怡" src="images/member2.jpg"/><h4>刘思怡</h4><p>计算语言学 硕士</p></div>
+                </div>
               </div>
-            </div>
-            <div class="team-group-card">
-              <h3>文化策划</h3>
-              <div class="group-members-list">
-                <div class="team-member"><img alt="武羽柯" src="images/member3.jpg" loading="lazy"/><h4>武羽柯</h4><p>出版学 硕士</p></div>
-                <div class="team-member"><img alt="张乐怡" src="images/member4.jpg" loading="lazy"/><h4>张乐怡</h4><p>出版学 硕士</p></div>
+              <div class="team-group-card">
+                <h3>文化策划</h3>
+                <div class="group-members-list">
+                  <div class="team-member"><img alt="武羽柯" src="images/member3.jpg"/><h4>武羽柯</h4><p>出版学 硕士</p></div>
+                  <div class="team-member"><img alt="张乐怡" src="images/member4.jpg"/><h4>张乐怡</h4><p>出版学 硕士</p></div>
+                </div>
               </div>
-            </div>
-            <div class="team-group-card">
-              <h3>传播运营</h3>
-              <div class="group-members-list">
-                <div class="team-member"><img alt="万旭" src="images/member5.jpg" loading="lazy"/><h4>万旭</h4><p>数字出版 本科</p></div>
-                <div class="team-member"><img alt="张怡卓含" src="images/member6.jpg" loading="lazy"/><h4>张怡卓含</h4><p>汉语国际教育 本科</p></div>
+              <div class="team-group-card">
+                <h3>传播运营</h3>
+                <div class="group-members-list">
+                  <div class="team-member"><img alt="万旭" src="images/member5.jpg"/><h4>万旭</h4><p>数字出版 本科</p></div>
+                  <div class="team-member"><img alt="张怡卓含" src="images/member6.jpg"/><h4>张怡卓含</h4><p>汉语国际教育 本科</p></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 成果展示 -->
-    <section class="section-wrapper" id="achievements" data-aos="fade-up">
-      <div class="tape-decor"></div>
-      <div class="bg-decor">GALLERY</div>
-      <h1 style="text-align: center;">成果展示</h1>
-      <div class="image-slider">
-        <button class="slider-btn prev">‹</button>
-        <button class="slider-btn next">›</button>
-        <div class="slider-images">
-          <img src="images/image1.jpg" class="slider-image active" alt="成果1" loading="lazy"/>
-          <img src="images/image2.jpg" class="slider-image" alt="成果2" loading="lazy"/>
-          <img src="images/image3.jpg" class="slider-image" alt="成果3" loading="lazy"/>
+    <!-- Card 5: 成果展示 -->
+    <div class="stack-card" id="achievements">
+      <div class="card-index-tab" onclick="scrollToCard('achievements')">05 · 成果展示</div>
+      <div class="card-scroll-area">
+        <div class="bg-decor">GALLERY</div>
+        <h1 style="text-align: center;">成果展示</h1>
+        <div class="image-slider">
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-images">
+            <img src="images/image1.jpg" class="slider-image active" alt="成果1" loading="lazy"/>
+            <img src="images/image2.jpg" class="slider-image" alt="成果2" loading="lazy"/>
+            <img src="images/image3.jpg" class="slider-image" alt="成果3" loading="lazy"/>
+          </div>
         </div>
       </div>
-    </section>
-  
-    <!-- 加入我们 -->
-    <section id="join-us" data-aos="zoom-in">
-      <h1>加入我们 · 守护记忆</h1>
-      <h2 style="font-size: 1.2rem; color: var(--c-charcoal); margin-bottom: 2rem; border:none;">立即为长辈制作记忆档案：免费试用入口</h2>
-      
-      <div style="text-align: left; display: inline-block; color: var(--c-ink); background:#fff; padding:2rem 3rem; border-radius:4px; box-shadow:var(--shadow-sm);">
-        <p style="margin-bottom:1rem; font-weight:600; color:var(--c-vermilion);">即刻行动：</p>
-        <ul style="list-style: none; padding: 0;">
-          <li style="margin-bottom: 10px;">✦ <strong>家庭用户：</strong>为长辈制作专属记忆档案，留住人生故事</li>
-          <li style="margin-bottom: 10px;">✦ <strong>机构合作：</strong>申请「记忆方舟」公益项目，获取AI技术支持</li>
-          <li style="margin-bottom: 10px;">✦ <strong>志愿者招募：</strong>诚邀各方志愿者，共同守护银发群体的记忆财富</li>
-        </ul>
-      </div>
+    </div>
 
-      <div style="margin-top: 3rem;">
-        <a href="#hero" class="btn-scroll-top scroll-fix">
-          <span>加入记忆守护计划</span>
-          <span style="margin-left:8px; font-size:1.2em;">↑</span>
-        </a>
-      </div>
-    </section>
-       
-  </main>
+  </div> <!-- End Stack -->
 
-  <footer class="page-footer">
-    <div style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 1rem; color: #E8DCC5;">© 银发记忆工程 版权所有</div>
-    <p style="opacity: 0.7; font-size: 1.1rem; font-family: var(--font-serif);">小舟载记，字字生光 · 岁岁留痕，代代相传。</p>
-  </footer>
+  <section id="join-us" data-aos="fade-up">
+    <h1>加入我们 · 守护记忆</h1>
+    <h2 style="font-size: 1.2rem; color: var(--c-charcoal); margin-bottom: 2rem; border:none;">立即为长辈制作记忆档案：免费试用入口</h2>
+    
+    <div style="text-align: left; display: inline-block; color: var(--c-ink); background:#fff; padding:2rem 3rem; border-radius:4px; box-shadow:var(--shadow-sm);">
+      <p style="margin-bottom:1rem; font-weight:600; color:var(--c-vermilion);">即刻行动：</p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 10px;">✦ <strong>家庭用户：</strong>为长辈制作专属记忆档案，留住人生故事</li>
+        <li style="margin-bottom: 10px;">✦ <strong>机构合作：</strong>申请「记忆方舟」公益项目，获取AI技术支持</li>
+        <li style="margin-bottom: 10px;">✦ <strong>志愿者招募：</strong>诚邀各方志愿者，共同守护银发群体的记忆财富</li>
+      </ul>
+    </div>
 
-  <!-- 浮动图标 -->
+    <div style="margin-top: 3rem;">
+      <a href="#hero" class="btn-scroll-top scroll-fix">
+        <span>加入记忆守护计划</span>
+        <span style="margin-left:8px; font-size:1.2em;">↑</span>
+      </a>
+    </div>
+
+    <footer class="page-footer">
+      <div style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 1rem; color: #E8DCC5;">© 银发记忆工程 版权所有</div>
+      <p style="opacity: 0.7; font-size: 1.1rem; font-family: var(--font-serif);">小舟载记，字字生光 · 岁岁留痕，代代相传。</p>
+    </footer>
+  </section>
+
+  <!-- 悬浮图标 -->
   <div class="floating-icons">
-    <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" target="_blank" title="开始讲述">
+    <a href="https://www.coze.cn/store/agent/7526616735718375439?bot_id=true&bid=6hgv2e7ic0g13" target="_blank">
       <div class="floating-icon-button" style="background:var(--c-vermilion); border-color:var(--c-vermilion);">
         <img alt="开始" src="images/boat_icon.png" style="width:28px; filter:brightness(0) invert(1);"/>
       </div>
     </a>
-    <div id="shareButton" title="欢迎分享" style="cursor:pointer;">
+    <div id="shareButton" style="cursor:pointer;">
       <div class="floating-icon-button">
         <img alt="分享" src="images/sea_icon.png" style="width:28px;"/>
       </div>
     </div>
   </div>
-
-  <!-- 分享弹窗 -->
   <div class="share-modal" id="shareModal">
     <div class="share-content">
-      <div id="closeShare" style="position:absolute; top:15px; right:20px; font-size:2rem; cursor:pointer; color:var(--c-charcoal);">×</div>
-      <h3 style="color:var(--c-vermilion); margin-bottom:2rem; font-family:var(--font-serif);">分享渠道</h3>
+      <div id="closeShare" style="position:absolute; top:15px; right:20px; font-size:2rem; cursor:pointer;">×</div>
+      <h3>分享渠道</h3>
       <div style="display:flex; flex-direction:column; gap:1rem;">
-        <a href="mailto:example@example.com" style="padding:1.2rem; background:#fff; border-radius:4px; color:#3E3836; border:1px solid #E0D8C8;">📧 官方邮箱</a>
-        <a href="#" style="padding:1.2rem; background:#fff; border-radius:4px; color:#3E3836; border:1px solid #E0D8C8;">📕 官方小红书：银发记忆工程</a>
+        <a href="#" style="padding:1.2rem; border:1px solid #ddd;">📧 官方邮箱</a>
+        <a href="#" style="padding:1.2rem; border:1px solid #ddd;">📕 官方小红书</a>
       </div>
     </div>
   </div>
@@ -947,57 +768,125 @@ ul { list-style: none; padding: 0; margin: 0; }
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // 滚动事件：进度条与小船
-    window.onscroll = function() {
+    // ==========================================
+    // 核心逻辑：全局滚轮接管 (Scroll Hijacking)
+    // ==========================================
+    
+    const stackCards = document.querySelectorAll('.stack-card');
+    const joinSection = document.getElementById('join-us');
+    const header = document.getElementById('header');
+
+    // 辅助函数：判断卡片是否处于“吸顶激活”状态
+    function isCardActive(card, nextCard) {
+      const rect = card.getBoundingClientRect();
+      const computedStyle = window.getComputedStyle(card);
+      const stickyTop = parseInt(computedStyle.top); 
+
+      // 1. 判定当前卡片是否到达了吸顶位置
+      const isAtTop = Math.abs(rect.top - stickyTop) <= 5;
+
+      // 2. 判定是否被下一张卡片盖住了
+      let isCovered = false;
+      if (nextCard) {
+        const nextRect = nextCard.getBoundingClientRect();
+        const nextStickyTop = parseInt(window.getComputedStyle(nextCard).top); 
+        if (nextRect.top <= nextStickyTop + 5) {
+          isCovered = true;
+        }
+      }
+      return isAtTop && !isCovered;
+    }
+
+    // 监听全局滚轮事件
+    window.addEventListener('wheel', (e) => {
+      let activeCard = null;
+
+      // 遍历寻找当前视口中“正在展示”的那张卡片
+      for (let i = 0; i < stackCards.length; i++) {
+        const card = stackCards[i];
+        const nextElement = stackCards[i + 1] || joinSection;
+        
+        if (isCardActive(card, nextElement)) {
+          activeCard = card;
+          break; // 找到当前主角
+        }
+      }
+
+      // 如果找到了活跃卡片，开始判断是滚页面还是滚内容
+      if (activeCard) {
+        const scrollArea = activeCard.querySelector('.card-scroll-area');
+        if (!scrollArea) return;
+
+        const { scrollTop, scrollHeight, clientHeight } = scrollArea;
+        const delta = e.deltaY;
+        const isGoingDown = delta > 0;
+        const isGoingUp = delta < 0;
+
+        // 计算是否滚到底部 (容差 1px)
+        const maxScroll = scrollHeight - clientHeight;
+        const isAtBottom = Math.ceil(scrollTop) >= maxScroll - 1;
+        const isAtTop = scrollTop <= 0;
+
+        // 场景 1: 用户向下滚，且内容还没看完
+        if (isGoingDown && !isAtBottom) {
+          e.preventDefault(); 
+          scrollArea.scrollTop += delta;
+        }
+        
+        // 场景 2: 用户向上滚，且内容还没回到顶部
+        else if (isGoingUp && !isAtTop) {
+          e.preventDefault(); 
+          scrollArea.scrollTop += delta;
+        }
+      }
+    }, { passive: false });
+
+
+    // ==========================================
+    // 其他功能
+    // ==========================================
+
+    function scrollToCard(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const index = Array.from(stackCards).indexOf(el);
+        const rootStyle = getComputedStyle(document.documentElement);
+        const headerH = parseInt(rootStyle.getPropertyValue('--header-h')) || 80;
+        const tabH = parseInt(rootStyle.getPropertyValue('--tab-h')) || 55;
+        const offset = headerH + (index * tabH);
+        const targetTop = el.offsetTop - offset;
+
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }
+      document.getElementById('pageNav').classList.remove('open');
+      document.getElementById('navToggle').classList.remove('active');
+    }
+
+    window.addEventListener('scroll', () => {
       let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       let scrolled = (winScroll / height) * 100;
-      document.getElementById("scrollProgressBar").style.width = scrolled + "%";
+      
+      const progressBar = document.getElementById("scrollProgressBar");
+      if(progressBar) progressBar.style.width = scrolled + "%";
       
       const boat = document.getElementById("scrollBoat");
-      boat.style.transform = `translateY(${Math.sin(winScroll / 50) * 3}px) rotate(${Math.sin(winScroll / 100) * 5}deg)`;
+      if(boat) {
+        boat.style.transform = `translateY(${Math.sin(winScroll / 50) * 3}px) rotate(${Math.sin(winScroll / 100) * 5}deg)`;
+      }
 
-      const header = document.getElementById('header');
-      header.classList.toggle('scrolled', winScroll > 50);
+      if(header) header.classList.toggle('scrolled', winScroll > 50);
+    });
 
-      // 导航高亮
-      const sections = document.querySelectorAll("section[id]");
-      const navLinks = document.querySelectorAll(".page-nav a");
-      let current = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 150;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute("id");
-        }
-      });
-      navLinks.forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${current}`) {
-          link.classList.add("active");
-        }
-      });
-    };
-
-    // 移动端菜单逻辑 (含背景锁定)
     const navToggle = document.getElementById('navToggle');
     const pageNav = document.getElementById('pageNav');
-    const body = document.body;
-    
-    navToggle.addEventListener('click', () => { 
-      pageNav.classList.toggle('open'); 
-      navToggle.classList.toggle('active'); 
-      body.classList.toggle('nav-open'); // 锁定/解锁滚动
-    });
-
-    document.querySelectorAll('.page-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        pageNav.classList.remove('open');
-        navToggle.classList.remove('active');
-        body.classList.remove('nav-open');
+    if(navToggle && pageNav) {
+      navToggle.addEventListener('click', () => { 
+        pageNav.classList.toggle('open'); 
+        navToggle.classList.toggle('active'); 
       });
-    });
+    }
 
-    // 展开更多逻辑
     document.querySelectorAll('.btn-toggle-more').forEach(button => {
       button.addEventListener('click', () => {
         const contentId = button.getAttribute('aria-controls');
@@ -1016,61 +905,40 @@ ul { list-style: none; padding: 0; margin: 0; }
       });
     });
 
-    // 轮播图逻辑 (含触摸滑动)
     const sliderImages = document.querySelectorAll('.slider-image');
-    const sliderContainer = document.querySelector('.image-slider');
     let currentIdx = 0;
-
     function showSlide(idx) {
       sliderImages.forEach(img => { img.style.opacity = '0'; img.classList.remove('active'); });
-      sliderImages[idx].style.opacity = '1'; sliderImages[idx].classList.add('active');
+      if(sliderImages[idx]) {
+        sliderImages[idx].style.opacity = '1'; 
+        sliderImages[idx].classList.add('active');
+      }
     }
-
     const nextBtn = document.querySelector('.slider-btn.next');
     const prevBtn = document.querySelector('.slider-btn.prev');
-
-    nextBtn.addEventListener('click', () => {
+    if(nextBtn) nextBtn.addEventListener('click', () => {
       currentIdx = (currentIdx + 1) % sliderImages.length; showSlide(currentIdx);
     });
-    prevBtn.addEventListener('click', () => {
+    if(prevBtn) prevBtn.addEventListener('click', () => {
       currentIdx = (currentIdx - 1 + sliderImages.length) % sliderImages.length; showSlide(currentIdx);
     });
 
-    // 触摸滑动支持
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    sliderContainer.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    sliderContainer.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-      const threshold = 50; 
-      if (touchEndX < touchStartX - threshold) {
-        nextBtn.click(); // 左滑下一张
-      }
-      if (touchEndX > touchStartX + threshold) {
-        prevBtn.click(); // 右滑上一张
-      }
+    const shareModal = document.getElementById('shareModal');
+    const shareBtn = document.getElementById('shareButton');
+    const closeShare = document.getElementById('closeShare');
+    if(shareBtn && shareModal) {
+      shareBtn.addEventListener('click', () => shareModal.style.display = 'flex');
+      closeShare.addEventListener('click', () => shareModal.style.display = 'none');
+      shareModal.addEventListener('click', (e) => { if(e.target === shareModal) shareModal.style.display = 'none'; });
     }
 
-    // 弹窗逻辑
-    const shareModal = document.getElementById('shareModal');
-    document.getElementById('shareButton').addEventListener('click', () => shareModal.style.display = 'flex');
-    document.getElementById('closeShare').addEventListener('click', () => shareModal.style.display = 'none');
-    shareModal.addEventListener('click', (e) => { if(e.target === shareModal) shareModal.style.display = 'none'; });
-
-    // 底部按钮点击回到顶部
-    document.querySelector('.scroll-fix').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
-    });
-
+    const scrollFixBtn = document.querySelector('.scroll-fix');
+    if(scrollFixBtn) {
+      scrollFixBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
   </script>
 </body>
 </html>
