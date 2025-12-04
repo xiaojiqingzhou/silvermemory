@@ -429,18 +429,14 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
   .hero-big-boat { width: 180px; bottom: 5%; opacity: 0.6; }
 }
 /* ============================================================
-   ★ BONUS PATCH：为每个 “了解更多” 展开区添加“虚拟底部空白层”
-   ------------------------------------------------------------
-   功能：避免展开内容一不小心就滚出卡片（空白不足），
-         通过 ::after 添加 240px 的可滚动缓冲区，
-         并确保其参与 scrollHeight 判断。
+    BONUS PATCH：为每个 “了解更多” 展开区添加“虚拟底部空白层”
    ============================================================ */
 
 .more-content.expanded {
   position: relative;
 }
 
-/* ★ 关键：虚拟底部空白层（防误触跳卡） */
+/* 虚拟底部空白层（防误触跳卡） */
 .more-content.expanded::after {
   content: "";
   display: block;
@@ -449,21 +445,11 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
   pointer-events: none;
 }
 
-/* ★ 同时强化内部 padding 防止文字贴底 */
+/*  同时强化内部 padding 防止文字贴底 */
 .more-content.expanded {
   padding-bottom: 3.5rem !important;
 }
 
-/* ============================================================
-   ★ PATCH A：为视频 / 图集 / 团队卡片增加“整卡底部空白层”
-   ------------------------------------------------------------
-   解决的痛点：
-   - 演示卡（视频）
-   - 团队卡（成员小卡片）
-   - 成果展示卡（轮播）
-   在内容滚完后，底部可滚动的留白不够，一下就切到下一卡。
-   这里为这几张卡的内部滚动区添加一个额外的 ::after 空白块。
-   ============================================================ */
 
 #demo .card-scroll-area::after,
 #team .card-scroll-area::after,
@@ -476,13 +462,8 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
 }
 
 /* ============================================================
-   ★ PATCH B：给 “了解更多” 按钮本身下面加额外留白
-   ------------------------------------------------------------
-   解决的痛点：
-   - 按钮和下面展开区 / 其他内容贴得太近
-   做法：
-   - 统一给 .btn-text 增加 margin-bottom
-   ============================================================ */
+    PATCH B：给 “了解更多” 按钮本身下面加额外留白
+
 
 .btn-text {
   /* 保留你原有的样式，这里只强调间距 */
@@ -852,17 +833,12 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
                   </div>
                 </div>
               </div>
-
-            </div><!-- .team-groups-container -->
-          </div><!-- 团队成员块 -->
-
-        </div><!-- .team-introduction -->
-
-      </div><!-- .card-scroll-area -->
-    </div><!-- .stack-card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
-
-
 
     <!-- Card 5: 成果展示 -->
     <div class="stack-card" id="achievements">
