@@ -490,6 +490,69 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
   margin-bottom: 3rem;   /* ★ 新增：按钮下再留一两排空间 */
 }
 
+/* —— 团队成员卡片布局优化 —— */
+
+/* 默认：小屏保持一列 */
+.team-groups-container {
+  display: grid;
+  gap: 2rem;
+}
+
+/* 中屏（Pad / 小电脑）：两列 */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .team-groups-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 大屏：固定四列，四个卡片一排 */
+@media (min-width: 1200px) {
+  .team-groups-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* 让卡片“扁一点”，减少上下留白 */
+.team-group-card {
+  padding: 1.6rem 1.4rem 1.2rem;  /* 上下都比默认小 */
+}
+
+/* 组名标题更紧凑一点 */
+.team-group-card h3 {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* 成员区的间距缩小一点 */
+.group-members-list {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.6rem;
+}
+
+/* 头像稍微缩小一点，让卡片看起来不那么“高” */
+.team-member img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.6rem;
+}
+
+/* 姓名、专业都更紧凑 */
+.team-member h4 {
+  margin: 0.4rem 0 0.25rem;
+  font-size: 0.98rem;
+}
+
+.team-member p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 </style>
 </head>
 <body>
@@ -686,7 +749,7 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
       </div>
     </div>
 
-        <!-- Card 4: 专业护航 -->
+    <!-- Card 4: 专业护航 -->
     <div class="stack-card" id="team">
       <div class="card-index-tab" onclick="scrollToCard('team')">04 · 专业护航</div>
       <div class="card-scroll-area">
@@ -695,28 +758,15 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
           <div>
             <h2 style="text-align: center; border: none; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 指导教师 ·</h2>
             <div class="team-teachers">
-              <div class="teacher-card">
-                <img alt="H教授" src="images/teacher1.jpg"/>
-                <h4>H教授</h4>
-                <p>计算语言学 专家</p>
-              </div>
-              <div class="teacher-card">
-                <img alt="W教授" src="images/teacher2.jpg"/>
-                <h4>W教授</h4>
-                <p>中国文学 专家</p>
-              </div>
-              <div class="teacher-card">
-                <img alt="L教授" src="images/teacher3.jpg"/>
-                <h4>L教授</h4>
-                <p>口述史研究 专家</p>
-              </div>
+              <div class="teacher-card"><img alt="H教授" src="images/teacher1.jpg"/><h4>H教授</h4><p>计算语言学专家</p></div>
+              <div class="teacher-card"><img alt="W教授" src="images/teacher2.jpg"/><h4>W教授</h4><p>中国文学专家</p></div>
+              <div class="teacher-card"><img alt="L教授" src="images/teacher3.jpg"/><h4>L教授</h4><p>口述史研究专家</p></div>
             </div>
           </div>
-
           <div>
             <h2 style="text-align: center; border: none; margin-top: 4rem; display: block; font-size: 1.5rem; margin-bottom: 2rem;">· 团队成员 ·</h2>
             <div class="team-groups-container">
-              <!-- 组别 1 -->
+              <!-- 组别 1：技术开发 -->
               <div class="team-group-card">
                 <h3>技术开发</h3>
                 <div class="group-members-list">
@@ -732,8 +782,8 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
                   </div>
                 </div>
               </div>
-
-              <!-- 组别 2 -->
+            
+              <!-- 组别 2：文化策划 -->
               <div class="team-group-card">
                 <h3>文化策划</h3>
                 <div class="group-members-list">
@@ -749,15 +799,15 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
                   </div>
                 </div>
               </div>
-
-              <!-- 组别 3 -->
+            
+              <!-- 组别 3：传播运营 -->
               <div class="team-group-card">
                 <h3>传播运营</h3>
                 <div class="group-members-list">
                   <div class="team-member">
                     <img alt="万旭" src="images/member5.jpg"/>
                     <h4>万旭</h4>
-                    <p>数字出版 本科</p>
+                    <p>数字出版  本科</p>
                   </div>
                   <div class="team-member">
                     <img alt="张怡卓含" src="images/member6.jpg"/>
@@ -766,8 +816,8 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
                   </div>
                 </div>
               </div>
-
-              <!-- 组别 4 · 新增窗格（占位内容） -->
+            
+              <!-- 组别 4：跨媒表达（数媒 + 汉语言文学） -->
               <div class="team-group-card">
                 <h3>跨媒表达</h3>
                 <div class="group-members-list">
@@ -783,14 +833,13 @@ a { text-decoration: none; color: inherit; transition: all 0.3s; }
                   </div>
                 </div>
               </div>
-
             </div>
-          </div>
+                
+            
+            
         </div>
       </div>
     </div>
-    
-
 
     <!-- Card 5: 成果展示 -->
     <div class="stack-card" id="achievements">
